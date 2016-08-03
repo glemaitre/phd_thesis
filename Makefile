@@ -17,4 +17,4 @@ clean:
 	find . -name "*.bbl" -o -name "*.blg" -o -name "*.fdb_latexmk" -o -name "*.fls" -o -name "*.log" | xargs rm -f
 	find . -name "*.toc" -o -name "*.synctex.gz" -o -name "*.acn" -o -name "*.glo" -o -name "*.ist" | xargs rm -f
 	find . -name "*.lof" -o -name "*.lot" -o -name "*.out" -o -name "*.acr" -o -name "*.alg" | xargs rm -f
-find . -name "*.glg" -o -name "*.gls" -o -name "*.glsdefs" -o -name "*.cb" -o -name "*.cb2" | xargs rm -f
+	find . -name "*.glg" -o -name "*.gls" -o -name "*.glsdefs" -o -name "*.cb" -o -name "*.cb2" | xargs rm -f
