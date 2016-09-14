@@ -1,0 +1,86 @@
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+
+%% amsmath for math environment
+\usepackage{amsmath}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\sign}{sign}
+
+% to break equation
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage[mathpazo]{flexisym}
+%\usepackage{breqn}
+
+%% For clever reference
+%\usepackage{cleveref}
+
+%% color package
+\usepackage{color}
+
+%% figure package
+\usepackage{epsf,graphicx}
+\usepackage{epstopdf}
+\usepackage{subfigure}	
+\usepackage{transparent}
+
+%% New environment to have some indent inside enumerate environment
+\usepackage{enumitem}
+
+%% To create acronym for proper glossary
+\usepackage{acro}
+
+%% To number the line in the article
+\usepackage{lineno}
+
+%% Environment to include table with notes
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{multirow}
+
+%% In order to change size of margin
+\usepackage{geometry}
+\usepackage{changepage}
+
+%% Colorpackage for table
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{arydshln}
+
+%% To use URL referencing
+\usepackage[hidelinks]{hyperref}
+
+%% In order to draw some graphs
+\usepackage{tikz,xifthen}
+\usepackage{tikz-qtree}
+\usetikzlibrary{decorations.pathmorphing} % noisy shapes
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+\usetikzlibrary{shapes,arrows,shadows}
+\usetikzlibrary{calc,decorations.pathreplacing,decorations.markings,positioning}
+\usetikzlibrary{snakes,decorations.text,shapes,patterns}
+%\usepackage{scalefnt,lmodern,booktabs}
+
+%% Paxkage for cross and tick symbols
+\usepackage{pifont}
+\newcommand{\cmark}{\large \color{green!60!black!80}\ding{51}}
+\newcommand{\mmark}{\large {\color{green!60!black!80}\ding{51}}$^{!}$}
+\newcommand{\xmark}{\large \color{red!60!black!80}\ding{55}}
+\newcommand{\cmarksmall}{\color{green!60!black!80}\ding{51}}
+\newcommand{\mmarksmall}{{\color{green!60!black!80}\ding{51}}$^{!}$}
+\newcommand{\xmarksmall}{\color{red!60!black!80}\ding{55}}
+
+\definecolor{autoGuided}{rgb}{ 0.3765    0.7294    0.9412}
+\newcommand{\autoGuidedColor}{(light-Blue)}
+\definecolor{fullyAuto}{rgb}{ 0.0941    0.3843    0.6627}
+\newcommand{\fullyAutoColor}{(dark-blue)}
+\definecolor{semiAuto}{rgb}{ 0.0784    0.5059    0.1686}
+\newcommand{\semiAutoColor}{(light-green)}
+\definecolor{fullyGuided}{rgb}{ 0.4275    0.6902    0.3176}
+\newcommand{\fullyGuidedColor}{(dark-green)}

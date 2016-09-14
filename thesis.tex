@@ -20,7 +20,8 @@
 % Here, they are placed in an external file /Latex/Macros/MacroFile1.tex
 % An macro that you may use frequently is the figuremacro (see introduction.tex)
 \include{Latex/Macros/MacroFile1}
-
+\input{file_system/package}
+\input{file_system/acronym_definition}
 
 
 %: ----------------------------------------------------------------------
@@ -175,21 +176,18 @@ Day of the defense:
 \setcounter{tocdepth}{3}    % print table of contents for level 3
 \tableofcontents            % print the table of contents
 % levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
+\clearpage
 
+%: ----------------------- list of acronyms/figures/tables ------------------------
 
-%: ----------------------- list of figures/tables ------------------------
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\printacronyms[name = List of Abbreviations]
+
 
 \listoffigures	% print list of figures
 
 \listoftables  % print list of tables
 
-
-%: ----------------------- glossary ------------------------
-
-% Tie in external source file for definitions: /0_frontmatter/glossary.tex
-% Glossary entries can also be defined in the main text. See glossary.tex
-
-\include{0_frontmatter/glossary} 
 
 %: --------------------------------------------------------------
 %:                  MAIN DOCUMENT SECTION

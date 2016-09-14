@@ -2,55 +2,9 @@
 % content in this file will be fed into the main document
 \chapter*{Glossary}
 
-% Glossary entries are defined with the command \nomenclature{1}{2}
-% 1 = Entry name, e.g. abbreviation; 2 = Explanation
-% You can place all explanations in this separate file or declare them in the middle of the text. Either way they will be collected in the glossary.
-
-% required to print nomenclature name to page header
-\markboth{\MakeUppercase{\nomname}}{\MakeUppercase{\nomname}}
 
 
-% ----------------------- contents from here ------------------------
+\addcontentsline{toc}{chapter}{List of Abbreviations}
 
-%\nomenclature{PCa}{Prostate Cancer}
-%
-%\nomenclature{CZ}{Central Zone}
-%\nomenclature{TZ}{Transitional Zone}
-%\nomenclature{PZ}{Peripheral Zone}
-%
-%\nomenclature{PSA}{Prostate Specific Antigen}
-%\nomenclature{TRUS}{Transrectal Ultrasound}
-%\nomenclature{MRI}{Magnetic Resonance Imaging}
-%\nomenclature{MRSI}{Magnetic Resonance Spectroscopy Imaging}
-
-% It will be faster to do the glossary by hand
-
-\begin{multicols}{2} % \begin{multicols}{#columns}[header text][space]  produces a 2 column page for a compact glossary
-\begin{footnotesize} % scriptsize(7) < footnotesize(8) < small (9) < normal (10)
-
-\textbf{BPH} - Benign Prostatic Hyperplasia \\
-
-\textbf{PCa} - Prostate Cancer \\
-
-\textbf{CZ} - Central Zone \\
-
-\textbf{TZ} - Transitional Zone \\
-
-\textbf{PZ} - Peripheral Zone \\
-
-\textbf{PSA} - Prostate Specific Antigen \\
-
-\textbf{TRUS} -Transrectal Ultrasound \\
-
-\textbf{MRI} - Magnetic Resonance Imaging \\
-
-\textbf{DWI} - Diffusion-Weighted Imaging \\
-
-\textbf{DCE} - Dynamic Contrast-Enhanced MR Imaging \\
-
-\textbf{MRSI} - Magnetic Resonance Spectroscopy Imaging \\
-
-\label{nom} % target name for links to glossary
-
-\end{footnotesize}
-\end{multicols}
+%\printacronyms[name = Abbreviations]
+\printacronyms
