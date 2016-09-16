@@ -1,0 +1,87 @@
+\section{\ac{cap} screening and imaging techniques}\label{sec:intro:screening}
+%\subsection{Current \ac{cap} screening}\label{subsec:intro:current-screening}
+
+Current \ac{cap} screening consists of three different stages.
+First, \ac{psa} control is performed to distinguish between low and high risk \ac{cap}.
+Then, for confirmation, samples are taken during prostate biopsy and finally analysed to evaluate the prognosis and the stage of \ac{cap}.
+In this section, we present a detailed description of the current screening as well as its drawbacks.
+
+Since its introduction in mid-1980s, \ac{psa} is widely used for \ac{cap} screening \cite{Etzioni2002}.
+A higher-than-normal level of \ac{psa} can indicate an abnormality of the prostate either as a \ac{bph} or a cancer \cite{Hoeks2011}.
+However, other factors can lead to an increased \ac{psa} level such as prostate infections, irritations, a recent ejaculation or a recent rectal examination \cite{Parfait2010}.
+\ac{psa} can be found in the bloodstream in two different forms: free \ac{psa} (about 10\%), and linked to another protein (about 90\%).
+A level of \ac{psa} higher than 10 ng.mL$^{-1}$ is considered to be at risk \cite{Parfait2010}.
+If the \ac{psa} level is between 10 ng.mL$^{-1}$ and 4 ng.mL$^{-1}$, the patient is considered as suspicious \cite{Barentsz2012}.
+In that case, the ratio of free \ac{psa} to total \ac{psa} is computed; if the ratio is higher than 15\%, the case is considered as pathological \cite{Parfait2010}.
+
+\Iac{trus} biopsy is carried out for cases which are considered as pathological.
+At least six different samples are taken randomly from the right and left parts of three different zones: apex, median and base.
+These samples are further evaluated using the Gleason grading system \cite{Gleason1977}.
+The scoring scheme to characterize the biopsy sample is composed of five different patterns which correspond to grades ranging from 1 to 5.
+Higher grades are associated with poor prognosis \cite{Epstein2005}.
+Then, in the Gleason system, two scores are assigned corresponding to (i) the grade of the most present tumour pattern, and (ii) the grade of the second most present tumour pattern \cite{Epstein2005}.
+A higher \ac{gs} indicates a more aggressive tumour \cite{Epstein2005}.
+Also, it should be noted that biopsy is an invasive procedure which can result in serious infection or urine retention \cite{Hara2005,Chou2011}.
+
+Although \ac{psa} screening has been shown to improve early detection of \ac{cap} \cite{Chou2011}, its lack of reliability motivates further investigations using \ac{mri}-\ac{cad}.
+Two reliable studies, carried out in the United States \cite{Andriole2009} and in Europe \cite{Schroeder2012, Hugosson2010}, have attempted to assess the impact of early detection of \ac{cap}, with diverging outcomes \cite{Chou2011,Heidenreich2013}.
+The study carried out in Europe\footnote{The \ac{ersspc} started in the 1990s in order to evaluate the effect of \ac{psa} screening on mortality rate.} concluded that \ac{psa} screening reduces CaP-related mortality by 21-44\% \cite{Schroeder2012, Hugosson2010}, while the American\footnote{The \ac{plco} cancer screening trial is carried out in the United States and intends to ascertain the effects of screening on mortality rate.} trial found no such effect \cite{Andriole2009}.
+However, both studies agree that \ac{psa} screening suffers from low specificity, with an estimated rate of 36 \% \cite{Schroder2008}.
+Both studies also agree that over-treatment is an issue: decision making regarding treatment is further complicated by difficulties in evaluating the aggressiveness and progression of \ac{cap} \cite{Delpierre2013}. 
+
+Hence, new screening methods should be developed with improved specificity of detection as well as more accurate risk assessment (aggressiveness and progression).
+Current research is focused on identifying new biological markers to replace \ac{psa}-based screening \cite{Bourdoumis2010,Morgan2011,Brenner2013}.
+Until such research comes to fruition, these needs can be met through active-surveillance strategy using multi-parametric \ac{mri} techniques \cite{Hoeks2011,Moore2013}.
+An \ac{mri}-\acs{cad} system, which is an area of active research and forms the focus of this thesis, can be incorporated into this screening strategy allowing a more systematic and rigorous follow-up.
+
+Another weakness of the current screening strategy lies in the fact that \ac{trus} biopsy does not provide trustworthy results.
+Due to its ``blind'' nature, there is a chance of missing aggressive tumours or detecting microfocal ``cancers'', which influences the aggressiveness-assessment procedure \cite{Noguchi2001}.
+As a consequence, over-diagnosis is estimated at up to 30 \% \cite{Haas2007}, while missing clinically significant \ac{cap} is estimated at up to 35 \% \cite{Taira2010}.
+In an effort to solve both issues, alternative biopsy approaches have been explored.
+\ac{mri}/\ac{us}-guided biopsy has been shown to outperform standard \ac{trus} biopsy \cite{Delongchamps2013}.
+There, multimodal \ac{mri} images are fused with \ac{us} images in order to improve localization and aggressiveness assessment to carry out biopsies.
+Human interaction plays a major role in biopsy sampling which can lead to low repeatability; by reducing potential human errors at this stage, the \acs{cad} framework can be used to improve repeatability of examination.
+\ac{cap} detection and diagnosis benefit from the use of \acs{cad} and \ac{mri} techniques.
+
+In an effot to improve the current statge of \ac{cap} diagnosis and detection, this thesis is intended to provide a multiparameteric \ac{mri} \acs{cad} system. 
+\ac{mri} principles and its different modalites are presented in \ac{chp}~\ref{chap:2}. 
+%In the following sections, these techniques will be presented in addition to an overview of \acs{cad} for \ac{cap}.
+
+\section{Computer-aided systems for \ac{cap}}\label{sec:intro:cad} 
+During the last century, physicists have focused on constantly innovating in terms of imaging techniques assisting radiologists to improve cancer detetction and diagnosis.
+However, human diagnosis still suffers from low repeatability, synonymous with erroneous detection or interpretations of abnormalities throughout clinical decisions \cite{Giger2008,Hambrock2013}.
+These errors are driven by two majors causes \cite{Giger2008}: observer limitations (e.g., constrained human visual perception, fatigue or distraction) and the complexity of the clinical cases themselves, for instance due to unbalanced data (number of healthy cases more abundant than malignant cases) or overlapping structures.
+%% On the one hand, observer limitations (e.g., constrained human visual perception, fatigue or distraction) are the principal human issues.
+%% On the other hand, the second reason is linked to the clinical cases themselves, for instance due to unbalanced data (number of healthy cases more abundant than malignant cases) or overlapping structures resulting from limitations of imaging techniques.
+
+Computer vision has given rise to many promising solutions, but, instead of focusing on fully automatic computerized systems, researchers have aimed at providing computer image analysis techniques to aid radiologists in their clinical decisions \cite{Giger2008}.
+In fact, these investigations brought about both concepts of \ac{cade} and \ac{cadx} grouped under the acronym \acs{cad}.
+Since those first steps, evidence has shown that \acs{cad} systems enhance the diagnosis performance of radiologists.
+Chan \textit{et al.} reported a significant 4~\% improvement in breast cancer detection \cite{Chan1999}, which has been confirmed in later studies \cite{Dean2006}.
+Similar conclusions were drawn in the case of lung nodule detection \cite{Li2004}, colon cancer \cite{Petrick2008} and \ac{cap} as well \cite{Hambrock2013}.
+Chan \textit{et al.} \cite{Chan1999} also hypothesized that \acs{cad} systems will be even more efficient assisting inexperienced radiologists than senior radiologists.
+That hypothesis was tested by Hambrock \textit{et al.} \cite{Hambrock2013} and was confirmed in case of \ac{cap} detection.
+In this particular study, inexperienced radiologists obtained equivalent performance to senior radiologists, both using \acs{cad} whereas the accuracy of their diagnosis was significantly poorer without \ac{cad}'s help.
+
+In contradiction with the aforementioned statement, \ac{cad} for \ac{cap} is a young technology due to the fact that is based on \ac{mri} \cite{Hegde2013}.
+Four distinct \ac{mri} modalities are employed in \ac{cap} diagnosis which were mainly developed after the mid-1990s: (i) \ac{t2w} \ac{mri} \cite{Hricak1983}, (ii) \ac{dce} \ac{mri} \cite{HuchBoni1995}, (iii) \ac{mrsi} \cite{Kurhanewicz1996} and (iv) \ac{dw} \ac{mri} \cite{Scheidler1999}.
+In addition, the increase of magnetic field strength (from 1.5 to 3 Tesla) and the development of endorectal coils, both imporved image spatial resolution \cite{Swanson2001} needed to perform more accurate diagnosis.
+It is for this matter that the development of \ac{cad} for \ac{cap} is still lagging behind fields stated above.
+
+This research is aimed at first, to provide an overview of the current state-of-the-art of \ac{cad} for \ac{cap} and later, according to the drawn coclusions, to propose a \ac{cad} which takes advantag of multiparameteric \ac{mri} modalities. 
+A review of the current proposed \ac{cad} for \ac{cap} is presented in \acs{chp}~\ref{chap:3}.
+
+ 
+%% It can be noted that these techniques came into existence relatively recently mainly due to technological progress. In addition, the increase of magnetic field strength and the development of endorectal coil, both improved image spatial resolution \cite{Swanson2001}) needed to perform more accurate diagnosis. It is for this matter that development of \acs{cad} for \ac{cap} is lagging behind the other fields stated above.
+
+%% In the late eighties, the first \acs{cad} systems were developed to detect anomalies on chest radiographies and mammograms \cite{Doi1987,Chan1987,Giger1988}).
+%% In the past twenty years, extensive investigations were conducted in the advancement of \acs{cad} systems, migrating from intensive time consuming algorithms performed on reduced number of cases to ``fast'' processing on a large medical dataset. These works were focused on diverse organ cancer diagnosis making use of numerous imaging modalities: micro-calcification detection in breast mammography \cite{Rangayyan2007,Elter2009}) and \ac{us} imaging \cite{Cheng2010}), lung nodules detection based on \ac{ct} \cite{Chan2008,Suzuki2012}), colon tumours detection \cite{Suzuki2012}) and melanoma detection using dermoscopy imaging \cite{Korotkov2012}). Noting the abundance of diverse \acs{cad} systems, these fields achieved a certain maturity which can be explained by the imaging techniques employed. Indeed, x-rays, \ac{us} as well as \ac{ct} are medical imaging techniques developed all before the 1970s and were subject to intensive research.
+
+
+%% The first study using \ac{mri} as inputs of \acs{cad} system was published ten years ago by \cite{Chan2003}. Despite this, no less than fifty studies have been reviewed for this survey since that seminal work. To the best of our knowledge, there is no review in the literature regarding the advancement of \acs{cad} systems devoted specifically to \ac{cap} detection and diagnosis. Thus, our aim with this survey is threefold: (i) provide an overview of developed \acs{cad} systems for \ac{cap} detection and diagnosis based on \ac{mri} modalities (ii) assess the different work and (iii) pointing out avenues for future work.
+
+%% As discussed further in Sect.~\ref{subsubsec:CAD}, \acs{cad} systems share a common framework. Stages involved in \acs{cad} work-flow can be categorized into six distinctive processes: (i) pre-processing, (ii) segmentation, (iii) registration, (iv) feature detection, (v) feature selection and extraction and (vi) classification. The first three stages are used to enhance data as well as to extract regions of interest and, in the case of multi-modal sources, to merge information of those heterogeneous sources in a joint reference system. The last three categories deal with pattern recognition, machine learning and data mining notions and more precisely with the data classification problem. First, information is detected from the different data sources and a subset of relevant features is selected and/or extracted. Then, this meaningful data will then be classified in order to provide the probability of malignancy of the area of interest and will assist radiologists in their diagnosis decisions (see Fig.~\ref{fig:wkfcad}).
+
+%% %% This paper is organized as follows: Sect.~\ref{sec:background} deals with general information about human prostate and background about \ac{cap}. Methods regarding \ac{cap} screening and imaging techniques used are also presented as well as an introduction on the \acs{cad} framework. Sections~\ref{sec:imaprocfra} -~\ref{sec:dataclassfra} review techniques used in different steps involved in a \acs{cad} work-flow which will be our main contribution. Image regularization framework including pre-processing (Sect.~\ref{subsec:preprocessing}), segmentation (Sect.~\ref{subsec:segmentation}) and registration (Sect.~\ref{subsec:registration}) will be covered as well as the image classification framework comprising of feature detection (Sect.\ref{subsec:featuredetection}), feature selection and extraction (see Sect.~\ref{subsec:featureselectionextraction}) and feature classification (Sect.~\ref{subsec:classification}). Results and discussion are reported in Sect.~\ref{sec:discussion} followed by a concluding section.
+
+
