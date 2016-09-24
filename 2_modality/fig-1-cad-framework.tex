@@ -261,6 +261,6 @@ path picture={
 \end{scope}
 \end{tikzpicture}
 \caption[\ac{cad} framework using multiparametric \ac{mri} images.]{\ac{cad} framework using \ac{mri} images. Multiparametric \ac{mri} images are provided as inputs. These data arise from heterogeneous sources and need to be regularized. Some studies do not consider this stage as mandatory and do not implement or only partly those processes (see \acs{tab} \ref{tab:sumpap}). A pre-processing stage is usually applied to standardize the intensity of images, reduce noise and artefacts. Then, in the image set, the prostate organ has to be segmented to focus the next processing stages only on that particular \ac{roi}. Moreover, prostate location can vary depending of the modality chosen. Therefore, the images are registered so that all segmented images will be in the same reference frame. Once the image regularisation performed, image classification can be carried out. First, a strategy defining \acp{roi} to focus on is decided. Then, distinctive features are extracted before to be post-processed to select the most salient features. Finally, these salient features will feed a classifier previously trained which will provide a likelihood cancer map associated with either \ac{cap} detection or diagnosis.}
-\end{adjustwidth}
 \label{fig:wkfcad}
+\end{adjustwidth}
 \end{figure}

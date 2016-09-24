@@ -1,0 +1,200 @@
+\subsubsection{Segmentation}\label{subsubsec:chp3:lit-clas:img-reg:seg}
+The segmentation task consists of delineating the prostate boundaries in the \ac{mri} and is of particular importance for focusing the posterior processing on the organ of interest \cite{Ghose2012}. 
+In this section, only the segmentation methods used in \ac{cad} for \ac{cap} are presented and summarized in Table.~\ref{tab:summary-seg}.
+These methods are mostly intensity based.
+ An exhaustive review of prostate segmentation methods in \ac{mri} can be found in \cite{Ghose2012}.
+
+\begin{table}
+	\caption{Overview of the segmentation methods used in \ac{cad} systems.}
+	\small
+	%\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
+		\hline \\ [-1.5ex]
+		\textbf{Segmentation methods} & \textbf{References} \\ \\ [-1.5ex]
+		\hline \\ [-1.5ex]
+		\textit{\ac{mri}-based segmentation:} & \\ \\ [-1.5ex]
+		\quad Manual segmentation & $[$4-5,16,18-21,24,38-40$]$ \\
+		\quad Region-based segmentation & $[$11$]$ \\
+		\quad Hybrid segmentation & $[$10,34-36,41$]$ \\ \\ [-1.5ex]
+		\textit{\ac{mrsi}-based segmentation:} & \\ \\ [-1.5ex]
+		\quad Clustering & $[$28$]$ \\ \\ [-1.5ex]
+		\hline
+	\end{tabular}
+\label{tab:summary-seg}
+\end{table}
+
+\setenumerate{listparindent=\parindent,itemsep=10px}
+\setlist{noitemsep}
+\begin{enumerate}[leftmargin=*]
+
+\item[$-$] \textbf{\textit{Manual segmentation:}} To highlight the importance of prostate segmentation task in \ac{cad} systems, it is interesting to note the large number of studies which manually segment the prostate organs \cite{Artan2009,Artan2010,Matulewicz2013,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Puech2009,Vos2008,Vos2008a}.
+In all the cases, the boundaries of the prostate gland are manually defined in order to limit further processing to only this area.
+This approach ensures the right delineation of the organ nevertheless this procedure is highly time consuming and should be performed by a radiologist.
+
+\item[$-$] \textbf{\textit{Region-based segmentation:}} Litjens \textit{et al.} in \cite{Litjens2012} used a multi-atlas-based segmentation using multi-modal images (e.g., \ac{t2w}-\ac{mri} and \ac{adc} map) to segment the prostate with an additional pattern recognition method to differentiate \ac{cg} and \ac{pz} as proposed in \cite{Litjens2012a}.
+This method consists in three different steps: (i) the registration between each atlas and the multi-modal images, (ii) the atlas selection and finally (iii) the classification of the prostate segmented voxels in either \ac{cg} or \ac{pz}. 
+The registration between each atlas and the \ac{mri} images is performed using two successive registrations; the first registration is a rigid registration to roughly aligned the atlases and the \ac{mri} images and the second is an elastic registration using B-spline transformation.
+The objective function to perform the registration is defined as the weighted sum of the metric of both \ac{t2w}-\ac{mri} and \ac{adc} map.
+The metric is based on \ac{mi} (please refer to the next section for more details in regard to registration).
+Two strategies of atlas selection were performed by using either a majority voting approach or the \ac{staple} approach \cite{Warfield2004}.
+After segmentation of the prostate, the differentiation of both \ac{cg} and \ac{pz} has to be carried out.
+This problem was carried out by classifying each voxel using \ac{lda}.
+Three types of features were considered: (i) anatomy, (ii) intensity and (iii) texture.
+Regarding the anatomy, relative position and relative distance from the pixel to the border of the prostate were used.
+The intensity features consist in the intensity of the voxel in the ADC coefficient and the T$_2$ map.
+The texture features were composed of five different features: homogeneity, correlation \cite{Amadasun1989}, entropy, texture strength \cite{Li2005a} and \ac{lbp} \cite{Ojala1996}.
+Finally, some morphological operations were applied to remove artefact and the contour between the zones were smooth using the \ac{tps} \cite{Bookstein1989}.
+
+Litjens \textit{et al.} in \cite{Litjens2014} used an almost identical algorithm proposed by PROMISE12 challange \cite{Litjens2014a}.
+Their segmentation method is also based on multi-atlas multi-modal images, but the SIMPLE method \cite{langerak2010label} is used instead to combine labels after the registration of the different atlas to obtain the final segmentation.
+ 
+\item[$-$] \textbf{\textit{Hybrid-based segmentation:}} Viswanath \textit{et al.} in \cite{Viswanath2008a,Viswanath2009} used a \ac{mantra} method as proposed in \cite{Toth2008}.
+\ac{mantra} is closely related to the \ac{asm} from \cite{Cootes1995}.
+This algorithm consists of two stages: (i) a training stage where a shape and appearance model is generated and (ii) the actual segmentation performed based on the learned model. 
+For the training stage, a set of landmarks is defined and the shape model is generated as in the original \ac{asm} method \cite{Cootes1995}.
+{\color{red}\textbf{Check what is commented in the segmentation.tex here, it was not explained well so I didnt included them.}}
+
+%% Then, to model the appearance, a set of $K$ texture images $\{I_1,I_2,\cdots,I_k\}$ based on first and second order statistical texture features, are computed.
+%% For a given landmark $l$ with its given neighbourhood $\mathcal{N}(l)$, its feature matrix extracted can be expressed as:
+
+%% \begin{equation}
+%% 	f_l = \{ I_1(\mathcal{N}(l)), I_2(\mathcal{N}(l)), \cdots, I_k(\mathcal{N}(l)) \} \ .	
+%% 	\label{eq:mantra1}
+%% \end{equation}
+
+%% \noindent where $I_k(\mathcal{N}(l))$ represent a feature vector obtained by sampling the $k^{\text{th}}$ texture map using the neighbourhood $\mathcal{N}(l)$.
+%% By generating multiple landmark in the same fashion as the \ac{asm}, \ac{pca} \cite{Pearson1901} is applied to learned the appearance variations.
+%% For the segmentation stage, the mean shape learned previously is initialise in the test image.
+%% The same associated texture images as in the training stage are computed.
+%% For each landmark $l$, a neighbourhood of a larger size than $\mathcal{N}(l)$ is defined where multiple neighbourhoods $\mathcal{N}_R(l)$ of same size than $\mathcal{N}(l)$ will be generated.
+%% Each $\mathcal{N}_R(l)$ patch will be used to sample the texture images and a reconstruction will be performed using the appearance trained model.
+%% The new landmark location will be defined as the position where the \ac{mi} is maximal between the reconstructed and original values.
+%% This scheme is performed in a multi-resolution manner as in \cite{Cootes1995}.}
+
+%% \cite{Viswanath2012} used a \ac{weritas} proposed by \cite{Toth2009}. As \ac{mantra} method, this is really close to \ac{asm} formulation. 
+
+%% In the training stage, a set of landmarks $\{l_1,l_2,\cdots,l_n\}$ associated with their given neighbourhood $\{\mathcal{N}(l_1),\mathcal{N}(l_2),\cdots,\mathcal{N}(l_n)\}$ are defined. 
+
+%% In the same way, a set of pixels $\{p_1,p_2,\cdots,p_n\}$ associated with their given neighbourhood $\{\mathcal{N}(p_1),\mathcal{N}(p_2),\cdots,\mathcal{N}(p_n)\}$ are defined. 
+
+%% A set of $K$ texture images $\{I_1,I_2,\cdots,I_k\}$ based on first and second order statistical texture features, are computed from the original image $I_0$. Hence, for a given landmark $l$ with its given neighbourhood $\mathcal{N}(l)$, its feature matrix extracted can be expressed as:
+
+%% \begin{equation}
+%% 	f_l = \{ I_1(\mathcal{N}(l)), I_2(\mathcal{N}(l)), \cdots, I_k(\mathcal{N}(l)) \} \ .	
+%% 	\label{eq:weritas1}
+%% \end{equation}
+
+%% \noindent where $I_k(\mathcal{N}(l))$ represents a feature vector obtained by sampling the $k^{\text{th}}$ texture map using the neighbourhood $\mathcal{N}(l)$.
+
+%% In the same way, for a given pixel $p$ with its given neighbourhood $\mathcal{N}(p)$, its feature matrix extracted can be expressed as:
+
+%% \begin{equation}
+%% 	f_p = \{ I_1(\mathcal{N}(p)), I_2(\mathcal{N}(p)), \cdots, I_k(\mathcal{N}(p)) \} \ .	
+%% 	\label{eq:weritas2}
+%% \end{equation}
+
+%% \noindent where $I_k(\mathcal{N}(p))$ represents a feature vector obtained by sampling the $k^{\text{th}}$ texture map using the neighbourhood $\mathcal{N}(p)$.
+
+%% Also, each of the feature $f_l$ and $f_p$ are associated with their means $\bar{f}_l$ and $\bar{f}_p$ and their covariance $\Phi_l$ and $\Phi_p$. A set of of Euclidean distance is computed for each landmark and pixel such that:
+
+%% \begin{equation}
+%% 	E = \{ \| l - p \|_2 \} \ .
+%% 	\label{eq:weritas3}
+%% \end{equation}
+
+%% A set of Mahalanobis distance will also be computed such that:
+
+
+Litjens \textit{et al.}~\cite{Litjens2011} and Vos \textit{et al.}~\cite{Vos2012} used an approach proposed in \cite{Huisman2010} in which the bladder, prostate and rectum are segmented.
+
+The segmentation task is performed as an optimization problem taking three parameters into account linked to organs such as: (i) the shape (an ellipse), (ii) the location and (iii) the respective angles between them.
+%% First, a probabilistic model is first trained by embedding the three following aspects: (i) the shape by defining each organ as an ellipse, (ii) the position by defining the distance and the angle between each organ center and (iii) the appearance using the \acp{pdf} of \ac{si} of each organ. 
+Furthermore, Litjens \textit{et al.}~\cite{Litjens2011} used only \ac{adc} map to encode the appearance whereas Vos \textit{et al.}~\cite{Vos2012} used both \ac{adc} and T$_2$ maps.
+%Then, during the optimization using a quasi-Newton optimizer, an objective function is minimized. 
+%% This function is defined as the sum of the deviations from the above model learnt. This rough segmentation is then used inside a Bayesian framework to refine the shape. {\color{red}Really have to check because things seem to be made up.}
+
+
+Only the work of Tiwari \textit{et al.} in \cite{Tiwari2009} propose a segmentation based on \ac{mrsi}.
+Authors localized the voxels corresponding to the prostate organ using a hierarchical spectral clustering.
+First, each \ac{mrsi} spectrum is projected into a lower dimension space using graph embedding \cite{Shi2000}.
+To proceed, a similarity matrix $W$ is computed using a Gaussian similarity measure from Euclidean distance \cite{Belkin2001}) such that:
+
+\begin{equation}
+	W(\mathbf{x},\mathbf{y}) =
+	\begin{cases}	
+	 	\exp \left( \frac{\| s(\mathbf{x}) - s(\mathbf{y}) \|_2^2}{\sigma^2} \right) \ , & \text{if } \| \mathbf{x} - \mathbf{y} \|_2 < \epsilon \ , \\
+	 	0 \ , & \text{if } \| \mathbf{x} - \mathbf{y} \|_2 > \epsilon \ .
+	 \end{cases}
+	\label{eq:ge1}
+\end{equation}
+
+\noindent where $s(\mathbf{x})$ and $s(\mathbf{y})$ are the \ac{mrsi} spectra for the voxels $\mathbf{x}$ and $\mathbf{y}$ respectively, $\sigma$ is the standard deviation of the Gaussian similarity measure and $\epsilon$ is the parameter to defined an $\epsilon$-neighbourhood.
+The projection can be performed as a generalized eigenvector problem such that:
+\begin{eqnarray}
+	Lu & = & \lambda D u \ , \nonumber \\
+	D(\mathbf{x},\mathbf{x}) & = & \sum_{\mathbf{y}} W(\mathbf{x},\mathbf{y}) \ , \label{eq:ge2} \\
+	L & = & D-W \ . \nonumber
+\end{eqnarray}
+
+\noindent where $D$ is the diagonal weight matrix, $L$ is the Laplacian matrix, $\lambda$ and $u$ represent the eigenvalues and eigenvectors.
+Once that the \ac{mrsi} spectra are projected into the lower dimension space, a replicate k-means clustering method is used to define two clusters where the larger cluster is assimilated to be the cluster corresponding to non-prostate voxels and will be eliminated.
+The full procedure is repeated until the total number of voxels left is inferior to a given number.
+
+
+\end{enumerate}
+
+
+%% \subsection{Segmentation} \label{subsec:segmentation}
+
+%% The segmentation task consists in delineating the prostate boundaries in the \ac{mri}. This procedure is of particular importance for focusing the posterior processing on the organ of interest (\cite{Ghose2012}). In this section, only the segmentation methods used in \ac{cad} systems are presented and summarized in Tab. \ref{tab:seg}. An exhaustive review of prostate segmentation methods in \ac{mri} can be found in \cite{Ghose2012}.
+
+
+%% \setenumerate{listparindent=\parindent,itemsep=10px}
+%% \setlist{noitemsep}
+%% \begin{enumerate}[leftmargin=*]
+
+%% \item[$-$] \textbf{\textit{Manual segmentation:}} To highlight the importance of prostate segmentation task in \ac{cad} systems, it is interesting to note the large number of studies which segment manually the prostate organs (\cite{Artan2009,Artan2010,Matulewicz2013,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Puech2009,Vos2008,Vos2008a}). In all the cases, the boundaries of the prostate gland is defined in order to limit the further processing to only this area. This approach ensure the right delineation of the organ nevertheless this procedure is highly time consuming and should be perform by a radiologist.
+
+%% \item[$-$] \textbf{\textit{Region-based segmentation:}} \cite{Litjens2012} used a multi-atlas-based segmentation using multi-modal images (e.g., \ac{t2w}-\ac{mri} and \ac{adc} map) to segment the prostate with an additional pattern recognition method to differentiate \ac{cg} and \ac{pz} as proposed in \cite{Litjens2012a}. This method consists of three different steps: (i) the registration between each atlas and the multi-modal images, (ii) the atlas selection and finally (iii) the classification of the prostate segmented voxels in either \ac{cg} or \ac{pz}. 
+
+%% The registration between each atlas and the \ac{mri} images is performed using two successive registrations: the first registration is a rigid registration to roughly align the atlases and the \ac{mri} images and the second is an elastic registration using B-spline transformation. The objective function to perform the registration is defined as the weighted sum of the metric of both \ac{t2w}-\ac{mri} and \ac{adc} map. The metric is based on \ac{mi}. We refer to the next section for more details in regard to registration. Two strategies of atlas selection were performed by using either a majority voting approach or the \ac{staple} approach (\cite{Warfield2004}).
+
+%% Subsequently,  \ac{cg} and \ac{pz} segmentation within the prostate region is achieved by classifying each voxel using a \ac{lda} classifier. Three types of features were considered: (i) anatomy, (ii) intensity and (iii) texture. Regarding the anatomy, relative position and relative distance from the pixel to the border of the prostate were used. The intensity features consist of the intensity of the voxel in the ADC coefficient and the T$_2$ map. The texture features were composed of five different features: homogeneity, correlation (\cite{Amadasun1989}), entropy, texture strength (\cite{Li2005a}) and \ac{lbp} (\cite{Ojala1996}). Finally, morphological operations were applied to remove artefacts and the contours between the zones were smoothed using \ac{tps} (\cite{Bookstein1989}).
+
+%% \item[$-$] \textbf{\textit{Model-based segmentation:}} \cite{Viswanath2008a,Viswanath2009} used the \ac{mantra} method as proposed by \cite{Toth2008}. \ac{mantra} is closely related to the \ac{asm} from \cite{Cootes1995}. This algorithm consists of two stages: (i) a training stage where a shape and appearance model is generated and (ii) the actual segmentation performed based on the learned model. 
+
+%% For the training stage, a set of landmarks is defined and the shape model is generated as in the original \ac{asm} method (\cite{Cootes1995}). Then, to model the appearance, a set of $K$ texture images $\{I_1,I_2,\cdots,I_k\}$ based on first and second order statistical texture features are computed. For a given landmark $l$ with its given neighbourhood $\mathcal{N}(l)$, its feature matrix extracted can be expressed as:
+
+%% \begin{equation}
+%% 	f_l = \{ I_1(\mathcal{N}(l)), I_2(\mathcal{N}(l)), \cdots, I_k(\mathcal{N}(l)) \} \ ,
+%% 	\label{eq:mantra1}
+%% \end{equation}
+
+%% \noindent where $I_k(\mathcal{N}(l))$ represents a feature vector obtained by sampling the $k^{\text{th}}$ texture map using the neighbourhood $\mathcal{N}(l)$.
+
+%% By generating multiple landmarks in the same fashion as \ac{asm}, \ac{pca} (\cite{Pearson1901}) is applied to learn the appearance variations.
+
+%% For the segmentation stage, the mean shape learned previously is initialised in the test image. The same associated texture images as in the training stage are computed. For each landmark $l$, a neighbourhood of patches are used to sample the texture images and a reconstruction is obtained using the appearance model previously trained. The new landmark location will be defined as the position where the \ac{mi} is maximal between the reconstructed and original values. This scheme is performed in a multi-resolution manner as in \cite{Cootes1995}.
+
+%% Subsequently, the same authors (\cite{Viswanath2012}) used the \ac{weritas} method also proposed by \cite{Toth2009}. As with the \ac{mantra} method, \ac{weritas} is based on the \ac{asm} formulation. In fact it is very close to the \ac{mantra} itself. The same texture features are used to construct the appearance models, but instead of using \ac{mi} between the landmarks and neighbour patches for adapting the landmark positions, it defines a metric based on the Mahalanobis distance. In the training stage, the Mahalanobis distance is computed between landmarks and neighbour patches for each of the features. Subsequently, a new metric is proposed as a linear weighted combination of those Mahalanobis distances which maximises the correlation with the Euclidean distance between the patches and the true landmarks. In the segmentation step, this metric is then computed between the initialised landmarks and neighbouring patches in order to update landmark positions, in a similar fashion to other \ac{acm} models. 
+
+%% \cite{Litjens2011} and \cite{Vos2012} used an approach proposed by \cite{Huisman2010} in which the bladder, prostate and rectum are segmented tackling the segmentation task as an optimization problem. A probabilistic model is first trained by embedding the three following aspects: (i) the shape by defining each organ as an ellipse, (ii) the position by defining the distance and the angle between each organ center and (iii) the appearance using the \acp{pdf} of \ac{si} of each organ. \cite{Litjens2011} used only \ac{adc} map to encode the appearance whereas \cite{Vos2012} used both \ac{adc} and T$_2$ maps. Then, during the optimization using a quasi-Newton optimizer, an objective function is minimized. This function is defined as the sum of the deviations from the above model learnt. This rough segmentation is then used inside a Bayesian framework to refine the segmentation.
+
+%% \end{enumerate}
+
+%% \subsubsection{MRSI-based segmentation}
+
+%% \cite{Tiwari2009} localized the voxels corresponding to the prostate organ using a hierarchical spectral clustering. First, each \ac{mrsi} spectrum is projected into a lower dimension space using graph embedding (\cite{Shi2000}). To proceed, a similarity matrix $W$ is computed using a Gaussian similarity measure from the Euclidean distance (\cite{Belkin2001}) such that:
+
+%% \begin{equation}
+%% 	W(\mathbf{x},\mathbf{y}) =
+%% 	\begin{cases}	
+%% 	 	\exp \left( \frac{\| s(\mathbf{x}) - s(\mathbf{y}) \|_2^2}{\sigma^2} \right) \ , & \text{if } \| \mathbf{x} - \mathbf{y} \|_2 < \epsilon \ , \\
+%% 	 	0 \ , & \text{if } \| \mathbf{x} - \mathbf{y} \|_2 > \epsilon \ ,
+%% 	 \end{cases}
+%% 	\label{eq:ge1}
+%% \end{equation}
+
+%% \noindent where $s(\mathbf{x})$ and $s(\mathbf{y})$ are the \ac{mrsi} spectra for the voxels $\mathbf{x}$ and $\mathbf{y}$ respectively, $\sigma$ is the standard deviation of the Gaussian similarity measure and $\epsilon$ is a parameter used to define an $\epsilon$-neighbourhood.
+
+%% The \ac{mrsi} spectra projection into the lower dimension space is approached as a generalized eigenvector problem. Subsequently, a replicate k-means clustering method is run defining two clusters. The data corresponding to larger cluster is assumed to belong to the non-prostate voxels and these voxels will be eliminated from the processing. The full procedure is repeated until the total number of voxels left is inferior to a given threshold set experimentally.
