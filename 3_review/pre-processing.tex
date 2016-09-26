@@ -1,10 +1,10 @@
-\subsubsection{Pre-processing}\label{subsubsec:chp3:lit-clas:img-reg:prepro}
+\subsection{Pre-processing}\label{subsec:chp3img-reg:prepro}
 Three different groups of pre-processing methods are commonly applied to images as initial stage in \ac{cad} for \ac{cap}.
 These methods are explained for both \ac{mri} and \ac{mrsi} modalities, while a summary of the applied methods in \ac{cad} is presented in Table.~\ref{tab:summary-preproc}.
 
-\setenumerate{listparindent=\parindent,itemsep=10px}
-\setlist{noitemsep}
-\begin{enumerate}[leftmargin=*]
+%% \setenumerate{listparindent=\parindent,itemsep=10px}
+%% \setlist{noitemsep}
+%% \begin{enumerate}[leftmargin=*]
 
 \begin{figure}
 \centering
@@ -14,7 +14,8 @@ These methods are explained for both \ac{mri} and \ac{mrsi} modalities, while a 
 \end{figure}
 
 %Noise filtering
-\item[$-$] \textbf{\textit{Noise filtering:}} The \ac{nmr} signal measured and recorded in the k-space during an \ac{mri} acquisition is affected by noise.
+%\item[$-$] \textbf{\textit{Noise filtering:}} 
+\paragraph{Noise filtering:} The \ac{nmr} signal measured and recorded in the k-space during an \ac{mri} acquisition is affected by noise.
 This noise obeys a complex Gaussian white noise mainly due to thermal noises in the patient area \cite{Nowak1999}.
 Furthermore, \ac{mri} images visualized by radiologists are in fact the magnitude images resulting from the complex Fourier transform of the k-space data.
 The complex Fourier transform, being a linear and orthogonal transform, does not affect the Gaussian noise characteristics \cite{Nowak1999}.
@@ -62,8 +63,10 @@ It implies that the wavelet coefficients are also unbiased estimators and the sc
 	\label{fig:bias}
 \end{figure}
 
+
 % Artefacts filtering
-\item[$-$] \textbf{\textit{Bias correction:}} Besides being corrupted by noise, \ac{mri} images are also affected by the inhomogeneity of the \ac{mri} field commonly referred to as bias field \cite{Styner2000}.
+%\item[$-$] \textbf{\textit{Bias correction:}} 
+\paragraph{Bias correction:} Besides being corrupted by noise, \ac{mri} images are also affected by the inhomogeneity of the \ac{mri} field commonly referred to as bias field \cite{Styner2000}.
 This bias field results in a smooth variation of the \ac{si} through the image.
 When an endorectal coil is used, an artefact resulting of an hyper-intense signal can be observed around the coil on the images (see Fig.~\ref{fig:bias}).
 
@@ -182,9 +185,8 @@ This process is repeated until the number of pixels in the largest region $R$ do
 }
 
 %SI normalization
-\item[$-$] \textbf{\textit{\Ac{si} normalization/standardization:}}
-
-As discussed in the later section, segmentation or classification tasks are usually performed by first learning from a training set of patients.
+%\item[$-$] \textbf{\textit{\Ac{si} normalization/standardization:}}
+\paragraph{\Ac{si} normalization/standardization:} As discussed in the later section, segmentation or classification tasks are usually performed by first learning from a training set of patients.
 Hence, one can emphasize the desire to perform \ac{mri} examinations with a high repeatability or in other words, one would ensure to obtain similar \ac{mri} images (cf., similar \acp{si}) for patients of the same group (cf., healthy patients \textit{vs.} patients with \ac{cap}), for a similar sequence.
 
 However, it is a known fact that variability between patients occurs during the \ac{mri} examinations even using the same scanner, protocol or sequence parameters \cite{Nyul1999}.
@@ -260,15 +262,15 @@ Niaf \textit{et al.}~\cite{Niaf2011,Niaf2012} normalized \ac{t2w}-\ac{mri} image
 Likewise, \cite{Niaf2011} standardized the \ac{t1w}-\ac{mri} images using the \ac{aif}.
 They computed the \ac{aif} by taking the mean of the \ac{si} in the most enhanced part of the common femoral arteries (see Fig. \ref{subfig:arteries}) as proposed in \cite{Wiart2007}.
 
-\end{enumerate}
+%\end{enumerate}
 
 
 Presented in Sect.~\ref{subsec:chp2:imaging:mrsi}, \ac{mrsi} is a modality related to a one dimensional signal.
 Hence, specific pre-processing steps for this type of signals have been applied instead of standard signal processing methods.
 
-\setenumerate{listparindent=\parindent,itemsep=10px}
-\setlist{noitemsep}
-\begin{enumerate}[leftmargin=*]
+%% \setenumerate{listparindent=\parindent,itemsep=10px}
+%% \setlist{noitemsep}
+%% \begin{enumerate}[leftmargin=*]
 
 \begin{figure}
 	\centering
@@ -277,7 +279,8 @@ Hence, specific pre-processing steps for this type of signals have been applied 
 	\label{fig:phase}
 \end{figure}
 
-	\item[$-$] \textbf{\textit{Phase correction:}} \ac{mrsi} data acquired suffer from zero-order and first-order phase misalignments as shown in Fig.~\ref{fig:phase} \cite{Chen2002,Osorio-Garcia2012}. 
+%\item[$-$] \textbf{\textit{Phase correction:}}
+\paragraph{Phase correction:} \ac{mrsi} data acquired suffer from zero-order and first-order phase misalignments as shown in Fig.~\ref{fig:phase} \cite{Chen2002,Osorio-Garcia2012}. 
 Parfait \textit{et al.}~\cite{Parfait2012} used a method proposed in \cite{Chen2002} where the phase of \ac{mrsi} signal is corrected based on entropy minimization in the frequency domain.
 The corrected \ac{mrsi} signal $o(\xi)$ can be expressed as:
 
@@ -307,7 +310,8 @@ Once the best parameter $\Phi$ is obtained, the \ac{mrsi} signal is corrected us
 	\label{fig:waterfat}
 \end{figure}
 
-	\item[$-$] \textbf{\textit{Water and lipid residuals filtering:}} The water and lipid metabolites occur in much higher concentrations the metabolites of interests (cf., choline, creatine and citrate) \cite{Zhu2010,Osorio-Garcia2012}.
+%\item[$-$] \textbf{\textit{Water and lipid residuals filtering:}} 
+\paragraph{Water and lipid residuals filtering:} The water and lipid metabolites occur in much higher concentrations the metabolites of interests (cf., choline, creatine and citrate) \cite{Zhu2010,Osorio-Garcia2012}.
 Fortunately, specific \ac{mrsi} sequences were developed in order to suppress water and lipid metabolites using pre-saturation techniques \cite{Zhu2010}.
 However, these techniques do not perfectly remove water and lipids peaks and some residuals are still present in the \ac{mrsi} spectra as shown in Fig.~\ref{fig:waterfat}.
 Therefore, different post-processing methods have been proposed to enhance the quality of the \ac{mrsi} spectra by removing these residuals.
@@ -328,7 +332,8 @@ However, due to the presence of noise, $H$ is in fact a full rank matrix.
 Thus, to recover the ``noise-free signal'', the rank of $H$ can be truncated to $K$ using its \ac{svd} decomposition.
 Hence, knowing the cut off frequencies of water (cf., 4.7 ppm) and lipid (cf., 2.2 ppm) metabolites, their corresponding peaks can be reconstructed and subtracted from the original signal \cite{Laudadio2002}.
 	
-	\item[$-$] \textbf{\textit{Baseline correction:}} Sometimes, the problem discussed in the above section regarding the lipid molecules is not addressed simultaneously with water residuals suppression.
+%\item[$-$] \textbf{\textit{Baseline correction:}} 
+\paragraph{Baseline correction:} Sometimes, the problem discussed in the above section regarding the lipid molecules is not addressed simultaneously with water residuals suppression.
 Lipids and macromolecules are known to affect the baseline of the \ac{mrsi} spectra.
 They could cause errors during further fitting processes aiming to quantify the metabolites, especially regarding the citrate metabolite.
 	
@@ -369,12 +374,16 @@ In the contemporary work of Tiwari \textit{et al.}~\cite{Tiwari2012}, the author
 	\label{fig:frequency}
 \end{figure}
 
-	\item[$-$] \textbf{\textit{Frequency alignment:}} Due to variations of the experimental conditions, a frequency shift can be observed in the \ac{mrsi} spectra \cite{Chen2002,Osorio-Garcia2012} as shown in Fig.~\ref{fig:frequency}.
+%\item[$-$] \textbf{\textit{Frequency alignment:}} 
+\paragraph{Frequency alignment:}
+Due to variations of the experimental conditions, a frequency shift can be observed in the \ac{mrsi} spectra \cite{Chen2002,Osorio-Garcia2012} as shown in Fig.~\ref{fig:frequency}.
 	
 Tiwari \textit{et al.}~\cite{Tiwari2012} corrected the frequency shift by first detecting known metabolite peaks such as choline, creatine and citrate.
 The frequency shift is corrected by minimizing the frequency error between the experimental and theoretical values of each of these peaks.
 
-	\item[$-$] \textbf{\textit{Normalization:}} Due to variations of the experimental conditions, the \ac{mrsi} signal may also vary between patients.
+%\item[$-$] \textbf{\textit{Normalization:}} 
+\paragraph{Normalization:}
+Due to variations of the experimental conditions, the \ac{mrsi} signal may also vary between patients.
 Parfait \textit{et al.}~\cite{Parfait2012} as in \cite{Devos2004} compared two methods to normalize \ac{mrsi} signal.
 In each method, the original \ac{mrsi} spectra is divided by a normalization factor, similar to the intensity normalization described earlier.  
 The first approach to obtain the normalization factor is based on an estimation of the water concentration.
@@ -383,7 +392,7 @@ Using this sequence, an estimation of the water concentration can be performed u
 The second approach to normalization is based on using the L$_2$ norm of the \ac{mrsi} spectra $\|s(\xi)\|_2$. 
 It should be noted that both \cite{Parfait2012} and \cite{Devos2004} concluded that the L$_2$ normalization was more efficient in their framework.
  
-\end{enumerate}
+%\end{enumerate}
 
 
 \begin{table}
