@@ -395,31 +395,33 @@ It should be noted that both \cite{Parfait2012} and \cite{Devos2004} concluded t
 %\end{enumerate}
 
 
+
+
 \begin{table}
-	\caption{Overview of the pre-processing methods used in \ac{cad} systems.}
-	\small
-	%\renewcommand{\arraystretch}{1.5}
-	\begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
-		\hline \\ [-1.5ex]
-		\textbf{Pre-processing operations} & \textbf{References} \\ \\ [-1.5ex]
-		\hline \\ [-1.5ex]
-		\textit{\ac{mri} pre-processing:} & \\ \\ [-1.5ex]
-		\quad Noise filtering: &  \\
-		\quad \quad Median filtering & $[$20-21$]$  \\
-		\quad \quad Wavelet-based filtering & $[$1-2,14$]$ \\ \\ [-1.5ex]
-		\quad Bias correction: & \\
-		\quad \quad Parametric methods & $[$15-35$]$ \\
-		\quad \quad Non-parametric methods & $[$36$]$ \\ \\ [-1.5ex]
-		\quad Standardization: & \\
-		\quad \quad Statistical-based normalization: & $[$3-4,15,20-21,35,37$]$ \\
-		\quad \quad Organ \ac{si}-based normalization & $[$18-19$]$ \\ \\ [-1.5ex]
-		\textit{\ac{mrsi} pre-processing:} & \\ \\ [-1.5ex]
-		\quad Phase correction & $[$22$]$ \\
-		\quad Water and lipid residuals filtering & $[$8$]$ \\
-		\quad Baseline correction & $[$22,31$]$ \\
-		\quad Frequency alignment & $[$31$]$ \\
-		\quad Normalization & $[$22$]$ \\ \\ [-1.5ex]
-		\hline
-	\end{tabular}
+  \caption{Overview of the pre-processing methods used in \ac{cad} systems.}
+  \small
+  \renewcommand{\arraystretch}{1}
+  \begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
+    \hline \\ [-1.5ex]
+    \textbf{Pre-processing operations} & \textbf{References} \\ \\ [-1.5ex]
+    \hline \\ [-1.5ex]
+    \textit{\ac{mri} pre-processing:} & \\ \\ [-1.5ex]
+    \quad Noise filtering: &  \\
+    \quad \quad Median filtering & \cite{Ozer2009,Ozer2010}  \\
+    \quad \quad Wavelet-based filtering & \cite{Ampeliotis2007,Ampeliotis2008,Lopes2011} \\ \\ [-1.5ex]
+    \quad Bias correction: & \\
+    \quad \quad Parametric methods & \cite{Lv2009,Viswanath2009} \\
+    \quad \quad Non-parametric methods & \cite{Viswanath2011} \\ \\ [-1.5ex]
+    \quad Standardization: & \\
+    \quad \quad Statistical-based normalization: & \cite{Artan2009,Artan2010,Lv2009,Ozer2009,Ozer2010,Viswanath2009,Viswanath2011,Viswanath2012} \\
+    \quad \quad Organ \ac{si}-based normalization & \cite{Niaf2011,Niaf2012} \\ \\ [-1.5ex]
+    \textit{\ac{mrsi} pre-processing:} & \\ \\ [-1.5ex]
+    \quad Phase correction & \cite{Parfait2012} \\
+    \quad Water and lipid residuals filtering & \cite{Kelm2007} \\
+    \quad Baseline correction & \cite{Parfait2012,Tiwari2012} \\
+    \quad Frequency alignment & \cite{Tiwari2012} \\
+    \quad Normalization & \cite{Parfait2012} \\ \\ [-1.5ex]
+    \hline
+  \end{tabular}
 \label{tab:summary-preproc}
 \end{table}

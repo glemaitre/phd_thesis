@@ -1,0 +1,61 @@
+
+\subsection{\Ac{cade}: \acp{roi} detection/selection} \label{subsec:chp3:img-clas:roiSel}
+
+\begin{table}
+  \caption{Overview of the \ac{cade} strategies employed in \ac{cad} systems.}\label{tab:cade}
+  \footnotesize
+  \renewcommand{\arraystretch}{.8}
+  \begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
+    \hline \\ [-1.5ex]
+    \textbf{\ac{cade}: \acp{roi} selection strategy} & \textbf{References} \\ \\ [-1.5ex]
+    \hline \\ [-1.5ex]
+    \quad All voxels-based approach & \cite{Artan2009,Artan2010,Giannini2013,Kelm2007,Liu2009,Lopes2011,Matulewicz2013,Mazzetti2011,Ozer2009,Ozer2010,Parfait2012,Sung2011,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2012,Tiwari2013,Viswanath2008,Viswanath2008a,Viswanath2009,Viswanath2011,Viswanath2012} \\ \\ [-1.5ex]
+    \quad Lesions candidate detection & \cite{Litjens2011,Litjens2012,Litjens2014,Vos2012} \\ \\ [-1.5ex]
+    \hline
+  \end{tabular}
+\label{tab:cade}
+\end{table}
+
+As discussed in the introduction and shown in Fig.~\ref{fig:wkfcad}, the image classification framework is often composed of a \ac{cade} and a \ac{cadx}.
+In this section, we will focus on studies embedding a \ac{cade} in their framework.
+Two approaches are considered to define a \ac{cade} (see Tab.~\ref{tab:cade}): (i) voxel-based delineation and (ii) lesion segmentation.
+The first strategy, which concerns the majority of the studies reviewed (see Tab.~\ref{tab:cade}), is in fact linked to the nature of the classification framework~~\cite{Artan2009,Artan2010,Giannini2013,Kelm2007,Liu2009,Lopes2011,Matulewicz2013,Mazzetti2011,Ozer2009,Ozer2010,Parfait2012,Sung2011,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2012,Tiwari2013,Viswanath2008,Viswanath2008a,Viswanath2009,Viswanath2011,Viswanath2012}.
+All voxels are considered as a possible lesion and the output of the framework will be pixels classified as lesion and non lesion.
+The second group of methods is composed of method implementing a lesion segmentation algorithm to delineate potential candidates to further obtain a diagnosis through the \ac{cadx}.
+This approach was borrowed from other application areas such as breast cancer.
+These methods are in fact very similar to the classification framework used in \ac{cadx} later.
+
+Vos \textit{et al.}~\cite{Vos2012} highlighted lesion candidates by detecting blobs in the \ac{adc} map.
+These candidates were filtered using some \textit{a priori} criteria such as \ac{si} or diameter.
+As mentioned in Sect.~\ref{subsec:chp2:imaging:mrsi} (see also Tab.~\ref{tab:modmri}), \ac{cap} can be interpreted as region of lower \ac{si} in \ac{adc} map.
+Hence, blob detectors are suitable to highlight these regions. 
+Blobs are detected in a multi-resolution scheme, by computing the three main eigenvalues $\{ \lambda_{\sigma,1},\lambda_{\sigma,2},\lambda_{\sigma,3} \}$ of the Hessian matrix, for each voxel location of the \ac{adc} map at a specific scale $\sigma$ \cite{Li2003}.
+The probability $p$ of a voxel $\mathbf{x}$ being a part of a blob at the scale $\sigma$ is given by:
+
+\begin{equation}
+P(\mathbf{x},\sigma) = \begin{cases}
+	\frac{\| \lambda_{\sigma,3}(\mathbf{x}) \|^{2}}{\| \lambda_{\sigma,1} (\mathbf{x}) \|} \ , & \text{if } \lambda_{\sigma,k}(\mathbf{x}) > 0 \text{ with } k = \{1,2,3\} \  , \\
+	0 \ , & \text{otherwise} \ .
+\end{cases}
+\label{eq:blobdet}
+\end{equation}
+
+\noindent The fusion of the different scales is computed as:
+
+\begin{equation}
+	L(\mathbf{x}) = \max P(\mathbf{x},\sigma) , \forall \sigma \ .
+	\label{eq:fusionBlob}
+\end{equation}
+
+The candidate blobs detected are then filtered depending on its appearance (cf. maximum of the likelihood of the region, diameter of the lesion) and their \ac{si} in \ac{adc} and \ac{t2w} images.
+The detected regions are then used as inputs for the \ac{cadx}.
+
+Litjens \textit{et al.} in \cite{Litjens2011} used a pattern recognition approach in order to delineate the \acp{roi}.
+A blobness map was calculated in the same manner as in \cite{Vos2010} using the multi-resolution Hessian blob detector on the \ac{adc} map, \ac{t2w} and pharmacokinetic parameters maps (see Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec} for details about those parameters).
+Additionally, the position of the voxel $\mathbf{x}=\{x,y,z\}$ was used as a feature as well as the Euclidean distance of the voxel to the prostate center.
+Hence, the feature vectors were composed of eight features and a \ac{svm} classifier was trained using a \ac{rbf} kernel (see Sect.~\ref{subsec:chp3:img-clas:CADX-clas} for more details).
+
+Subsequently, Litjens \textit{et al.} in \cite{Litjens2012} modified this approach by including only features related to the blob detection on the different maps as well as the original \acp{si} of the parametric images.
+Two new maps were introduced based on texture.
+Instead of a \ac{svm} classifier, a \ac{knn} classifier was used.
+The candidate regions were then extracted by performing a local maxima detection followed by post-processing region-growing and morphological operations. 

@@ -2,7 +2,7 @@
 \input{3_review/fig-reg-framework.tex}
 
 The role of image registration is vital in \ac{cad} systems using multi-parametric \ac{mri} images. 
-As it will be discussed in Sect.~\ref{sec:chp3clas}, for the sake of an optimal classification, the features detected in each modality will be grouped depending of their spatial locations. 
+As it will be discussed in Sect.~\ref{sec:chp3:img-clas}, for the sake of an optimal classification, the features detected in each modality will be grouped depending of their spatial locations. 
 Hence, one has to ensure the perfect alignment of the multi-modal \ac{mri} images ahead of performing any classification.
 
 Image registration is the procedure consisting of aligning an unregistered image (also called moving image) into a template image (also called fixed image) via a geometric transformation.
@@ -164,38 +164,40 @@ However, commonly used methods are bilinear, nearest-neighbour, bi-cubic, spline
 \paragraph{Registration methods used in \ac{cad} systems:}
 Studies presenting \ac{cad} pipeline incorporating an automatic registration procedure are summarized in Tab.~\ref{tab:regtab}.
 
-\begin{table}%[ht]
-\centering
-\caption{Classification of the different registration methods used in the \ac{cad} systems reviewed. Acronyms: gradient descent (GD), Nelder-Mead (NM).}
-\footnotesize
-\begin{adjustwidth}{-2.2cm}{}
-\begin{threeparttable}
-\renewcommand{\arraystretch}{1.5}
-	\rowcolors{3}{black!5}{white}	
-	\begin{tabular}{|c|c|c|>{\centering\arraybackslash}m{0.8cm} >{\centering\arraybackslash}m{0.8cm} >{\centering\arraybackslash}m{0.8cm}| >{\centering\arraybackslash}m{0.8cm} >{\centering\arraybackslash}m{0.8cm} >{\centering\arraybackslash}m{0.8cm}| >{\centering\arraybackslash}m{1.5cm} >{\centering\arraybackslash}m{1.5cm} >{\centering\arraybackslash}m{1.5cm}|}\hline
-	\hiderowcolors
-	Study & Modality & \multirow{2}{*}{Type} & \multicolumn{3}{c|}{Geometric transform} & \multicolumn{3}{c|}{Similarity measure} & \multicolumn{3}{c|}{Optimizer} \\ \cline{4-12}
-	 index & registered & & Rigid & Affine & Elastic & \acs{mse} & \acs{mi} & \acs{cmi} & GD & L-BFGS-B & NM simplex \\ \hline \hline
-	 \showrowcolors
-	 	  $[$1-2$]$ & \ac{t2w} - \ac{dce} & 2D & $-$ & \cmark & $-$ & \cmark & $-$ & $-$ & $-$ & $-$ & $-$ \\
-	 	  $[$7$]$ & \ac{t2w} - \ac{dw} & 2D & $-$ & \cmark & \cmark & $-$ & $-$ & $-$ & $-$ & $-$ & $-$ \\
-		  $[$7$]$ & \ac{t2w} - \ac{dce} & 2D & $-$ & \cmark & \cmark & $-$ & \cmark & $-$ & \cmark & $-$ & $-$ \\
-	 	  $[$34-35$]$ & \ac{t2w} - \ac{dce} & 2D & $-$ & \cmark & $-$ & $-$ & \cmark & $-$ & $-$ & $-$ & $-$ \\
-	 	  $[$36$]$ & \ac{t2w} - \ac{dce} - \ac{dw} & 3D & $-$ & \cmark & $-$ & $-$ & $-$ & \cmark & \cmark & $-$ & $-$ \\
-	 	  $[$38$]$ & \ac{t2w} - \ac{dce} & 3D & $-$ & \cmark & $-$ & $-$ & \cmark & $-$ & $-$ & $-$ & $-$ \\
-	 	  $[$40$]$ & \ac{t2w} - \ac{dce} & 3D & $-$ & \cmark & \cmark & $-$ & \cmark & $-$ & $-$ & \cmark & $-$ \\
-	 	 \hline
-	\end{tabular}
-	\begin{tablenotes}
-      \scriptsize
+\begin{table}[ht]
+  \centering
+  \caption{Classification of the different registration methods used in the \ac{cad} systems reviewed. Acronyms: gradient descent (GD), Nelder-Mead (NM).}
+  \footnotesize
+  %\begin{adjustwidth}{-.1cm}{}
+    \begin{threeparttable}
+      \renewcommand{\arraystretch}{1}
+      \rowcolors{3}{black!5}{white}
+      \begin{tabular}{|c|c|c| >{\centering\arraybackslash}m{1.1cm} >{\centering\arraybackslash}m{1.1cm}| >{\centering\arraybackslash}m{0.5cm} >{\centering\arraybackslash}m{0.5cm} >{\centering\arraybackslash}m{0.5cm}| >{\centering\arraybackslash}m{1.1cm} >{\centering\arraybackslash}m{1.35cm}| }\hline
+        \hiderowcolors
+        Study & Modality & \multirow{2}{*}{Type} & \multicolumn{2}{c|}{Geometric model} & \multicolumn{3}{c|}{Similarity measure} & \multicolumn{2}{c|}{Optimizer} \\ \cline{4-10}
+        index & registered & & Affine & Elastic & \acs{mse} & \acs{mi} & \acs{cmi} & GD & L-BFGS-B \\ \hline \hline
+        \showrowcolors
+        \cite{Ampeliotis2007,Ampeliotis2008} & \ac{t2w} - \ac{dce} & 2D & \cmark & $-$ & \cmark & $-$ & $-$ & $-$ & $-$ \\
+        \cite{Giannini2013} & \ac{t2w} - \ac{dw} & 2D & \cmark & \cmark & $-$ & $-$ & $-$ & $-$ & $-$  \\
+        \cite{Giannini2013} & \ac{t2w} - \ac{dce} & 2D & \cmark & \cmark & $-$ & \cmark & $-$ & \cmark & $-$ \\
+        \cite{Viswanath2008a,Viswanath2009} & \ac{t2w} - \ac{dce} & 2D & \cmark & $-$ & $-$ & \cmark & $-$ & $-$ & $-$ \\
+        \cite{Viswanath2011} & \ac{t2w} - \ac{dce} - \ac{dw} & 3D & \cmark & $-$ & $-$ & $-$ & \cmark & \cmark & $-$  \\
+        \cite{Vos2008} & \ac{t2w} - \ac{dce} & 3D & \cmark & $-$ & $-$ & \cmark & $-$ & $-$ & $-$ \\
+        \cite{Vos2010} & \ac{t2w} - \ac{dce} & 3D & \cmark & \cmark & $-$ & \cmark & $-$ & $-$ & \cmark \\
+        \hline
+      \end{tabular}
+      \begin{tablenotes}
+        \footnotesize
       \item Notes:
       \item {$-$}: not used or not mentioned.
       \item {\cmark}: used or implemented.
-    \end{tablenotes}
-\end{threeparttable}
-\end{adjustwidth}
-\label{tab:regtab}
+      \end{tablenotes}
+    \end{threeparttable}
+\label{tab:regtab}  
+%\end{adjustwidth}
 \end{table}
+
+
 
 Ampeliotis \textit{et al.} in \cite{Ampeliotis2007,Ampeliotis2008} did not use the framework as presented in Fig.~\ref{fig:frareg} to register 2D \ac{t2w} and \ac{dce} images.
 By using image symmetries and the \ac{mse} metric, they find the parameters of an affine transformation but without using a common objective function.

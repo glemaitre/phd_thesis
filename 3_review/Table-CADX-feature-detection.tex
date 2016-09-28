@@ -1,0 +1,64 @@
+%%%% THIS TABLE NEEDS TO BE CHANG
+\newgeometry{margin=1cm}
+\thispagestyle{empty}
+\begin{table}
+  \centering
+  \caption{Overview of the feature detection methods used in \ac{cad} systems.}\label{tab:feat}
+  \footnotesize
+  \begin{threeparttable}
+    \renewcommand{\arraystretch}{.7}
+    \begin{tabular}{p{.5\linewidth} p{.4\linewidth}}
+      \hline \\ [-1.5ex]
+      \textbf{Feature detection methods} & \textbf{Indexes} \\ \\ [-1.5ex]
+      \hline \\ [-1.5ex]
+      \textbf{\ac{mri} image:} & \\ \\ [-1.5ex]
+      \quad \textit{Voxel-wise detection} &  \\ \\ [-1.5ex]
+      \quad \quad Intensity-based & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Vos2008}\par $^{\text{- - {\cmarksmall}}}$\cite{Giannini2013}\par $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Artan2009,Artan2010,Chan2003,Langer2009,Litjens2011,Litjens2012,Litjens2014,Liu2009,Ozer2009,Ozer2010}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012} \\ 
+      \quad \quad Edge-based & \\
+      \quad \quad \quad Prewitt operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008} \\
+      \quad \quad \quad Sobel operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012} \\
+      \quad \quad \quad Kirsch operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012} \\
+      \quad \quad \quad Gabor filtering & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2012,Viswanath2008,Viswanath2012} \\ 
+      \quad \quad Texture-based & \\
+      \quad \quad \quad Haralick features & $^{\text{{\cmarksmall}- -}}$\cite{Antic2013,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2012,Niaf2011,Niaf2012} \\
+      \quad \quad \quad Fractal analysis & $^{\text{{\cmarksmall}- -}}$\cite{Lopes2011,Lv2009} \\
+      \quad \quad \quad \Ac{dct} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Chan2003} \\
+      \quad \quad \quad Wavelet-based features & $^{\text{{\cmarksmall}- -}}$\cite{Viswanath2012} \\
+      \quad \quad \quad Gaussian filter bank & $^{\text{{\cmarksmall}- -}}$\cite{Litjens2014} \\ 
+      \quad \quad Position-based & \cite{Chan2003,Litjens2011,Litjens2012,Litjens2014} \\ \\ [-1.5ex]
+      \quad \textit{Region-wise detection} &  \\ \\ [-1.5ex]
+      \quad \quad Statistical-based & \\
+      \quad \quad \quad Percentiles & $^{\text{- {\cmarksmall}-}}$\cite{Vos2008a} \par $^{\text{- - {\cmarksmall}}}$\cite{Antic2013,Peng2013}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Vos2010}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,Vos2012} \\
+      \quad \quad \quad Statistical-moments & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012}\par $^{\text{- - {\cmarksmall}}}$\cite{Antic2013}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011}\par $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Peng2013}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012} \\
+      \quad \quad Histogram-based & \\
+      \quad \quad \quad \acs{pdf} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
+      \quad \quad \quad \acs{hog} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
+      \quad \quad \quad Shape context & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
+      \quad \quad \quad \acs{lbp} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
+      \quad \quad Anatomical-based & \cite{Litjens2012,Litjens2014,Matulewicz2013} \\ \\ [-1.5ex]
+      \textbf{\ac{dce} signal:} & \\ \\ [-1.5ex]
+      \quad Whole spectra approach & \cite{Ampeliotis2007,Ampeliotis2008} \\
+      \quad Semi-quantitative approach & $^{\text{{\mmarksmall}}}$\cite{Puech2009}\par \cite{Mazzetti2011,Niaf2011,Niaf2012,Sung2011} \\
+      \quad Quantitative approach &  \\
+      \quad \quad Toft model & $^{\text{{\mmarksmall}}}$\cite{Liu2013,Peng2009}\par \cite{Giannini2013,Langer2009,Litjens2011,Litjens2012,Litjens2014,Mazzetti2011,Niaf2011,Niaf2012} \\
+      \quad \quad Brix model & $^{\text{{\mmarksmall}}}$\cite{Artan2009,Artan2010,Ozer2009,Ozer2010}\par \cite{Liu2009,Sung2011} \\
+      \quad \quad Weibull function & \cite{Giannini2013,Mazzetti2011} \\
+      \quad \quad PUM & \cite{Giannini2013,Mazzetti2011} \\
+      \\ [-1.5ex]
+      \textbf{\ac{mrsi} signal:} & \\ \\ [-1.5ex]
+      \quad Whole spectra approach & \cite{Kelm2007,Matulewicz2013,Parfait2012,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008} \\
+      \quad Quantification approach & \cite{Kelm2007,Parfait2012} \\
+      \quad Wavelet-based approach & \cite{Tiwari2012} \\ \\ [-1.5ex]
+      \hline
+    \end{tabular}
+    \begin{tablenotes}
+      \footnotesize
+    \item Notes:
+    \item ( {\cmarksmall}$|$- {\cmarksmall}$|$- {\cmarksmall}$|$- ): triplet stating the implementation or not of the feature for respectively \ac{t2w}-\ac{mri} images, \ac{dce}-\ac{mri} images, \ac{dw}-\ac{mri} images.
+    \item {\cmarksmall}: used or implemented.
+    \item {\mmarksmall}: partially implemented.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+\restoregeometry
+

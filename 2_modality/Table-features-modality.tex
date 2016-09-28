@@ -1,0 +1,44 @@
+\begin{landscape}
+\begin{table}
+  \begin{adjustwidth}{-1cm}{}
+    \caption{Overview of the features associated with each \ac{mri} modality used for medical diagnosis by radiologists. Acronyms: \acf{cap} - \acf{si} - \acf{gs}.}\label{tab:modmri}
+    \begin{threeparttable}
+      \centering
+      \footnotesize
+      \renewcommand{\arraystretch}{1.2}
+      \begin{tabular}{|m{1.7cm}||m{4.5cm}|>{\centering\arraybackslash}m{4.8cm}|>{\centering\arraybackslash}m{4.8cm}|>{\centering\arraybackslash}m{2cm}|}\hline
+        \rowcolor{gray!10}
+        Modality & Significant features & \ac{cap} & Healthy tissue & \ac{gs} correlation \\ \hline \hline
+        \multirow{4}{*}{\ac{t2w} \ac{mri}} & \acs{si} & low-\ac{si} in \ac{pz}~\cite{Hricak1987} & \multirow{2}{*}{intermediate to high-\ac{si} in \ac{pz}~\cite{Hricak1987}} & \multirow{4}{*}{+~\cite{Wang2008}} \\ 
+        & Shape & round or ill-defined mass in \ac{pz}~\cite{Hricak1983} &  & \\ \cdashline{2-4}
+        & \acs{si} & low-\ac{si} in \ac{cg}~\cite{Akin2006, Barentsz2012} & \multirow{2}{*}{low-\ac{si} in \ac{cg}~\cite{Akin2006, Barentsz2012}} &  \\
+        & Shape & homogeneous mass with ill-defined edges in \ac{cg}~\cite{Akin2006, Barentsz2012} &  &  \\ \hline
+        T$_2$ map & \acs{si} & low-\ac{si}~\cite{Liney1996,Gibbs2001} & intermediate to high-\ac{si}~\cite{Liney1996,Gibbs2001} & +~\cite{Liu2011,Liney1996,Liney1997}  \\ \hline
+        \multirow{9}{*}{\ac{dce} \ac{mri}} & Semi-quantitative features~\cite{Verma2012}: & & & \\[-1.5ex]
+        & $-$ wash-in & faster & slower & 0 \\[-1.5ex]
+        & $-$ wash-out & faster & slower & 0 \\[-1.5ex]
+        & $-$ integral under the curve & higher & lower & 0 \\[-1.5ex]
+        & $-$ maximum signal intensity & higher & lower & 0 \\[-1.5ex]
+        & $-$ time-to-peak enhancement & faster & slower & 0 \\ \cline{2-5}
+        & Quantitative features (Tofts' parameters~\cite{Tofts2010}): & & & \\[-1.5ex]
+        & $-$ $\text{k}_{\text{ep}}$ & higher & lower & 0 \\[-1.5ex]
+        & $-$ $\text{K}^{\text{trans}}$ & higher & lower & 0 \\ \hline
+        \ac{dw} \ac{mri} & \acs{si} & higher-\ac{si}~\cite{Huisman2003,Barentsz2012} & lower-\ac{si}~\cite{Huisman2003,Barentsz2012} & + \\ \hline
+        \acs{adc} map & \acs{si} & low-\ac{si}~\cite{Barentsz2012} & high-\ac{si}~\cite{Barentsz2012} & +~\cite{Hambrock2011, Itou2011, Peng2013} \\ \hline
+        \multirow{4}{*}{\ac{mrsi}}& Metabolites: & & & \\[-1.5ex]
+        & Citrate (2.64 ppm)~\cite{Verma2010} & lower concentration~\cite{Awwad2012,Costello2006,Graaf2000} & higher concentration~\cite{Awwad2012,Costello2006,Graaf2000} & +~\cite{Giskeodegard2013} \\[-1.5ex]
+        & Choline (3.21 ppm)~\cite{Verma2010} & higher concentration~\cite{Awwad2012,Costello2006,Graaf2000} & lower concentration~\cite{Awwad2012,Costello2006,Graaf2000} & 0~\cite{Giskeodegard2013} \\[-1.5ex]
+        & Spermine (3.11 ppm)~\cite{Verma2010} & lower concentration~\cite{Awwad2012,Costello2006,Graaf2000} & higher concentration~\cite{Awwad2012,Costello2006,Graaf2000} & +~\cite{Giskeodegard2013} \\ \hline
+        
+      \end{tabular}
+      \begin{tablenotes}
+        \small
+      \item Notes:
+      \item + = significantly correlated.
+      \item 0 = no correlation.
+      \end{tablenotes}
+    \end{threeparttable}
+  \label{tab:modmri}
+  \end{adjustwidth}
+\end{table}
+\end{landscape}

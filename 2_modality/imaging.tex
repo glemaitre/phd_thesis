@@ -7,48 +7,7 @@ Features strengthening each modality, will receive particular attention together
 Commonly, these features form the basis for developing analytic tools and automatic algorithms.
 However, we refer the reader to \acs{sec}.~\ref{subsec:featuredetection} for more details on automatic feature detection methods since they are part and parcel of the \acs{cad} framework.
 Table~\ref{tab:modmri} provides an overview of the following discussion.
-
-\begin{table}
-\begin{adjustwidth}{-1.5cm}{}
-\caption{Overview of the features associated with each \ac{mri} modality. Acronyms: \acf{cap} - \acf{si} - \acf{gs}.}
-\begin{threeparttable}
-\centering
-\footnotesize
-\renewcommand{\arraystretch}{1.5}
-	\begin{tabular}{|m{1.7cm}||m{4.5cm}|>{\centering\arraybackslash}m{3.5cm}|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{2cm}|}\hline
-	\rowcolor{gray!10}
-	Modality & Significant features & \ac{cap} & Healthy tissue & \ac{gs} correlation \\ \hline \hline
-	\ac{t2w} \ac{mri} & \acs{si} & low-\ac{si} & intermediate to high-\ac{si} & + \\ \hline
-	T$_2$ map & \acs{si} & low-\ac{si} & intermediate to high-\ac{si} & + \\ \hline
-	\multirow{9}{*}{\ac{dce} \ac{mri}} & Semi-quantitative features: & & & \\[-1.5ex]
-	& $-$ wash-in & faster & slower & 0 \\[-1.5ex]
-	& $-$ wash-out & faster & slower & 0 \\[-1.5ex]
-	& $-$ integral under the curve & higher & lower & 0 \\[-1.5ex]
-	& $-$ maximum signal intensity & higher & lower & 0 \\[-1.5ex]
-	& $-$ time-to-peak enhancement & faster & slower & 0 \\ \cline{2-5}
-	& Quantitative features (Tofts' parameters): & & & \\[-1.5ex]
-	& $-$ $\text{k}_{\text{ep}}$ & higher & lower & 0 \\[-1.5ex]
-	& $-$ $\text{K}^{\text{trans}}$ & higher & lower & 0 \\ \hline
-	\ac{dw} \ac{mri} & \acs{si} & higher-\ac{si} & lower-\ac{si} & + \\ \hline
-	\acs{adc} map & \acs{si} & low-\ac{si} & high-\ac{si} & + \\ \hline
-	\multirow{4}{*}{\ac{mrsi}}& Metabolites: & & & \\[-1.5ex]
-	& Citrate (2.64 ppm) & lower concentration & higher concentration & + \\[-1.5ex]
-	& Choline (3.21 ppm) & higher concentration & lower concentration & 0 \\[-1.5ex]
-	& Spermine (3.11 ppm) & lower concentration & higher concentration & + \\ \hline
-	
-	\end{tabular}
-	\begin{tablenotes}
-      \small
-      \item Notes:
-      \item + = significantly correlated.
-      \item 0 = no correlation.
-    \end{tablenotes}
-\end{threeparttable}
-\label{tab:modmri}
-\end{adjustwidth}
-%\label{tab:modmri}
-\end{table}
-
+\input{2_modality/Table-features-modality.tex}
 \input{2_modality/fig-1-cad-framework.tex}
 
 %% % We are using enumerate with a small margin and some indent to organize our thoughts by paragraphs.
