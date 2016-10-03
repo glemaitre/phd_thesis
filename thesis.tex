@@ -12,7 +12,11 @@
 %: Style file for Latex
 % Most style definitions are in the external file PhDthesisPSnPDF.
 % In this template package, it can be found in ./Latex/Classes/
-\documentclass[twoside,11pt]{Latex/Classes/PhDthesisPSnPDF}
+\documentclass[twoside,12pt]{Latex/Classes/PhDthesisPSnPDF}
+
+\makeatletter
+        \setlength{\@fptop}{0pt}
+\makeatother
 
 
 %: Macro file for Latex
@@ -208,8 +212,8 @@ Day of the defense:
 \include{2_modality/chapter2}						% aims of the project
 
 \include{3_review/chapter3}			
-%\include{4_materials/XYZ}	
-%\include{5_normalization/XYZ}
+\include{4_materials/chapter4}	
+\include{5_normalization/chapter5}
 %% \include{6_pipeline/XYZ}
 
 %% \include{7/discussion}               % discussion of results
