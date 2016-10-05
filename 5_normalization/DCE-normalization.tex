@@ -33,9 +33,9 @@ We also propose a new clustering-based method to segment enhanced signals from t
 % Additionally, we show that using the whole normalized \ac{dce}-\ac{mri} signal is preferable to quantitative and semi-quantitative methods, leading to the best classification performance.
 
 This section is organized as follows:
-First Sect.~\ref{subsec:chp5:DCE-norm:norm} details our normalization strategy for \ac{dce}-\ac{mri} data.
-Quantitative and semi-quantitative methods are summarized in Sect.\,\ref{subsec:chp5:DCE-norm:stateart} with insights about their implementations.
-Finally experiments and results to answer the previous stated challenges are reported in Sect.\,\ref{subsec:chp5:DCE-norm:exp} while discussed in Sect.\,\ref{subsec:chp5:DCE-norm:discussions}, followed by a concluding section.
+First Sect.~\ref{subsubsec:chp5:DCE-norm:norm} details our normalization strategy for \ac{dce}-\ac{mri} data.
+Quantitative and semi-quantitative methods are summarized in Sect.~\ref{subsubsec:chp5:DCE-norm:stateart} with insights about their implementations.
+Finally experiments and results to answer the previous stated challenges are reported in Sect.~\ref{subsec:chp5:DCE-norm:exp-res} while discussed in Sect.~\ref{subsec:chp5:DCE-norm:dis-con}, followed by a concluding section.
 %Section~\ref{sec:methods} outlines our normalization strategy (Section~\ref{sec:norm}) as well as specificity regarding the state-of-the-art methods used for comparison (Section~\ref{sec:stateart}).
 %The dataset, experiments, and results are reported in Section~\ref{sec:experiments} while discussed in Section~\ref{sec:discussions} followed by a concluding section.
 
@@ -163,13 +163,14 @@ The resulting normalized data can be used into two fashions: (i) each normalized
 
 \subsubsection{Quantification of \ac{dce}-\ac{mri}}\label{subsubsec:chp5:DCE-norm:stateart}
 
-In this section, we summarize the different methods which have been used for the quantification of \ac{dce}-\ac{mri} for \ac{cap} detection~\citep{Lemaitre2015} and which will be used for comparison in this work.
+The quantitive approaches for detection of \ac{dce}-based features was brifly discussed in Sect.~\ref{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea}.
+In this section, we present in details the different methods which have been used for the quantification of \ac{dce}-\ac{mri} for \ac{cap} detection~\citep{Lemaitre2015} and which will be used for comparison in this work.
 Furthermore, we would like to emphasize the following additional contributions for this section: (i) a novel automatic \ac{aif} estimation algorithm based on clustering and (ii) a simplified semi-quantitative method using constrained optimization.
 
 \paragraph{Brix and Hoffmann models}\label{par:chp5:DCE-norm:brixhoffmann}
 
-In the Brix model~\citep{brix1991pharmacokinetic}, the \ac{mri} signal intensity is assumed to be proportional to the media concentration.
-Therefore, the model is expressed as in Eq.\,\eqref{eq:brix}:
+In the Brix model~\cite{brix1991pharmacokinetic}, the \ac{mri} signal intensity is assumed to be proportional to the media concentration.
+Therefore, the model is expressed as in Eq.~\eqref{eq:brix} (see also Eq.~\eqref{eq:brixmod}):
 
 \begin{equation}
   s_n(t) = 1 + A \left[ \frac{\exp(k_{el} t') - 1}{k_{ep}(k_{ep} - k_{el})} \exp(- k_{el} t) - \frac{\exp(k_{ep} t') - 1}{k_{el}(k_{ep} - k_{el})} \exp(- k_{ep} t) \right],
@@ -186,7 +187,7 @@ Therefore, the model is expressed as in Eq.\,\eqref{eq:brix}:
 \noindent where $s(t)$ and $S_0$ are the \ac{mri} signal intensity at time $t$ and the average pre-contrast \ac{mri} signal intensity, respectively; $A$, $k_{el}$, and $k_{ep}$ are the constant proportional to the transfer constant, the diffusion rate constant, and the rate constant, respectively.
 Additionally, $t'$ is set such that $0 \leq t \leq \tau$, $t' = t$ and afterwards while $t > \tau$, $t' = \tau$.
 
-Hoffman \textit{at al.}~\cite{hoffmann1995pharmacokinetic} proposed a similar model as expressed in Eq.\,\eqref{eq:hoffmann}, which derive from the Brix model:
+Hoffmann \textit{at al.}~\cite{hoffmann1995pharmacokinetic} proposed a similar model as expressed in Eq.~\eqref{eq:hoffmann}, which derive from the Brix model:
 
 \begin{equation}
   \small
@@ -200,7 +201,7 @@ The parameters $A$, $k_{el}$, and $k_{ep}$ are estimated by fitting the model us
 
 \paragraph{Tofts model}\label{par:chp5:DCE-norm:tofts}
 
-The extended Tofts model is formulated as in Eq.\,\eqref{eq:exttofts}:
+The extended Tofts model is formulated as in Eq.~\eqref{eq:exttofts}(see also Eq.~\eqref{eq:tofts}):
 
 \begin{equation}
   C_t(t) = K_{trans} C_p(t) \Conv \exp(-k_{ep}t) + v_p C_p(t),
@@ -249,7 +250,7 @@ Therefore, Tofts model requires to:
     In this regards, the selection criteria corresponds to the 90\textsuperscript{th} percentile of the maximum \ac{dce}-\ac{mri} signal.
     Finally, regions with an eccentricity smaller than $0.5$ and an area in the range of $[100, 400]$ voxels are kept.
     Additionally, to remove voxels contaminated by partial volume effect, only the $10\%$ most enhanced voxels of the possible candidates are kept as proposed by~\cite{schabel2008uncertainty} and the average signal is computed.
-    A summary of the different segmentation steps is presented in Fig.\,\ref{fig:aif}.
+    A summary of the different segmentation steps is presented in Fig.~\ref{fig:aif}.
     \item[Conversion of \ac{mri} signal intensity to concentration] To estimate the free parameters of the Tofts model (see Eq.\,\eqref{eq:exttofts}), the concentration $C_t(t)$ and $C_p(t)$ need to be computed from the \ac{mri} signal intensity and the \ac{aif} signal, respectively.
       This conversion is based on the equation of the FLASH sequence\textemdash see~\ref{app:signaltoconc} for details\textemdash and is formulated as in Eq.\,\eqref{eq:conv}:
       \begin{equation}
@@ -264,11 +265,11 @@ Therefore, Tofts model requires to:
       \noindent where $s(t)$ is the \ac{mri} signal, $S_0$ is the \ac{mri} signal prior to the injection of the contrast media, $\alpha$ is the flip angle, $TR$ is the \acf{tr}, $R_{10}$ is the pre-contrast tissue relaxation time also equal to $\frac{1}{T_{10}}$, and $r_1$ is the relaxitivity coefficient of the contrast agent.
 
       $T_{10}$ can be estimated from the acquisition of a T$_1$ map.
-      However, this modality is not part of the clinical trial in this research and the value of $T_{10}$ is fixed to \SI{1600}{\ms} for both blood and prostate, in accordance with the values found in the literature~\citep{fennessy2015quantitative,de2004mr,carr2011magnetic}.
+      However, this modality is not part of the clinical trial in this research and the value of $T_{10}$ is fixed to \SI{1600}{\ms} for both blood and prostate, in accordance with the values found in the literature~\cite{fennessy2015quantitative,de2004mr,carr2011magnetic}.
       \item[Estimation of population-based \ac{aif}] While estimating the pharmacokinetic parameters from Tofts model, the \ac{aif} concentration $C_p(t)$ can be computed either from the patient or a population.
         We presented in the two previous sections the algorithms which allows to estimate the patient-based \ac{aif} concentration.
         To compare with the previous approach, we also computed a population-based \ac{aif} which will be also used later to compare the performance of both approaches.
-        In that regard, the population-based \ac{aif} was estimated as in~\citep{meng2010comparison} by fitting the average patient-based \ac{aif}s to the model of~\cite{parker2006experimentally} which is formulated as in Eq.\,\eqref{eq:parker}:
+        In that regard, the population-based \ac{aif} was estimated as in~\cite{meng2010comparison} by fitting the average patient-based \ac{aif}s to the model of~\cite{parker2006experimentally} which is formulated as in Eq.\,\eqref{eq:parker}:
         \begin{equation}
           C_p(t) = \sum_{n=1}^{2} \frac{A_n}{\sigma_n \sqrt{2 \pi}} \exp\left(\frac{- (t- T_n)^2}{2\sigma_{n}^{2}}\right) + \frac{\alpha \exp(-\beta t)}{1 + \exp{-s (t - \tau)}} ,
           \label{eq:parker}
@@ -282,11 +283,11 @@ The parameters are estimated by fitting the model using a constrained non-linear
 
 Gliozzi \textit{et al.}~\cite{gliozzi2011phenomenological} showed that \ac{pun} approach can be used for \ac{dce}-\ac{mri} analysis~\cite{gliozzi2011phenomenological}.
 The model has been successfully used in a \ac{cad} system proposed by~\cite{giannini2015fully}.
-This model can be expressed as in Eq.\,\eqref{eq:pun}:
+This model can be expressed as in Eq.~\eqref{eq:pun2} (see also Eq.~\eqref{eq:pun}):
 
 \begin{equation}
   s_n(t) = \exp\left[rt + \frac{1}{\beta} \left( a_0 - r \right) \left( \exp(\beta t) - 1 \right) \right],
-  \label{eq:pun}
+  \label{eq:pun2}
 \end{equation}
 
 \noindent with
@@ -302,7 +303,7 @@ The parameters are estimated by fitting the model using non-linear least-squares
 
 \paragraph{Semi-quantitative analysis}\label{par:chp5:DCE-norm:semi}
 
-The semi-quantitative analysis of the \ac{dce}-\ac{mri} is equivalent to extracting curve characteristics directly from the signal without a strict theoretical pharmacokinetic meaning.
+The semi-quantitative analysis of the \ac{dce}-\ac{mri} is equivalent to extracting curve characteristics directly from the signal without a strict theoretical pharmacokinetic meaning (see Table.~\ref{tab:semiqua}).
 In this work, we use the model presented by~\cite{huisman2001accurate} which formulated the \ac{mri} signal as in Eq.\,\eqref{eq:huisman}:
 
 \begin{equation}
@@ -327,7 +328,7 @@ Instead of these successive estimations, we propose a unified optimization in wh
 Therefore, $t_0$ is robustly estimated from the \ac{aif} signal since that this is the most enhanced signal in which the start of enhancement is easily identifiable.
 The \ac{aif} signal is computed as in Section~\ref{sec:tofts}.
 $t_0$ is estimated by finding the maximum of the first derivative of the \ac{aif} signal, always occurring at the beginning of the signal.
-Then, the function in Eq.\,\eqref{eq:huisman} is fitted using non-linear least squares with the Trust Region Reflective algorithm~\cite{sorensen1982newton}.
+Then, the function in Eq.~\eqref{eq:huisman} is fitted using non-linear least squares with the Trust Region Reflective algorithm~\cite{sorensen1982newton}.
 Furthermore, the parameters $\tau$ and $S_M$ are bounded during the optimization to ensure robust estimations.
 $\tau$ is bounded between $t_0$ and $t_f$ which is the time of the last sample while $S_M$ is bounded between $S_0$ and $\max(s(t))$.
 
@@ -340,7 +341,7 @@ From Eq.\,\eqref{eq:huisman}, the following features are extracted:
 (v) the relative enhancement $S_M - S_0$.
 
 
-\section{Experiment and results}\label{sec:chp5:DCE-norm:exp-res}
+\subsection{Experiment and results}\label{subsec:chp5:DCE-norm:exp-res}
 
 {\color{red} \textbf{Data, check with the material chapter}}
 
