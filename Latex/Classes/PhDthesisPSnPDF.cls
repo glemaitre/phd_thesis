@@ -299,8 +299,8 @@
 %  \null\vfill
   \begin{center}
 {\large {{\@firstlogouni}\hspace*{5mm}{\@firstlogolab}\hspace*{5mm}{\@secondlogouni}\hspace*{5mm}{\@secondlogolab} \par \vspace*{15mm}}}
-    { \huge {\bfseries {\@title}} \par \vspace*{15mm}}
-    {{\Large \@author} \par}
+    { \Large {\bfseries {\@title}} \par \vspace*{15mm}}
+    {{\large \@author} \par}
 %	\vspace*{1ex}
 %	{{\@cityofbirth} \par}    
 {\large 
@@ -309,13 +309,15 @@
 	\vspace*{1ex}
     {{\@firstuni}{ - }{\@seconduni} \par}
 	\vspace*{15mm}
-    {\textbf{Supervisors: } \par \@supervisora \par \@supervisorb \par \@supervisorc \par \@supervisord \par}
+    {\small \textbf{Supervised by: } \par \@supervisora, \@supervisorb \par \@supervisorc, \@supervisord \par}
 	\vspace*{15mm}
-    {{\submittedtext} \par}
+    {\small {\submittedtext} \par}
 	\vspace*{0.5ex}
-    {\it {\@degree} \par}
+    {\small \it {\@degree} \par}
 	\vspace*{0.5ex}
-    {\@degreedate \par}
+    {\small \@degreedate \par}
+        \vspace*{15mm}
+    {\small Work submitted to the Universitat de Girona and Universit\'e de Bourgogne in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
 	
 }%end large
   \end{center}
