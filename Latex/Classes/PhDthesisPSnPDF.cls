@@ -51,7 +51,7 @@
 \usepackage[english]{babel}
 \usepackage[usenames, dvipsnames]{color}
 \usepackage[perpage]{footmisc}
-\usepackage[round, sort, numbers]{natbib}
+\usepackage[sort, numbers]{natbib}
 \usepackage{ifthen}
 \usepackage{multicol,multirow} % for pages with multiple text columns, e.g. References
 \setlength{\columnsep}{20pt} % space between columns; default 10pt quite narrow

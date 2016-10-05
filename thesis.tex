@@ -241,17 +241,19 @@ Day of the defense: December 2016
 % Entries are also linked back to the page number in the text and to external URL if provided in the BibTex file.
 
 % PhDbiblio-url2 = names small caps, title bold & hyperlinked, link to page 
-\begin{multicols}{2} % \begin{multicols}{ # columns}[ header text][ space]
-\begin{tiny} % tiny(5) < scriptsize(7) < footnotesize(8) < small (9)
+%\begin{multicols}{2} % \begin{multicols}{ # columns}[ header text][ space]
+%\begin{tiny} % tiny(5) < scriptsize(7) < footnotesize(8) < small (9)
 
-\bibliographystyle{Latex/Classes/PhDbiblio-url2} % Title is link if provided
+%\bibliographystyle{Latex/Classes/PhDbiblio-url2} % Title is link if provided
+\bibliographystyle{abbrvnat} % calls style file plainnat.bst
+
 \renewcommand{\bibname}{References} % changes the header; default: Bibliography
 
 %\bibliography{9_backmatter/references} % adjust this to fit your BibTex file
 \bibliography{9_backmatter/literature_review_2}
 
-\end{tiny}
-\end{multicols}
+%\end{tiny}
+%\end{multicols}
 
 % --------------------------------------------------------------
 % Various bibliography styles exit. Replace above style as desired.
