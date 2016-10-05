@@ -1,8 +1,10 @@
 \chapter{Normalization/Standardization of T2W-MRI and DCE-MRI Images} \label{chap:5}
-
-As a pre-processing steps, image normalization is an important step of the chain.
-Normalization is a highly crucial step to overcome the inter-patient intensity variations occurring, enforce the repeatability, and achieve a robust classification~\cite{Lemaitre2015}.
-However, little attention has been dedicated to the problem of normalization of \ac{t2w}-\ac{mri} prostate images~\cite{Lemaitre2015}.
+\Ac{cad} systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
+As a pre-processing image and data normalization is a crutial and important step of the chain in order to design a robust classifier and overcome the inter-patients intensity variations.
+However little attention has been dedicated to the normalization.
+In this section, we first propose two methods for normalization of \ac{t2w}-\ac{mri} prostate images based on: (i) Rician \emph{a priori} and (ii) \ac{srsf} representation.
+Then we proposed a fully atumated framework for normalization of \ac{dce}-\ac{mri} images.
+In both cases, a comparison with the state-of-the-art methods are provided.
 
 
 \input{5_normalization/T2-normalization.tex}

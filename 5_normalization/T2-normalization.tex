@@ -1,9 +1,7 @@
 \section{Normalization of \ac{t2w}-\ac{mri} images} \label{sec:chp5:T2-norm}
-
-As a pre-processing steps, image normalization is an important step of the chain.
-Normalization is a highly crucial step to overcome the inter-patient intensity variations occurring, enforce the repeatability, and achieve a robust classification~\cite{Lemaitre2015}.
-However, little attention has been dedicated to the problem of normalization of T2W-\ac{mri} prostate images~\cite{Lemaitre2015}.
-
+This section presents the state-of-the-art method poroposed for normalization of \ac{t2w}-\ac{mri} prostate images.
+Our proposed methods (Sect.~\ref{subsec:chp5:T2-norm:meth}), the designed experiments and finally the conclusions drawn from the results obtained. 
+ 
 Artan \textit{et al.}~\cite{Artan2010,Artan2009} and Ozer \textit{et al.}~\cite{Ozer2009,Ozer2010} proposed to normalize the T2W-\ac{mri} images by computing the standard score (i.e., \textit{z-score}) of the \ac{pz} pixels such as: 
 \begin{equation}
   I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ ,
@@ -81,7 +79,8 @@ In the proposed registration framework of functional data, two function $f_1$ an
 
 \noindent where $D_{FR}$ is the Fisher-Rao distance and $\Gamma$ is the set of all the functions $\gamma$.
 
-The \Ac{srsf} representation is used to transform the functions and register them into this space. The \ac{srsf} of a function $f$ is defined as:
+The \Ac{srsf} representation is used to transform the functions and register them into this space.
+The \ac{srsf} of a function $f$ is defined as:
 
 \begin{equation}
   q(t) = \sign(\dot{f}(t))\sqrt{|\dot{f}(t)|} \ ,
@@ -127,9 +126,8 @@ Then, for each function $f_i$:
 
 \noindent where $n$ is the total number of functions to be aligned.
 
-This step is iteratively performed based on the gradient of the cost function given in Eq.\,\eqref{eq:mean}. We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
-
-
+This step is iteratively performed based on the gradient of the cost function given in Eq.\,\eqref{eq:mean}. 
+We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
 
 
 \subsection{Experiments and results}\label{subsec:chp5:T2-norm:Exp-res}
@@ -173,9 +171,9 @@ The \ac{srsf} normalization gets unstable due to the warping function $\gamma$ f
 \begin{figure}
   \centering
   \subfigure[]{
-    \label{fig:qtfull}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/quantitative_1.png}}\hfill
+    \label{fig:qtfull}\includegraphics[width=0.6\textwidth]{5_normalization/figures/T2-normalization/quantitative_1.png}}\hfill
   \subfigure[]{
-    \label{fig:qtcap}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/quantitative_2.png}}
+    \label{fig:qtcap}\includegraphics[width=0.6\textwidth]{5_normalization/figures/T2-normalization/quantitative_2.png}}
   \caption{Spectral evaluation using \ac{pca} decomposition: \protect\subref{fig:qtfull} evaluation considering the full prostate, \protect\subref{fig:qtcap} evaluation considering only the \ac{cap}.}
   \label{fig:qt}
 \end{figure}
