@@ -1,4 +1,4 @@
-\chapter{Review of CADe and CADx for CaP}\label{chap:3}
+\chapter{Review of CAD sytems for CaP}\label{chap:3}
 % the code below specifies where the figures are stored
 \ifpdf
     \graphicspath{{3_review/figures/}}
@@ -6,39 +6,40 @@
     \graphicspath{{3_review/figures/}}
 \fi
 
+\input{2_modality/fig-1-cad-framework.tex}
 
-As previously mentioned in the introduction (see \acs{sec}~\ref{sec:intro:cad}), \acp{cad} are developed to advise and backup radiologists in their tasks of \ac{cap} detection and diagnosis, but not to provide fully automatic decisions \cite{Giger2008}.
-\acp{cad} can be divided into two different sub-groups either as \ac{cade}, with the purpose to highlight probable lesions in \ac{mri} images, or \ac{cadx}, which focuses on differentiating malignant from non-malignant tumours \cite{Giger2008}.
+As previously mentioned \acs{sec}\,\ref{sec:intro:cad}, \acp{cad} are developed to advise and backup radiologists in their tasks of \ac{cap} detection and diagnosis, but not to provide fully automatic decisions~\cite{Giger2008}.
+\acp{cad} can be divided into two different sub-groups: either as \ac{cade}, with the purpose to highlight probable lesions in \ac{mri} images, or \ac{cadx}, which focuses on differentiating malignant from non-malignant tumours~\cite{Giger2008}.
 Moreover, an intuitive approach, motivated by developing a framework combining detection-diagnosis, is to mix both \ac{cade} and \ac{cadx} by using the output of the former mentioned as a input of the latter named.
 Although the outcomes of these two systems should differ, the framework of both \ac{cad} systems is similar.
-A general \ac{cad} work-flow is presented n \acs{fig}~\ref{fig:wkfcad}. 
+A general \ac{cad} work-flow is presented in \acs{fig}\,\ref{fig:wkfcad}.
 %The \ac{cad} work-flow is presented in \acs{fig}~\ref{fig:wkfcad}.
 
-\ac{mri} modalities mentioned in \acs{sec}~\ref{subsubsec:mrimrsi} are used as inputs of \ac{cad} for \ac{cap}.
-These images acquired from the different modalities show a large variability between patients: the prostate organ can be located at different positions in images (e.g., patient motion, variation of acquisition plan), and the \ac{si} can be corrupted with noise or artefacts during the acquisition process (eg., magnetic field inhomogeneity, use of endorectal coil).
+\ac{mri} modalities mentioned in \acs{sec}\,\ref{sec:chp2:imaging} are used as inputs of \ac{cad} for \ac{cap}.
+These images acquired from the different modalities show a large variability between patients: the prostate organ can be located at different positions in images --- due to patient motion, variation of acquisition plan --- and the \ac{si} can be corrupted with noise or artefacts during the acquisition process caused by the magnetic field inhomogeneity or the use of endorectal coil.
 %It can be noted that \ac{adc} map is not considered as an input since it is a feature derived from the \ac{dw} \ac{mri} images.
-To address these issues, the first stage of \ac{cad} is to pre-process multiparametric \ac{mri} images to reduce noise, remove artefacts and standardize the \ac{si}.
-At most of the later processes will be only focused on the prostate, it is necessary to segment the prostate in each \ac{mri}-modality to define it as a \acs{roi}.
+To address these issues, the first stage of \ac{cad} is to pre-process \ac{mpmri} images to reduce noise, remove artefacts, and standardize the \ac{si}.
+Subsequently, most of the later processes are only focusing on the prostate organ; therefore it is necessary to segment the prostate in each \ac{mri} modality to define it as a \ac{roi}.
 However, data may suffer from misalignment due to patient motions or different acquisition parameters.
-Therefore, a registration step is usually performed so that all the previously segmented \ac{mri} images will be in the same reference frame.
+Therefore, a registration step is usually performed so that all the previously segmented \ac{mri} images are in the same reference frame.
 Registration and segmentation can be swapped depending on the strategy chosen.
 
-Some studies do not fully apply the methodology depicted in \acs{fig}.~\ref{fig:wkfcad}.
+Some studies do not fully apply the methodology depicted in \acs{fig}\,\ref{fig:wkfcad}.
 Details about those can be found in \acs{tab}~\ref{tab:sumpap}.
-Some studies proposed methods in which inputs are the \ac{mri} raw data inorder to demostrate the robustness of their approaches to noise or artefacts.
+Some studies bypass the pre-processing stages to proof the robustness of their approaches to noise or other artefacts, by using directly the raw data as inputs of their \ac{cad} systems.
 In some cases, prostate segmentation is performed manually as well as registration.
-It is also sometimes assumed that no patient motions occur during the acquisition procedure, removing the need of registering the multiparametric \ac{mri} images.
+Sometimes, it is also assumed that no patient motions occur during the acquisition procedure, removing the need of registering the \ac{mpmri} images.
 
-Once the data are regularized, it becomes possible to extract features and classify the data to obtain either the location of possible lesions (\ac{cade}) or/and the malignancy nature of these lesions (\ac{cadx}).
+Once the data are regularized, it becomes possible to extract features and classify the data to obtain either the location of possible lesions (i.e., \ac{cade}) or/and the malignancy nature of these lesions (i.e., \ac{cadx}).
 
-In \iac{cade} framework, \textit{possible lesions will be segmented automatically} and further used as input of \ac{cadx}.
-Nevertheless, some works also used a fusion \ac{cade}-\ac{cadx} framework in which a voxel-based features are directly used, allowing to obtain the location of the malignant lesions as results.
+In \iac{cade} framework, \textit{possible lesions are segmented automatically} and further used as input of \iac{cadx}.
+Nevertheless, some works also used a fusion of \ac{cade}-\ac{cadx} framework in which a voxel-based features are directly used, in which the location of the malignant lesions are obtained as results.
 On the other hand, manual lesions segmentation are not considered to be part of \ac{cade}.
 The output of the \ac{cade} is used as input of the \ac{cadx}.
 
 \Ac{cadx} is composed of the processes allowing to \textit{distinguish malignant from non-malignant tumours}.
-Here, \ac{cap} malignancy is defined using the grade of the GS determined after post biopsy or prostatecomy.
-As presented in \ac{fig}.~\ref{fig:wkfcad}, \ac{cadx} is usually composed of the three common steps used in classification framework: (i) features detection, (ii) feature extraction/selection and (iii) feature classification.
+Here, \ac{cap} malignancy is defined using the grade of the \ac{gs} determined after post biopsy or prostatectomy.
+As presented in \ac{fig}\,\ref{fig:wkfcad}, \ac{cadx} is usually composed of the three common steps used in a classification framework: (i) features detection, (ii) feature extraction/selection, and (iii) feature classification.
 
 
 %% We divided \ac{cadx} into three different stages. First, salient features are extracted, in an pixel-based or region-based manner, from \ac{mri} images to characterize the lesion. Of course, more discriminative features will be associated with a robust and accurate likelihood cancer map. Frequently, the number of features extracted can be large resulting in redundant or insufficient discriminative features which will negatively affect the performances of the further classification. Therefore, a step consists of selecting the best features or/and reducing the number of dimensions is commonly used. Then, this modified feature vector is finally classified using different pattern recognition approaches.
@@ -48,13 +49,13 @@ As presented in \ac{fig}.~\ref{fig:wkfcad}, \ac{cadx} is usually composed of the
 
 %\section{Literature classification}\label{sec:chp3:Literature-classification}
 
-This chapter is organized using the methodology presented in \acs{fig}.~\ref{fig:wkfcad}.
+This chapter is organized using the methodology presented in \acs{fig}\,\ref{fig:wkfcad}.
 Methods embedded in the image regularization framework are presented initially to subsequently focus on the image classification framework, being divided into \ac{cade} and \ac{cadx}.
-Finally presenting the results and the discussion driven from the state-of-the-art.
+Finally, we present a summary of the results reported in the state-of-the-art as well as a discussion that follows.
 %before to focus on the image classification framework, the later being divided into \ac{cade} and \ac{cadx}. 
-\Acl{tab}~\ref{tab:sumpap} summarizes the fourty-two different \ac{cad} studies reviewed in section.
+{\color{red}Update the number of studies. }\Acl{tab}~\ref{tab:sumpap} summarizes the 42 different \ac{cad} studies reviewed in this section.
 The first set of information reported is linked to the data acquisition such as the number of patients included in the study, the modalities acquired as well as the strength of the field of the scanner used.
-Subsequently, information about the prostate zones considered in the \ac{cad} analysis (\ac{pz} or \ac{cg}) are reported since that detecting \ac{cap} in the \ac{cg} is a more challenging problem and has received particular attention only in the recent publications.
+Subsequently, information about the prostate zones considered in the \ac{cad} analysis --- i.e. \ac{pz} or \ac{cg} --- are reported since that detecting \ac{cap} in the \ac{cg} is a more challenging problem and has received particular attention only in the recent publications.
 
 %% Characteristics related to \ac{mri} acquisition as well as \ac{cad} strategies are reported.
 %% Only methods used in \ac{cad} system are discussed.
