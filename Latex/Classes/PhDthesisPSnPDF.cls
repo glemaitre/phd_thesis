@@ -286,7 +286,7 @@
 % single column even in a double-column document.
 
 \newenvironment{alwayssingle}{%
-       \@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+  \@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
        \else\newpage\fi}
        {\if@restonecol\twocolumn\else\newpage\fi}
 
@@ -298,31 +298,59 @@
     \thispagestyle{empty}
 %  \null\vfill
   \begin{center}
-{\large {{\@firstlogouni}\hspace*{5mm}{\@firstlogolab}\hspace*{5mm}{\@secondlogouni}\hspace*{5mm}{\@secondlogolab} \par \vspace*{15mm}}}
+{\large
+  {{\@firstlogouni}\hspace*{30mm}{\@secondlogouni} \par \vspace*{25mm}}}
+    { \Large {\bfseries {Doctoral Thesis}} \par \vspace*{10mm}}
+    { \Large {\bfseries {\@title}} \par \vspace*{65mm}}
+    {{\large \@author} \par \vspace*{25mm}}
+%	\vspace*{1ex}
+%	{{\@cityofbirth} \par}    
+{\large 
+    {\small \@degreedate \par}
+\newpage
+\thispagestyle{empty}	
+}%end large
+  \end{center}
+  \null\vfill
+
+\end{alwayssingle}
+
+\begin{alwayssingle}
+    \renewcommand{\footnotesize}{\small}
+    \renewcommand{\footnoterule}{\relax}
+    \thispagestyle{empty}
+%  \null\vfill
+  \begin{center}
+{\large
+  {{\@firstlogouni}\hspace*{10mm}{\@firstlogolab}\hspace*{10mm}{\@secondlogouni}\hspace*{10mm}{\@secondlogolab} \par \vspace*{25mm}}}
+    { \Large {\bfseries {Doctoral Thesis}} \par \vspace*{10mm}}
     { \Large {\bfseries {\@title}} \par \vspace*{15mm}}
     {{\large \@author} \par}
 %	\vspace*{1ex}
 %	{{\@cityofbirth} \par}    
 {\large 
-	\vspace*{1ex}
-    {{\@firstlab}{ - }{\@secondlab} \par}
-	\vspace*{1ex}
-    {{\@firstuni}{ - }{\@seconduni} \par}
-	\vspace*{15mm}
+    %     \vspace*{1ex}
+    % {{\@firstlab}{ - }{\@secondlab} \par}
+    %     \vspace*{1ex}
+    % {{\@firstuni}{ - }{\@seconduni} \par}
+	\vspace*{30mm}
     {\small \textbf{Supervised by: } \par \@supervisora, \@supervisorb \par \@supervisorc, \@supervisord \par}
-	\vspace*{15mm}
-    {\small {\submittedtext} \par}
-	\vspace*{0.5ex}
-    {\small \it {\@degree} \par}
-	\vspace*{0.5ex}
+	\vspace*{5mm}
+    % {\small {\submittedtext} \par}
+    %     \vspace*{0.5ex}
+    % {\small \it {\@degree} \par}
+    %     \vspace*{0.5ex}
     {\small \@degreedate \par}
-        \vspace*{15mm}
-    {\small Work submitted to the Universitat de Girona and Universit\'e de Bourgogne in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
-	
+        \vspace*{10mm}
+    {\small Doctorate in Technology \par}
+        \vspace*{5mm}
+    {\scriptsize Work submitted to the Universitat de Girona and Universit\'e de Bourgogne Franche-Comt\'e in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
+\newpage
 }%end large
   \end{center}
   \null\vfill
-\end{alwayssingle}}
+\end{alwayssingle}
+}
 
 % page number for cover back side should have page number blanked
 
@@ -344,6 +372,23 @@
   \vspace{0.5cm}
   \begin{quote} \begin{center}}
 {\end{center} \end{quote} \end{alwayssingle}}
+
+
+% Publication
+%
+% The dedication environment makes sure the dedication gets its
+% own page and is set out in verse format.
+
+\newenvironment{publication}
+{\pagestyle{empty}
+\begin{alwayssingle}
+\begin{center}
+\vspace*{1.5cm}
+{\Large \bfseries Publications}
+\end{center}
+\vspace{0.5cm}
+\begin{quote}}
+{\end{quote}\end{alwayssingle}}
 
 
 % ACKNOWLEDGEMENTS
