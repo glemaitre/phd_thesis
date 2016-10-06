@@ -1,266 +1,177 @@
+\begin{figure*}
+  \centering
 
-\begin{figure}
-\begin{adjustwidth}{-1.5cm}{}
-\centering
-% Define block styles used later
+  % Define block styles used later
 
-\tikzstyle{module}=[draw, draw=blue!80, text width=10em, 
-    text centered, minimum height=5em, minimum width = 13em, drop shadow, rounded corners,
-    fill=blue!30]
+  \tikzstyle{module}=[draw, draw=blue!80, text width=10em, 
+  text centered, minimum height=5em, minimum width = 15em, drop shadow, rounded corners,
+  fill=blue!30]
+  
+  \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
+    1 with {\arrow[semithick]{open triangle 60}}},
+  double distance=1.4pt, shorten >= 5.5pt,
+  preaction = {decorate},
+  postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+
+  % Define distances for bordering
+  \def\blockdist{1.5}
+  \def\edgedist{2.5}
+
+  \begin{tikzpicture}[node distance=3cm,thick,scale=0.6, every node/.style={scale=0.6},path image/.style={
+      path picture={
+        \node at (path picture bounding box.center) {
+          \includegraphics[width=1cm]{#1}
+        };}}]
+    \tikzstyle{conefill} = [path image=,fill opacity=0.8]
+    \node[module=above:pre] (pre) at (4.5,-2.6) {\Large Pre-processing};
+    \node[module,below of=pre] (seg) {\Large Segmentation};
+    \node[module,below of=seg] (reg) {\Large Registration};
+
+    \path[->,dashed] (seg.west) edge [bend right=70] node {} (reg.west);
+    \path[->,dashed] (reg.east) edge [bend right=70] node {} (seg.east);
+
+    \draw[->] (pre)--(seg);
+    \draw[->] (seg)--(reg);
+
+    \begin{pgfonlayer}{background}
+      \path (pre.west |- pre.north)+(-0.9,1.0+\blockdist) node (a) {};
+      \path (reg.east |- reg.south)+(+0.9,-0.5) node (b) {};
+      
+      \path[fill=blue!10,rounded corners, draw=blue!20, dashed] (a) rectangle (b);
+    \end{pgfonlayer}
     
-\tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
-   1 with {\arrow[semithick]{open triangle 60}}},
-   double distance=1.4pt, shorten >= 5.5pt,
-   preaction = {decorate},
-   postaction = {draw,line width=1.4pt, white,shorten >= 4.5pt}]
+    \path (pre.north) +(0,+\blockdist) node (bgreg) {\Large Image regularization};
 
-% Define distances for bordering
-\def\blockdist{1.5}
-\def\edgedist{2.5}
+    \begin{scope}[node distance=10cm]
+      \node[module] (det) [below right=0cm and 3cm of pre] {\Large Features detection};
+    \end{scope}
+    \begin{scope}[node distance=3.5cm]
+      \node[module,above of=det] (roi) {\Large ROIs\\detection/selection};
+    \end{scope}
+    \node[module,below of=det] (sel) {\Large Features\\selection/extraction};
+    \node[module,below of=sel] (cla) {\Large Features\\classification/fusion};
 
-\begin{tikzpicture}[node distance=3cm,thick,scale=0.6, every node/.style={scale=0.6},path image/.style={
-path picture={
-\node at (path picture bounding box.center) {
-\includegraphics[width=1cm]{#1}
-};}}]
-\tikzstyle{conefill} = [path image=,fill opacity=0.8]
-\node[module=above:pre] (pre) at (4.5,-2.6) {\large Pre-processing};
-\node[module,below of=pre] (seg) {\large Segmentation};
-\node[module,below of=seg] (reg) {\large Registration};
+    \draw[->] (roi)--(det);
+    \draw[->] (det)--(sel);
+    \draw[->] (sel)--(cla);
 
-\draw[->] (pre)--(seg);
-\draw[->] (seg)--(reg);
+    \begin{pgfonlayer}{background}
+      \path (roi.west |- roi.north)+(-0.25,0.8) node (c) {};
+      \path (roi.east |- roi.south)+(+0.25,-0.25) node (d) {};
+      
+      \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
+    \end{pgfonlayer}
 
-\begin{pgfonlayer}{background}
-	\path (pre.west |- pre.north)+(-0.5,1.0+\blockdist) node (a) {};
-    \path (reg.east |- reg.south)+(+0.5,-0.5) node (b) {};
-          
-    \path[fill=blue!10,rounded corners, draw=blue!20, dashed] (a) rectangle (b);
-\end{pgfonlayer}
-        
-\path (pre.north) +(0,+\blockdist) node (bgreg) {\large Image regularization};
+    \path (roi.west |- roi.north) +(.6,0.4) node (bgfea) {\Large \textbf{CADe}};
 
-\begin{scope}[node distance=10cm]
-	\node[module] (det) [below right=0cm and 3cm of pre] {\large Features detection};
-\end{scope}
-\begin{scope}[node distance=3.5cm]
-	\node[module,above of=det] (roi) {\large ROIs\\detection/selection};
-\end{scope}
-\node[module,below of=det] (sel) {\large Features\\selection/extraction};
-\node[module,below of=sel] (cla) {\large Features\\classification/fusion};
+    \begin{pgfonlayer}{background}
+      \path (det.west |- det.north)+(-0.25,0.8) node (c) {};
+      \path (cla.east |- cla.south)+(+0.25,-0.25) node (d) {};
+      
+      \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
+    \end{pgfonlayer}
 
-\draw[->] (roi)--(det);
-\draw[->] (det)--(sel);
-\draw[->] (sel)--(cla);
+    \path (roi.west |- det.north) +(.6,0.4) node (bgfea) {\Large \textbf{CADx}};     
 
-\begin{pgfonlayer}{background}
-	\path (roi.west |- roi.north)+(-0.5,1.0+\blockdist) node (c) {};
-    \path (cla.east |- cla.south)+(+0.5,-0.5) node (d) {};
-          
-    \path[fill=blue!10,rounded corners, draw=blue!20, dashed] (c) rectangle (d);
-\end{pgfonlayer}
+    % Define the place where the arrow should start anf finish
+    \path (seg.east |- seg.north)+(+0.9,0) node (e) {};
+    \path (sel.west |- seg.north)+(-0.8,0) node (f) {};
 
-\path (roi.north) +(0,+\blockdist) node (bgfea) {\large Image classification};
+    \draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (e) -- (f) node[midway,above] {\Large Regularized data};
 
-\begin{pgfonlayer}{background}
-	\path (roi.west |- roi.north)+(-0.25,0.8) node (c) {};
-    \path (roi.east |- roi.south)+(+0.25,-0.25) node (d) {};
-          
-    \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
-\end{pgfonlayer}
+    \begin{scope}[yshift=34,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\path (roi.west |- roi.north) +(.6,0.4) node (bgfea) {\large \textbf{CADe}};
+    \begin{scope}[yshift=31,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{pgfonlayer}{background}
-	\path (det.west |- det.north)+(-0.25,0.8) node (c) {};
-    \path (cla.east |- cla.south)+(+0.25,-0.25) node (d) {};
-          
-    \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
-\end{pgfonlayer}
+    \begin{scope}[yshift=28,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1.5,0.3) node {\Large T$_2$-W MRI};
+    \end{scope}
 
-\path (roi.west |- det.north) +(.6,0.4) node (bgfea) {\large \textbf{CADx}};     
+    \begin{scope}[yshift=-33,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-% Define the place where the arrow should start anf finish
-\path (seg.east |- seg.north)+(+0.5,0) node (e) {};
-\path (sel.west |- seg.north)+(-0.5,0) node (f) {};
+    \begin{scope}[yshift=-36,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (e) -- (f) node[midway,above] {\large Regularized data};
+    \begin{scope}[yshift=-39,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1.2,0.3) node {\Large T$_2$ map};
+    \end{scope}
 
-\begin{scope}[yshift=-11,xshift=-86]
-	% opacity to prevent graphical interference
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-	%\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-    %\draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-	%\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-100,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-8,xshift=-83]
-	%\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-    %\draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-	%\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-103,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-5,xshift=-80]
-	% opacity to prevent graphical interference
-	%\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-	\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-    %\draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-	%\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(-1.5,0.3) node {\large T$_2$-W \ac{mri}};
-\end{scope}
+    \begin{scope}[yshift=-106,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1.5,0.3) node {\Large DCE MRI};
+    \end{scope}
 
-\begin{scope}[yshift=-78,xshift=-86]
-	% opacity to prevent graphical interference
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-167,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-75,xshift=-83]
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-170,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-72,xshift=-80]
-	% opacity to prevent graphical interference
-	\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(-1.2,0.3) node {\large T$_2$ map};
-\end{scope}
+    \begin{scope}[yshift=-173,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1.5,0.3) node {\Large DW MRI};
+    \end{scope}
 
-\begin{scope}[yshift=-151,xshift=-86]
-	% opacity to prevent graphical interference
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-234,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/adc.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-148,xshift=-83]
-\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-237,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/adc.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-145,xshift=-80]
-	% opacity to prevent graphical interference
-	\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(-1.5,0.3) node {\large DCE \ac{mri}};
-\end{scope}
+    \begin{scope}[yshift=-240,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/adc.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1.5,0.3) node {\Large ADC};
+    \end{scope}
 
-\begin{scope}[yshift=-219,xshift=-86]
-\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
-	% opacity to prevent graphical interference
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-301,xshift=-86]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-215,xshift=-83]
-\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \begin{scope}[yshift=-304,xshift=-83]
+      \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
+    \end{scope}
 
-\begin{scope}[yshift=-212,xshift=-80]
-\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
-	% opacity to prevent graphical interference
-%	\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(-1.5,0.3) node {\large DW \ac{mri}};
-\end{scope}
+    \begin{scope}[yshift=-307,xshift=-80]
+      \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
+      \path (0,0)+(-1,0.3) node {\Large MRSI};
+    \end{scope}
 
-\begin{scope}[yshift=-285,xshift=-86]
-	% opacity to prevent graphical interference
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \path (pre.west |- roi.north)+(-3.5,1.0+\blockdist) node (g) {};
+    \path (reg.west |- cla.south)+(-3.5,-0.5) node (h) {};
 
-\begin{scope}[yshift=-282,xshift=-83]
-\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
-
-\begin{scope}[yshift=-279,xshift=-80]
-\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
-	% opacity to prevent graphical interference
-%	\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(-1,0.3) node {\large MRSI};
-\end{scope}
-
-\path (pre.west |- pre.north)+(-3.5,1.0+\blockdist) node (g) {};
-\path (reg.west |- reg.south)+(-3.5,-0.5) node (h) {};
-
-\draw[decorate,decoration={brace,raise=6pt,amplitude=10pt}, thick]
+    \draw[decorate,decoration={brace,raise=6pt,amplitude=10pt}, thick]
     (g)--(h) ;
     
-\path (seg.west |- seg.north)+(-2.5,0) node (i) {};
-\path (seg.west |- seg.north)+(-0.5,0) node (j) {};
-   
-\draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (i) -- (j);   
-
-\path (sel.east |- seg.north)+(2,0) node (k) {};
-\path (sel.east |- seg.north)+(0.5,0) node (l) {};
-   
-\draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (l) -- (k);  
-
-%\path (det.east |- det.north)+(.5,1.0+\blockdist) node (k) {};
-%\path (cla.east |- cla.south)+(.5,-0.5) node (l) {};
-%    
-%\draw[decorate,decoration={brace,raise=6pt,amplitude=10pt}, thick]
-%    (k)--(l) ;
+    \path (seg.west |- seg.north)+(-2.5,0) node (i) {};
+    \path (seg.west |- seg.north)+(-0.9,0) node (j) {};
     
-\begin{scope}[path image/.style={
-path picture={
-\node at (path picture bounding box.center) {
-\includegraphics[width=3cm]{#1}
-};}}]    
-\begin{scope}[yshift=-180,xshift=560]
-	% opacity to prevent graphical interference
-	\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/likeli.eps,very thin] (0,0) rectangle (3.0,3.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
+    \draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (i) -- (j);   
 
-\begin{scope}[yshift=-175,xshift=570]
-\transparent{0.6}\draw[path image=2_modality/figures/tikzimage/likeli.eps,very thin] (0,0) rectangle (3.0,3.0);
-%	\fill[white,fill opacity=0.6] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-\end{scope}
-
-\begin{scope}[yshift=-170,xshift=580]
-	% opacity to prevent graphical interference
-	\transparent{0.8}\draw[path image=2_modality/figures/tikzimage/likeli.eps,very thin] (0,0) rectangle (3.0,3.0);
-%	\fill[white,fill opacity=0.8] (0,0) rectangle (1.0,1.0);
-%    \draw[step=2mm, black, thin] (0,0) grid (1.0,1.0);
-%	\draw[black,thin] (0,0) rectangle (1.0,1.0);
-	\path (0,0)+(+1,-1) node {\large Likelihood};
-	\path (0,0)+(+1,-1.5) node {\large cancer};
-	\path (0,0)+(+1,-2) node {\large map};
-\end{scope}
-\end{scope}
-\end{tikzpicture}
-\caption[\ac{cad} framework using multiparametric \ac{mri} images.]{\ac{cad} framework using \ac{mri} images. Multiparametric \ac{mri} images are provided as inputs. These data arise from heterogeneous sources and need to be regularized. Some studies do not consider this stage as mandatory and do not implement or only partly those processes (see \acs{tab} \ref{tab:sumpap}). A pre-processing stage is usually applied to standardize the intensity of images, reduce noise and artefacts. Then, in the image set, the prostate organ has to be segmented to focus the next processing stages only on that particular \ac{roi}. Moreover, prostate location can vary depending of the modality chosen. Therefore, the images are registered so that all segmented images will be in the same reference frame. Once the image regularisation performed, image classification can be carried out. First, a strategy defining \acp{roi} to focus on is decided. Then, distinctive features are extracted before to be post-processed to select the most salient features. Finally, these salient features will feed a classifier previously trained which will provide a likelihood cancer map associated with either \ac{cap} detection or diagnosis.}
-\label{fig:wkfcad}
-\end{adjustwidth}
-\end{figure}
+    \path (sel.east |- seg.north)+(2,0) node (k) {};
+    \path (sel.east |- seg.north)+(0.5,0) node (l) {};
+    
+  \end{tikzpicture}
+  \caption{Common \acs*{cad} framework based on \acs*{mri} images used to detect \acs*{cap}.}
+  \label{fig:wkfcad}
+\end{figure*}
