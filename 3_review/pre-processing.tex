@@ -1,6 +1,6 @@
 \subsection{Pre-processing}\label{subsec:chp3img-reg:prepro}
-Three different groups of pre-processing methods are commonly applied to images as initial stage in \ac{cad} for \ac{cap}.
-These methods are explained for both \ac{mri} and \ac{mrsi} modalities, while a summary of the applied methods in \ac{cad} is presented in Table.~\ref{tab:summary-preproc}.
+Three different groups of pre-processing methods are commonly applied to images as initial stage in \acp{cad} for \ac{cap}.
+These methods are explained for both \ac{mri} and \ac{mrsi} modalities, while a summary of the applied methods in \ac{cad} is presented in \ac{tab}~\ref{tab:summary-preproc}.
 
 %% \setenumerate{listparindent=\parindent,itemsep=10px}
 %% \setlist{noitemsep}
@@ -9,45 +9,47 @@ These methods are explained for both \ac{mri} and \ac{mrsi} modalities, while a 
 \begin{figure}
 \centering
 	\includegraphics[width=0.7\linewidth]{3_review/figures/processing/pre-processing/noise/noisedistr.eps}
-	\caption[Illustration of a Gaussian and Rayleigh distributions.]{Illustration of a Gaussian distribution ($\mu = 1, \sigma=0.25$) and a Rayleigh distribution ( $\sigma = 2$). It can be seen that the Rayleigh distribution is suffering of a bias term when compared with the Gaussian distribution.}
+	\caption[Illustration of a Gaussian and Rayleigh distributions.]{Illustration of a Gaussian and Rayleigh distribution. Although the mode of these distributions are identical, it can be noted that the Rayleigh distribution ($\mu=1.253$) is suffering of a bias term when compared with the Gaussian distribution ($\mu=1$).}
 	\label{fig:noisedistr}
 \end{figure}
 
 %Noise filtering
 %\item[$-$] \textbf{\textit{Noise filtering:}} 
-\paragraph{Noise filtering:} The \ac{nmr} signal measured and recorded in the k-space during an \ac{mri} acquisition is affected by noise.
-This noise obeys a complex Gaussian white noise mainly due to thermal noises in the patient area \cite{Nowak1999}.
+\paragraph{Noise filtering} The \ac{nmr} signal, measured and acquired in the k-space, is affected by noise.
+This noise obeys a complex Gaussian white noise mainly due to thermal noises in the patient area~\cite{Nowak1999}.
 Furthermore, \ac{mri} images visualized by radiologists are in fact the magnitude images resulting from the complex Fourier transform of the k-space data.
-The complex Fourier transform, being a linear and orthogonal transform, does not affect the Gaussian noise characteristics \cite{Nowak1999}.
-However, the function involved in the magnitude computation is a non-linear transform (i.e., the square root of the sum of squares of real and the imaginary parts), implying that the noise distribution is no longer Gaussian; it indeed follows a Rician distribution making the denoising task harder.
-Briefly, a Rician distribution can be characterized as follows: in low-\ac{si} region (low \ac{snr}), it can be approximated with a Rayleigh distribution while in high-\ac{si} region (high \ac{snr}), it is similar to a Gaussian distribution (see Fig. \ref{fig:noisedistr}) \cite{Manjon2008}.
-Reviews of all denoising methods can be found in \cite{Buades2005,Mohan2014}.
+The complex Fourier transform does not affect the Gaussian noise characteristics since this is a linear and orthogonal transform~\cite{Nowak1999}.
+However, the calculation of the magnitude is a non-linear transform --- i.e., the square root of the sum of squares of real and the imaginary parts --- implying that the noise distribution is no longer Gaussian; it indeed follows a Rician distribution making the denoising task more challenging.
+Briefly, a Rician distribution is characterized as follows: in low-\ac{si} region (low-\ac{snr}), it can be approximated with a Rayleigh distribution while in high-\ac{si} region (high-\ac{snr}), it is similar to a Gaussian distribution~\cite{Manjon2008}.
+The reader can refer to \acs{fig}\,\ref{fig:noisedistr} to observe the difference between a Gaussian and Rayleigh distribution.
+Comprehensive reviews regarding denoising methods can be found in~\cite{Buades2005,Mohan2014}.
 
-Median filtering is the simplest approach used to address the denoising issue in \ac{mri} images \cite{Ozer2009,Ozer2010}.
-In both studies, Ozer \textit{et al.} used a square kernel of size $5 \times 5$ pixels with the image resolutions ranging from $320 \times 256$ (cf., \ac{t2w} \ac{mri}) to $256 \times 128$ (cf., T$_2$ map, \ac{dce} and \ac{dw} \ac{mri}) and \iac{fov} ranging from 14 cm (cf, \ac{t2w} and \ac{dw} \ac{mri}) to 20 cm (cf, T$_2$ map and \ac{dce} \ac{mri}).
-However, from a theoretical point of view, this simple filtering method is not well formalized to address the noise distribution in \ac{mri} images.
+Median filtering is the simplest approach used to address the denoising issue in \ac{mri} images~\cite{Ozer2009,Ozer2010}.
+In both studies, \citeauthor{Ozer2010} used a square-shaped kernel of size \SI[product-units=repeat]{5x5}{\px} with the image resolutions ranging from \SI[product-units=repeat]{320x256}{\px} to \SI[product-units=repeat]{256x128}{\px} for the \ac{t2w}-\ac{mri} and the other remaining modalities used, respectively.
 
-More complex approaches were proposed to overcome this problem.
-A common method used to denoise \ac{mri} images is based on wavelet-based filtering.
+More recently, \citeauthor{rampun2016quantitative} used a combination of median and anisotropic diffusion filter~\cite{rampun2015classifying,rampun2016computer,rampun2016computerb,rampun2016quantitative}, proposed in~\cite{ling2002smoothing}.
+In low-\ac{snr} images, the gradient generated by an edge and noise can be similar, making the denoising by diffusion more challenging.
+In this condition, the threshold allowing to locally differentiate a noise gradient from an edge gradient needs to be increased, at the cost of blurring edges after filtering.
+Therefore, \citeauthor{ling2002smoothing} propose to apply a standard anisotropic diffusion filter with a low threshold followed by a median filtering to remove large noise spikes.
+%However, from a theoretical point of view, this simple filtering method is not well formalized to address the noise distribution in \ac{mri} images.
+
+%More complex approaches were proposed to overcome this problem.
+Another common method used to denoise \ac{mri} images is based on wavelet decomposition and shrinkage.
 This filtering exploits the sparsity property of the wavelet decomposition.
-The projection of a noisy signal from the spatial-domain to the wavelet-domain implies that only few wavelet coefficients contribute to the ``signal-free noise'' while all wavelet coefficients contribute to the noise \cite{Donoho1994}.
-Therefore, denoising is performed by thresholding/attenuating the insignificant wavelet coefficients to enforce the sparsity in the wavelet-domain.
-Investigations focus on the strategies to perform the most adequate coefficient shrinkage method (e.g., using thresholding, singularity property or Bayesian framework) \cite{Pizurica2002}.
-
-Ampeliotis \textit{et al.} in \cite{Ampeliotis2007,Ampeliotis2008} performed wavelet shrinkage to denoise magnitude \ac{mri} images (cf., \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri}) using thresholding techniques \cite{Mallat2008}.
+The projection of a noisy signal from the spatial-domain to the wavelet-domain implies that only few wavelet coefficients contribute to the ``signal-free noise'' while all wavelet coefficients contribute to the noise~\cite{Donoho1994}.
+Therefore, insignificant wavelet coefficients are thresholded/attenuated to enforce the sparsity in the wavelet-domain, which result to a denoising process in the spatial domain.
+Investigations focus on the strategies to perform the most adequate coefficient shrinkage (e.g., thresholding, singularity property, or Bayesian framework)~\cite{Pizurica2002}.
+\citeauthor{Ampeliotis2008} denoised the magnitude \ac{mri} images~\cite{Ampeliotis2007,Ampeliotis2008} --- i.e., \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- by wavelet shrinkage, using thresholding techniques~\cite{Mallat2008}.
 However, since the wavelet transform is an orthogonal transform, the Rician distribution of the noise is preserved in the wavelet-domain.
-Hence, for low \ac{snr}, the wavelet and scaling coefficients still suffer from a bias due to this specific noise distribution \cite{Nowak1999}.
- 
-Lopes \textit{et al.} in \cite{Lopes2011} used the filtering technique proposed by \cite{Pizurica2003} to denoise \ac{t2w}-\ac{mri} which was based on joint detection and estimation theory \cite{Pizurica2003}.
-{\color{blue}
-%Pizurica \textit{et al.} proposed a filtering technique based on joint detection and estimation theory \cite{Middleton1968}.
+Hence, for low-\ac{snr}, the wavelet and scaling coefficients still suffer from a bias due to this specific noise distribution~\cite{Nowak1999}.
+That is why, \citeauthor{Lopes2011} filtered \ac{t2w}-\ac{mri} images~\cite{Lopes2011}, using the method proposed in~\cite{Pizurica2003} based on joint detection and estimation theory.
 In this approach, the wavelet coefficients ``free-of-noise'' are estimated from the noisy wavelet coefficients using a \ac{map} estimate.
-Furthermore, the estimator designed takes spatial context into account by including both local and global information in the prior probabilities.
-The different probabilities needed by the \ac{map} are empirically estimated by using mask images representing the locations of the significant wavelet coefficients.
+Furthermore, the designed estimator takes spatial context into account by including both local and global information in the prior probabilities.
+The different probabilities needed by the \ac{map} are empirically estimated by using mask images, representing the locations of the significant wavelet coefficients.
 These mask images are computed by thresholding the detail images obtained from the wavelet decomposition.
-To remove the bias from the wavelet and scaling coefficients, the squared magnitude \ac{mri} image used instead of the magnitude \ac{mri} image as proposed by \cite{Nowak1999}.
-This involves changing the Rician distribution to a scaled non-central Chi-square distribution.
-It implies that the wavelet coefficients are also unbiased estimators and the scaling coefficients are unbiased estimators but up to a constant $C$ as defined in Eq. \eqref{eq:nowakC} which needs to be subtracted from each scaling coefficient,
+To remove the bias from the wavelet and scaling coefficients, the squared magnitude \ac{mri} image is computed instead of the magnitude \ac{mri} image as proposed in~\cite{Nowak1999}.
+This involves changing the Rician distribution to a scaled non-central Chi-squared distribution.
+It implies that the wavelet coefficients are also unbiased estimators and the scaling coefficients are unbiased estimators but up to a constant $C$ as defined in \acs{eq}\,\eqref{eq:nowakC} which needs to be subtracted from each scaling coefficient such as:
 
 \begin{equation}
 	C=2^{(J+1)}\hat{\sigma}^2 \ ,
@@ -55,26 +57,24 @@ It implies that the wavelet coefficients are also unbiased estimators and the sc
 \end{equation}
 
 \noindent where $J$ is the number of levels of the wavelet decomposition and $\hat{\sigma}$ is an estimate of the noise standard deviation.
-}
+
 \begin{figure}
 \centering
-	\includegraphics[width=0.3\linewidth]{3_review/figures/processing/pre-processing/bias/t2w_bias_antenna.eps}
-	\caption[Inhomogeneity artefacts due to perturbation of the endorectal coil.]{Example of artefacts with high \ac{si} due to perturbation from the endorectal coil which create inhomogeneity.}
-	\label{fig:bias}
+\includegraphics[width=0.3\linewidth]{3_review/figures/processing/pre-processing/bias/t2w_bias_antenna.eps}
+\caption[Inhomogeneity artefacts due to perturbation of the endorectal coil.]{Example of artefacts with high \acs*{si} due to perturbation from the endorectal coil which create inhomogeneity.}
+\label{fig:bias}
 \end{figure}
 
 
 % Artefacts filtering
 %\item[$-$] \textbf{\textit{Bias correction:}} 
-\paragraph{Bias correction:} Besides being corrupted by noise, \ac{mri} images are also affected by the inhomogeneity of the \ac{mri} field commonly referred to as bias field \cite{Styner2000}.
+\paragraph{Bias correction} Besides being corrupted by noise, \ac{mri} images are also affected by the inhomogeneity of the \ac{mri} field commonly referred to as bias field~\cite{Styner2000}.
 This bias field results in a smooth variation of the \ac{si} through the image.
-When an endorectal coil is used, an artefact resulting of an hyper-intense signal can be observed around the coil on the images (see Fig.~\ref{fig:bias}).
+When an endorectal coil is used, a resulting artefact of an hyper-intense signal is observed around the coil as depicted in \acs{fig}\,\ref{fig:bias}.
+As a consequence, the \ac{si} of identical tissues varies depending on their spatial location in the image making further processes such as segmentation, registration, or classification more challenging~\cite{Jungke1987,Vovk2007}.
+A comprehensive review of bias correction methods is proposed in~\cite{Vovk2007}.
 
-As a consequence, the \ac{si} of identical tissues varies depending on their spatial location in the image making further processes such as segmentation or registration harder \cite{Jungke1987,Vovk2007}.
-A review of bias correction methods can be found in \cite{Vovk2007}.
-
-{\color{blue}
-The model of image formation is usually formalized such that:
+The model of image formation is usually formalized as:
 
 \begin{equation}
 	s(\mathbf{x}) = o(\mathbf{x})b(\mathbf{x}) + \eta(\mathbf{x}) \ ,
@@ -94,22 +94,19 @@ The model of image formation is usually formalized such that:
 
 Hence, the task of bias correction involves estimating the bias function $b(\mathbf{x})$ in order to infer the ``signal-free bias'' $o(\mathbf{x})$.
 % and subtract to the logarithm of the initial signal in order to obtain an estimated ``signal-free bias''.
-}
 
-Viswanath \textit{et al.}~\cite{Viswanath2009} performed bias correction on \ac{t2w}-\ac{mri} using a parametric Legendre polynomial model proposed in \cite{Styner2000} and available in the \ac{itk} library\footnote{The \ac{itk} library is available at: \texttt{http://www.itk.org/}}.
 
-{\color{blue}
-Styner \textit{et al.}~\cite{Styner2000} chose to model the bias field by using a linear combination of Legendre polynomials as:
+\citeauthor{Viswanath2009} corrected this artefact on \ac{t2w}-\ac{mri} images~\cite{Viswanath2009}, using the model proposed in~\cite{Styner2000}, in which \citeauthor{Styner2000} model the bias field function by using a linear combination of Legendre polynomials as:
 
 \begin{equation}
 	\hat{b}(\mathbf{x},\mathbf{p}) = \sum_{i=0}^{m-1} p_i f_i(\mathbf{x}) =  \sum_{i=0}^{l} \sum_{j=0}^{l-i} p_{ij} P_i(x) P_j(y) \ ,
 	\label{eq:biascorr}
 \end{equation}
 
-\noindent where $\hat{b}$ is the bias estimation with the image coordinates $\mathbf{x} = \{x,y\}$ and the $m$ coefficients of the linear combination $\mathbf{p} = {p_{11},\dotsc,p_{ij}}$ ; $m$ can be defined as $m=(l+1)\frac{(l+2)}{2}$ where $l$ is the degree of Legendre polynomials chosen and $P_i(\cdot)$ denotes a Legendre polynomial of degree $i$.
+\noindent where $\hat{b}(\cdot)$ is the bias estimation with the image coordinates $\mathbf{x} = \{x,y\}$ and the $m$ coefficients of the linear combination $\mathbf{p} = {p_{11},\dotsc,p_{ij}}$; $m$ can be defined as $m=(l+1)\frac{(l+2)}{2}$ where $l$ is the degree of Legendre polynomials chosen and $P_i(\cdot)$ denotes a Legendre polynomial of degree $i$.
 
-This family of functions allows us to model the bias as a smooth inhomogeneity function across the image.
-To estimate the set of parameters $\mathbf{p}$, a cost function is defined which relies on the following assumptions: (i) an image is composed of $k$ regions with $\mu_k$ being the mean \ac{si} and a variance $\sigma^{2}_{k}$ of each particular class, and (ii) each noisy pixel belongs to one of the $k$ regions with its \ac{si} value close to the class mean $\mu_k$.
+This family of functions offers to model the bias function as a smooth inhomogeneous function across the image.
+To estimate the set of parameters $\mathbf{p}$, a cost function is defined which relies on the following assumptions: (i) an image is composed of $k$ regions with a mean $\mu_k$ and a variance $\sigma^{2}_{k}$ for each particular class, and (ii) each noisy pixel belongs to one of the $k$ regions with its \ac{si} value close to the class mean $\mu_k$.
 Hence, the cost function is defined as:
 
 \begin{equation}
@@ -122,47 +119,40 @@ Hence, the cost function is defined as:
 	\label{eq:mestbias}
 \end{equation}
 
-\noindent where $\rho_k(\cdot)$ is a M-estimator allowing estimations to be less sensitive to outliers than usual square distance \cite{Li1996}.
+\noindent where $\rho_k(\cdot)$ is a M-estimator allowing estimations to be less sensitive to outliers than the usual squared distance~\cite{Li1996}.
 
-Finally, estimation of the parameters $\mathbf{p}$ results in finding the minimum of the cost function $C(\mathbf{p})$.
-This optimization was performed using the non-linear $(1+1)$ \ac{es} optimizer \cite{Styner1997}.
+Finally, the parameters $\mathbf{p}$ are estimated by finding the minimum of the cost function $C(\mathbf{p})$, which was optimized using the non-linear $(1+1)$ \ac{es} optimizer~\cite{Styner1997}.
 
-In a later publication, \cite{Viswanath2012} make use of the well known N3 algorithm\footnote{The N3 algorithm implementation is available at: \texttt{http://www.bic.mni.mcgill.ca/\allowbreak software/N3/}} to correct \ac{t2w}-\ac{mri} developed by \cite{Sled1998}.
-To estimate the bias function, \cite{Sled1998} proposed to estimate the \acp{pdf} of the signal and bias.
-
-Recalling Eq.~\eqref{eq:biasmodel} and taking advantage of logarithm property, it implies that this model becomes additive such that:
+In a later publication, \citeauthor{Viswanath2012} correct \ac{t2w}-\ac{mri}~\cite{Viswanath2012} using the well known N3 algorithm~\cite{Sled1998} in which \citeauthor{Sled1998} infer the bias function using the \acp{pdf} of the signal and bias.
+Taking advantage of the logarithm property, the model in \acs{eq}\,\eqref{eq:biasmodel} becomes additive as expressed in \acs{eq}\,\eqref{eq:logbias}.
 
 \begin{eqnarray}
 	\log s(\mathbf{x}) & = & \log b(\mathbf{x}) + \log \left( o(\mathbf{x}) + \frac{\eta(\mathbf{x})}{b(\mathbf{x})} \right) \ , \nonumber \\
 	& \approx & \log b(\mathbf{x}) + \log \hat{o}(\mathbf{x}) \ , \label{eq:logbias}
 \end{eqnarray}
 
-\noindent where $\hat{o}(\mathbf{x})$ is the signal only degraded by noise. \cite{Sled1998} shows that Eq. \eqref{eq:logbias} can be related to \acp{pdf} such that:
+\noindent where $\hat{o}(\mathbf{x})$ is the signal only degraded by noise. \citeauthor{Sled1998} show that \acs{eq}\,\eqref{eq:logbias} is related to \acp{pdf} such that:
 
 \begin{equation}
 	S(s) = B(s) * O(s) \ ,
 	\label{eq:distrbias} 
 \end{equation}
 
-\noindent where $S$, $B$ and $O$ are respectively the probability densities of $s$, $b$ and $o$.
+\noindent where $S(\cdot)$, $B(\cdot)$, and $O(\cdot)$ are the \acp{pdf} of $s(\cdot)$, $b(\cdot)$, and $o(\cdot)$, respectively.
 
-Restoring the corrupted signal $s$ is carried out by finding the multiplicative field $b$ which maximizes the frequency content of the distribution $O$.
-Sled \textit{et al.}~\cite{Sled1998} argue that a search through all possible fields $b$ and selection of the one which maximizes the high frequency content of $O$ could be carried out but results in an exhaustive search.
-However, they show that the bias field distribution can be assimilated to a near Gaussian distribution.
-Using this fact as \textit{a priori}, it is then possible to infer the distribution $O$ using Wiener deconvolution given $B$ and $S$ and later estimate the corresponding smooth field $b$.
-}
+The corrupted signal $s$ is restored by finding the multiplicative field $b$ which maximizes the frequency content of the distribution $O$.
+\citeauthor{Sled1998} argue that a brute-force search through all possible fields $b$ and selecting the one which maximizes the high frequency content of $O$ is possible but far to complex.
+By assimilating the bias field distribution to be a near Gaussian distribution as \textit{a priori}, it is then possible to infer the distribution $O$ using the Wiener deconvolution given $B$ and $S$ and later estimate the corresponding smooth field $b$.
 
-Lv \textit{et al.}~\cite{Lv2009} corrected the inhomogeneity in \ac{t2w}-\ac{mri} images by using the method proposed in \cite{Madabhushi2006}.
-In this method, the \ac{mri} images are corrected iteratively by successively detecting the image foreground via \ac{gscale} and estimating a bias field function based on a second-order polynomial model. 
-{\color{blue}
-First the background of the \ac{mri} image is eliminated by threholding.
-The threshold value is commonly equal to the mean \ac{si} of the considered image.
-Then, in the seeded region growing algorithm is applied considering every thresholded pixel as a potential seed.
-However, pixels already assigned to a region will not be considered any more as seed.
-As in seeded region growing algorithm \cite{Shapiro2001}, two criteria are taken into account to expand the region.
-First, the region will grow using a connected-neighbourhood, initially defined by the user.
-Then, the homogeneity of \ac{si} is based on a fuzzy membership function taking into account the absolute difference of the \acp{si} of two pixels.
-Depending on the membership value (cf., a threshold has to be defined), the pixel considered is merged or not to the region.
+\citeauthor{Lv2009} corrected the inhomogeneity in \ac{t2w}-\ac{mri} images~\cite{Lv2009} by using the method proposed in~\cite{Madabhushi2006}.
+\citeauthor{Madabhushi2006} propose to correct the \ac{mri} images by iteratively detecting the image foreground via \ac{gscale} and estimating a bias field function based on a second-order polynomial model.
+First, the background of the \ac{mri} image is eliminated by thresholding, in which the threshold value is commonly equal to the mean \ac{si} of the considered image.
+Then, a seeded region growing algorithm is applied in the image foreground, considering every thresholded pixel as a potential seed.
+However, pixels already assigned to a region are not considered any more as potential seed.
+As in seeded region growing algorithm~\cite{Shapiro2001}, two criteria are taken into account to expand a region.
+First, the region grows using a connected-neighbourhood, initially defined by the user.
+Then, the homogeneity of \ac{si} is based on a fuzzy membership function taking into account the absolute difference of two pixel \ac{si}.
+Depending on the membership value --- corresponding to a threshold which needs to be defined --- the pixel considered is merged or not to the region.
 Once this segmentation is performed, the largest region $R$ is used as a mask to select pixels of the original image and the mean \ac{si}, $\mu_{R}$, is computed. 
 The background variation $b(\mathbf{x})$ is estimated as:
 
@@ -173,7 +163,7 @@ The background variation $b(\mathbf{x})$ is estimated as:
 
 \noindent where $s(\mathbf{x})$ is the original \ac{mri} image.
 
-Finally, a second order polynomial $\hat{b}_{\Theta}(\mathbf{x})$ is fitted in a least-squares sense (Eq.~\eqref{eq:lsolv}),
+Finally, a second order polynomial $\hat{b}_{\Theta}(\mathbf{x})$ is fitted in a least-squares sense as in \acs{eq}\,\eqref{eq:lsolv},
 
 \begin{equation}
 	\hat{\Theta} = \argmin_{\Theta} | b(\mathbf{x}) - \hat{b}_{\Theta}(\mathbf{x}) |^{2}, \ \forall \mathbf{x} \in R \ .
@@ -181,8 +171,7 @@ Finally, a second order polynomial $\hat{b}_{\Theta}(\mathbf{x})$ is fitted in a
 \end{equation}
 
 Finally, the whole original \ac{mri} image is corrected by dividing it by the estimated bias field function $\hat{b}_{\Theta}(\mathbf{x})$.
-This process is repeated until the number of pixels in the largest region $R$ does not change significantly between two iterations.
-}
+The convergence is reached when the number of pixels in the largest region $R$ does not change significantly between two iterations.
 
 %SI normalization
 %\item[$-$] \textbf{\textit{\Ac{si} normalization/standardization:}}
@@ -394,34 +383,32 @@ It should be noted that both \cite{Parfait2012} and \cite{Devos2004} concluded t
  
 %\end{enumerate}
 
-
-
-
 \begin{table}
-  \caption{Overview of the pre-processing methods used in \ac{cad} systems.}
-  \small
-  \renewcommand{\arraystretch}{1}
-  \begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
-    \hline \\ [-1.5ex]
+  \caption{Overview of the pre-processing methods used in \acs*{cad} systems.}
+  \scriptsize
+  \centering
+  \begin{tabular}{l r}
+    \toprule
     \textbf{Pre-processing operations} & \textbf{References} \\ \\ [-1.5ex]
-    \hline \\ [-1.5ex]
-    \textit{\ac{mri} pre-processing:} & \\ \\ [-1.5ex]
+    \midrule
+    \textbf{\ac{mri} pre-processing:} & \\
     \quad Noise filtering: &  \\
-    \quad \quad Median filtering & \cite{Ozer2009,Ozer2010}  \\
-    \quad \quad Wavelet-based filtering & \cite{Ampeliotis2007,Ampeliotis2008,Lopes2011} \\ \\ [-1.5ex]
+    \quad \quad $\bullet$ Anisotropic median-diffusion filtering & \cite{rampun2015classifying,rampun2016computer,rampun2016computerb,rampun2016quantitative}  \\
+    \quad \quad $\bullet$ Median filtering & \cite{Ozer2009,Ozer2010}  \\
+    \quad \quad $\bullet$ Wavelet-based filtering & \cite{Ampeliotis2007,Ampeliotis2008,Lopes2011} \\ \\ [-1.5ex]
     \quad Bias correction: & \\
-    \quad \quad Parametric methods & \cite{Lv2009,Viswanath2009} \\
-    \quad \quad Non-parametric methods & \cite{Viswanath2011} \\ \\ [-1.5ex]
+    \quad \quad $\bullet$ Parametric methods & \cite{Lv2009,Viswanath2009} \\
+    \quad \quad $\bullet$ Non-parametric methods & \cite{Viswanath2011} \\ \\ [-1.5ex]
     \quad Standardization: & \\
-    \quad \quad Statistical-based normalization: & \cite{Artan2009,Artan2010,Lv2009,Ozer2009,Ozer2010,Viswanath2009,Viswanath2011,Viswanath2012} \\
-    \quad \quad Organ \ac{si}-based normalization & \cite{Niaf2011,Niaf2012} \\ \\ [-1.5ex]
-    \textit{\ac{mrsi} pre-processing:} & \\ \\ [-1.5ex]
-    \quad Phase correction & \cite{Parfait2012} \\
-    \quad Water and lipid residuals filtering & \cite{Kelm2007} \\
-    \quad Baseline correction & \cite{Parfait2012,Tiwari2012} \\
-    \quad Frequency alignment & \cite{Tiwari2012} \\
-    \quad Normalization & \cite{Parfait2012} \\ \\ [-1.5ex]
-    \hline
+    \quad \quad $\bullet$ Statistical-based normalization: & \cite{Artan2009,Artan2010,Lv2009,Ozer2009,Ozer2010,Viswanath2009,Viswanath2011,Viswanath2012} \\
+    \quad \quad $\bullet$ Organ \ac{si}-based normalization & \cite{Niaf2011,Niaf2012,lehaire2014computer,samarasinghe2016semi} \\ \\ [-1.5ex]
+    \textbf{\ac{mrsi} pre-processing:} & \\ \\ [-1.5ex]
+    \quad $\bullet$ Phase correction & \cite{Parfait2012,trigui2016classification,trigui2017automatic} \\
+    \quad $\bullet$ Water and lipid residuals filtering & \cite{Kelm2007} \\
+    \quad $\bullet$ Baseline correction & \cite{Parfait2012,Tiwari2012,trigui2016classification,trigui2017automatic} \\
+    \quad $\bullet$ Frequency alignment & \cite{Tiwari2012,trigui2016classification,trigui2017automatic} \\
+    \quad $\bullet$ Normalization & \cite{Parfait2012,trigui2016classification,trigui2017automatic} \\ \\ [-1.5ex]
+    \bottomrule
   \end{tabular}
 \label{tab:summary-preproc}
 \end{table}
