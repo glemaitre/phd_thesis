@@ -35,7 +35,7 @@ Thus, the low-dimensional space is then composed of a subset of the original fea
 In this section, methods employed in the studies reviewed will be briefly presented.
 More extensive reviews specific to feature selection can be found in \cite{Saeys2007}.
 
-Naif \textit{et al.}~\cite{Niaf2011,Niaf2012} make use of the p-value by using the independent two-sample t-test with equal mean for each feature dimension.
+Niaf \textit{et al.}~\cite{Niaf2011,Niaf2012} make use of the p-value by using the independent two-sample t-test with equal mean for each feature dimension.
 In this statistical test, there are two classes: \ac{cap} and healthy tissue.
 Hence, for each particular feature, the distribution of each class can be characterized by their means $\bar{X}_1$ and $\bar{X}_2$ and standard deviation $s_{X_1}$ and $s_{X_2}$, respectively.
 Therefore, the null hypothesis test is based on the fact that these both distribution means are equal.
@@ -185,3 +185,86 @@ Thus, the projection into the low dimension space can be seen as an optimization
 
 Tiwari \textit{et al.} in \cite{Tiwari2008} used a modified version of the \ac{lle} algorithm in which they applied \ac{lle} in a bagging approach with multiple neighbourhood sizes.
 The different embeddings obtaixned are then fused using the \ac{ml} estimation.
+
+%%%%%%
+{\color{red}\textbf{BoW and SCF add the references}}
+
+\Ac{scf} representation has become very popular in the past decades and lead to state-of-the-art results in various applications such as face recognition~\cite{wright2009robust}, image denoising, image inpainting~\cite{elad2006image}, and image classification~\cite{sidibe2015discrimination,rastgo2016classification}.
+The main goal of sparse modeling is to efficiently represent the images as a linear combination of a few typical patterns, called atoms, selected from a dictionary.
+Sparse coding consists of three main steps: (i) dictionary learning, (ii) low-level features projection, and (iii) feature pooling~\cite{rubinstein2008efficient}.
+
+\begin{description}
+\item[Sparse approximation] Given a dictionary $\mathbf{D} \in \mathbb{R}^{n \times K}$ composed of $K$ atoms and an original signal $\mathbf{y} \in \mathbb{R}^{n}$ (i.e., one feature vector), the sparse approximation corresponds to find the sparest vector $\mathbf{x} \in \mathbb{R}^{K}$ such that:
+
+\begin{equation}
+  \argmin_{\mathbf{x}}\|\mathbf{y - Dx} \|_{2} \qquad  \text{s.t.} \  \|\mathbf{x}\|_{0} \leq \lambda \, \label{eq:sprapp} \ ,
+\end{equation}
+
+\noindent where $\lambda$ is a specified sparsity level.
+
+Solving the above optimization problem is an NP-hard problem~\cite{elad2010sparse}.
+However, approximate solutions are obtained using greedy algorithms such as \ac{mp}~\cite{mallat1993matching} or \ac{omp}~\cite{pati1993orthogonal,davis1997adaptive}.
+
+\item[Dictionary learning] As stated previously, the sparse approximation is computed given a specific dictionary $\mathbf{D}$, which involves a learning stage from a set of training data.
+This dictionary is learned using $K$-\acs*{svd} which is a generalized version of $K$-means clustering and uses \ac{svd}. 
+The dictionary is built, by iteratively solving the optimization problem of Eq.\,\ref{eq:dct}, by alternatively computing the sparse approximation of $\mathbf{X}$ and the dictionary $\mathbf{D}$.
+
+\begin{equation}
+  \argmin_{\mathbf{D,X}} \|\mathbf{Y} - \mathbf{D}\mathbf{X}\|_{2} \qquad  \text{s.t.} \  \|\mathbf{x}_{i}\|_{1} \leq \lambda \,\label{eq:dct} \ ,
+\end{equation}
+
+\noindent where $\mathbf{Y}$ is a training set of low-level descriptors, $\mathbf{X}$ is the associated sparse coded matrix (i.e., set of high-level descriptors) with a sparsity level $\lambda$, and $\mathbf{D}$ is the dictionary with $K$ atoms.
+
+Given $\mathbf{D}$, $\mathbf{X}$ is computed using the batch-\ac{omp} algorithm, while given $\mathbf{X}$, $\mathbf{D}$ is sequentially updated, one atom at a time using \ac{svd}. 
+
+\item[Low-level features projection] Once the dictionary is learned, each set of low-level features $\mathbf{F}_{I} \in \mathbb{R}^{n \times p}$ extracted from $p$ patches in an image is encoded using the dictionary $\mathbf{D}$, solving the optimization problem presented in Eq.\,\ref{eq:sprapp} such that $\mathbf{F}_{I} \simeq \mathbf{DX}_{I}$.
+
+\item[Feature pooling] The sparse coded matrix $\mathbf{X}_{I}$ is max-pooled to build a final descriptor $\mathbf{f}$ characterizing the given image, such that:
+
+\begin{equation}
+  \mathbf{f}_i = \max_{j}\left(|\mathbf{X}_{I}(i,j)|\right), \ \forall i = 1, \cdots, K\ .
+\end{equation}
+
+\end{description}
+
+
+\ac{bow} approach is used for this purpose~\cite{Sivic2003}.
+This model represents the features by creating a codebook or visual dictionary, from the set of low-level features.
+The set of low-level features are clustered using \textit{k}-means to create the codebook with \textit{k} clusters or visual words.
+After creating the codebook from the training set, the low-level descriptors are replaced by their closest word within the codebook.
+The final descriptor is a histogram of size \textit{k} which represents the codebook occurrences for a given mapping.
+
+
+% THIS IS FROM MY THESIS, YOU CAN USE THIS, If you like
+
+%% \acf{scf}, or sparse signal representation, has become very popular over the past few decades and has led to state-of-the-art results in various applications such as face recognition~\cite{wright2009robust}, image denoising, image inpainting~\cite{elad2006image}, and image classification~\cite{sidibe2015discrimination}. 
+%% The main goal of sparse modeling is to efficiently represent the samples/images as a linear combination of a few typical patterns, called atoms, selected from the dictionary.
+%% Sparse coding consists of three main steps: (i) dictionary learning, (ii) low-level feature projection, and (iii) feature pooling~\cite{rubinstein2008efficient}. 
+%% Considering our dictionary $D \in R^{n \times K}$ with $K$ atoms, where each column of $D$ represents one atom, the sparse coding problem of a signal $y \in R^{n}$ is defined as finding the sparsest vector $x$ so that $y \approx Dx$. 
+%% This is an optimization problem that can be formulated as:
+%% \begin{equation}
+%% \min_{x} \|y-Dx\|_{2} \qquad \text{s.t.}\ \|x\|_{0} \leq \lambda \,,
+%% \end{equation}  
+%% \noindent where $\lambda$ is the sparsity level and $l^{0}$-norm accounts for the minimum number of non-zero elements in the sparse vector $x$. 
+%% This optimization problem is NP hard~\cite{Elad2010}, subsequently approximation solutions are proposed either by using greedy algorithms such as \ac{mp}~\cite{mallat1993matching} and \ac{omp}~\cite{davis1994adaptive}, or by replacing the $l^{0}$-norm with $l^{1}$-norm such as in the \ac{bp} algorithm~\cite{chen1998atomic}.
+%% %\noindent where $\lambda$ is the sparsity level and $l^{0}$-norm accounts for the minimum number of non-zero elements in sparse vector $x$. 
+%% %This optimization problem is NP hard~\cite{Elad2010}.
+%% %Subsequently approximation solutions are proposed either by using greedy algorithms such as \ac{mp}~\cite{mallat1993matching} and \ac{omp}~\cite{davis1994adaptive} or by replacing the $l^{0}$-norm with $l^{1}$-norm such as \ac{bp}~\cite{chen1998atomic}.
+%% The dictionary is learned using K-SVD, a generalized version of \textit{k}-means clustering that uses \ac{svd}~\cite{aharon2006img}. 
+%% The dictionary is built such that:
+%% \begin{equation}
+%%   \min_{Dx} \|y - Dx\|_{2} \qquad  \text{s.t.} \ \forall i \ \|x_{i}\|_{1} \leq \lambda \,,
+%% \end{equation}
+
+%% \noindent where $y$ is a low-level descriptor, $x$ is the sparse coded descriptor (i.e., high-level descriptor) with a sparsity level $\lambda$, and $D$ is the dictionary with $K$ atoms.
+%% The K-SVD algorithm solves the optimization problem iteratively by alternating between $x$ and $D$. 
+%% With $D$, the sparse code matrix $x$ is computed by any of the pursuit algorithms, and with $x$, $D$ is updated one atom at a time using \ac{svd}. 
+
+%% Once the dictionary is learned, each $y_{i} \in R^{n}$ signal can be projected using $D$ to form a set of sparse codes $x_{i} \in R^{K}$. 
+%% In the case of image samples, the sparse representation can be generated for patches in the image.
+%% In this case, the final mapping is based on a combination of sparse codes, for instance by taking the maximum code from all the patches: 
+%% \begin{equation}
+%% f_{i} = \max_{j}(\vert X_{l}(i,j)\vert) \qquad  \forall  i = 1, 2, .., K \,,
+%% \end{equation} 
+%% \noindent where $X_{l} \in R^{K \times P}$ is the sparse code matrix~\cite{sidibe2015discrimination}. 
+%% \end{description}
