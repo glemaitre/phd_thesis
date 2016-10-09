@@ -10,20 +10,19 @@ This section summarizes the different features used in \ac{cad} for \ac{cap} and
 
 \subsubsection{Image-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:Img-fea}
 
-This section will focus on image-based features detection.
-Two main strategies to detect features have been identified and used for the purpose of our classification: (i) voxel-wise detection and (ii) region-wise detection.
+This section focuses on image-based features which can be categorized into two categories: (i) voxel-wise detection and (ii) region-wise detection.
 
 \paragraph{Voxel-wise detection}
 This strategy refers to the fact that a feature is extracted at each voxel location.
-\ac{cap} as previously discussed (see Tab.~\ref{tab:modmri}) can be discerned due to \ac{si} changes.
-Hence, intensity-based features are one of the most common features used to build the feature vector which has to be classified~\cite{Ampeliotis2007,Ampeliotis2008,Artan2009,Artan2010,Chan2003,Langer2009,Liu2009,Niaf2011,Niaf2012,Viswanath2008a,Viswanath2011}.
-This type of feature consists simply of the \ac{si} of each voxel of the different \ac{mri} modalities.
+As discussed in \acs{sec}\,\ref{sec:chp2:imaging}, \ac{cap} has an influence on the \ac{si} in \ac{mpmri} images.
+Therefore, intensity-based feature is the most commonly used feature~\cite{Ampeliotis2007,Ampeliotis2008,Vos2008,rampun2016computerb,rampun2015classifying,Giannini2013,Artan2009,Artan2010,Chan2003,Langer2009,Litjens2011,Litjens2012,Litjens2014,Liu2009,Ozer2009,Ozer2010,trigui2016classification,trigui2017automatic,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,giannini2015fully,Niaf2011,Niaf2012,lehaire2014computer}.
+This feature consists in the extraction of the intensity of the \ac{mri} modality of interest.
 
-Edge based features have also been used to detect \ac{si} changes.
+Edge-based features have also been used to detect \ac{si} changes but bring additional information regarding the the \ac{si} transition.
 Each feature is computed by convolving the original image with an edge operator.
-Three of these operators are used: (i) Prewitt operator \cite{Prewitt1970}, (ii) Sobel operator \cite{Sobel1970} and (iii) Kirsch operator \cite{Kirsch1971}.
-Results obtained with these operators vary, due to their different kernels.
-These features are commonly incorporated in the feature vector for further classification in the \ac{cad} systems reviewed \cite{Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2011}.
+Three operators are commonly used: (i) Prewitt operator~\cite{Prewitt1970}, (ii) Sobel operator~\cite{Sobel1970}, and (iii) Kirsch operator~\cite{Kirsch1971}.
+These operators differ due to the kernel used which attenuate more or less the noise.
+Multiple studies used the resulting magnitude and orientation of the edges computed in their classification frameworks~\cite{Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2011,rampun2016quantitative,rampun2015computer,rampun2016computer,lehaire2014computer,khalvati2015automated,chung2015prostate}.
 
 \begin{figure}
 	\hspace*{\fill}
@@ -36,11 +35,11 @@ These features are commonly incorporated in the feature vector for further class
 	\label{fig:gabor}
 \end{figure}
 
-Gabor filters \cite{Gabor1946,Daugman1985} offer another approach to extract information related to edges and texture and were integrated in three different \ac{cad} for \ac{cap} \cite{Viswanath2008a,Viswanath2012,Tiwari2012}.
-A Gabor filter is defined by the modulation of a Gaussian function with a sinusoid which can be further rotated.
-Hence, a Gabor filter $g$ can be formalized as:
+Gabor filter~\cite{Gabor1946,Daugman1985} offer an alternative to the usual edge detector, with the possibility to tune the direction and the frequency of the filter to encode a specific pattern. 
+A Gabor filter is defined by the modulation of a Gaussian function with a sine wave which can be further rotated and is formalized as in \acs{eq}\,\ref{eq:gabor}.
 \begin{equation}
 	g(x,y;\theta,\psi,\sigma,\gamma) = \exp \left( - \frac{x'^{2}+ \gamma^{2}y'^{2}}{2 \sigma^{2}} \right) \cos \left( 2 \pi \frac{x'}{\lambda} + \phi \right) \ ,
+        \label{eq:gabor}
 \end{equation}
 
 \noindent with 
@@ -50,8 +49,9 @@ Hence, a Gabor filter $g$ can be formalized as:
 	y' & = & s \left( - x \sin \theta + y \cos \theta \right) \ , \nonumber
 \end{eqnarray}
 
-\noindent where $\lambda$ is the wavelength of the sinusoidal factor, $\theta$ represents the orientation of the Gabor filter, $\psi$ is the phase offset, $\sigma$ is the standard deviation of the Gaussian envelope, $\gamma$ is the spatial aspect ratio and $s$ is the scale factor.
-To perform Gabor analysis to extract features for a classification scheme, a bank of Gabor filters is usually created with different angles, scale and dilatations (see Fig.~\ref{fig:gabor}) and then convolved with the image. 
+\noindent where $\lambda$ is the wavelength of the sinusoidal factor, $\theta$ represents the orientation of the Gabor filter, $\psi$ is the phase offset, $\sigma$ is the standard deviation of the Gaussian envelope, $\gamma$ is the spatial aspect ratio, and $s$ is the scale factor.
+In an effort to characterize pattern and texture, a bank of Gabor filters is usually created with different angles, scale, and frequency --- refer to \acs{fig}\,\ref{fig:gabor} --- and then convolved with the image.
+\citeauthor{Viswanath2012}, \citeauthor{Tiwari2012} and more recently \citeauthor{khalvati2015automated} and \citeauthor{chung2015prostate} have designed a bank of Gabor filters to characterized texture and edge information in \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} modalities.
 
 %%%% GO here 
 \citeauthor{rampun2016computer} employed rotationally invariant Gabor filter banks ( \ac{lm}~\cite{varma2005statistical}) which takes edges and sopts/bars into account. 
@@ -60,10 +60,12 @@ The scale of proposed filters vary between $\sigma = 1$ to $\sigma = 10$ \si{\px
 
 
 Texture-based features provide other characteristics discerning \ac{cap} from healthy tissue.
-The most common texture analysis for image classification are co-occurrence matrices with their related statistics which were proposed in \cite{Haralick1973} and areB commonly used in \ac{cad} systems \cite{Antic2013,Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2008a,Viswanath2011,Viswanath2012}.
-At each voxel, a neighbourhood is defined around this center and a gray-level co-occurrence matrix is built by selecting a pair of voxels based on a defined distance and angle.
-Then, using this co-occurrence matrix, a set of features can be computed based on the statistics describing the texture around each voxel.
-Computation of these features is presented in Tab.~\ref{tab:glcm}.
+The most common texture analysis for image classification is based on the \ac{glcm} with their related statistics which have been proposed by \citeauthor{Haralick1973} in~\cite{Haralick1973}.
+In a neighborhood around a central voxel, a \ac{glcm} is build considering each voxel pair defined by a specific distance and angle.
+Then, using the \ac{glcm}, a set of statistical features is computed as defined in \acs{tab}~\ref{tab:glcm} and assigned to the location of the central voxel.
+Therefore, $N$ --- up to 14 --- statistical maps are derived from the \ac{glcm} analysis, one per statistics presented in \acs{tab}~\ref{tab:glcm}.
+\ac{glcm} is commonly used in \ac{cad} systems, on the different \ac{mri} modalities, namely \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, or \ac{dw}-\ac{mri}~\cite{Antic2013,Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012,trigui2016classification,rampun2015computer,rampun2016computer,rampun2016quantitative,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,lehaire2014computer}.
+However, the statistics extracted from the \ac{glcm} across studies vary.
 
 \begin{table}
   \caption[The 14 statistical features used in conjunction with \acs*{glcm} analysis.]{The 14 statistical features for texture analysis commonly computed from the \acs*{glcm} $p$ as presented by~\cite{Haralick1973}.}

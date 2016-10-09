@@ -126,7 +126,7 @@ Hence, the cost function is defined as:
 
 Finally, the parameters $\mathbf{p}$ are estimated by finding the minimum of the cost function $C(\mathbf{p})$, which was optimized using the non-linear $(1+1)$ \ac{es} optimizer~\cite{Styner1997}.
 
-In a later publication, \citeauthor{Viswanath2012} corrected \ac{t2w}-\ac{mri}~\cite{Viswanath2012} using the well known N3 algorithm~\cite{Sled1998} in which \citeauthor{Sled1998} infer the bias function using the \acp{pdf} of the signal and bias.
+In a later publication, \citeauthor{Viswanath2012} as well as \citeauthor{giannini2015fully} corrected \ac{t2w}-\ac{mri}~\cite{Viswanath2012,giannini2015fully} using the well known N3 algorithm~\cite{Sled1998} in which \citeauthor{Sled1998} infer the bias function using the \acp{pdf} of the signal and bias.
 Taking advantage of the logarithm property, the model in \acs{eq}\,\eqref{eq:biasmodel} becomes additive as expressed in \acs{eq}\,\eqref{eq:logbias}.
 
 \begin{eqnarray}
@@ -250,6 +250,7 @@ Once the foreground is detected, the largest region is extracted, and the regula
 
 The standardization problem can be tackled by normalizing the MRI images using the \ac{si} of some known organs present in these images. 
 \citeauthor{Niaf2012} and \citeauthor{lehaire2014computer} normalized \ac{t2w}-\ac{mri} images by dividing the original \ac{si} of the images by the mean \ac{si} of the bladder~\cite{Niaf2011,Niaf2012,lehaire2014computer}, which is depicted in \acs{fig}\,\ref{subfig:bladder}.
+\citeauthor{giannini2015fully} also normalized the same modality but using the signal intensity of obturator muscle~\cite{giannini2015fully}.
 Likewise, \citeauthor{Niaf2011} standardized the \ac{t1w}-\ac{mri} images using the \ac{aif}~\cite{Niaf2011}.
 They computed the \ac{aif} by taking the mean of the \ac{si} in the most enhanced part of the common femoral arteries --- refer to \acs{fig}\,\ref{subfig:arteries} --- as proposed in~\cite{Wiart2007}.
 Along the same line, \citeauthor{samarasinghe2016semi} normalized the \ac{si} of lesion regions in \ac{t1w}-\ac{mri} using the mean intensity of the prostate gland in the same modality~\cite{samarasinghe2016semi}.
@@ -401,7 +402,7 @@ The different pre-processing methods are summarized in \acs{tab}~\ref{tab:summar
     \quad \quad $\bullet$ Median filtering & \cite{Ozer2009,Ozer2010}  \\
     \quad \quad $\bullet$ Wavelet-based filtering & \cite{Ampeliotis2007,Ampeliotis2008,Lopes2011} \\ \\ [-1.5ex]
     \quad Bias correction: & \\
-    \quad \quad $\bullet$ Parametric methods & \cite{Lv2009,Viswanath2009} \\
+    \quad \quad $\bullet$ Parametric methods & \cite{Lv2009,Viswanath2009,giannini2015fully} \\
     \quad \quad $\bullet$ Non-parametric methods & \cite{Viswanath2011} \\ \\ [-1.5ex]
     \quad Standardization: & \\
     \quad \quad $\bullet$ Statistical-based normalization: & \cite{Artan2009,Artan2010,Lv2009,Ozer2009,Ozer2010,rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb,rampun2016quantitative,Viswanath2009,Viswanath2011,Viswanath2012} \\
