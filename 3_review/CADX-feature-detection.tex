@@ -1,18 +1,19 @@
-\subsection{\Ac{cadx}: Feature detection} \label{subsec:chp3:img-clas:CADX-fea-dec}
+\subsection{\acs*{cadx}: Feature detection} \label{subsec:chp3:img-clas:CADX-fea-dec}
 
-Discriminative features which can be used to recognize \ac{cap} from healthy tissue have to be first detected.
+Discriminative features which help to recognize \ac{cap} from healthy tissue need to be first detected.
 This processing is known in computer vision as feature extraction. 
-However, feature extraction is also the name given in pattern recognition to some types of dimension reduction methods which will be presented next.
-In order to avoid confusion between these two aspects, in this survey, the procedure ``detecting'' or ``extracting'' features from images and signals will be defined as feature detection.
-This section will summarize the different strategies employed for this task.
-The features used in the studies are summarized in Table.~\ref{tab:feat}.  
+However, feature extraction also refer to the name given in pattern recognition to some types of dimension reduction methods which are later presented.
+In order to avoid confusion between these two aspects, in this survey, the procedure ``detecting'' or ``extracting'' features from images and signals is defined as feature detection.
+This section summarizes the different features used in \ac{cad} for \ac{cap} and are summarized in \acs{tab}~\ref{tab:feat}.  
+
+\input{3_review/Table-CADX-feature-detection}
 
 \subsubsection{Image-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:Img-fea}
 
 This section will focus on image-based features detection.
 Two main strategies to detect features have been identified and used for the purpose of our classification: (i) voxel-wise detection and (ii) region-wise detection.
 
-\paragraph{Voxel-wise detection:}
+\paragraph{Voxel-wise detection}
 This strategy refers to the fact that a feature is extracted at each voxel location.
 \ac{cap} as previously discussed (see Tab.~\ref{tab:modmri}) can be discerned due to \ac{si} changes.
 Hence, intensity-based features are one of the most common features used to build the feature vector which has to be classified~\cite{Ampeliotis2007,Ampeliotis2008,Artan2009,Artan2010,Chan2003,Langer2009,Liu2009,Niaf2011,Niaf2012,Viswanath2008a,Viswanath2011}.
@@ -31,7 +32,7 @@ These features are commonly incorporated in the feature vector for further class
 		\subfigure[$\theta=120^{\circ}$.]{\label{subfig:gab3} \includegraphics[width=0.2\linewidth]{3_review/figures/feature-detection/gabor/gabor_3.eps}} \hfill
 		\subfigure[$\theta=180^{\circ}$.]{\label{subfig:gab4} \includegraphics[width=0.2\linewidth]{3_review/figures/feature-detection/gabor/gabor_4.eps}}
 	\hspace*{\fill}
-	\caption[Illustration of four different Gabor filters.]{Illustration of four different Gabor filters varying their orientations $\theta$.}
+	\caption[Illustration of 4 different Gabor filters.]{Illustration of 4 different Gabor filters varying their orientations $\theta$.}
 	\label{fig:gabor}
 \end{figure}
 
@@ -59,30 +60,31 @@ Then, using this co-occurrence matrix, a set of features can be computed based o
 Computation of these features is presented in Tab.~\ref{tab:glcm}.
 
 \begin{table}
-	\caption{The fourteen statistical features for texture analysis commonly computed from the gray level co-occurrence matrix $p$ as presented by \cite{Haralick1973}.}
-	\small
-	\renewcommand{\arraystretch}{1.5}
-	\begin{tabular}{p{.4\linewidth} p{.6\linewidth}}
-		\hline %\\ [-1.5ex]
-		\textbf{Statistical features} & \textbf{Formula} \\ \\ [-3ex]
-		\hline \\ [-1.5ex]
-		Angular second moment & $\sum_i \sum_j p(i,j)^2 \ .$  \\
-		Contrast & $\sum_{n=0}^{N_g - 1} n^2 \{ \sum_{i=1}^{N_g - 1} \sum_{j=1}^{N_g - 1} p(i,j) \} \ , | i-j |=n \ . $ \\
-		Correlation & $\frac{\sum_i \sum_j (ij) p(i,j) - \mu_x \mu_y}{\sigma_x \sigma_y} \ . $ \\
-		Variance & $\sum_i \sum_j (i - \mu)^2 p(i,j) \ . $ \\
-		Inverse difference moment & $\sum_i \sum_j \frac{1}{1+(i - \mu)^2} p(i,j) \ . $ \\
-		Sum average & $\sum_{i=2}^{2N_g} i p_{x+y}(i) \ . $ \\
-		Sum variance & $\sum_{i=2}^{2N_g} (i-f_s)^2 p_{x+y}(i) \ . $ \\
-		Sum entropy & $ - \sum_{i=2}^{2N_g} p_{x+y}(i) \log p_{x+y}(i) \ . $ \\
-		Entropy & $ - \sum_i \sum_j p(i,j) \log p(i,j) \ .$ \\
-		Difference variance & $\sum_{i=0}^{N_g-1} i^2 p_{x-y}(i) \ . $ \\
-		Difference entropy & $ - \sum_{i=0}^{N_g-1} p_{x-y}(i) \log p_{x-y}(i) \ . $ \\
-		Info. measure of corr. 1 & $\frac{S(X;Y)-S_1(X;Y)}{\max(S(X),S(Y))} \ . $ \\
-		Info. measure of corr. 2 & $\sqrt{\left( 1 - \exp \left[ -2( H_2(X;Y) - H(X;Y) ) \right] \right)} \ . $ \\
-		Max. corr. coeff. & $ \sqrt{\lambda_2} \ , \text{of } Q(i,j) = \sum_k \frac{p(i,k)p(j,k)}{p_x(i)p_y(k)} \ . $ \\
-		\\ [-3ex] \hline
-	\end{tabular}
-	\label{tab:glcm}
+  \caption[The 14 statistical features used in conjunction with \acs*{glcm} analysis.]{The 14 statistical features for texture analysis commonly computed from the \acs*{glcm} $p$ as presented by~\cite{Haralick1973}.}
+  \scriptsize
+  \renewcommand{\arraystretch}{1.5}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Statistical features} & \textbf{Formula} \\
+    \midrule
+    Angular second moment & $\sum_i \sum_j p(i,j)^2 $  \\
+    Contrast & $\sum_{n=0}^{N_g - 1} n^2 \left[ \sum_{i=1}^{N_g - 1} \sum_{j=1}^{N_g - 1} p(i,j) \right] \ , | i-j |=n  $ \\
+    Correlation & $\frac{\sum_i \sum_j (ij) p(i,j) - \mu_x \mu_y}{\sigma_x \sigma_y}  $ \\
+    Variance & $\sum_i \sum_j (i - \mu)^2 p(i,j)  $ \\
+    Inverse difference moment & $\sum_i \sum_j \frac{1}{1+(i - \mu)^2} p(i,j)  $ \\
+    Sum average & $\sum_{i=2}^{2N_g} i p_{x+y}(i)  $ \\
+    Sum variance & $\sum_{i=2}^{2N_g} (i-f_s)^2 p_{x+y}(i)  $ \\
+    Sum entropy & $ - \sum_{i=2}^{2N_g} p_{x+y}(i) \log p_{x+y}(i)  $ \\
+    Entropy & $ - \sum_i \sum_j p(i,j) \log p(i,j) $ \\
+    Difference variance & $\sum_{i=0}^{N_g-1} i^2 p_{x-y}(i)  $ \\
+    Difference entropy & $ - \sum_{i=0}^{N_g-1} p_{x-y}(i) \log p_{x-y}(i)  $ \\
+    Info. measure of corr. 1 & $\frac{S(X;Y)-S_1(X;Y)}{\max(S(X),S(Y))}  $ \\
+    Info. measure of corr. 2 & $\sqrt{\left( 1 - \exp \left[ -2( H_2(X;Y) - H(X;Y) ) \right] \right)}  $ \\
+    Max. corr. coeff. & $ \sqrt{\lambda_2} \ , \text{of } Q(i,j) = \sum_k \frac{p(i,k)p(j,k)}{p_x(i)p_y(k)}  $ \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:glcm}
 \end{table}
 
 Fractal analysis and more precisely a local estimation of the fractal dimension \cite{Benassi1998} describing the texture roughness at a specific location was used in \cite{Lopes2011}.
@@ -106,9 +108,7 @@ Finally Litjens \textit{et al.} in \cite{Litjens2011} computed the texture map b
 %% Euclidean distance from each voxel to the prostate center as well as the individual distance in the three directions $x$, $y$ and $z$. \cite{Chan2003} embedded the same information but this time using cylindrical coordinate $r$, $\theta$ and $z$ corresponding to the radius, azimuth and elevation respectively.
 
 
-
-
-\paragraph{Region-wise detection:}
+\paragraph{Region-wise detection}
 
 Unlike the previous section, another strategy is to study an entire region and extract characteristic features corresponding to this region.
 The most common approach reviewed can be classified as statical methods.
@@ -157,46 +157,46 @@ Lopes \textit{et al.}~\cite{Lopes2011} proposed a 3D version to estimate the fra
 In this section the features extracted for \ac{dce}-\ac{mri} analysis are presented.
 
 \begin{table}
-  \caption{Parameters used as features for a \ac{dce} semi-quantitative analysis in \ac{cad} systems.}
-  \small
-  \renewcommand{\arraystretch}{.8}
-  \begin{tabular}{p{.35\linewidth} p{.60\linewidth}}
-    \hline \\ [-1.5ex]
-    \textbf{Semi-quantitative features} & \textbf{Explanations} \\ \\ [-1.5ex]
-    \hline \\ [-1.5ex]
-    \textit{Amplitude features:} & \\ \\ [-1.5ex]
-    \quad $S_0$ & Amplitude at the onset of the enhancement \\
-    \quad $S_{\max}$ & Amplitude corresponding to $95\%$ of the maximum amplitude \\
-    \quad $S_{p}$ & Amplitude corresponding to the maximum amplitude \\
-    \quad $S_f$ & Amplitude at the final time point \\ \\ [-1.5ex]
-    \textit{Time features:} & \\ \\ [-1.5ex]
-    \quad $t_0$ & Time at the onset of the enhancement \\
-    \quad $t_{\max}$ & Time corresponding to $95\%$ of the maximum amplitude \\
-    \quad $t_{p}$ & Time corresponding to the maximum amplitude \\
-    \quad $t_{f}$ & Final time \\
-    \quad $t_{tp}$ & Time to peak which is the time from $t_0$ to $t_p$ \\ \\ [-1.5ex]
-    \textit{Derivatives and integral features:} & \\ \\ [-1.5ex]
-    \quad $WI$ & Wash-in rate corresponding to the signal slope from $t_0$ to $t_m$ or $t_p$ \\
-    \quad $WO$ & Wash-out rate corresponding to the signal slope from $t_m$ or $t_p$ to $t_p$ \\
-    \quad $IAUC$ & Initial area under the curve which is the area between $t_0$ to $t_{f}$ \\ \\ [-1.5ex]
-    \hline
-  \end{tabular}
+  \caption{Parameters used as features for a \acs*{dce} semi-quantitative analysis in \acs*{cad} systems.}
+  \scriptsize
+  \centering
+  \begin{tabularx}{\textwidth}{l X}
+    \toprule
+    \textbf{Semi-quantitative features} & \textbf{Explanations} \\
+    \midrule
+    \textbf{Amplitude features:} & \\ \\ [-1.5ex]
+    \quad $\bullet\ S_0$ & Amplitude at the onset of the enhancement \\
+    \quad $\bullet\ S_{\max}$ & Amplitude corresponding to $95\%$ of the maximum amplitude \\
+    \quad $\bullet\ S_{p}$ & Amplitude corresponding to the maximum amplitude \\
+    \quad $\bullet\ S_f$ & Amplitude at the final time point \\ \\ [-1.5ex]
+    \textbf{Time features:} & \\ \\ [-1.5ex]
+    \quad $\bullet\ t_0$ & Time at the onset of the enhancement \\
+    \quad $\bullet\ t_{\max}$ & Time corresponding to $95\%$ of the maximum amplitude \\
+    \quad $\bullet\ t_{p}$ & Time corresponding to the maximum amplitude \\
+    \quad $\bullet\ t_{f}$ & Final time \\
+    \quad $\bullet\ t_{tp}$ & Time to peak which is the time from $t_0$ to $t_p$ \\ \\ [-1.5ex]
+    \textbf{Derivatives and integral features:} & \\ \\ [-1.5ex]
+    \quad $\bullet\ WI$ & Wash-in rate corresponding to the signal slope from $t_0$ to $t_m$ or $t_p$ \\
+    \quad $\bullet\ WO$ & Wash-out rate corresponding to the signal slope from $t_m$ or $t_p$ to $t_p$ \\
+    \quad $\bullet\ IAUC$ & Initial area under the curve which is the area between $t_0$ to $t_{f}$ \\
+    \bottomrule
+  \end{tabularx}
 \label{tab:semiqua}
 \end{table}
 
 
-\paragraph{Whole-spectra approch:}
+\paragraph{Whole-spectra approach}
 Some studies are using the whole \ac{dce} time series as feature vector \cite{Ampeliotis2007,Ampeliotis2008,Tiwari2012,Viswanath2008a,Viswanath2008}.
 In some cases, the high-dimensional feature space is reduced using dimension reduction methods as it will be presented in the next section (see Sect.~\ref{subsec:chp3:img-clas:CADX-fea-ext}).
 
 \begin{figure}
 	\centering
 	\includegraphics[width=.8\linewidth]{3_review/figures/feature-detection/dce/dce_cancer_parameters.eps}
-	\caption[Semi-quantitative features used for \ac{dce}-\ac{mri}.]{Graphical representation of the different semi-quantitative features used for \ac{dce}-\ac{mri} analysis.}
+	\caption[Semi-quantitative features used for \acs*{dce}-\acs*{mri}.]{Graphical representation of the different semi-quantitative features used for \acs*{dce}-\acs*{mri} analysis.}
 	\label{fig:dceparam}
 \end{figure}
 
-\paragraph{Semi-quantitative approach:}
+\paragraph{Semi-quantitative approach}
 Semi-quantitative approaches are based on mathematically modelling the \ac{dce} time series.
 The parameters modelling the signal are commonly used, mainly due to the simplicity of their computation.
 Parameters included in semi-quantitative analysis are summarized in Tab.~\ref{tab:semiqua} and also graphically depicted in Fig.~\ref{fig:dceparam}.
@@ -204,7 +204,7 @@ A set of time features corresponding to specific amplitude level (start, maximum
 Then, derivative and integral features are also considered as discriminative and are commonly computed.
 
 
-\paragraph{Quantitative approach:}
+\paragraph{Quantitative approach}
 As presented in Sect.~\ref{sec:chp2:imaging}, quantitative approaches correspond to mathematical-pharmacokinetic models based on physiological exchanges.
 Four different models have been used in \ac{cad} for \ac{cap} systems.
 The most common model reviewed was the \textit{Brix model} \cite{Artan2009,Artan2010,Sung2011,Liu2009,Ozer2009,Ozer2010}.
@@ -247,11 +247,11 @@ Mazzetti \textit{et al.}~\cite{Mazzetti2011} and Giannini \textit{et al.}~\cite{
 
 \subsubsection{\Ac{mrsi}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}
 
-\paragraph{Whole spectra approach:}
+\paragraph{Whole spectra approach}
 As in the case of \ac{dce} analysis, one common approach is to incorporate the whole \ac{mrsi} spectra in the feature vector for classification \cite{Kelm2007,Parfait2012,Tiwari2007,Tiwari2009,Tiwari2013,Tiwari2009a,Tiwari2010,Viswanath2008a,Matulewicz2013}. 
 Sometimes post-processing involving dimension reduction methods is performed to reduce the complexity during the classification as it will be presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-ext}.
 
-\paragraph{Quantification approach:}
+\paragraph{Quantification approach}
 We can reiterate that in \ac{mrsi} only few biological markers (cf., choline, creatine and citrate metabolites mainly) are known to be useful to discriminate \ac{cap} and healthy tissue.
 Then, concentrations of these metabolites can be considered as a feature used for classification.
 In order to perform this quantification, four different approaches have been used.
@@ -267,5 +267,5 @@ Although Parfait \textit{et al.}~\cite{Parfait2012} used each metabolite concent
 \end{eqnarray}
 \noindent where $\text{Cit}$, $\text{Cho}$ and $\text{Cr}$ are the concentration of citrate, choline and creatine respectively.
 
-\paragraph{Wavelet decomposition approach:} 
+\paragraph{Wavelet decomposition approach} 
 Tiwari \textit{et al.}~\cite{Tiwari2012} performed a wavelet packet decomposition \cite{Coifman1992} of the spectra with the Haar wavelet basis function and used its coefficients as features.
