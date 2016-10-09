@@ -53,12 +53,6 @@ A Gabor filter is defined by the modulation of a Gaussian function with a sine w
 In an effort to characterize pattern and texture, a bank of Gabor filters is usually created with different angles, scale, and frequency --- refer to \acs{fig}\,\ref{fig:gabor} --- and then convolved with the image.
 \citeauthor{Viswanath2012}, \citeauthor{Tiwari2012} and more recently \citeauthor{khalvati2015automated} and \citeauthor{chung2015prostate} have designed a bank of Gabor filters to characterized texture and edge information in \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} modalities.
 
-%%%% GO here 
-\citeauthor{rampun2016computer} employed rotationally invariant Gabor filter banks ( \ac{lm}~\cite{varma2005statistical}) which takes edges and sopts/bars into account. 
-The \ac{lm} consists of 48 filters including first and second derivatives of Gaussian at 6 orientations and 3 scales (36 filters), in addition to 8 Laplacian of Gaussian and 4 Gaussians filters.
-The scale of proposed filters vary between $\sigma = 1$ to $\sigma = 10$ \si{\px}
-
-
 Texture-based features provide other characteristics discerning \ac{cap} from healthy tissue.
 The most common texture analysis for image classification is based on the \ac{glcm} with their related statistics which have been proposed by \citeauthor{Haralick1973} in~\cite{Haralick1973}.
 In a neighborhood around a central voxel, a \ac{glcm} is build considering each voxel pair defined by a specific distance and angle.
@@ -95,12 +89,12 @@ However, the statistics extracted from the \ac{glcm} across studies vary.
   \label{tab:glcm}
 \end{table}
 
-Fractal analysis and more precisely a local estimation of the fractal dimension \cite{Benassi1998} describing the texture roughness at a specific location was used in \cite{Lopes2011}.
-A wavelet-based method in a multi-resolution framework was used to estimate the fractal dimension.
-Cancerous tissue were characterized to have a higher fractal dimension than healthy tissue.
+\citeauthor{Lopes2011} used fractal analysis  and more precisely a local estimation of the fractal dimension~\cite{Benassi1998}, to describe the texture roughness at a specific location.
+The fractal dimension is estimated through a wavelet-based method in multi-resolution analysis.
+They showed that cancerous tissues have a higher fractal dimension than healthy tissue.
 
-\citeauthor{Chan2003} described the texture using the frequency signature via the \acf{dct} \cite{Ahmed1974} defining a neighbourhood of $7 \times 7$ pixels for each of the modalities that they used.
-The \ac{dct} allows to decompose a portion of image into a coefficients space where few of these coefficients encoded the visually significant information.
+\citeauthor{Chan2003} described texture using the frequency signature via the \acf{dct}\cite{Ahmed1974} defining a neighbourhood of \SI[product-units=repeat]{7x7}{\px} for modalities used, namely \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri}.
+The \ac{dct} allows to decompose a portion of image into a coefficient space, where few of these coefficients encode the significant information.
 The \ac{dct} coefficients are computed such as:
 
 \begin{equation}
@@ -109,10 +103,11 @@ The \ac{dct} coefficients are computed such as:
 
 \noindent where $C_{k_1,k_2}$ is the \ac{dct} coefficient at the position $k_1,k_2$, $M$ and $N$ are the dimension of the neighbourhood and $p_m,n$ is the pixel \ac{si} at the position $p_{m,n}$.
 
-\citeauthor{Viswanath2012} projected \ac{t2w} images into the wavelet space, using Haar wavelet, and used the coefficients obtained from the decomposition as features.
+\citeauthor{Viswanath2012} projected \ac{t2w}-\ac{mri} images into the wavelet space, using the Haar wavelet, and used the resulting coefficients as features~\cite{Viswanath2012}.
 %The wavelet family used for the decomposition was the Haar wavelet.
-
-Litjens \textit{et al.} in \cite{Litjens2011} computed the texture map based on \ac{t2w} images using a Gaussian filer bank.
+\citeauthor{Litjens2011} computed the texture map based on \ac{t2w}-\ac{mri} images using a Gaussian filer bank~\cite{Litjens2011}.
+Likewise, \citeauthor{rampun2016computer} employed a rotation invariant filter bank proposed in~\cite{leung2001representing}.
+The bank is composed of 48 filters including Gaussian filters, first and second derivatives of Gaussian filters as well as Laplacian of Gaussian
 
 Finally \citeauthor{cameron2016maps} defined their radiomics-based features using Morphology, Asymmetry, Physiology, and Size (MAPS).
 MAPS include three morphological features based on region boundary. 
@@ -138,12 +133,7 @@ The authors proposed to calculate four asymmetry features by divinding a region 
 The physiological features consists of Raw-\ac{mri} signal intensities, median, standard deviation, mean values of \ac{roi} and Haralick features. 
 Finally the las element of MAPS, size, represent the size of the \ac{roi}.
 
-
-
-
-
 %% Euclidean distance from each voxel to the prostate center as well as the individual distance in the three directions $x$, $y$ and $z$. \cite{Chan2003} embedded the same information but this time using cylindrical coordinate $r$, $\theta$ and $z$ corresponding to the radius, azimuth and elevation respectively.
-
 
 \paragraph{Region-wise detection}
 
@@ -202,20 +192,20 @@ In this section the features extracted for \ac{dce}-\ac{mri} analysis are presen
     \textbf{Semi-quantitative features} & \textbf{Explanations} \\
     \midrule
     \textbf{Amplitude features:} & \\ \\ [-1.5ex]
-    \quad $\bullet\ S_0$ & Amplitude at the onset of the enhancement \\
-    \quad $\bullet\ S_{\max}$ & Amplitude corresponding to $95\%$ of the maximum amplitude \\
-    \quad $\bullet\ S_{p}$ & Amplitude corresponding to the maximum amplitude \\
-    \quad $\bullet\ S_f$ & Amplitude at the final time point \\ \\ [-1.5ex]
+    \quad $S_0$ & Amplitude at the onset of the enhancement \\
+    \quad $S_{\max}$ & Amplitude corresponding to $95\%$ of the maximum amplitude \\
+    \quad $S_{p}$ & Amplitude corresponding to the maximum amplitude \\
+    \quad $S_f$ & Amplitude at the final time point \\ \\ [-1.5ex]
     \textbf{Time features:} & \\ \\ [-1.5ex]
-    \quad $\bullet\ t_0$ & Time at the onset of the enhancement \\
-    \quad $\bullet\ t_{\max}$ & Time corresponding to $95\%$ of the maximum amplitude \\
-    \quad $\bullet\ t_{p}$ & Time corresponding to the maximum amplitude \\
-    \quad $\bullet\ t_{f}$ & Final time \\
-    \quad $\bullet\ t_{tp}$ & Time to peak which is the time from $t_0$ to $t_p$ \\ \\ [-1.5ex]
+    \quad $t_0$ & Time at the onset of the enhancement \\
+    \quad $t_{\max}$ & Time corresponding to $95\%$ of the maximum amplitude \\
+    \quad $t_{p}$ & Time corresponding to the maximum amplitude \\
+    \quad $t_{f}$ & Final time \\
+    \quad $t_{tp}$ & Time to peak which is the time from $t_0$ to $t_p$ \\ \\ [-1.5ex]
     \textbf{Derivatives and integral features:} & \\ \\ [-1.5ex]
-    \quad $\bullet\ WI$ & Wash-in rate corresponding to the signal slope from $t_0$ to $t_m$ or $t_p$ \\
-    \quad $\bullet\ WO$ & Wash-out rate corresponding to the signal slope from $t_m$ or $t_p$ to $t_p$ \\
-    \quad $\bullet\ IAUC$ & Initial area under the curve which is the area between $t_0$ to $t_{f}$ \\
+    \quad $WI$ & Wash-in rate corresponding to the signal slope from $t_0$ to $t_m$ or $t_p$ \\
+    \quad $WO$ & Wash-out rate corresponding to the signal slope from $t_m$ or $t_p$ to $t_p$ \\
+    \quad $IAUC$ & Initial area under the curve which is the area between $t_0$ to $t_{f}$ \\
     \bottomrule
   \end{tabularx}
 \label{tab:semiqua}
