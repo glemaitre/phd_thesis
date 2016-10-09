@@ -53,6 +53,12 @@ Hence, a Gabor filter $g$ can be formalized as:
 \noindent where $\lambda$ is the wavelength of the sinusoidal factor, $\theta$ represents the orientation of the Gabor filter, $\psi$ is the phase offset, $\sigma$ is the standard deviation of the Gaussian envelope, $\gamma$ is the spatial aspect ratio and $s$ is the scale factor.
 To perform Gabor analysis to extract features for a classification scheme, a bank of Gabor filters is usually created with different angles, scale and dilatations (see Fig.~\ref{fig:gabor}) and then convolved with the image. 
 
+%%%% GO here 
+\citeauthor{rampun2016computer} employed rotationally invariant Gabor filter banks ( \ac{lm}~\cite{varma2005statistical}) which takes edges and sopts/bars into account. 
+The \ac{lm} consists of 48 filters including first and second derivatives of Gaussian at 6 orientations and 3 scales (36 filters), in addition to 8 Laplacian of Gaussian and 4 Gaussians filters.
+The scale of proposed filters vary between $\sigma = 1$ to $\sigma = 10$ \si{\px}
+
+
 Texture-based features provide other characteristics discerning \ac{cap} from healthy tissue.
 The most common texture analysis for image classification are co-occurrence matrices with their related statistics which were proposed in \cite{Haralick1973} and areB commonly used in \ac{cad} systems \cite{Antic2013,Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2008a,Viswanath2011,Viswanath2012}.
 At each voxel, a neighbourhood is defined around this center and a gray-level co-occurrence matrix is built by selecting a pair of voxels based on a defined distance and angle.
