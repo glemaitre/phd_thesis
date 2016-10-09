@@ -1,0 +1,186 @@
+\begin{figure}
+  \centering
+ % \hspace{\fill}
+  \subfigure[]{
+    \label{fig:auc15}
+    \begin{tikzpicture}[scale=.7,every node/.style={scale=0.7}]
+
+      \def\labels{
+        {\color{blue}\cite{Ampeliotis2008}},
+        {\color{blue}\cite{Antic2013}},
+        {\color{blue}\cite{Chan2003}},
+        {\color{blue}\cite{Giannini2013}},
+        {\color{blue}\cite{Langer2009}},
+        {\color{blue}\cite{Lopes2011}},
+        {\color{blue}\cite{Lv2009}},
+        {\color{blue}\cite{Niaf2011}},
+        {\color{blue}\cite{Niaf2012}},
+        {\color{blue}\cite{Tiwari2009a}},
+        {\color{blue}\cite{Tiwari2010}},
+        {\color{blue}\cite{Tiwari2012}},
+        {\color{blue}\cite{Tiwari2013}},
+        {\color{blue}\cite{Vos2008}},
+        {\color{blue}\cite{Vos2010}},
+        {\color{blue}\cite{lehaire2014computer}},
+        {\color{blue}\cite{giannini2015fully}},
+        {\color{blue}\cite{Mazzetti2011}},
+        {\color{blue}\cite{Puech2009}},
+        {\color{blue}\cite{Vos2008a}},
+        {\color{blue}\cite{rampun2016computerb}},
+        {\color{blue}\cite{rampun2016computer}} 
+      }
+
+      \def\reward{90,94,84,87,71,93,97,87,87,84,91,90,85,91,97,75,91,92,77,90,93,93}
+      \def\dbSize{25,53,15,10,25,27,55,23,30,15,19,36,29,29,29,35,56,29,100,10,45,45}
+      \def\dbClass{1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,3,1,2,2}
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{22}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{17/0/{Multiparametric},
+        5/17/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}}\\
+  \subfigure[]{
+    \label{fig:auc30}
+    \begin{tikzpicture}[scale=.7,every node/.style={scale=0.7}]
+
+      \def\labels{
+        {\color{blue}\cite{Litjens2014}},
+        {\color{blue}\cite{Liu2013}},
+        {\color{blue}\cite{Peng2013}},
+        {\color{blue}\cite{Viswanath2009}},
+        {\color{blue}\cite{Viswanath2011}},
+        {\color{blue}\cite{khalvati2015automated}},
+        {\color{blue}\cite{Viswanath2012}}
+      }
+
+      \def\reward{81,83,95,82,77,90,80}
+      \def\dbSize{347,54,48,6,12,20,22}
+      \def\dbClass{3,3,2,1,1,1,1}
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{7}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{6/0/{Multiparametric},
+        1/6/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,  text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}
+ }
+  %\hspace{\fill}
+  \caption[Results comparison from the state-of-the-art in terms of \ac{auc}.]{Numerical and graphical comparison of the results in terms of AUC for 1.5 and 3.0 Tesla \ac{mri} scanners. The {\color{semiAuto}green} value represents the metric and are graphically reported in the {\color{semiAuto}green} curve in the center of the figure. The {\color{red}red} value and areas correspond to the number of patients in the dataset. The numbers between brackets in {blue\color{blue}} correspond to the reference as reported in \acs{tab}~\ref{tab:sumpap}.}
+  \label{fig:auc}
+\end{figure}
+

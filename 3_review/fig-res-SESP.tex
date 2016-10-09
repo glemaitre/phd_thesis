@@ -1,0 +1,356 @@
+\begin{figure}%
+ \centering
+  \subfigure[]{
+    \label{fig:sens15}
+    \begin{tikzpicture}[scale=.5,every node/.style={scale=0.5}]
+
+      \def\labels{
+        {\color{blue}\cite{Artan2009}},
+        {\color{blue}\cite{Artan2010}},
+        {\color{blue}\cite{Giannini2013}},
+        {\color{blue}\cite{Liu2009}},
+        {\color{blue}\cite{Lopes2011}},
+        {\color{blue}\cite{Ozer2009}},
+        {\color{blue}\cite{Ozer2010}},
+        {\color{blue}\cite{Tiwari2009a}},
+        {\color{blue}\cite{Viswanath2008}},
+        {\color{blue}\cite{Mazzetti2011}},
+        {\color{blue}\cite{Puech2009}},
+        {\color{blue}\cite{Tiwari2008}}
+      }
+
+      \def\reward{74,66,79,90,85,76,78,84,88,82,100,87}
+      \def\dbSize{10,21,10,11,27,20,20,18,16,10,100,18}
+      \def\dbClass{1,2,1,1,2,1,1,1,1,1,3,1}
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{12}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{9/0/{Multiparametric},
+        3/9/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,  text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}
+}
+  \subfigure[]{
+    \label{fig:spec15}
+    \begin{tikzpicture}[scale=.5,every node/.style={scale=0.5}]
+
+      \def\labels{
+        {\color{blue}\cite{Artan2009}},
+        {\color{blue}\cite{Artan2010}},
+        {\color{blue}\cite{Giannini2013}},
+        {\color{blue}\cite{Liu2009}},
+        {\color{blue}\cite{Lopes2011}},
+        {\color{blue}\cite{Ozer2009}},
+        {\color{blue}\cite{Ozer2010}},
+        {\color{blue}\cite{Tiwari2009a}},
+        {\color{blue}\cite{Viswanath2008}},
+        {\color{blue}\cite{Mazzetti2011}},
+        {\color{blue}\cite{Puech2009}},
+        {\color{blue}\cite{Tiwari2008}}
+      }
+
+      \def\reward{82,72,84,88,93,75,74,81,85,82,43,85}
+      \def\dbSize{10,21,10,11,27,20,20,18,16,10,100,18}
+      \def\dbClass{1,2,1,1,2,1,1,1,1,1,3,1}
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{12}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{9/0/{Multiparametric},
+        3/9/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,  text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}
+  }
+  \\
+  \subfigure[]{
+    \label{fig:sens30}
+    \begin{tikzpicture}[scale=.5,every node/.style={scale=0.5}]
+
+      \def\labels{
+        {\color{blue}\cite{Peng2013}},
+        {\color{blue}\cite{Viswanath2008a}},
+        {\color{blue}\cite{trigui2017automatic}},
+        {\color{blue}\cite{trigui2016classification}},
+        {\color{blue}\cite{cameron2014multiparametric}},
+        {\color{blue}\cite{cameron2016maps}},
+        {\color{blue}\cite{khalvati2015automated}},
+        {\color{blue}\cite{chung2015prostate}},
+        {\color{blue}\cite{Matulewicz2013}},
+        {\color{blue}\cite{Parfait2012}},
+        {\color{blue}\cite{Sung2011}},
+        {\color{blue}\cite{samarasinghe2016semi}}
+      }
+
+      \def\reward{82,60,91,99,80,86,80,72,63,84,90,92}
+      \def\dbSize{48,6,34,34,5,13,20,20,18,22,42,40}
+      \def\dbClass{3,1,3,3,1,2,2,2,2,3,3}
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{12}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{8/0/{Multiparametric},
+        4/8/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,  text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}
+}
+  \subfigure[]{
+    \label{fig:spec30}
+    \begin{tikzpicture}[scale=.5,every node/.style={scale=0.5}]
+
+      \def\labels{
+        {\color{blue}\cite{Peng2013}},
+        {\color{blue}\cite{Viswanath2008a}},
+        {\color{blue}\cite{trigui2017automatic}},
+        {\color{blue}\cite{trigui2016classification}},
+        {\color{blue}\cite{cameron2014multiparametric}},
+        {\color{blue}\cite{cameron2016maps}},
+        {\color{blue}\cite{khalvati2015automated}},
+        {\color{blue}\cite{chung2015prostate}},
+        {\color{blue}\cite{Matulewicz2013}},
+        {\color{blue}\cite{Parfait2012}},
+        {\color{blue}\cite{Sung2011}},
+        {\color{blue}\cite{samarasinghe2016semi}}
+      }
+
+      \def\reward{95,66,98,100,70,88,88,92,99,97,77,99}
+      \def\dbSize{48,6,34,34,5,13,20,20,18,22,42,40}
+      \def\dbClass{3,1,3,3,1,2,2,2,2,3,3}
+            
+      \def\cZoom{3} 
+      \def\percentageLabelAngle{90}
+      \def\nbeams{12}
+      \pgfmathsetmacro\beamAngle{(360/\nbeams)}
+      \pgfmathsetmacro\halfAngle{(180/\nbeams)}
+      \pgfmathsetmacro\globalRotation{\halfAngle}
+
+      % draw the radiants
+      \foreach \n  [count=\ni] in \labels
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \draw(\cAngle:{\cZoom*1.15})  node[fill=white] {\n};
+        \draw [thin] (0,0) -- (\cAngle:{\cZoom*1}) ;
+
+      }
+
+      % draw the % rings 
+      \foreach \x in {12.5,25, ...,100} 
+      \draw [thin,color=gray!50] (0,0) circle [radius={\cZoom*\x/100}];
+
+      \foreach \x in {50,75,100}
+      { 
+        \draw [thin,color=black!50] (0,0) circle [radius={\cZoom/100*\x}];
+        \foreach \a in {0, 180} \draw ({\percentageLabelAngle+\a}:{\cZoom*0.01*\x}) node  [inner sep=0pt,outer sep=0pt,fill=white,font=\fontsize{8}{8.5}\selectfont]{$\x\%$};
+      }
+
+      % draw the path of the percentages
+      \def\aux{{\reward}}
+      \pgfmathsetmacro\origin{\aux[\nbeams-1]} 
+      \draw [semiAuto, thick] (\globalRotation:{\cZoom*\origin/100}) \foreach \n  [count=\ni] in \reward { -- ({(\ni*(360/\nbeams))+\globalRotation}:{\cZoom*\n/100}) } ;
+
+      % label all the percentags
+      \foreach \n [count=\ni] in \dbSize 
+      {
+        \pgfmathsetmacro\cAngle{{(\ni*(360/\nbeams))+\globalRotation}}
+        \pgfmathsetmacro\nreward{\aux[\ni-1]}
+        \draw (\cAngle:{\cZoom*1.5}) node[align=center] {{\color{semiAuto}\nreward $\%$} \\ {\color{red}\n} };
+      } ;
+
+      % draw the database rose
+      \def\dbScale{\9}
+      \foreach \n [count=\ni] in \dbClass
+      \filldraw[fill=red!20!white, draw=red!50!black]
+      (0,0) -- ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\cZoom*\n/9}) arc ({\ni*(360/\nbeams)-\halfAngle+\globalRotation}:{\ni*(360/\nbeams)+\halfAngle+\globalRotation}:{\cZoom*\n/9}) -- cycle;
+      \foreach \x in {1,2,3}
+      \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
+
+      %% draw the domain of each class 
+      \def\puta{8/0/{Multiparametric},
+        4/8/{Monoparametric}}
+
+      \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
+      {
+
+        \pgfmathsetmacro\initialAngle{(\contadorQueNoSeCalcular*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\finalAngle  {((\numElm+\contadorQueNoSeCalcular)*\beamAngle)+\halfAngle+\globalRotation}
+        \pgfmathsetmacro\l  {\cZoom*1.65+.3pt}
+        \draw (\initialAngle:{\cZoom*1.7}) -- (\initialAngle:{\cZoom*1.1});
+        \draw [ |<->|,>=latex] (\initialAngle:\l) arc (\initialAngle:\finalAngle:\l) ;     
+        \pgfmathsetmacro\r  {\cZoom*1.65+.45pt}
+        {\draw [decoration={raise=4pt,text along path,  text={\name},text align={center}},decorate] (\finalAngle:\r) arc (\finalAngle:\initialAngle:\r);}
+      }
+      
+    \end{tikzpicture}
+  }
+  \caption[Comparison of the state-of-the-art results in terms of \ac{se} and \ac{sp}.]{Numerical and graphical comparison of the results in terms of sensitivity~\subref{fig:sens15},~\subref{fig:sens30} and specificity~\subref{fig:spec15},~\subref{fig:spec30} for 1.5 and 3.0 Tesla \ac{mri} scanners. The value in {\color{semiAuto}green} represents the metric and are graphically reported in the {\color{semiAuto}green} curve in the center of the figure. The {\color{red}red} value and areas correspond to the number of patients in the dataset. The numbers between brackets in {\color{blue}blue} correspond to the reference as reported in \acs{tab}~\ref{tab:sumpap}.}
+  \label{fig:sensspec}
+\end{figure}
