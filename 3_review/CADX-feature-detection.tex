@@ -99,7 +99,7 @@ Fractal analysis and more precisely a local estimation of the fractal dimension 
 A wavelet-based method in a multi-resolution framework was used to estimate the fractal dimension.
 Cancerous tissue were characterized to have a higher fractal dimension than healthy tissue.
 
-Chan \textit{et al.}~\cite{Chan2003} described the texture using the frequency signature via the \acf{dct} \cite{Ahmed1974}) defining a neighbourhood of $7 \times 7$ pixels for each of the modalities that they used.
+\citeauthor{Chan2003} described the texture using the frequency signature via the \acf{dct} \cite{Ahmed1974} defining a neighbourhood of $7 \times 7$ pixels for each of the modalities that they used.
 The \ac{dct} allows to decompose a portion of image into a coefficients space where few of these coefficients encoded the visually significant information.
 The \ac{dct} coefficients are computed such as:
 
@@ -109,10 +109,39 @@ The \ac{dct} coefficients are computed such as:
 
 \noindent where $C_{k_1,k_2}$ is the \ac{dct} coefficient at the position $k_1,k_2$, $M$ and $N$ are the dimension of the neighbourhood and $p_m,n$ is the pixel \ac{si} at the position $p_{m,n}$.
 
-Viswanath \textit{et al.}~\cite{Viswanath2012} projected \ac{t2w} images into the wavelet space, using Haar wavelet, and used the coefficients obtained from the decomposition as features.
+\citeauthor{Viswanath2012} projected \ac{t2w} images into the wavelet space, using Haar wavelet, and used the coefficients obtained from the decomposition as features.
 %The wavelet family used for the decomposition was the Haar wavelet.
 
-Finally Litjens \textit{et al.} in \cite{Litjens2011} computed the texture map based on \ac{t2w} images using a Gaussian filer bank.
+Litjens \textit{et al.} in \cite{Litjens2011} computed the texture map based on \ac{t2w} images using a Gaussian filer bank.
+
+Finally \citeauthor{cameron2016maps} defined their radiomics-based features using Morphology, Asymmetry, Physiology, and Size (MAPS).
+MAPS include three morphological features based on region boundary. 
+The first morphological feature is based one the difference of morphological closing and opening of an area ($A$): 
+\begin{equation}
+  f^{M}_{1} = \frac{A_{closed} - A_{opened}}{A_{initial}}.
+\end{equation} 
+The second morphological feaure compares the region perimeter ($P$) before and after eliminating the high frequency components in the Fourier space \cite{cameron2016maps}: 
+\begin{equation}
+  f^{M}_{2} = \frac{\vert P_{initial} - P_{reconstruction} \vert}{P_{initial}}
+\end{equation}
+The third morphological feature used is very similar to the second one since it compares the difference two Fourier reconstruction of the area, while it compares areas ($A$) rather than perimeter:
+\begin{equation}
+  f^{M}_{3} = \frac{A_{initial} \oplus A_{reconstruction}}{ A_{initial} \cup A_{reconstruction}}
+\end{equation}
+
+The authors proposed to calculate four asymmetry features by divinding a region into two parts along its axes and compare the areas. 
+\begin{equation}
+  f^{A}_{.} = \frac{A_{large} - A_{small}}{A_{normalize}}
+\end{equation}
+\noindent Four features are drived by using major or minor axis of the region and considering small or full area as $A_{normalize}$.
+
+The physiological features consists of Raw-\ac{mri} signal intensities, median, standard deviation, mean values of \ac{roi} and Haralick features. 
+Finally the las element of MAPS, size, represent the size of the \ac{roi}.
+
+
+
+
+
 %% Euclidean distance from each voxel to the prostate center as well as the individual distance in the three directions $x$, $y$ and $z$. \cite{Chan2003} embedded the same information but this time using cylindrical coordinate $r$, $\theta$ and $z$ corresponding to the radius, azimuth and elevation respectively.
 
 
