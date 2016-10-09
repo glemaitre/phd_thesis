@@ -16,9 +16,9 @@ A general \ac{cad} work-flow is presented in \acs{fig}\,\ref{fig:wkfcad}.
 %The \ac{cad} work-flow is presented in \acs{fig}~\ref{fig:wkfcad}.
 
 \ac{mri} modalities mentioned in \acs{sec}\,\ref{sec:chp2:imaging} are used as inputs of \ac{cad} for \ac{cap}.
-These images acquired from the different modalities show a large variability between patients: the prostate organ can be located at different positions in images --- due to patient motion, variation of acquisition plan --- and the \ac{si} can be corrupted with noise or artefacts during the acquisition process caused by the magnetic field inhomogeneity or the use of endorectal coil.
+These images acquired from the different modalities show a large variability between patients: the prostate organ can be located at different positions in images --- due to patient motion, variation of acquisition plan --- and the \ac{si} can be corrupted with noise or artifacts during the acquisition process caused by the magnetic field non-homogeneity or the use of endorectal coil.
 %It can be noted that \ac{adc} map is not considered as an input since it is a feature derived from the \ac{dw} \ac{mri} images.
-To address these issues, the first stage of \ac{cad} is to pre-process \ac{mpmri} images to reduce noise, remove artefacts, and standardize the \ac{si}.
+To address these issues, the first stage of \ac{cad} is to pre-process \ac{mpmri} images to reduce noise, remove artifacts, and standardize the \ac{si}.
 Subsequently, most of the later processes are only focusing on the prostate organ; therefore it is necessary to segment the prostate in each \ac{mri} modality to define it as a \ac{roi}.
 However, data may suffer from misalignment due to patient motions or different acquisition parameters.
 Therefore, a registration step is usually performed so that all the previously segmented \ac{mri} images are in the same reference frame.
@@ -26,7 +26,7 @@ Registration and segmentation can be swapped depending on the strategy chosen.
 
 Some studies do not fully apply the methodology depicted in \acs{fig}\,\ref{fig:wkfcad}.
 Details about those can be found in \acs{tab}~\ref{tab:sumpap}.
-Some studies bypass the pre-processing stages to proof the robustness of their approaches to noise or other artefacts, by using directly the raw data as inputs of their \ac{cad} systems.
+Some studies bypass the pre-processing stages to proof the robustness of their approaches to noise or other artifacts, by using directly the raw data as inputs of their \ac{cad} systems.
 In some cases, prostate segmentation is performed manually as well as registration.
 Sometimes, it is also assumed that no patient motions occur during the acquisition procedure, removing the need of registering the \ac{mpmri} images.
 

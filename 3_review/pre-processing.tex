@@ -23,7 +23,7 @@ Furthermore, \ac{mri} images visualized by radiologists are in fact the magnitud
 The complex Fourier transform does not affect the Gaussian noise characteristics since this is a linear and orthogonal transform~\cite{Nowak1999}.
 However, the calculation of the magnitude is a non-linear transform --- i.e., the square root of the sum of squares of real and the imaginary parts --- implying that the noise distribution is no longer Gaussian; it indeed follows a Rician distribution making the denoising task more challenging.
 Briefly, a Rician distribution is characterized as follows: in low-\ac{si} region (low-\ac{snr}), it can be approximated with a Rayleigh distribution while in high-\ac{si} region (high-\ac{snr}), it is similar to a Gaussian distribution~\cite{Manjon2008}.
-The reader can refer to \acs{fig}\,\ref{fig:noisedistr} to observe the difference between a Gaussian and Rayleigh distribution.
+Refer to \acs{fig}\,\ref{fig:noisedistr} to observe the difference between a Gaussian and Rayleigh distribution.
 Comprehensive reviews regarding denoising methods can be found in~\cite{Buades2005,Mohan2014}.
 
 Median filtering is the simplest approach used to address the denoising issue in \ac{mri} images~\cite{Ozer2009,Ozer2010}.
@@ -64,16 +64,16 @@ It implies that the wavelet coefficients are also unbiased estimators and the sc
 \begin{figure}
 \centering
 \includegraphics[width=0.3\linewidth]{3_review/figures/processing/pre-processing/bias/t2w_bias_antenna.eps}
-\caption[Inhomogeneity artefacts due to perturbation of the endorectal coil.]{Example of artefacts with high \acs*{si} due to perturbation from the endorectal coil which create inhomogeneity.}
+\caption[Non-homogeneity artifacts due to perturbation of the endorectal coil.]{Example of artifacts with high \acs*{si} due to perturbation from the endorectal coil which create non-homogeneity.}
 \label{fig:bias}
 \end{figure}
 
 
-% Artefacts filtering
+% Artifacts filtering
 %\item[$-$] \textbf{\textit{Bias correction:}} 
 \paragraph{Bias correction} Besides being corrupted by noise, \ac{mri} images are also affected by the inhomogeneity of the \ac{mri} field commonly referred to as bias field~\cite{Styner2000}.
 This bias field results in a smooth variation of the \ac{si} through the image.
-When an endorectal coil is used, a resulting artefact of an hyper-intense signal is observed around the coil as depicted in \acs{fig}\,\ref{fig:bias}.
+When an endorectal coil is used, a resulting artifact of an hyper-intense signal is observed around the coil as depicted in \acs{fig}\,\ref{fig:bias}.
 As a consequence, the \ac{si} of identical tissues varies depending on their spatial location in the image making further processes such as segmentation, registration, or classification more challenging~\cite{Jungke1987,Vovk2007}.
 A comprehensive review of bias correction methods is proposed in~\cite{Vovk2007}.
 
@@ -99,7 +99,7 @@ Hence, the task of bias correction involves estimating the bias function $b(\mat
 % and subtract to the logarithm of the initial signal in order to obtain an estimated ``signal-free bias''.
 
 
-\citeauthor{Viswanath2009} corrected this artefact on \ac{t2w}-\ac{mri} images~\cite{Viswanath2009}, using the model proposed in~\cite{Styner2000}, in which \citeauthor{Styner2000} model the bias field function by using a linear combination of Legendre polynomials as:
+\citeauthor{Viswanath2009} corrected this artifact on \ac{t2w}-\ac{mri} images~\cite{Viswanath2009}, using the model proposed in~\cite{Styner2000}, in which \citeauthor{Styner2000} model the bias field function by using a linear combination of Legendre polynomials as:
 
 \begin{equation}
 	\hat{b}(\mathbf{x},\mathbf{p}) = \sum_{i=0}^{m-1} p_i f_i(\mathbf{x}) =  \sum_{i=0}^{l} \sum_{j=0}^{l-i} p_{ij} P_i(x) P_j(y) \ ,
@@ -147,8 +147,8 @@ The corrupted signal $s$ is restored by finding the multiplicative field $b$ whi
 \citeauthor{Sled1998} argue that a brute-force search through all possible fields $b$ and selecting the one which maximizes the high frequency content of $O$ is possible but far to complex.
 By assimilating the bias field distribution to be a near Gaussian distribution as \textit{a priori}, it is then possible to infer the distribution $O$ using the Wiener deconvolution given $B$ and $S$ and later estimate the corresponding smooth field $b$.
 
-\citeauthor{Lv2009} corrected the inhomogeneity in \ac{t2w}-\ac{mri} images~\cite{Lv2009} by using the method proposed in~\cite{Madabhushi2006}.
-\citeauthor{Madabhushi2006} propose to correct the \ac{mri} images by iteratively detecting the image foreground via \ac{gscale} and estimating a bias field function based on a second-order polynomial model.
+\citeauthor{Lv2009} corrected the non-homogeneity in \ac{t2w}-\ac{mri} images~\cite{Lv2009} by using the method proposed in~\cite{Madabhushi2006}.
+\citeauthor{Madabhushi2006} propose to correct the \ac{mri} images by detecting the image foreground via \ac{gscale} in an iterative manner and estimating a bias field function based on a 2\textsuperscript{nd} order polynomial model.
 First, the background of the \ac{mri} image is eliminated by thresholding, in which the threshold value is commonly equal to the mean \ac{si} of the considered image.
 Then, a seeded region growing algorithm is applied in the image foreground, considering every thresholded pixel as a potential seed.
 However, pixels already assigned to a region are not considered any more as potential seed.
@@ -166,7 +166,7 @@ The background variation $b(\mathbf{x})$ is estimated as:
 
 \noindent where $s(\mathbf{x})$ is the original \ac{mri} image.
 
-Finally, a second order polynomial $\hat{b}_{\Theta}(\mathbf{x})$ is fitted in a least-squares sense as in \acs{eq}\,\eqref{eq:lsolv},
+Finally, a 2\textsuperscript{nd} order polynomial $\hat{b}_{\Theta}(\mathbf{x})$ is fitted in a least-squares sense as in \acs{eq}\,\eqref{eq:lsolv},
 
 \begin{equation}
 	\hat{\Theta} = \argmin_{\Theta} | b(\mathbf{x}) - \hat{b}_{\Theta}(\mathbf{x}) |^{2}, \ \forall \mathbf{x} \in R \ .
@@ -193,12 +193,12 @@ These standardization methods are categorized either as statistical-based standa
 
 \noindent where $I_s(\mathbf{x})$ is the standardized \ac{si} with the image coordinates $\mathbf{x} = \{x,y\}$, $I_r(\mathbf{x})$ is the raw \ac{si}, $\mu_{pz}$ is the mean \ac{si} of the \ac{pz} and $\sigma_{pz}$ is the \ac{si} standard deviation in the \ac{pz}.
 This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
-In a similar way, \citeauthor{Liu2013} normalized \ac{t2w}-\ac{mri} by making use of the median and interquartile range for all the pixels~\cite{Liu2013}.
+In a similar way, \citeauthor{Liu2013} normalized \ac{t2w}-\ac{mri} by making use of the median and inter-quartile range for all the pixels~\cite{Liu2013}.
 
 \citeauthor{Lv2009} scaled the \ac{si} of \ac{t2w}-\ac{mri} images using the method proposed in~\cite{Nyul2000} based on \ac{pdf} matching~\cite{Lv2009}.
 This approach is based on the assumption that \ac{mri} images from the same sequence should share the same \ac{pdf} appearance.
 Hence, one can approach this issue by transforming and matching the \acp{pdf} using some statistical landmarks such as quantiles.
-Using a training set, these statistical landmarks --- such as minimum, $25^{\text{th}}$ percentile, median, $75^{\text{th}}$ percentile, and maximum --- are extracted for $N$ training images:
+Using a training set, these statistical landmarks --- such as minimum, 25\textsuperscript{th} percentile, median, 75\textsuperscript{th} percentile, and maximum --- are extracted for $N$ training images:
 
 \begin{eqnarray}	
 	\Phi_{0} & = & \{ \phi_{0}^{1}, \phi_{0}^{2}, \cdots, \phi_{0}^{N} \} \ , \nonumber \\
@@ -208,12 +208,12 @@ Using a training set, these statistical landmarks --- such as minimum, $25^{\tex
 	\Phi_{100} & = & \{ \phi_{100}^{1}, \phi_{100}^{2}, \cdots, \phi_{100}^{N} \} \ , \nonumber
 \end{eqnarray}
 
-\noindent where $\phi_{n^\text{th}}^{i^{\text{th}}}$ is the $n^{\text{th}}$ quantile of the $i^{\text{th}}$ training image.
+\noindent where $\phi_{n^\text{th}}^{i^{\text{th}}}$ is the $n^{\text{th}}$ percentile of the $i^{\text{th}}$ training image.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{3_review/figures/processing/pre-processing/normalization/linear_transform_parts.eps}
-	\caption{Example of piecewise-linear normalization as proposed in~\cite{Nyul2000}.}
+	\caption{Example of piecewise linear normalization as proposed in~\cite{Nyul2000}.}
 	\label{fig:imnorm}
 \end{figure}
 
@@ -308,7 +308,7 @@ Once the best parameter $\Phi$ vector is obtained, the \ac{mrsi} signal is corre
 Fortunately, specific \ac{mrsi} sequences have been developed in order to suppress water and lipid metabolites using pre-saturation techniques~\cite{Zhu2010}.
 However, these techniques do not perfectly remove water and lipids peaks and some residuals are still present in the \ac{mrsi} spectra as illustrated in \ac{fig}\,\ref{fig:waterfat}.
 Therefore, different post-processing methods have been proposed to enhance the quality of the \ac{mrsi} spectra by removing these residuals.
-For instance, \citeauthor{Kelm2007} used the HSVD algorithm proposed by \citeauthor{Pijnappel1992} which models the \ac{mrsi} signal by a sum of exponentially damped sinusoids in the time domain as \acs{eq}\,\eqref{eq:fidsig}.
+For instance, \citeauthor{Kelm2007} used the HSVD algorithm proposed by \citeauthor{Pijnappel1992} who models the \ac{mrsi} signal by a sum of exponentially damped sine waves in the time domain as \acs{eq}\,\eqref{eq:fidsig}.
 %In the time domain, a \ac{mrsi} signal $s(t)$ is modelled by a sum of $K$ exponentially damped sinusoids such that:
 
 \begin{equation}
@@ -330,7 +330,7 @@ Hence, knowing the cut off frequencies of water --- i.e., \SI{4.65}{\ppm} --- an
 Lipids and macro-molecules are known to affect the baseline of the \ac{mrsi} spectra, causing errors during while quantifying metabolites, especially the citrate metabolite.
 
 \citeauthor{Parfait2012} made the comparison of two different methods to detect the baseline and correct the \ac{mrsi} spectra~\cite{Parfait2012} which are based on~\cite{Lieber2003,Devos2004}.
-\citeauthor{Lieber2003} correct the baseline in the frequency domain by fitting a low degree polynomial $p(x)$ --- e.g., second or third degree --- to the \ac{mrsi} signal $s(x)$ in a least-squares sense~\cite{Lieber2003}.
+\citeauthor{Lieber2003} correct the baseline in the frequency domain by fitting a low degree polynomial $p(x)$ --- e.g., 2\textsuperscript{nd} or 3\textsuperscript{rd} degree --- to the \ac{mrsi} signal $s(x)$ in a least-squares sense~\cite{Lieber2003}.
 Then, the values of the fitted polynomial are re-assigned as:
 
 \begin{equation}
@@ -342,7 +342,7 @@ Then, the values of the fitted polynomial are re-assigned as:
 	\label{eq:lieber}
 \end{equation}
 
-Finally, this procedure of fitting and re-assignment is iteratively repeated on $p_f(x)$ until a stopping criterion is reached.
+Finally, this procedure of fitting and re-assignment is repeated on $p_f(x)$ until a stopping criterion is reached.
 The final polynomial function is subtracted from the original signal $s(x)$ to correct it.
 \cite{Parfait2012} modified this algorithm by convolving a Gaussian kernel to smooth the \ac{mrsi} signal instead of fitting a polynomial function, keeping the rest of the algorithm identical. 
 Unlike~\citeauthor{Lieber2003}, \citeauthor{Devos2004} correct the baseline in the time domain by multiplying the \ac{mrsi} signal by a decreasing exponential function~\cite{Devos2004} as:
@@ -355,7 +355,7 @@ Unlike~\citeauthor{Lieber2003}, \citeauthor{Devos2004} correct the baseline in t
 However, \citeauthor{Parfait2012} concluded that the method proposed in~\cite{Lieber2003} outperformed the one in~\cite{Devos2004}.
 The later study of \citeauthor{trigui2017automatic} used these conclusion and adopted the same method~\cite{trigui2016classification,trigui2017automatic}.
 
-In the contemporary work of \citeauthor{Tiwari2012}, the authors detected the baseline using a local non-linear fitting method avoiding regions with significant peaks which have been detected using an experimentally parametrised signal-to-noise ratio (i.e., a value larger than 5 dB).
+In the contemporary work of \citeauthor{Tiwari2012}, the authors detected the baseline using a local non-linear fitting method avoiding regions with significant peaks which have been detected using an experimentally parametrized signal-to-noise ratio, which has been set to a value larger than \SI{5}{\decibel}.
 
 \begin{figure}
 \centering
@@ -366,8 +366,8 @@ In the contemporary work of \citeauthor{Tiwari2012}, the authors detected the ba
 
 %\item[$-$] \textbf{\textit{Frequency alignment:}} 
 \paragraph{Frequency alignment}
-Due to variations of the experimental conditions, a frequency shift is commonly observed in the \ac{mrsi} spectra~\cite{Chen2002,Osorio-Garcia2012} as depicted in\acs{fig}\,\ref{fig:frequency}.
-\citeauthor{Tiwari2012} correct this frequency shift by first detecting known metabolite peaks such as choline, creatine, or citrate and minimizing the frequency error between the experimental and theoretical values for each of these peaks\cite{Tiwari2012}.
+Due to variations of the experimental conditions, a frequency shift is commonly observed in the \ac{mrsi} spectra~\cite{Chen2002,Osorio-Garcia2012} as depicted in \acs{fig}\,\ref{fig:frequency}.
+\citeauthor{Tiwari2012} correct this frequency shift by first detecting known metabolite peaks such as choline, creatine, or citrate and minimizing the frequency error between the experimental and theoretical values for each of these peaks~\cite{Tiwari2012}.
 
 %\item[$-$] \textbf{\textit{Normalization:}} 
 \paragraph{Normalization}
@@ -392,7 +392,7 @@ The different pre-processing methods are summarized in \acs{tab}~\ref{tab:summar
   \centering
   \begin{tabular}{l r}
     \toprule
-    \textbf{Pre-processing operations} & \textbf{References} \\ \\ [-1.5ex]
+    \textbf{Pre-processing operations} & \textbf{References} \\
     \midrule
     \textbf{\ac{mri} pre-processing:} & \\
     \quad Noise filtering: &  \\
@@ -411,7 +411,7 @@ The different pre-processing methods are summarized in \acs{tab}~\ref{tab:summar
     \quad $\bullet$ Water and lipid residuals filtering & \cite{Kelm2007} \\
     \quad $\bullet$ Baseline correction & \cite{Parfait2012,Tiwari2012,trigui2016classification,trigui2017automatic} \\
     \quad $\bullet$ Frequency alignment & \cite{Tiwari2012,trigui2016classification,trigui2017automatic} \\
-    \quad $\bullet$ Normalization & \cite{Parfait2012,trigui2016classification,trigui2017automatic} \\ \\ [-1.5ex]
+    \quad $\bullet$ Normalization & \cite{Parfait2012,trigui2016classification,trigui2017automatic} \\
     \bottomrule
   \end{tabular}
 \label{tab:summary-preproc}
