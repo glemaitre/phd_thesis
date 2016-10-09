@@ -152,10 +152,10 @@ The first feature is based on estimating the fractal dimension on the \ac{si} of
 The second fractal dimension is estimated using the \ac{pdf} of each image and characterizes the complexity of the \ac{pdf}.
 \citeauthor{Lopes2011} proposed a 3D version to estimate the fractal dimension of a volume using a wavelet decomposition~\cite{Lopes2011}.
 
-\subsubsection{\Ac{dce}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea}
+\subsubsection{\acs*{dce}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea}
 
-\ac{dce}-\ac{mri} is more commonly based on a \ac{si} analysis over time as presented in Sect.~\ref{subsec:chp2:imaging:dce}.
-In this section the features extracted for \ac{dce}-\ac{mri} analysis are presented.
+\ac{dce}-\ac{mri} is more commonly based on a \ac{si} analysis over time as presented in \acs{sec}\,\ref{subsec:chp2:imaging:dce}.
+In this section, the features extracted for \ac{dce}-\ac{mri} analysis are presented.
 
 \begin{table}
   \caption{Parameters used as features for a \acs*{dce} semi-quantitative analysis in \acs*{cad} systems.}
@@ -185,88 +185,87 @@ In this section the features extracted for \ac{dce}-\ac{mri} analysis are presen
 \label{tab:semiqua}
 \end{table}
 
-
 \paragraph{Whole-spectra approach}
-Some studies are using the whole \ac{dce} time series as feature vector \cite{Ampeliotis2007,Ampeliotis2008,Tiwari2012,Viswanath2008a,Viswanath2008}.
-In some cases, the high-dimensional feature space is reduced using dimension reduction methods as it will be presented in the next section (see Sect.~\ref{subsec:chp3:img-clas:CADX-fea-ext}).
+Some studies are using the whole \ac{dce} time series as feature vector~\cite{Ampeliotis2007,Ampeliotis2008,Tiwari2012,Viswanath2008a,Viswanath2008}.
+In some cases, the high-dimensional feature space is reduced using dimension reduction methods as it will be presented in the \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-ext}.
 
 \begin{figure}
-	\centering
-	\includegraphics[width=.8\linewidth]{3_review/figures/feature-detection/dce/dce_cancer_parameters.eps}
-	\caption[Semi-quantitative features used for \acs*{dce}-\acs*{mri}.]{Graphical representation of the different semi-quantitative features used for \acs*{dce}-\acs*{mri} analysis.}
-	\label{fig:dceparam}
+  \centering
+  \includegraphics[width=.8\linewidth]{3_review/figures/feature-detection/dce/dce_cancer_parameters.eps}
+  \caption[Semi-quantitative features used for \acs*{dce}-\acs*{mri}.]{Graphical representation of the different semi-quantitative features used for \acs*{dce}-\acs*{mri} analysis.}
+  \label{fig:dceparam}
 \end{figure}
 
 \paragraph{Semi-quantitative approach}
 Semi-quantitative approaches are based on mathematically modelling the \ac{dce} time series.
-The parameters modelling the signal are commonly used, mainly due to the simplicity of their computation.
-Parameters included in semi-quantitative analysis are summarized in Tab.~\ref{tab:semiqua} and also graphically depicted in Fig.~\ref{fig:dceparam}.
-A set of time features corresponding to specific amplitude level (start, maximum and end) are extracted.
+The parameters modelling the signal are commonly used, mainly due to the simplicity of their computation~\cite{Puech2009,Mazzetti2011,Niaf2011,Niaf2012,Sung2011,trigui2016classification,trigui2017automatic,lehaire2014computer,samarasinghe2016semi,giannini2015fully}.
+Parameters included in semi-quantitative analysis are summarized in \acs{tab}~\ref{tab:semiqua} and also graphically depicted in \acs{fig}\,\ref{fig:dceparam}.
+A set of time features corresponding to specific amplitude level (start, maximum, and end) are extracted.
 Then, derivative and integral features are also considered as discriminative and are commonly computed.
 
-
 \paragraph{Quantitative approach}
-As presented in Sect.~\ref{sec:chp2:imaging}, quantitative approaches correspond to mathematical-pharmacokinetic models based on physiological exchanges.
+As presented in \acs{sec}\,\ref{sec:chp2:imaging}, quantitative approaches correspond to mathematical-pharmacokinetic models based on physiological exchanges.
 Four different models have been used in \ac{cad} for \ac{cap} systems.
-The most common model reviewed was the \textit{Brix model} \cite{Artan2009,Artan2010,Sung2011,Liu2009,Ozer2009,Ozer2010}.
+The most common model reviewed is the \textit{Brix model}~\cite{Artan2009,Artan2010,Sung2011,Liu2009,Ozer2009,Ozer2010}.
 This model is formalized such as:
 \begin{equation}
 	\frac{S(t)}{S(0)} = 1 + A k_{ep} \left( \frac{\exp( -k_{ep} t ) - \exp( -k_{el} t )}{k_{el} - k_{ep}} \right) \ ,
 	\label{eq:brixmod}
 \end{equation}
 
-\noindent where $S(\cdot)$ is the \ac{dce} signal, $A$ is the parameter simulating the tissue properties, $k_{el}$ is the parameter related to the first-order elimination from the plasma compartment and $k_{ep}$ is the parameter of the transvascular permeability.
-These parameters ($k_{ep}$, $k_{el}$,$A$) are computed from the \ac{mri} data and used as features.
+\noindent where $S(\cdot)$ is the \ac{dce} signal, $A$ is the parameter simulating the tissue properties, $k_{el}$ is the parameter related to the first-order elimination from the plasma compartment, and $k_{ep}$ is the parameter of the transvascular permeability.
+The parameters $k_{ep}$, $k_{el}$, and $A$ are computed from the \ac{mri} data and used as features.
 
-Another model is Tofts model \cite{Tofts1997} which was used in \cite{Langer2009,Giannini2013,Niaf2011,Niaf2012,Mazzetti2011}.
+Another model is Tofts model~\cite{Tofts1997} which have been used in~\cite{Langer2009,Giannini2013,Niaf2011,Niaf2012,Mazzetti2011,lehaire2014computer,giannini2015fully}.
 In this model, the \ac{dce} signal relative to the concentration is presented as:
 \begin{equation}
 	C_t(t) = v_p C_p(t) + K_{trans} \int_{0}^{t} C_p(\tau) \exp( -k_{ep}(t-\tau) ) \ d\tau \ ,
 	\label{eq:tofts} 
 \end{equation}
 
-\noindent where $C_t(\cdot)$ is the concentration of the medium, $C_p(\cdot)$ is the \ac{aif} which have to be estimated independently, $K_{trans}$ is the parameter related to the diffuse transport of media across the capillary endothelium, $k_{ep}$ is the parameter related to the exchanges back into the vascular space and $v_e$ is the extravascular-extracellular space fraction defined such that $v_e = 1 - v_p$.
-In this model, paramteres $K_{trans}$, $k_{ep}$ and $v_e$ are computed and used as features.
+\noindent where $C_t(\cdot)$ is the concentration of the medium, $C_p(\cdot)$ is the \ac{aif} which have to be estimated independently, $K_{trans}$ is the parameter related to the diffuse transport of media across the capillary endothelium, $k_{ep}$ is the parameter related to the exchanges back into the vascular space, and $v_e$ is the extravascular-extracellular space fraction defined such that $v_e = 1 - v_p$.
+In this model, parameters $K_{trans}$, $k_{ep}$, and $v_e$ are computed and used as features.
 
-%Mazzetti \textit{et al.}~\cite{Mazzetti2011} and Giannini \textit{et al.}~\cite{Giannini2013} used the Weibull function empirically formalized as:
-Mazzetti \textit{et al.}~\cite{Mazzetti2011} and Giannini \textit{et al.}~\cite{Giannini2013} used the Weibull function in different emprical model based on West-like function and referred to as the phenomenological universalities model \cite{Castorina2006} defined by three parameters $\beta$, $a_{0}$, and $r$ ( see Eq.~\ref{eq:pun}).
+\citeauthor{Mazzetti2011} and \citeauthor{giannini2015fully} used the Weibull function~\cite{Mazzetti2011,Giannini2013,giannini2015fully} which is formalized as:
 
-%% \begin{equation}
-%% 	S(t) = A t \exp( -t^{B} ) \ ,
-%% 	\label{eq:weibull}
-%% \end{equation}
+\begin{equation}
+	S(t) = A t \exp( -t^{B} ) \ ,
+	\label{eq:weibull}
+\end{equation}
 
-%% \noindent where $A$ and $B$ are the two parameters which have to be inferred.
-%They also used another empirical model which is based on the West-like function and named the phenomenological universalities model \cite{Castorina2006}) formalized as:
+\noindent where $A$ and $B$ are the two parameters which have to be inferred.
+
+They also used another empirical model which is based on the West-like function and named the \ac{pun}~\cite{Castorina2006}, formalized as:
 \begin{equation}
 	S(t) = \exp \left[ r t + \frac{1}{\beta} a_0 - r \left( \exp( \beta t ) - 1 \right) \right] \ ,
 	\label{eq:pun}
 \end{equation}
-%\noindent where the parameters $\beta$, $a_0$ and $r$ are inferred.
-\noindent For all these models, the parameters are inferred using an optimization curve fitting approach.
+\noindent where the parameters $\beta$, $a_0$ and $r$ are inferred.
+For all these models, the parameters are inferred using an optimization curve fitting approach.
 
-
-\subsubsection{\Ac{mrsi}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}
+\subsubsection{\acs*{mrsi}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}
 
 \paragraph{Whole spectra approach}
-As in the case of \ac{dce} analysis, one common approach is to incorporate the whole \ac{mrsi} spectra in the feature vector for classification \cite{Kelm2007,Parfait2012,Tiwari2007,Tiwari2009,Tiwari2013,Tiwari2009a,Tiwari2010,Viswanath2008a,Matulewicz2013}. 
-Sometimes post-processing involving dimension reduction methods is performed to reduce the complexity during the classification as it will be presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-ext}.
+As in the case of \ac{dce} analysis, one common approach is to incorporate the whole \ac{mrsi} spectra in the feature vector for classification~\cite{Kelm2007,Parfait2012,Tiwari2007,Tiwari2009,Tiwari2013,Tiwari2009a,Tiwari2010,Viswanath2008a,Matulewicz2013,trigui2016classification,trigui2017automatic}.
+Sometimes post-processing involving dimension reduction methods is performed to reduce the complexity during the classification as it will be presented in \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-ext}.
 
 \paragraph{Quantification approach}
-We can reiterate that in \ac{mrsi} only few biological markers (cf., choline, creatine and citrate metabolites mainly) are known to be useful to discriminate \ac{cap} and healthy tissue.
-Then, concentrations of these metabolites can be considered as a feature used for classification.
-In order to perform this quantification, four different approaches have been used.
-The QUEST \cite{Ratiney2005}, AMARES \cite{Vanhamme1997} and VARPRO \cite{Coleman1993} models were used in \cite{Kelm2007}.
+We can reiterate that in \ac{mrsi} only few biological markers --- i.e., choline, creatine, and citrate metabolites --- are known to be useful to discriminate \ac{cap} and healthy tissue.
+Therefore, only the concentrations of these metabolites are considered as a feature prior to classification.
+In order to perform this quantification, 4 different approaches have been used.
+\citeauthor{Kelm2007} used the following models~\cite{Kelm2007}: QUEST~\cite{Ratiney2005}, AMARES~\cite{Vanhamme1997}, and VARPRO~\cite{Coleman1993}.
 They are all time-domain quantification methods varying by the type of pre-knowledge embedded and the optimization approaches used to solve the quantification problem.
-Unlike the time-domain quantification approaches, Parfait \textit{et al.}~\cite{Parfait2012} used the LcModel approach \cite{Provencher1993}) which solves the optimization problem in the frequency domain.
-
-Although Parfait \textit{et al.}~\cite{Parfait2012} used each metabolite concentration individually, other authors such as Kelm \textit{et al.}~\cite{Kelm2007} proposed to compute relative concentrations as the ratio of the choline plus creatine to citrate (see Eq.~\eqref{eq:ratio1}) or the ratio of citrate to choline plus creatine plus citrate (see Eq.~\eqref{eq:ratio2}).
+Unlike the time-domain quantification approaches, \citeauthor{Parfait2012} used the LcModel approach proposed in~\cite{Provencher1993} which solves the optimization problem in the frequency domain.
+Although \citeauthor{Parfait2012} used each metabolite relative concentration individually~\cite{Parfait2012}, other authors such as \citeauthor{Kelm2007} proposed to compute relative concentrations as the ratios of metabolites as shown in \acs{eq}\,\ref{eq:ratio1} and \acs{eq}\,\ref{eq:ratio2}.
 
 \begin{eqnarray}
 	R_1 & = & \frac{ [ \text{Cho} ] + [ \text{Cr} ]}{[ \text{Cit} ]} \ . \label{eq:ratio1} \\
 	R_2 & = & \frac{[ \text{Cit} ]}{[\text{Cho}]+[\text{Cr}]+[\text{Cit}]} \ , \label{eq:ratio2}
 \end{eqnarray}
-\noindent where $\text{Cit}$, $\text{Cho}$ and $\text{Cr}$ are the concentration of citrate, choline and creatine respectively.
+\noindent where $\text{Cit}$, $\text{Cho}$ and $\text{Cr}$ are the relative concentration of citrate, choline, and creatine, respectively.
+
+Recently \citeauthor{trigui2017automatic} used an absolute quantification approach from which water sequences are acquired to compute the absolute concentration of the metabolites~\cite{trigui2016classification,trigui2017automatic}.
+Absolute quantification using water as reference is based on the fact that the fully relaxed signal from water or metabolites is proportional to the number of moles of the molecules in the voxel~\cite{gasparovic2006use}.
 
 \paragraph{Wavelet decomposition approach} 
-Tiwari \textit{et al.}~\cite{Tiwari2012} performed a wavelet packet decomposition \cite{Coifman1992} of the spectra with the Haar wavelet basis function and used its coefficients as features.
+\citeauthor{Tiwari2012} performed a wavelet packet decomposition~\cite{Coifman1992} of the spectra using the Haar wavelet basis function and use its coefficients as features.
