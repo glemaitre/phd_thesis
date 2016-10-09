@@ -60,6 +60,7 @@ Then, using the \ac{glcm}, a set of statistical features is computed as defined 
 Therefore, $N$ --- up to 14 --- statistical maps are derived from the \ac{glcm} analysis, one per statistics presented in \acs{tab}~\ref{tab:glcm}.
 \ac{glcm} is commonly used in \ac{cad} systems, on the different \ac{mri} modalities, namely \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, or \ac{dw}-\ac{mri}~\cite{Antic2013,Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012,trigui2016classification,rampun2015computer,rampun2016computer,rampun2016quantitative,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,lehaire2014computer}.
 However, the statistics extracted from the \ac{glcm} across studies vary.
+Along the same line, \citeauthor{rampun2016computer} extracted from \ac{t2w}-\ac{mri}~\cite{rampun2016computer,rampun2015computer} Tamura features~\cite{tamura1978textural} composed of three features to characterize texture: (i) coarseness, (ii) contrast, and (iii) directionality.
 
 \begin{table}
   \caption[The 14 statistical features used in conjunction with \acs*{glcm} analysis.]{The 14 statistical features for texture analysis commonly computed from the \acs*{glcm} $p$ as presented by~\cite{Haralick1973}.}
@@ -107,76 +108,49 @@ The \ac{dct} coefficients are computed such as:
 %The wavelet family used for the decomposition was the Haar wavelet.
 \citeauthor{Litjens2011} computed the texture map based on \ac{t2w}-\ac{mri} images using a Gaussian filer bank~\cite{Litjens2011}.
 Likewise, \citeauthor{rampun2016computer} employed a rotation invariant filter bank proposed in~\cite{leung2001representing}.
-The bank is composed of 48 filters including Gaussian filters, first and second derivatives of Gaussian filters as well as Laplacian of Gaussian
-
-Finally \citeauthor{cameron2016maps} defined their radiomics-based features using Morphology, Asymmetry, Physiology, and Size (MAPS).
-MAPS include three morphological features based on region boundary. 
-The first morphological feature is based one the difference of morphological closing and opening of an area ($A$): 
-\begin{equation}
-  f^{M}_{1} = \frac{A_{closed} - A_{opened}}{A_{initial}}.
-\end{equation} 
-The second morphological feaure compares the region perimeter ($P$) before and after eliminating the high frequency components in the Fourier space \cite{cameron2016maps}: 
-\begin{equation}
-  f^{M}_{2} = \frac{\vert P_{initial} - P_{reconstruction} \vert}{P_{initial}}
-\end{equation}
-The third morphological feature used is very similar to the second one since it compares the difference two Fourier reconstruction of the area, while it compares areas ($A$) rather than perimeter:
-\begin{equation}
-  f^{M}_{3} = \frac{A_{initial} \oplus A_{reconstruction}}{ A_{initial} \cup A_{reconstruction}}
-\end{equation}
-
-The authors proposed to calculate four asymmetry features by divinding a region into two parts along its axes and compare the areas. 
-\begin{equation}
-  f^{A}_{.} = \frac{A_{large} - A_{small}}{A_{normalize}}
-\end{equation}
-\noindent Four features are drived by using major or minor axis of the region and considering small or full area as $A_{normalize}$.
-
-The physiological features consists of Raw-\ac{mri} signal intensities, median, standard deviation, mean values of \ac{roi} and Haralick features. 
-Finally the las element of MAPS, size, represent the size of the \ac{roi}.
+The bank is composed of 48 filters including Gaussian filters, first and second derivatives of Gaussian filters as well as Laplacian of Gaussian.
 
 %% Euclidean distance from each voxel to the prostate center as well as the individual distance in the three directions $x$, $y$ and $z$. \cite{Chan2003} embedded the same information but this time using cylindrical coordinate $r$, $\theta$ and $z$ corresponding to the radius, azimuth and elevation respectively.
 
 \paragraph{Region-wise detection}
 
-Unlike the previous section, another strategy is to study an entire region and extract characteristic features corresponding to this region.
-The most common approach reviewed can be classified as statical methods.
-First a feature map is computed for the whole image instaed of using single voxels.
-Then, \acp{roi} are defined and statistics are extracted from each of these regions.
-The most widely used statistics is based on percentiles and is widely used \cite{Antic2013,Litjens2011,Litjens2012,Litjense2014,Peng2013,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2008a,Viswanath2011,Viswanath2012,Vos2008,Vos2008a,Vos2010,Vos2012}.
-The percentile used is usually manually determined observing the distribution and corresponds to the best discriminant value differentiating malignant and healthy tissue.
-In addition, statistic-moments such as mean, standard deviation, kurtosis and skewness are also used \cite{Ampeliotis2007,Ampeliotis2008,Antic2013,Niaf2011,Niaf2012,Peng2013}.
-Litjense \textit{et al.} in \cite{Litjense2014} also introduced a feature based on symmetry.
-They compute the mean of a candidate lesion as well as its mirrored counter-part and compute the quotient as feature.
+Unlike the previous section, another strategy is to study a region instead of each pixel independently.
+Usually, the feature maps are computed using the method presented in voxel-based approach followed by a step in which features are computed in some specific delineated regions to characterize them.
 
-Another subset of features are anatomic which were also used in \cite{Litjens2012,Litjense2014,Matulewicz2013}. 
-Litjense \textit{et al.} in \cite{Litjense2012, Litjense2014} computed the volume, compactness and sphericity related to the region to integrate it in their feature vector.
-Matulewicz \textit{et al.}~\cite{Matulewicz2013} introduced four features corresponding to the percentage of tissue belonging to the regions\ac{pz}, \ac{cg}, periurethral region or outside prostate region for the considered \ac{roi}.
+The most common feature type is based on statistics and more specifically the statistic-moments such as mean, standard deviation, kurtosis, and skewness~\cite{Ampeliotis2007,Ampeliotis2008,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012,rampun2016quantitative,rampun2015computer,rampun2016computer,Antic2013,Viswanath2011,Peng2013,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,lehaire2014computer}.
+Additionally, some studies extract additional statistical landmarks based on percentiles~\cite{Vos2008a,Antic2013,Peng2013,Vos2010,Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,Vos2012,lehaire2014computer}
+The percentiles to use are manually determined by observing the \ac{pdf} of the features and checking which values allow the best to differentiate malignant from healthy tissue.
 
-In contrast to anatomical are histogram-based features.
-For instance, Liu \textit{et al.}~\cite{Liu2013} introduced four different types of histogram-based features.
+Further statistics are computed through the use of histogram-based features.
+\citeauthor{Liu2013} introduced 4 different types of histogram-based features to characterized hand-delineated lesions~\cite{Liu2013}.
 The first type corresponds to the histogram of the \ac{si} of the image.
-The second type is the \acf{hog} \cite{Dalal2005}.
-\Ac{hog} descriptor describes the local shape of the object of interest by using distribution of gradient directions.
+The second type is the \ac{hog}~\cite{Dalal2005} which encodes the local shape of the object of interest by using the distribution of the gradient directions.
 This descriptor is extracted mainly in three steps.
-First the gradient image and its corresponding magnitude and direction are computed.
+First, the gradient image and its corresponding magnitude and direction are computed.
 Then, the \ac{roi} is divided into cells and an oriented-based histogram is generated for each cell.
-At each pixel location, the orientation of the gradient will vote for a bin of the histogram and this vote is weighted by the magnitude of the same gradient.
-Finally, The cells are grouped into block and each block is normalized.
-The third histogram-based type used in \cite{Liu2013} was shape context \cite{Belongie2002}.
+At each pixel location, the orientation of the gradient votes for a bin of the histogram and this vote is weighted by the magnitude of the same gradient.
+Finally, the cells are grouped into blocks and each block is normalized.
+The third histogram-based type used in~\cite{Liu2013} is the shape context introduced in~\cite{Belongie2002}.
 The shape context is also a way to describe the shape of an object of interest.
 First, a set of points defining edges have to be detected and for each point of each edge, a log-polar-based histogram is computed using the relative points distribution.
-The last set of histogram-based feature extracted is based on the framework described in \cite{Zhao2012} which is using the Fourier transform of the histogram created via \acf{lbp} \cite{Ojala1996}.
-\Ac{lbp} is generated by comparing the value of the central pixel with its 8-connected neighbours.
+The last set of histogram-based feature extracted is based on the framework described in~\cite{Zhao2012} which is using the Fourier transform of the histogram created via \acf{lbp}~\cite{Ojala1996}.
+\Ac{lbp} is generated by comparing the value of the central pixel with its neighbours, defined through a radius and the number of connected neighbours.
 Then, in the \ac{roi}, the histogram of the \ac{lbp} distribution is computed.
 The \acf{dft} of the \ac{lbp} histogram is used to make the feature invariant to rotation.
 
-The last group of region-based feature is based on fractal analysis.
-The features proposed are based on estimating the fractal dimension which is a statistical index representing the complexity of what is analysed.
-Lv \textit{et al,}~\cite{Lv2009} proposed two features based on fractal dimension: (i) texture fractal dimension and (ii) histogram fractal dimension.
-The first feature is based on estimating the fractal dimension on the \ac{si} of each image.
-Hence, this feature is a statistical characteristic of the image roughness.
-The second fractal dimension is estimated in the \ac{pdf} of each image and characterises the complexity of the \ac{pdf}.
-Lopes \textit{et al.}~\cite{Lopes2011} proposed a 3D version to estimate the fractal dimension of a volume using wavelet decomposition.
+Another subset of features are anatomical-based features and have been used in~\cite{Litjens2012,Litjens2014,Matulewicz2013,cameron2014multiparametric,cameron2016maps}.
+\citeauthor{Litjens2012} computed the volume, compactness, and sphericity related to the given region~\cite{Litjens2012, Litjens2014}.
+Additionally, \citeauthor{Litjens2014} also introduced a feature based on symmetry in which they compute the mean of a candidate lesion as well as its mirrored counter-part and compute the quotient as feature~\cite{Litjens2014}.
+\citeauthor{Matulewicz2013} introduced 4 features corresponding to the percentage of tissue belonging to the regions \ac{pz}, \ac{cg}, periurethral region, or outside the prostate region for the considered \ac{roi}~\cite{Matulewicz2013}.
+Finally, \citeauthor{cameron2016maps} defined 4 features based on morphology and asymmetry:
+(i) the difference of morphological closing and opening of the \ac{roi}, (ii) the difference of the initial perimeter and the one after removing the high-frequency components, (iii) the difference between the initial \ac{roi} and the one after removing the high-frequency components, and (iv) the asymmetry by computing the difference of the two areas splitting the \ac{roi} by its major axes~\cite{cameron2014multiparametric,cameron2016maps}.
 
+The last group of region-based feature is based on fractal analysis.
+This group of features is based on estimating the fractal dimension which is a statistical index representing the complexity of the analyzed texture.
+\citeauthor{Lv2009} proposed two features based on fractal dimension: (i) texture fractal dimension and (ii) histogram fractal dimension~\cite{Lv2009}.
+The first feature is based on estimating the fractal dimension on the \ac{si} of each image and thus this feature is a statistical characteristic of the image roughness.
+The second fractal dimension is estimated using the \ac{pdf} of each image and characterizes the complexity of the \ac{pdf}.
+\citeauthor{Lopes2011} proposed a 3D version to estimate the fractal dimension of a volume using a wavelet decomposition~\cite{Lopes2011}.
 
 \subsubsection{\Ac{dce}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea}
 

@@ -1,5 +1,5 @@
 \scriptsize
-\renewcommand{\arraystretch}{1.3}
+%\renewcommand{\arraystretch}{1.3}
 \begin{longtable}{@{}l >{\raggedleft\arraybackslash}X@{}}
   \caption[Overview of the feature detection methods used in \acs*{cad} systems.]{Overview of the feature detection methods used in \acs*{cad} systems. Notes: ( {\cmarksmall}$|$- {\cmarksmall}$|$- {\cmarksmall}$|$- ): triplet stating the implementation or not of the feature for respectively \acs*{t2w}-\acs*{mri} images, \acs*{dce}-\acs*{mri} images, \acs*{dw}-\acs*{mri} images; {\cmarksmall}: used or implemented; {\mmarksmall}: partially implemented.
   }\\
@@ -8,14 +8,14 @@
   \midrule
   \textbf{\acs*{mri} image:} & \\ \\ [-1.5ex]
   \quad \textit{Voxel-wise detection} &  \\ \\ [-1.5ex]
-  \quad \quad Intensity-based & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Vos2008,rampun2016computerb,rampun2015classifying}\par $^{\text{- - {\cmarksmall}}}$\cite{Giannini2013}\par $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Artan2009,Artan2010,Chan2003,Langer2009,Litjens2011,Litjens2012,Litjens2014,Liu2009,Ozer2009,Ozer2010,trigui2016classification,trigui2017automatic,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,giannini2015fully}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\ \\ [-1.5ex]
+  \quad \quad Intensity-based & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Vos2008,rampun2016computerb,rampun2015classifying} $^{\text{- - {\cmarksmall}}}$\cite{Giannini2013} $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Artan2009,Artan2010,Chan2003,Langer2009,Litjens2011,Litjens2012,Litjens2014,Liu2009,Ozer2009,Ozer2010,trigui2016classification,trigui2017automatic,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,giannini2015fully} $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\ \\ [-1.5ex]
   \quad \quad Edge-based & \\
   \quad \quad \quad $\bullet$ Prewitt operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008} \\
-  \quad \quad \quad $\bullet$ Sobel operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012,rampun2016quantitative,rampun2015computer,rampun2016computer}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\
-  \quad \quad \quad $\bullet$ Kirsch operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012}\par $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{khalvati2015automated,chung2015prostate} \par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\
-  \quad \quad \quad $\bullet$ Gabor filtering & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2012,Viswanath2008,Viswanath2012}\par $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{khalvati2015automated,chung2015prostate}  \\ \\ [-1.5ex]
+  \quad \quad \quad $\bullet$ Sobel operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012,rampun2016quantitative,rampun2015computer,rampun2016computer} $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\
+  \quad \quad \quad $\bullet$ Kirsch operator & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2011,Viswanath2012} $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{khalvati2015automated,chung2015prostate}  $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Niaf2011,Niaf2012,lehaire2014computer} \\
+  \quad \quad \quad $\bullet$ Gabor filtering & $^{\text{{\cmarksmall}- -}}$\cite{Tiwari2012,Viswanath2008,Viswanath2012} $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{khalvati2015automated,chung2015prostate}  \\ \\ [-1.5ex]
   \quad \quad Texture-based & \\
-  \quad \quad \quad $\bullet$ Haralick features & $^{\text{{\cmarksmall}- -}}$\cite{Antic2013,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012,trigui2016classification,rampun2015computer,rampun2016computer,rampun2016quantitative}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011}\par $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2012,Niaf2011,Niaf2012,lehaire2014computer} \\
+  \quad \quad \quad $\bullet$ Haralick features & $^{\text{{\cmarksmall}- -}}$\cite{Antic2013,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012,trigui2016classification,rampun2015computer,rampun2016computer,rampun2016quantitative} $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011} $^{\text{{\cmarksmall}-{\cmarksmall}}}$\cite{cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate} $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2012,Niaf2011,Niaf2012,lehaire2014computer} \\
   \quad \quad \quad $\bullet$ Tamura features & $^{\text{{\cmarksmall}- -}}$\cite{rampun2016computer,rampun2016quantitative,rampun2015computer} \\
   \quad \quad \quad $\bullet$ Fractal analysis & $^{\text{{\cmarksmall}- -}}$\cite{Lopes2011,Lv2009} \\
   \quad \quad \quad $\bullet$ \acs*{dct} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Chan2003} \\
@@ -25,22 +25,23 @@
   \quad \quad Position-based & \cite{Chan2003,Litjens2011,Litjens2012,Litjens2014} \\ \\ [-1.5ex]
   \quad \textit{Region-wise detection} &  \\ \\ [-1.5ex]
   \quad \quad Statistical-based & \\
-  \quad \quad \quad $\bullet$ Percentiles & $^{\text{- {\cmarksmall}-}}$\cite{Vos2008a} \par $^{\text{- - {\cmarksmall}}}$\cite{Antic2013,Peng2013}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Vos2010}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,Vos2012,lehaire2014computer} \\
-  \quad \quad \quad $\bullet$ Statistical-moments & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012,rampun2016quantitative,rampun2015computer,rampun2016computer}\par $^{\text{- - {\cmarksmall}}}$\cite{Antic2013}\par $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011}\par $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Peng2013,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate}\par $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,lehaire2014computer} \\ \\ [-1.5ex]
+  \quad \quad \quad $\bullet$ Percentiles & $^{\text{- {\cmarksmall}-}}$\cite{Vos2008a}  $^{\text{- - {\cmarksmall}}}$\cite{Antic2013,Peng2013} $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Vos2010} $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,Vos2012,lehaire2014computer} \\
+  \quad \quad \quad $\bullet$ Statistical-moments & $^{\text{{\cmarksmall}- -}}$\cite{Ampeliotis2007,Ampeliotis2008,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2009,Viswanath2012,rampun2016quantitative,rampun2015computer,rampun2016computer} $^{\text{- - {\cmarksmall}}}$\cite{Antic2013} $^{\text{{\cmarksmall}{\cmarksmall}-}}$\cite{Viswanath2011} $^{\text{{\cmarksmall}- {\cmarksmall}}}$\cite{Peng2013,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate} $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Litjens2011,Litjens2012,Litjens2014,Niaf2011,Niaf2012,lehaire2014computer} \\ \\ [-1.5ex]
   \quad \quad Histogram-based & \\
   \quad \quad \quad $\bullet$ \acs{pdf} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
   \quad \quad \quad $\bullet$ \acs{hog} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
   \quad \quad \quad $\bullet$ Shape context & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\
   \quad \quad \quad $\bullet$ \acs{lbp} & $^{\text{{\cmarksmall}{\cmarksmall}{\cmarksmall}}}$\cite{Liu2013} \\ \\ [-1.5ex]
   \quad \quad Anatomical-based & \cite{Litjens2012,Litjens2014,Matulewicz2013,cameron2014multiparametric,cameron2016maps} \\ \\ [-1.5ex]
+  \quad \quad Fractal-based & \cite{Lopes2011,Lv2009} \\ \\ [-1.5ex]
   \textbf{\acs*{dce} signal:} & \\ \\ [-1.5ex]
   \quad Whole spectra approach & \cite{Ampeliotis2007,Ampeliotis2008} \\
-  \quad Semi-quantitative approach & $^{\text{{\mmarksmall}}}$\cite{Puech2009}\par \cite{Mazzetti2011,Niaf2011,Niaf2012,Sung2011,trigui2016classification,trigui2017automatic,lehaire2014computer,samarasinghe2016semi} \\ \\ [-1.5ex]
+  \quad Semi-quantitative approach & $^{\text{{\mmarksmall}}}$\cite{Puech2009} \cite{Mazzetti2011,Niaf2011,Niaf2012,Sung2011,trigui2016classification,trigui2017automatic,lehaire2014computer,samarasinghe2016semi} \\ \\ [-1.5ex]
   \quad Quantitative approach &  \\ \\ [-1.5ex]
-  \quad \quad $\bullet$ Toft model & $^{\text{{\mmarksmall}}}$\cite{Liu2013,Peng2013}\par \cite{Giannini2013,Langer2009,Litjens2011,Litjens2012,Litjens2014,Mazzetti2011,Niaf2011,Niaf2012,lehaire2014computer,giannini2015fully} \\
-  \quad \quad $\bullet$ Brix model & $^{\text{{\mmarksmall}}}$\cite{Artan2009,Artan2010,Ozer2009,Ozer2010}\par \cite{Liu2009,Sung2011} \\
+  \quad \quad $\bullet$ Toft model & $^{\text{{\mmarksmall}}}$\cite{Liu2013,Peng2013} \cite{Giannini2013,Langer2009,Litjens2011,Litjens2012,Litjens2014,Mazzetti2011,Niaf2011,Niaf2012,lehaire2014computer,giannini2015fully} \\
+  \quad \quad $\bullet$ Brix model & $^{\text{{\mmarksmall}}}$\cite{Artan2009,Artan2010,Ozer2009,Ozer2010} \cite{Liu2009,Sung2011} \\
   \quad \quad $\bullet$ Weibull function & \cite{Giannini2013,Mazzetti2011,giannini2015fully} \\
-  \quad \quad $\bullet$ PUM & \cite{Giannini2013,Mazzetti2011,giannini2015fully} \\ \\ [-1.5ex]
+  \quad \quad $\bullet$ \acs*{pun} & \cite{Giannini2013,Mazzetti2011,giannini2015fully} \\ \\ [-1.5ex]
   \textbf{\acs*{mrsi} signal:} & \\ \\ [-1.5ex]
   \quad Whole spectra approach & \cite{Kelm2007,Matulewicz2013,Parfait2012,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008} \\
   \quad Quantification approach & \cite{Kelm2007,Parfait2012,trigui2016classification,trigui2017automatic} \\
