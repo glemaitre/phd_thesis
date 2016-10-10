@@ -188,47 +188,38 @@ This optimization is solved as an eigenvectors-eigenvalues problem by finding th
 \citeauthor{Tiwari2008} used a modified version of the \ac{lle} algorithm in which they applied \ac{lle} in a bagging approach with multiple neighbourhood sizes~\cite{Tiwari2008}.
 The different embeddings obtained are then fused using the \ac{ml} estimation.
 
-%%%%%%
-{\color{red}\textbf{BoW and SCF add the references}}
-
+Another way of reducing the complexity of high-dimensional feature space is to use the family of so-called dictionary-based methods.
 \Ac{scf} representation has become very popular in the past decades and lead to state-of-the-art results in various applications such as face recognition~\cite{wright2009robust}, image denoising, image inpainting~\cite{elad2006image}, and image classification~\cite{sidibe2015discrimination,rastgo2016classification}.
 The main goal of sparse modeling is to efficiently represent the images as a linear combination of a few typical patterns, called atoms, selected from a dictionary.
 Sparse coding consists of three main steps: (i) dictionary learning, (ii) low-level features projection, and (iii) feature pooling~\cite{rubinstein2008efficient}.
 
-\begin{description}
-\item[Sparse approximation] Given a dictionary $\mathbf{D} \in \mathbb{R}^{n \times K}$ composed of $K$ atoms and an original signal $\mathbf{y} \in \mathbb{R}^{n}$ (i.e., one feature vector), the sparse approximation corresponds to find the sparest vector $\mathbf{x} \in \mathbb{R}^{K}$ such that:
+\emph{Sparse approximation} Given a dictionary $\mathbf{D} \in \mathbb{R}^{n \times K}$ composed of $K$ atoms and an original signal $\mathbf{y} \in \mathbb{R}^{n}$ (i.e., one feature vector), the sparse approximation corresponds to find the sparest vector $\mathbf{x} \in \mathbb{R}^{K}$ such that:
 
 \begin{equation}
   \argmin_{\mathbf{x}}\|\mathbf{y - Dx} \|_{2} \qquad  \text{s.t.} \  \|\mathbf{x}\|_{0} \leq \lambda \, \label{eq:sprapp} \ ,
 \end{equation}
-
 \noindent where $\lambda$ is a specified sparsity level.
 
 Solving the above optimization problem is an NP-hard problem~\cite{elad2010sparse}.
 However, approximate solutions are obtained using greedy algorithms such as \ac{mp}~\cite{mallat1993matching} or \ac{omp}~\cite{pati1993orthogonal,davis1997adaptive}.
 
-\item[Dictionary learning] As stated previously, the sparse approximation is computed given a specific dictionary $\mathbf{D}$, which involves a learning stage from a set of training data.
+\emph{Dictionary learning} As stated previously, the sparse approximation is computed given a specific dictionary $\mathbf{D}$, which involves a learning stage from a set of training data.
 This dictionary is learned using $K$-\acs*{svd} which is a generalized version of $K$-means clustering and uses \ac{svd}. 
-The dictionary is built, by iteratively solving the optimization problem of Eq.\,\ref{eq:dct}, by alternatively computing the sparse approximation of $\mathbf{X}$ and the dictionary $\mathbf{D}$.
-
+The dictionary is built, in an iterative manner by solving the optimization problem of \acs{eq}\,\ref{eq:dct}, by alternatively computing the sparse approximation of $\mathbf{X}$ and the dictionary $\mathbf{D}$.
 \begin{equation}
   \argmin_{\mathbf{D,X}} \|\mathbf{Y} - \mathbf{D}\mathbf{X}\|_{2} \qquad  \text{s.t.} \  \|\mathbf{x}_{i}\|_{1} \leq \lambda \,\label{eq:dct} \ ,
 \end{equation}
-
 \noindent where $\mathbf{Y}$ is a training set of low-level descriptors, $\mathbf{X}$ is the associated sparse coded matrix (i.e., set of high-level descriptors) with a sparsity level $\lambda$, and $\mathbf{D}$ is the dictionary with $K$ atoms.
 
 Given $\mathbf{D}$, $\mathbf{X}$ is computed using the batch-\ac{omp} algorithm, while given $\mathbf{X}$, $\mathbf{D}$ is sequentially updated, one atom at a time using \ac{svd}. 
 
-\item[Low-level features projection] Once the dictionary is learned, each set of low-level features $\mathbf{F}_{I} \in \mathbb{R}^{n \times p}$ extracted from $p$ patches in an image is encoded using the dictionary $\mathbf{D}$, solving the optimization problem presented in Eq.\,\ref{eq:sprapp} such that $\mathbf{F}_{I} \simeq \mathbf{DX}_{I}$.
+\emph{Low-level features projection} Once the dictionary is learned, each set of low-level features $\mathbf{F}_{I} \in \mathbb{R}^{n \times p}$ extracted from $p$ patches in an image is encoded using the dictionary $\mathbf{D}$, solving the optimization problem presented in Eq.\,\ref{eq:sprapp} such that $\mathbf{F}_{I} \simeq \mathbf{DX}_{I}$.
 
-\item[Feature pooling] The sparse coded matrix $\mathbf{X}_{I}$ is max-pooled to build a final descriptor $\mathbf{f}$ characterizing the given image, such that:
+\emph{Feature pooling} The sparse coded matrix $\mathbf{X}_{I}$ is max-pooled to build a final descriptor $\mathbf{f}$ characterizing the given image, such that:
 
 \begin{equation}
   \mathbf{f}_i = \max_{j}\left(|\mathbf{X}_{I}(i,j)|\right), \ \forall i = 1, \cdots, K\ .
 \end{equation}
-
-\end{description}
-
 
 \ac{bow} approach is used for this purpose~\cite{Sivic2003}.
 This model represents the features by creating a codebook or visual dictionary, from the set of low-level features.
