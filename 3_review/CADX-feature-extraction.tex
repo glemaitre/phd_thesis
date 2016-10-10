@@ -1,43 +1,45 @@
-\subsection{\Ac{cadx}: Feature selection and feature extraction} \label{subsec:chp3:img-clas:CADX-fea-ext}
-As presented in the previous section, a wide variety of features can be computed (see Tab. \ref{tab:feat}).
-This often leads from multi-parametric \ac{mri} data to a high complexity feature space which might mislead or corrupt the classifier which used for training.
-Thus, it is of interest to reduce the number of dimensions before proceeding to the classification task.
+\subsection{\acs*{cadx}: Feature selection and feature extraction} \label{subsec:chp3:img-clas:CADX-fea-ext}
+As presented in the previous section, it is a common practise to extract a wide variety of features.
+While dealing with \ac{mpmri}, the feature space created is a high-dimensional space which might mislead or corrupt the classifier during the training phase.
+Therefore, it is of interest to reduce the number of dimensions before proceeding to the classification task.
 The strategies used can be grouped as: (i) feature selection and (ii) feature extraction.
-In this section only the methods used in \ac{cad} system are presented and summarized in Table.~\ref{tab:featext}.
+In this section only the methods used in \ac{cad} system are presented and summarized in \acs{tab}~\ref{tab:featext}.
 
 \begin{table}
-  \caption{Overview of the feature selection and extraction methods used in \ac{cad} systems.}
-  \small
-  \renewcommand{\arraystretch}{.8}
-  \begin{tabular}{p{.65\linewidth} p{.25\linewidth}}
-    \hline \\ [-1.5ex]
-    \textbf{Dimension reduction methods} & \textbf{References} \\ \\ [-1.5ex]
-    \hline \\ [-1.5ex]
-    \textit{Feature selection:} & \\ \\ [-1.5ex]
+  \caption{Overview of the feature selection and extraction methods used in \acs*{cad} systems.}
+  \scriptsize
+  \centering
+  \begin{tabular}{l r}
+    \toprule
+    \textbf{Dimension reduction methods} & \textbf{References} \\
+    \midrule
+    \textbf{Feature selection:} & \\ \\ [-1.5ex]
     \quad Statistical test & \cite{Niaf2011,Niaf2012,Vos2012} \\
-    \quad \ac{mi}-based methods & \cite{Niaf2011,Niaf2012,Vos2008} \\ \\ [-1.5ex]
-    \textit{Feature extraction:} & \\ \\ [-1.5ex]
+    \quad \ac{mi}-based methods & \cite{Niaf2011,Niaf2012,Vos2008,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
+    \quad Correlation-based methods & \cite{rampun2016computer,rampun2015computer} \\ \\ [-1.5ex]
+    \textbf{Feature extraction:} & \\ \\ [-1.5ex]
     \quad Linear mapping & \\
-    \quad \quad \acs{pca} & \cite{Tiwari2008,Tiwari2009} \\
+    \quad \quad \acs*{pca} & \cite{Tiwari2008,Tiwari2009} \\
     \quad Non-linear mapping & \\
     \quad \quad Laplacian eigenmaps & \cite{Tiwari2007,Tiwari2009a,Tiwari2009,Tiwari2010,Viswanath2008,Viswanath2011} \\
-    \quad \quad \acs{lle} and \acs{lle}-based & \cite{Tiwari2008,Tiwari2009,Viswanath2008a,Viswanath2008} \\ \\ [-1.5ex]
-    \hline
+    \quad \quad \acs*{lle} and \acs*{lle}-based & \cite{Tiwari2008,Tiwari2009,Viswanath2008a,Viswanath2008} \\
+    \quad Dictionary-based learning & \\
+    \quad \quad Sparse coding & \cite{lehaire2014computer} \\
+    \quad \quad \acs*{bow} & \cite{rampun2016computerb,rampun2015classifying} \\
+    \bottomrule
   \end{tabular}
 \label{tab:featext}
 \end{table} 
 
-
-
 \subsubsection{Feature selection}\label{subsubsec:chp3:img-clas:CADX:fea-ext:sel}
 The feature selection strategy is based on selecting the most discriminative feature dimensions of the high-dimensional space.
 Thus, the low-dimensional space is then composed of a subset of the original features detected.
-In this section, methods employed in the studies reviewed will be briefly presented.
-More extensive reviews specific to feature selection can be found in \cite{Saeys2007}.
+In this section, methods employed in \ac{cad} for \ac{cap} detection are presented.
+A more extensive review specific to feature selection is available in~\cite{Saeys2007}.
 
-Niaf \textit{et al.}~\cite{Niaf2011,Niaf2012} make use of the p-value by using the independent two-sample t-test with equal mean for each feature dimension.
-In this statistical test, there are two classes: \ac{cap} and healthy tissue.
-Hence, for each particular feature, the distribution of each class can be characterized by their means $\bar{X}_1$ and $\bar{X}_2$ and standard deviation $s_{X_1}$ and $s_{X_2}$, respectively.
+\citeauthor{Niaf2012} make use of the p-value by using the independent two-sample t-test with equal mean for each feature dimension~\cite{Niaf2011,Niaf2012}.
+In this statistical test, there are 2 classes: \ac{cap} and healthy tissue.
+Hence, for each particular feature, the distribution of each class is characterized by their means $\bar{X}_1$ and $\bar{X}_2$ and standard deviation $s_{X_1}$ and $s_{X_2}$.
 Therefore, the null hypothesis test is based on the fact that these both distribution means are equal.
 The t-statistic used to verify the null hypothesis is formalized such that:
 
@@ -47,15 +49,15 @@ s_{X_1X_2} & = & \sqrt{\frac{(n_1-1)s_{X_1}^2+(n_2-1)s_{X_2}^2}{n_1+n_2-2}} \ , 
 \end{eqnarray}
 
 \noindent where $n_1$ and $n_2$ are the number of samples in each class.
-From Eq.~\eqref{eq:tstat}, it can be seen that more the means of the class distribution diverge, the larger the $t$-statistic $t$ will be, implying that this particular feature is more relevant and able to make the distinction between the two classes. 
+From \acs{eq}\,\eqref{eq:tstat}, more the means of the class distribution diverge, the larger the $t$-statistic $t$ will be, implying that this particular feature is more relevant and able to make the distinction between the two classes. 
 
-The $p$-value statistic can be deduced from the $t$-test and corresponds to the probability of obtaining such an extreme test assuming that the null hypothesis is true (\cite{Goodman1999}).
+The $p$-value statistic is deduced from the $t$-test and corresponds to the probability of obtaining such an extreme test assuming that the null hypothesis is true~\cite{Goodman1999}.
 %Hence, smaller the $p$-value, the more likely we are to reject the null hypothesis and more relevant the feature is likely to be.
-Hence, smaller the $p$-value, the more likely we are to reject the null hypothesis and keep more relevant features.
-Finally, the features can be ranked and the most significant features can be selected.
+Hence, smaller the $p$-value, the more likely the null hypothesis to be rejected the null hypothesis and more relevant the feature is likely to be.
+Finally, the features are ranked and the most significant features are selected.
 However, this technique suffers from a main drawback since it assumes that each feature is independent, which is unlikely to happen and introduces a high degree of redundancy in the features selected.
 
-Vos \textit{et al.} in \cite{Vos2012} employed a similar feature ranking approach but make use of the Fisher discriminant ratio to compute the relevance of each feature dimension.
+\citeauthor{Vos2012} in~\cite{Vos2012} employed a similar feature ranking approach but make use of the Fisher discriminant ratio to compute the relevance of each feature dimension.
 Taking the aforementioned formulation, the Fisher discriminant ratio is formalized as the ratio of the interclass variance to the intraclass variance as:
 
 \begin{equation}
@@ -63,63 +65,64 @@ F_r = \frac{\bar{X}_1 - \bar{X}_2}{s^{2}_{X_1}+s^{2}_{X_2}} \ .
 \label{eq:fisherratio}
 \end{equation}
 
-\noindent Hence, a relevant feature dimension can be selected when the interclass variance is maximum and the intraclass variance in minimum.
-Once the features are ordered, the authors select the feature dimensions with the larger Fisher discriminant ratio.
+Therefore, a relevant feature dimension is selected when the interclass variance is maximum and the intraclass variance in minimum.
+Once the features are ordered, the authors select the feature dimensions with the largest Fisher discriminant ratio.
 
-\Ac{mi} can also be used to select a subset of feature dimensions.
-This method was previously presented in Sect.~\ref{subsec:chp3:img-reg:reg} (see Eq.~\eqref{eq:midef}).
+\Ac{mi} is a possible metric to use for selecting a subset of feature dimensions.
+This method has previously been presented in \acs{sec}\,\ref{subsec:chp3:img-reg:reg} and expressed in \acs{eq}\,\eqref{eq:midef}.
 %%%% As previously presented in Sect.~\ref{subsec:chp3:img-reg:reg} (see Eq.~\eqref{eq:midef}), the computation of the entropies involves the estimation of some \acp{pdf} and the data being usually continous variables, it is then necessary to estimate the \acp{pdf} using a method such as Parzen windows.
 %%%% Definition of the \ac{mi} was presented in Sect.~\ref{subsec:chp3img-reg:reg} and formalized in Eq. \eqref{eq:midef} and as previously mentioned, the computation of the entropies involves the estimation of some \acp{pdf} and the data being usually continuous variables, it is then necessary to estimate the \acp{pdf} using a method such as Parzen windows.
-Peng \textit{et al.}~\cite{Peng2005} introduced two main criteria to select the feature dimensions: (i) maximal relevance and (ii) minimum redundancy.
-Maximal relevance criterion is based on the paradigm that the classes and the feature dimension which has to be selected have to share a maximal \ac{mi} and can be formalized:
+\citeauthor{Peng2005} introduced two main criteria to select the feature dimensions based on \ac{mi}: (i) maximal relevance and (ii) minimum redundancy.
+Maximal relevance criterion is based on the paradigm that the classes and the feature dimension which has to be selected have to share a maximal \ac{mi} and is formalized as:
 \begin{equation}
-	\argmax Rel(\mathbf{x},c) = \frac{1}{|\mathbf{x}|} \sum_{x_i \in \mathbf{x}} MI(x_i,c)  \ , 
-	\label{eq:mRel}
+  \argmax Rel(\mathbf{x},c) = \frac{1}{|\mathbf{x}|} \sum_{x_i \in \mathbf{x}} MI(x_i,c)  \ , 
+  \label{eq:mRel}
 \end{equation}
-\noindent where $\mathbf{x} = \{x_i,i=1,\cdots,d\}$ is a feature vector of $d$ dimensions and $c$ is the class considered.
-As in the previous method, using maximal relevance criterion alone will imply independence between each feature dimension which is usually not true.
-Minimal redundancy criterion will force selection of a new feature dimension which shares as little as possible \ac{mi} with previously selected feature dimension and is formulized as:
+\noindent where $\mathbf{x} = \{x_i; i=1,\cdots,d\}$ is a feature vector of $d$ dimensions and $c$ is the class considered.
+As in the previous method, using maximal relevance criterion alone imply an independence between each feature dimension.
+The minimal redundancy criterion enforce the selection of a new feature dimension which shares as little as possible \ac{mi} with the previously selected feature dimensions such that:
 \begin{equation}
-	\argmin Red(\mathbf{x}) = \frac{1}{|\mathbf{x}|^2} \sum_{x_i,x_j \in \mathbf{x}} MI(x_i,x_j)  \ . 
-	\label{eq:mRed}
+  \argmin Red(\mathbf{x}) = \frac{1}{|\mathbf{x}|^2} \sum_{x_i,x_j \in \mathbf{x}} MI(x_i,x_j)  \ . 
+  \label{eq:mRed}
 \end{equation}
-Combination of these two criteria is known as \ac{mrmr}\footnote{\ac{mrmr} implementation can be found at: \texttt{http://penglab.janelia.\allowbreak org/proj/mRMR/}} (\cite{Peng2005}) and are computed as a difference or quotient of Eqs. \eqref{eq:mRel} and \eqref{eq:mRed}.
-Authors in \cite{Niaf2011,Niaf2012} make use of maximal relevance criterion alone and also of both \ac{mrmr} difference and quotient criterion.
-Viswanath \textit{et al.}~\cite{Viswanath2012} also reduced their feature vector via \ac{mrmr} difference and quotient.
+Combination of these two criteria is known as the \ac{mrmr} algorithm~\cite{Peng2005}.
+Two combinations are usually used: (i) the difference or (ii) the quotient.
+This method has been used at several occasions for the selecting a subset of features prior to classification~\cite{Niaf2011,Niaf2012,lehaire2014computer,Viswanath2012,khalvati2015automated,chung2015prostate}.
+
+{\color{red} add a couple of sentence about correlation-based feature selection used by Rampun}.
 
 \subsubsection{Feature extraction}\label{subsubsec:chp3:img-clas:CADX:fea-ext:ext}
 The feature extraction strategy is related to dimension reduction methods but not selecting discriminative features.
-Instead, these methods aim at mapping the data from the high-dimensional space into a low-dimensional space created to maximize the separability between the classes.
-The mapping can be performed in a linear or a non-linear manner.
-Again, only methods employed in \ac{cad} system will be reviewed in this section.
-We refer the reader to \cite{Fodor2002} for a full review of feature extraction techniques.
+Instead, these methods aim at mapping the data from the high-dimensional space into a low-dimensional space to maximize the separability between the classes.
+As in the previous sections, only methods employed in \ac{cad} system are reviewed in this section.
+We refer the reader to~\cite{Fodor2002} for a full review of feature extraction techniques.
 
 \ac{pca} is the most commonly used linear mapping method in \ac{cad} systems.
 \ac{pca} is based on finding the orthogonal linear transform mapping the original data into a low-dimensional space.
-The space is defined such that the linear combinations of the original data with the $k^{th}$ greatest variances will lie on the $k^{th}$ principal components \cite{Jolliffe2002}.
-The principal components can then be computed by using the eigenvectors-eigenvalues decomposition of the covariance matrix.
+The space is defined such that the linear combinations of the original data with the $k^{th}$ greatest variances lie on the $k^{th}$ principal components~\cite{Jolliffe2002}.
+The principal components are computed by using the eigenvectors-eigenvalues decomposition of the covariance matrix.
 Let $\mathbf{x}$ denote the data matrix.
-Then the covariance matrix and eigenvectors-eigenvalues decomposition are defined as in Eq.~\eqref{eq:covmat}, and Eq.~\eqref{eq:eigpca}, respectively. 
+Then, the covariance matrix and eigenvectors-eigenvalues decomposition are defined as in \acs{eq}\,\eqref{eq:covmat}, and \acs{eq}\,\eqref{eq:eigpca}, respectively. 
 The eigenvectors-eigenvalues decomposition can be formalized as:
 \begin{equation}
-	\Sigma = \mathbf{x}^{\text{T}} \mathbf{x} \ .
-	\label{eq:covmat}
+  \Sigma = \mathbf{x}^{\text{T}} \mathbf{x} \ .
+  \label{eq:covmat}
 \end{equation}
 
 \begin{equation}
-	\mathbf{v}^{-1} \Sigma \mathbf{v} = \Lambda \ ,
-	\label{eq:eigpca}
+  \mathbf{v}^{-1} \Sigma \mathbf{v} = \Lambda \ ,
+  \label{eq:eigpca}
 \end{equation}
 \noindent where $\mathbf{v}$ are the eigenvectors matrix and $\Lambda$ is a diagonal matrix containing the eigenvalues. 
 
-It is then possible to find the new low-dimensional space by sorting the eigenvectors using the eigenvalues and finally selecting the largest eigenvalues.
-The total variation that is the sum of the principal eigenvalues of the covariance matrix (\cite{Fodor2002}), usually corresponds to the $95\%$ to $98\%$ of the cumulative sum of the eigenvalues.
-Tiwari \textit{et al.} in \cite{Tiwari2008,Tiwari2009,Tiwari2012} used \ac{pca} in order to reduce the dimensionality of their feature vector.
-Non-linear mapping was also used for dimension reduction.
-It is mainly based on Laplacian eigenmaps and \acf{lle} methods.
-Laplacian eigenmaps\footnote{Laplacian eigenmap implementation is available at: \texttt{http://www.cse.ohio-state.edu/\allowbreak $\sim$mbelkin/algorithms/algorithms.html}}, also referred as spectral clustering in computer vision, aim to find a low-dimensional space in which the proximity of the data should be preserved from the high-dimensional space \cite{Shi2000,Belkin2001}.
-Thus, two adjacent data points in the high-dimensional space should also be close in the low-dimensional space.
-Similarly, two distant data points in the high-dimensional space also should be distant in the low-dimensional space.
+It is then possible to find the new low-dimensional space by sorting the eigenvectors using the eigenvalues and finally select the eigenvectors corresponding to the largest eigenvalues.
+The total variation that is the sum of the principal eigenvalues of the covariance matrix~\cite{Fodor2002}, usually corresponds to the \SIrange{95}{98}{\percent} of the cumulative sum of the eigenvalues.
+\citeauthor{Tiwari2012} used \ac{pca} in order to reduce the complexity of feature space~\cite{Tiwari2008,Tiwari2009,Tiwari2012}.
+
+Non-linear mapping has been also used for dimension reduction and is mainly based on Laplacian eigenmaps and \acf{lle} methods.
+Laplacian eigenmaps also referred as spectral clustering in computer vision, aim to find a low-dimensional space in which the proximity of the data should be preserved from the high-dimensional space~\cite{Shi2000,Belkin2001}.
+Therefore, two adjacent data points in the high-dimensional space should also be close in the low-dimensional space.
+Similarly, two distant data points in the high-dimensional space should also be distant in the low-dimensional space.
 To compute this projection, an adjacency matrix is defined as:
 \begin{equation}
 	W(i,j) = \exp \| \mathbf{x}_i - \mathbf{x}_j \|_2 \ ,
@@ -127,37 +130,37 @@ To compute this projection, an adjacency matrix is defined as:
 \end{equation}
 
 \noindent where $\mathbf{x}_i$ and $\mathbf{x}_j$ are the two samples considered.
-Then, the low-dimensional space will be found by solving the generalized eigenvectors-eigenvalues problem:
+Then, the low-dimensional space is found by solving the generalized eigenvectors-eigenvalues problem:
 
 \begin{equation}
 	(D-W)\mathbf{y} = \lambda D \mathbf{y} \ ,
 	\label{eq:geeig}
 \end{equation}
 
-\noindent where $D$ i a diagonal matrix such that $D(i,i) = \sum_j W(j,i)$.
-Finally the low-dimensional space is defined by the $k$ eigenvectors of the $k$ smallest eigenvalues \cite{Belkin2001}.
-Tiwari \textit{et al.} in \cite{Tiwari2007,Tiwari2009,Tiwari2009a} and Viswanath \textit{et al.} in \cite{Viswanath2008} used this spectral clustering to project their feature vector into a low-dimensional space.
+\noindent where $D$ is a diagonal matrix such that $D(i,i) = \sum_j W(j,i)$.
+Finally the low-dimensional space is defined by the $k$ eigenvectors of the $k$ smallest eigenvalues~\cite{Belkin2001}.
+\citeauthor{Tiwari2009a} and \citeauthor{Viswanath2008} used this spectral clustering to project their feature vector into a low-dimensional space~\cite{Tiwari2007,Tiwari2009,Tiwari2009a,Viswanath2008}.
 The feature space in these studies is usually composed of features extracted from a single or multiple modalities and then concatenated before applying the Laplacian eigenmaps dimension reduction technique.
 
-Tiwari \textit{et al.} in \cite{Tiwari2009,Tiwari2013} used a slightly different approach by combining the Laplacian eigenmaps techniques with a prior multi-kernel learning strategy.
-First, multiple features were extracted for multiple modalities.
-The features of a single modality were then mapped to a higher dimensional space via the Kernel trick (\cite{Aizerman1964}) and more precisely using a Gaussian kernel.
-Then, each kernel associated with each modality was linearly combined to obtain a combined kernel $K$, which leads to computation of the adjacency matrix $W$.
-Finally the same scheme as in Laplacian eigenmaps is applied.
-However, in order to use the combined kernel, Eq. \eqref{eq:geeig} is rewritten as:
+\citeauthor{Tiwari2013} used a slightly different approach by combining the Laplacian eigenmaps techniques with a prior multi-kernel learning strategy~\cite{Tiwari2009,Tiwari2013}.
+First, multiple features are extracted from multiple modalities.
+The features of a single modality are then mapped to a higher-dimensional space via the Kernel trick~\cite{Aizerman1964}, namely a Gaussian kernel.
+Then, each kernel is linearly combined to obtain a combined kernel $K$ and the adjacency matrix $W$ is computed.
+Finally, the same scheme as in the Laplacian eigenmaps is applied.
+However, in order to use the combined kernel, \acs{eq}\,\eqref{eq:geeig} is rewritten as:
 
 \begin{equation}
-	K (D-W) K^{\text{T}} \mathbf{y} = \lambda K D K^{\text{T}} \mathbf{y} \ .
-	\label{eq:sesmik}
+  K (D-W) K^{\text{T}} \mathbf{y} = \lambda K D K^{\text{T}} \mathbf{y} \ ,
+  \label{eq:sesmik}
 \end{equation}
-\noindent Which can be solved as a generalized eigenvectors-eigenvalues problem as previously.
-Viswanath \textit{et al.} in \cite{Viswanath2011} used Laplacian eigenmaps inside a bagging framework in which multiple embeddings are generated by successively selecting feature dimensions.
+\noindent which is solved as a generalized eigenvectors-eigenvalues problem as previously.
+\citeauthor{Viswanath2011} used Laplacian eigenmaps inside a bagging framework in which multiple embeddings are generated by successively selecting feature dimensions~\cite{Viswanath2011}.
 
 {\color{red} \textbf{READ THIS SECTION and CHECK THE DEFINITIONS}}
 
-\Ac{lle}\footnote{\ac{lle} implementation is available at: \texttt{http://www.cs.nyu.edu/\allowbreak $\sim$roweis/lle/code.html}} is another common non-linear dimension reduction technique widely used, first proposed in \cite{Roweis2000}.
-\ac{lle} is based on the fact that a data point in the feature space can be characterized by its neighbours.
-Thus, it was proposed to represent each data point in the high-dimensional space as the linear combination of its $k$-nearest neighbours.
+\Ac{lle} is another common non-linear dimension reduction technique widely used, first proposed in~\cite{Roweis2000}.
+\ac{lle} is based on the fact that a data point in the feature space is characterized by its neighbourhood.
+Thus, each data point in the high-dimensional space is transform to represent a linear combination of its $k$-nearest neighbours.
 This can be expressed as:
 \begin{equation}
 	\hat{\mathbf{x}}_i = \sum_j W(i,j) \mathbf{x}_j \ ,
@@ -165,26 +168,25 @@ This can be expressed as:
 \end{equation}
 
 \noindent where $\hat{\mathbf{x}}_i$ are the data point estimated using its neighbouring data points $\mathbf{x}_j$, and $W$ is the weight matrix.
-The weight matrix $W$ is estimated using a least square optimization scheme (see Eq.~\eqref{eq:lslle}).
+The weight matrix $W$ is estimated using a least square optimization as in \acs{eq}\,\eqref{eq:lslle}.
 %Hence, this problem which has to be solved at this stage is to estimate the weight matrix $W$. This problem can be tackled using a least square optimization scheme by optimizing the following objective function:
 \begin{eqnarray}
 	\hat{W} & = & \argmin_{W} \sum_i | \mathbf{x}_i - \sum_j W(i,j)\mathbf{x}_j |^{2} \ , \label{eq:lslle} \\
 	&& \text{subject to } \sum_j W(i,j) = 1 \ , \nonumber
 \end{eqnarray}
 
-Then, the essence of \ac{lle} is to project the data into a low dimension space, while retaining the data organization.
-Thus, the projection into the low dimension space can be seen as an optimization problem as:
+Then, the essence of \ac{lle} is to project the data into a low-dimensional space, while retaining the data saptial organization.
+Therefore, the projection into the low-dimensional space is tackled as an optimization problem as:
 
 \begin{equation}
 	\hat{\mathbf{y}} = \argmin_{\mathbf{y}} \sum_i | \mathbf{y}_i - \sum_j W(i,j)\mathbf{y}_j |^{2} \ .
 	\label{eq:lowprojlle}
 \end{equation}
 
-\noindent This optimization can be performed as an eigenvectors-eigenvalues problem by finding the $k^{\text{th}}$ eigenvectors corresponding to the $k^{\text{th}}$ smallest eigenvalues of the sparse matrix $(I-W)^{\text{T}}(I-W)$.
+This optimization is solved as an eigenvectors-eigenvalues problem by finding the $k^{\text{th}}$ eigenvectors corresponding to the $k^{\text{th}}$ smallest eigenvalues of the sparse matrix $(I-W)^{\text{T}}(I-W)$.
 
-
-Tiwari \textit{et al.} in \cite{Tiwari2008} used a modified version of the \ac{lle} algorithm in which they applied \ac{lle} in a bagging approach with multiple neighbourhood sizes.
-The different embeddings obtaixned are then fused using the \ac{ml} estimation.
+\citeauthor{Tiwari2008} used a modified version of the \ac{lle} algorithm in which they applied \ac{lle} in a bagging approach with multiple neighbourhood sizes~\cite{Tiwari2008}.
+The different embeddings obtained are then fused using the \ac{ml} estimation.
 
 %%%%%%
 {\color{red}\textbf{BoW and SCF add the references}}
