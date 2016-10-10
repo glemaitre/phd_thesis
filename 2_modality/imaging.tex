@@ -1,4 +1,4 @@
-\section{\acs*{mri} imaging techniques}\label{sec:chp2:imaging}
+%\section{\acs*{mri} imaging techniques}\label{sec:chp2:imaging}
 
 \ac{mri} provides promising imaging techniques to overcome the drawbacks of current clinical screening techniques mentioned in \acs{sec}\,\ref{chap:1}.
 Unlike \ac{trus} biopsy, \ac{mri} examination is a non-invasive protocol and has been shown to be the most acute and harmless technique available currently~\cite{Turkbey2012}.
@@ -6,8 +6,6 @@ In this section, we review different \ac{mri} imaging techniques developed for \
 Features strengthening each modality will receive particular attention together with their drawbacks.
 Commonly, these features form the basis for developing analytic tools and automatic algorithms.
 However, we refer the reader to \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec} for more details on automatic feature detection methods since they are part and parcel of the \acs{cad} framework.
-Table~\ref{tab:modmri} provides an overview of the following discussion.
-\input{2_modality/Table-features-modality.tex}
 
 %% % We are using enumerate with a small margin and some indent to organize our thoughts by paragraphs.
 %% \setenumerate{listparindent=\parindent,itemsep=10px}
@@ -16,16 +14,16 @@ Table~\ref{tab:modmri} provides an overview of the following discussion.
 \begin{figure}
 \centering
 	\hspace*{\fill}
-	\subfigure[\acs*{t2w}-\acs*{mri} slice of an healthy prostate acquire with a \SI{1.5}{\tesla} \acs*{mri}. The blue contour represents the \acs*{cg} while the \acs*{pz} corresponds to the green contour.]{\label{subfig:t2whealthy}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_healthy.eps}} \hfill
-	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{pz} using a \SI{3}{\tesla} \acs*{mri} scanner.]{\label{subfig:t2wcancerpz}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_pz.eps}} \hfill
-	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{cg} using a \SI{3}{\tesla} \acs*{mri} scanner.]{\label{subfig:t2wcancercg}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_cg.eps}}
+	\subfigure[\acs*{t2w}-\acs*{mri} slice of an healthy prostate acquire with a \SI{1.5}{\tesla} \acs*{mri} with an endorectal coil. The blue contour represents the \acs*{cg} while the \acs*{pz} corresponds to the green contour.]{\label{subfig:t2whealthy}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_healthy.eps}} \hfill
+	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{pz} using a \SI{3}{\tesla} \acs*{mri} scanner without an endorectal coil.]{\label{subfig:t2wcancerpz}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_pz.eps}} \hfill
+	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{cg} using a \SI{1.5}{\tesla} \acs*{mri} scanner with an endorectal coil.]{\label{subfig:t2wcancercg}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_cg.eps}}
 	\hspace*{\fill}
 	\caption[Rendering of \acs*{t2w}-\acs*{mri} prostate images.]{Rendering of \acs*{t2w}-\acs*{mri} prostate image with both \SI{1.5}{\tesla} and \SI{3}{\tesla} \acs*{mri} scanner.}
 	\label{fig:t2w}
 \end{figure}
 
 %T2W \ac{mri}
-\subsection{\acs*{t2w} MRI}\label{subsec:chp2:imaging:t2w} 
+\section{\acs*{t2w} MRI}\label{subsec:chp2:imaging:t2w} 
 \ac{t2w}-\ac{mri} has been the first \ac{mri}-modality used to perform \ac{cap} diagnosis using \ac{mri}~\cite{Hricak1983}.
 Nowadays, radiologists make use of it for \ac{cap} detection, localization, and staging purposes.
 This imaging technique is well suited to render zonal anatomy of the prostate~\cite{Barentsz2012}. 
@@ -37,7 +35,7 @@ An example of a healthy prostate is shown in \acs{fig}\,\ref{subfig:t2whealthy}.
 
 In \ac{pz}, round or ill-defined low-SI masses are synonymous with \acp{cap}~\cite{Hricak1983} as shown in \acs{fig}\,\ref{subfig:t2wcancerpz}.
 Detecting \ac{cap} in \ac{cg} is more challenging.
-In fact both normal \ac{cg} tissue and malignant tissue, have a low-\ac{si} in \ac{t2w}-\ac{mri}, reinforcing difficulties to distinguish between them.
+In fact both normal \ac{cg} tissue and malignant tissue, have a low-\ac{si} in \ac{t2w}-\ac{mri}, reinforcing difficulties to distinguish one among them.
 However, \acp{cap} in \ac{cg} appear often as homogeneous mass possessing ill-defined edges with lenticular or ``water-drop'' shapes~\cite{Akin2006,Barentsz2012} as depicted in \acs{fig}\,\ref{subfig:t2wcancercg}. 
 
 \ac{cap} aggressiveness has been shown to be inversely correlated with \ac{si}.
@@ -49,7 +47,7 @@ In fact, various conditions emulate patterns of \ac{cap} such as \ac{bph}, post-
 These issues are partly addressed using more innovative and advanced modalities.
 
 %T2 Map
-\subsection{T$_2$ map} \label{subsec:chp2:imaging:t2}
+\section{T$_2$ map} \label{subsec:chp2:imaging:t2}
 As previously mentioned, \ac{t2w}-\ac{mri} modality shows low sensitivity.
 Moreover, \ac{t2w}-\ac{mri} images are a composite of multiple effects~\cite{Hegde2013}.
 However, T$_2$ values alone have been shown to be more discriminative~\cite{Liu2011} and highly correlated with citrate concentration, a biological marker in \ac{cap}~\cite{Liney1996,Liney1997}.
@@ -84,7 +82,7 @@ Similar to \ac{t2w}-\ac{mri}, T$_2$ values associated with \ac{cap} are signific
 \end{figure}
 
 %DCE \ac{mri}
-\subsection{\acs*{dce}-\acs*{mri}}\label{subsec:chp2:imaging:dce}
+\section{\acs*{dce}-\acs*{mri}}\label{subsec:chp2:imaging:dce}
 \ac{dce}-\ac{mri} is an imaging technique which exploits the vascularity characteristic of tissues.
 Contrast media, usually gadolinium-based, is injected intravenously into the patient.
 The media extravasates from vessels to \ac{ees} and is released back into the vasculature before being eliminated by the kidneys~\cite{Gribbestad2005}.
@@ -120,7 +118,7 @@ It has been shown that semi-quantitative and quantitative methods improve locali
 
 \ac{dce}-\ac{mri} combined with \ac{t2w}-\ac{mri} has shown to enhance sensitivity compared to \ac{t2w}-\ac{mri} alone~\cite{Jager1997,Kim2005,Schlemmer2004,Zelhof2009}.
 Despite this fact, \ac{dce}-\ac{mri} possesses some drawbacks.
-Due to its ``dynamic'' nature, patient motions during the image acquisition lead to spatial mis-registration of the image set~\cite{Verma2012}).
+Due to its ``dynamic'' nature, patient motions during the image acquisition lead to spatial mis-registration of the image set~\cite{Verma2012}.
 Furthermore, it has been suggested that malignant tumours are difficult to distinguish from prostatitis located in \ac{pz} and \ac{bph} located in \ac{cg}~\cite{Hoeks2011,Verma2012}.
 These pairs of tissues tend to have similar appearances.
 Later studies have shown that \acp{cap} in \ac{cg} do not always manifest in homogeneous fashion.
@@ -137,11 +135,11 @@ Indeed, tumours in this zone can present both hypo-vascularization and hyper-vas
 \end{figure}
 
 %DWI \ac{mri}
-\subsection{\acs*{dw}-\acs*{mri}}\label{subsec:chp2:imaging:dw}
+\section{\acs*{dw}-\acs*{mri}}\label{subsec:chp2:imaging:dw}
 As previously mentioned in the introduction, \ac{dw}-\ac{mri} is the most recent \ac{mri} imaging technique aiming at \ac{cap} detection and diagnosis~\cite{Scheidler1999}.
 This modality exploits the variations in the motion of water molecules in different tissues~\cite{LeBihan1988,Koh2007}.
 
-The distinction between healthy and \ac{cap} in \ac{dw}-\ac{mri} is based on the following a physiological bases.
+The distinction between healthy and \ac{cap} in \ac{dw}-\ac{mri} is based on the following physiological bases.
 On the one hand, \ac{pz}, as previously mentioned, is mainly a glandular and tubular structure allowing water molecules to move freely~\cite{Choi2007,Hoeks2011}.
 On the other hand, \ac{cg} is made up of muscular or fibrous tissue causing the motion of the water molecules to be more constrained and heterogeneous than in \ac{pz}~\cite{Hoeks2011}.
 Then, \ac{cap} growth leads to the destruction of normal glandular structure and is associated with an increase in cellular density~\cite{Hoeks2011,Koh2007,Somford2008}.
@@ -177,7 +175,7 @@ As drawbacks, this modality suffers from poor spatial resolution and specificity
 With a view to eliminate these drawbacks, radiologists use quantitative maps extracted from \ac{dw}-\ac{mri}, which is presented in the next section.
 
 %ADC map
-\subsection{\acs*{adc} map}\label{subsec:chp2:imaging:adc} 
+\section{\acs*{adc} map}\label{subsec:chp2:imaging:adc} 
 The \ac{nmr} signal measured for \ac{dw}-\ac{mri} images is not only affected by diffusion as shown in \acs{eq}\,\eqref{eq:t2dif}.
 However, the signal drop --- \acs{eq}\,\eqref{eq:dif} --- is formulated such that the only variable is the acquisition parameter $b$~\cite{LeBihan1986}.
 The \ac{adc} is considered as a ``pure'' diffusion coefficient and is extracted to build a quantitative map known as the \acs{adc} map.
@@ -220,7 +218,7 @@ It has also been noted that a high variability of the \ac{adc} occurs between di
 
 
 %MRSI
-\subsection{\acs*{mrsi}}\label{subsec:chp2:imaging:mrsi}
+\section{\acs*{mrsi}}\label{subsec:chp2:imaging:mrsi}
 \ac{cap} induces metabolic changes in the prostate compared with healthy tissue.
 Thus, \ac{cap} detection can be carried out by tracking changes of metabolite concentration in prostate tissue.
 \ac{mrsi} is an \ac{nmr}-based technique which generates spectra of relative metabolite concentration in \iac{roi}.
@@ -266,3 +264,12 @@ However, this issue is addressed by developing new scanners with higher magnetic
 Finally, a high variability of the relative concentrations between patients has been observed~\cite{Choi2007}.
 The same observation has been made depending on the zones studied (ie., \ac{pz}, \ac{cg}, base, mid-gland, apex)~\cite{Walker2010,Lemaitre2011}.
 Due to this variability, it is difficult to use a fixed thresholds in order to differentiate \ac{cap} from healthy tissue.
+
+\section{Summary and conclusions}
+
+\acs{tab}~\ref{tab:modmri} provides an overview of the different modalities presented in the previous section.
+Indeed, each \ac{mri} modality alone provides different discriminative level to distinguish \ac{cap} from healthy tissue.
+A recurrent statement in the literature is, however, the ability to combine these \ac{mri} modalities which lead to the best diagnosis performance.
+In this regard, we will present in the next chapter automatic tools which have been developed to design \ac{mpmri} \ac{cad} systems for the detection of \ac{cap}.
+
+\input{2_modality/Table-features-modality.tex}

@@ -14,14 +14,14 @@ This section focuses on image-based features which can be categorized into two c
 
 \paragraph{Voxel-wise detection}
 This strategy refers to the fact that a feature is extracted at each voxel location.
-As discussed in \acs{sec}\,\ref{sec:chp2:imaging}, \ac{cap} has an influence on the \ac{si} in \ac{mpmri} images.
+As discussed in \acs{chp}\,\ref{chap:2}, \ac{cap} has an influence on the \ac{si} in \ac{mpmri} images.
 Therefore, intensity-based feature is the most commonly used feature~\cite{Ampeliotis2007,Ampeliotis2008,Vos2008,rampun2016computerb,rampun2015classifying,Giannini2013,Artan2009,Artan2010,Chan2003,Langer2009,Litjens2011,Litjens2012,Litjens2014,Liu2009,Ozer2009,Ozer2010,trigui2016classification,trigui2017automatic,cameron2014multiparametric,cameron2016maps,khalvati2015automated,chung2015prostate,giannini2015fully,Niaf2011,Niaf2012,lehaire2014computer}.
 This feature consists in the extraction of the intensity of the \ac{mri} modality of interest.
 
-Edge-based features have also been used to detect \ac{si} changes but bring additional information regarding the the \ac{si} transition.
+Edge-based features have also been used to detect \ac{si} changes but bring additional information regarding the \ac{si} transition.
 Each feature is computed by convolving the original image with an edge operator.
 Three operators are commonly used: (i) Prewitt operator~\cite{Prewitt1970}, (ii) Sobel operator~\cite{Sobel1970}, and (iii) Kirsch operator~\cite{Kirsch1971}.
-These operators differ due to the kernel used which attenuate more or less the noise.
+These operators differ due to the kernel used which attenuates more or less the noise.
 Multiple studies used the resulting magnitude and orientation of the edges computed in their classification frameworks~\cite{Niaf2011,Niaf2012,Tiwari2009a,Tiwari2010,Tiwari2013,Viswanath2008,Viswanath2011,rampun2016quantitative,rampun2015computer,rampun2016computer,lehaire2014computer,khalvati2015automated,chung2015prostate}.
 
 \begin{figure}
@@ -35,7 +35,7 @@ Multiple studies used the resulting magnitude and orientation of the edges compu
 	\label{fig:gabor}
 \end{figure}
 
-Gabor filter~\cite{Gabor1946,Daugman1985} offer an alternative to the usual edge detector, with the possibility to tune the direction and the frequency of the filter to encode a specific pattern. 
+Gabor filters~\cite{Gabor1946,Daugman1985} offer an alternative to the usual edge detector, with the possibility to tune the direction and the frequency of the filter to encode a specific pattern. 
 A Gabor filter is defined by the modulation of a Gaussian function with a sine wave which can be further rotated and is formalized as in \acs{eq}\,\ref{eq:gabor}.
 \begin{equation}
 	g(x,y;\theta,\psi,\sigma,\gamma) = \exp \left( - \frac{x'^{2}+ \gamma^{2}y'^{2}}{2 \sigma^{2}} \right) \cos \left( 2 \pi \frac{x'}{\lambda} + \phi \right) \ ,
@@ -51,7 +51,7 @@ A Gabor filter is defined by the modulation of a Gaussian function with a sine w
 
 \noindent where $\lambda$ is the wavelength of the sinusoidal factor, $\theta$ represents the orientation of the Gabor filter, $\psi$ is the phase offset, $\sigma$ is the standard deviation of the Gaussian envelope, $\gamma$ is the spatial aspect ratio, and $s$ is the scale factor.
 In an effort to characterize pattern and texture, a bank of Gabor filters is usually created with different angles, scale, and frequency --- refer to \acs{fig}\,\ref{fig:gabor} --- and then convolved with the image.
-\citeauthor{Viswanath2012}, \citeauthor{Tiwari2012} and more recently \citeauthor{khalvati2015automated} and \citeauthor{chung2015prostate} have designed a bank of Gabor filters to characterized texture and edge information in \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} modalities.
+\citeauthor{Viswanath2012}, \citeauthor{Tiwari2012} and more recently \citeauthor{khalvati2015automated} and \citeauthor{chung2015prostate} have designed a bank of Gabor filters to characterized texture and edge information in \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} modalities~\cite{Viswanath2012,Tiwari2012,khalvati2015automated,chung2015prostate}.
 
 Texture-based features provide other characteristics discerning \ac{cap} from healthy tissue.
 The most common texture analysis for image classification is based on the \ac{glcm} with their related statistics which have been proposed by \citeauthor{Haralick1973} in~\cite{Haralick1973}.
@@ -102,11 +102,11 @@ The \ac{dct} coefficients are computed such as:
 	C_{k_1,k_2} = \sum_{m=0}^{M-1} \sum_{n=0}^{N-1} p_{m,n} \cos \left[ \frac{\pi}{M} \left( m + \frac{1}{2} \right) k_1 \right] \cos \left[ \frac{\pi}{N} \left( n + \frac{1}{2} \right) k_2 \right] \ ,
 \end{equation}
 
-\noindent where $C_{k_1,k_2}$ is the \ac{dct} coefficient at the position $k_1,k_2$, $M$ and $N$ are the dimension of the neighbourhood and $p_m,n$ is the pixel \ac{si} at the position $p_{m,n}$.
+\noindent where $C_{k_1,k_2}$ is the \ac{dct} coefficient at the position $k_1,k_2$, $M$ and $N$ are the dimension of the neighbourhood and $p_{m,n}$ is the pixel \ac{si} at the position $\{m,n\}$.
 
 \citeauthor{Viswanath2012} projected \ac{t2w}-\ac{mri} images into the wavelet space, using the Haar wavelet, and used the resulting coefficients as features~\cite{Viswanath2012}.
 %The wavelet family used for the decomposition was the Haar wavelet.
-\citeauthor{Litjens2011} computed the texture map based on \ac{t2w}-\ac{mri} images using a Gaussian filer bank~\cite{Litjens2011}.
+\citeauthor{Litjens2011} computed the texture map based on \ac{t2w}-\ac{mri} images using a Gaussian filter bank~\cite{Litjens2011}.
 Likewise, \citeauthor{rampun2016computer} employed a rotation invariant filter bank proposed in~\cite{leung2001representing}.
 The bank is composed of 48 filters including Gaussian filters, first and second derivatives of Gaussian filters as well as Laplacian of Gaussian.
 
@@ -204,7 +204,7 @@ A set of time features corresponding to specific amplitude level (start, maximum
 Then, derivative and integral features are also considered as discriminative and are commonly computed.
 
 \paragraph{Quantitative approach}
-As presented in \acs{sec}\,\ref{sec:chp2:imaging}, quantitative approaches correspond to mathematical-pharmacokinetic models based on physiological exchanges.
+As presented in \acs{chp}\,\ref{chap:2}, quantitative approaches correspond to mathematical-pharmacokinetic models based on physiological exchanges.
 Four different models have been used in \ac{cad} for \ac{cap} systems.
 The most common model reviewed is the \textit{Brix model}~\cite{Artan2009,Artan2010,Sung2011,Liu2009,Ozer2009,Ozer2010}.
 This model is formalized such as:

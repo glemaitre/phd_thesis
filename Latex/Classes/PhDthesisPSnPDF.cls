@@ -322,7 +322,7 @@
 %  \null\vfill
   \begin{center}
 {\large
-  {{\@firstlogouni}\hspace*{10mm}{\@firstlogolab}\hspace*{10mm}{\@secondlogouni}\hspace*{10mm}{\@secondlogolab} \par \vspace*{25mm}}}
+  {{\@firstlogouni}\hspace*{30mm}{\@secondlogouni} \par \vspace*{25mm}}}
     { \Large {\bfseries {Doctoral Thesis}} \par \vspace*{10mm}}
     { \Large {\bfseries {\@title}} \par \vspace*{15mm}}
     {{\large \@author} \par}

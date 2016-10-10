@@ -72,7 +72,7 @@ Hence, for a 2D space where $\mathbf{x} = (x,y) \in \mathbb{R}^2$, an affine tra
 \noindent where the 4 parameters $\{a_{11},a_{12},a_{21},a_{22}\}$ of the affine matrix and $\{ t_x, t_y \}$ of the translation encode the deformation.
 As in the rigid registration case, in 3D the affine transformation $\mathcal{T}_A(\cdot)$ is of size $4 \times 4$ with 12 parameters involved.
 
-Finally, the last group of transformation is known as elastic transformation and offer the advantage to handle local distortions.
+Finally, the last group of transformation is known as elastic transformation and offers the advantage to handle local distortions.
 In the reviewed \ac{cad} systems, the radial basis functions are used to formalize the local distortions such as:
 
 \begin{equation}
@@ -85,7 +85,7 @@ In the reviewed \ac{cad} systems, the radial basis functions are used to formali
 \noindent where $\mathbf{x}$ are the control points in both images and $g(\cdots)$ is the actual radial basis function. 
 
 Two radial basis functions are used: (i) the \ac{tps} and (ii) the B-splines.
-Apart from the formalism, these two approaches have a main difference: with B-splines, the control points are usually uniformly and densely placed on a grid whereas with \ac{tps}, the control points correspond are detected or selected key points.
+Apart from the formalism, these two approaches have a main difference: with B-splines, the control points are usually uniformly and densely placed on a grid whereas with \ac{tps}, the control points correspond to some detected or selected key points.
 By using \ac{tps}, \citeauthor{Mitra2011} obtained more accurate and time efficient results than with the B-splines strategy~\cite{Mitra2012a}.
 
 It is reasonable to point out that usually only rigid or affine registrations are used to register \ac{mpmri} from a same protocol.
@@ -192,11 +192,11 @@ However, commonly used methods are bi-linear, nearest-neighbour, bi-cubic, splin
 \end{table}
 
 \citeauthor{Ampeliotis2008} in~\cite{Ampeliotis2007,Ampeliotis2008} did not use the framework as presented in \acs{fig}\,\ref{fig:frareg} to register 2D \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} images.
-By using image symmetries and the \ac{mse} metric, they find the parameters of an affine transformation but without using a common objective function.
+By using image symmetries and the \ac{mse} metric, they found the parameters of an affine transformation but without using a common objective function.
 The scale factor, the rotation, and the translation are independently and sequentially estimated.
 
 \cite{Giannini2013} used also a in-house registration method for 2D \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} images using an affine model~\cite{Giannini2013,giannini2015fully}.
-The bladder is first segmented in both modalities in order to obtain its contours and to focus the registration and minimize the distance between the contours.
+The bladder is first segmented in both modalities in order to obtain its contours and to focus on the registration and minimize the distance between the contours.
 
 \citeauthor{Giannini2013} and also \citeauthor{Vos2010} used a framework based on finding an affine transformation to register the \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} images using \ac{mi}~\cite{Rueckert1999,Giannini2013,Vos2010}.
 Then, an elastic registration using B-spline takes place using the affine parameters to initialize the geometric model with the same similarity measure.

@@ -58,5 +58,5 @@ Additionally, the position of the voxel $\mathbf{x}=\{x,y,z\}$ is used as a feat
 Hence, each feature vector is composed of 8 features and a \ac{svm} classifier is trained using a \ac{rbf} kernel (see \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-clas} for more details).
 
 Subsequently, \citeauthor{Litjens2012} modified this approach by including only features related to the blob detection on the different maps as well as the original \acp{si} of the parametric images~\cite{Litjens2012}.
-Two new maps are introduced based on texture and a \ac{knn} classifier is used instead of a \ac{svm} classifier
+Two new maps are introduced based on texture and a \ac{knn} classifier is used instead of a \ac{svm} classifier.
 The candidate regions are then extracted by performing a local maxima detection followed by post-processing region-growing and morphological operations. 

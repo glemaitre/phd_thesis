@@ -4,20 +4,20 @@
 \subsection{Results reported}\label{subsec:chp3:dis:res}
 
 As discussed previously in \ac{sec}\,\ref{subsec:chp3:img-clas:eval-mea}, different metrics have been used to report results.
-A comparison of the different methods reviewed is given depending on the metric used in field of research and also the type of \ac{mri} scanner used (cf., 1.5 \textit{versus} 3.0 Tesla).
-For each field, the \textit{best performances} obtained in each study were reported in these figures.
-The results given in terms of \ac{auc}-\ac{roc} are depicted in \ac{fig}\,\ref{fig:auc}.
-The results vary between $71\%$ and $97\%$ for some experiments with a 1.5 Tesla \ac{mri} scanner and $77\%$ and $95\%$ with a 3.0 Tesla \ac{mri} scanner. 
+A comparison of the different methods reviewed is given depending on the metric used in field of research and also the type of \ac{mri} scanner used, i.e. \SI{1.5}{\tesla} or \SI{3}{\tesla}.
+For each field, the \textit{best classification performance} obtained in each study have been reported in these figures.
+The results in terms of \ac{auc}-\ac{roc} are depicted in \acs{fig}\,\ref{fig:auc}.
+The results vary from \SIrange{71}{97}{\percent} for some experiments with a \SI{1.5}{\tesla} \ac{mri} scanner and from \SIrange{77}{95}{\percent} with a \SI{3}{\tesla} \ac{mri} scanner. 
 
-The results in regard of sensitivity and specificity are reported in \ac{fig}\,\ref{fig:sensspec}.
-In the case that the data were collected with a 1.5 Tesla \ac{mri} scanner, the sensitivity ranges from $74\%$ to $100\%$ and the specificity from $43\%$ to $93\%$.
-For the experiments carried out with a 3.0 Tesla \ac{mri} scanner, the sensitivity varies from $60\%$ to $90\%$ and the specificity from $66\%$ to $99\%$.
+The results in regard of sensitivity and specificity are reported in \acs{fig}\,\ref{fig:sensspec}.
+In the case that the data have been collected with a \SI{1.5}{\tesla} \ac{mri} scanner, the sensitivity ranges from \SIrange{74}{100}{\percent} and the specificity from \SIrange{43}{93}{\percent}.
+For the experiments carried out with a \SI{3}{\tesla} \ac{mri} scanner, the sensitivity varies from \SIrange{60}{99}{\percent} and the specificity from \SIrange{66}{100}{\percent}.
 Four studies also use \ac{froc} analysis to report their results and are reported in \ac{fig}\,\ref{fig:froc}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.5\linewidth]{3_review/figures/results/froc.eps}
-  \caption{Comparison in terms of \ac{froc} of the methods using data from 3.0 Tesla \ac{mri} scanner.}
+  \includegraphics[width=.8\linewidth]{3_review/figures/results/froc.eps}
+  \caption{Comparison in terms of \acs*{froc} of the methods using data from \SI{3}{\tesla} \acs*{mri} scanner.}
   \label{fig:froc}
 \end{figure}
 
@@ -31,74 +31,86 @@ We would like to stress the following findings drawn during the review of the di
 \begin{enumerate}
 \item Quantitatively, it is difficult to make a fair comparison between the different studies reviewed.
 Different factors come into play to elucidate this fact.
-Mainly a lack of standardization can be pointed out in regard to experimental evaluation: (i) different datasets are used during the evaluation of the frameworks developed hinderng a inter-study comparison.
-The same conclusion has been recently drawn by~\cite{Litjens2014} supporting this argument; (ii) the experimental results are not reported with a common metric which leads to the inability to compare the different studies.
+Mainly a lack of standardization has to be pointed out in regard to experimental evaluation:
+(i) different datasets are used during the evaluation of the frameworks developed hindering an inter-study comparison.
+The same conclusion has been recently drawn by~\cite{Litjens2014} supporting this argument;
+(ii) the experimental results are not reported with a common metric which leads to the inability to compare the different studies.
 
-\item \label{here} However, multiple studies reported some performance improvements using multi-parametric imaging techniques instead of mono-parametric imaging techniques.
+\item \label{here} However, multiple studies reported some performance improvements using \ac{mpmri} techniques instead of mono-parametric imaging techniques.
 Considering only the most recent studies proposing \ac{cade}-\ac{cadx} frameworks, the following results can be highlighted.
-Viswanath et al.~\cite{Viswanath2011} obtained an \ac{auc} of $77\%$ using an ensemble learning approach combining the features from the three modalities \ac{t2w}-\ac{dce}-\ac{dw} \ac{mri}, while the results obtained as standalone modality were ranging from $62\%$ to $65\%$. 
-Tiwari et al.~\cite{Tiwari2013} drawn similar conclusions by using \ac{t2w} and \ac{mrsi} modalities as both in standalone and multi-parametric frameworks with an improved \ac{auc} ranging from $57\%$-$76\%$ to $85\%$.
-The most recent work of Litjens et al.~\cite{Litjens2014} obtained an improved \ac{auc} metric from $71\%$-$76\%$ considering each modality separately (e.g., \ac{t2w}-\ac{dce}-\ac{dw} \ac{mri}) to $89\%$ in their multi-parametric framework.
+\citeauthor{Viswanath2011} obtained an \ac{auc} of \SI{77}{\percent} using an ensemble learning approach combining the features from the three \ac{mri} modalities --- i.e., \ac{t2w}-\ac{mri}, \ac{dce}--\ac{mri}, and \ac{dw}-\ac{mri}, while the results obtained as standalone modality range from \SIrange{62}{65}{\percent}~\cite{Viswanath2011}. 
+\citeauthor{Tiwari2013} drawn similar conclusions by using \ac{t2w}-\ac{mri} and \ac{mrsi} modalities as both in standalone and multi-parametric frameworks with an improved \ac{auc} ranging from \SI{57}{\percent}-\SIrange{76}{85}{\percent}~\cite{Tiwari2013}.
+The most recent work of \citeauthor{Litjens2014} obtained an improved \ac{auc} metric from \SI{71}{\percent}-\SI{76}{\percent} considering each modality separately --- i.e., \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and \ac{dw}-\ac{mri} --- to \SI{89}{\percent} in their \ac{mpmri} framework.
 
-\item The studies comparing particular combination of more than one modality give rise to the same fact~\cite{Ozer2010,Litjens2011,Liu2013,Litjens2014}: using three modalities lead to better performances than using any combination of two modalities. 
+\item The studies comparing particular combination of more than a single modality give rise to the same fact~\cite{Ozer2010,Litjens2011,Liu2013,Litjens2014}: using 3 modalities lead to better performances than using any combination of 2 modalities. 
 
-\item Unlike the previous remark~\ref{here}, no straightforward conclusions can be given regarding the performances of each modality in a standalone framework.
+\item Unlike the previous remark~\ref{here}, no straightforward conclusions can be given regarding the classification performance using each modality in a standalone framework.
 The modality being processed by different methods, it does not allow us to conclude if a modality by itself is more suited than another.
-However, we were able to distinguish some interesting trends which deserves the attention of the community.
-Tiwari et al. in~\cite{Tiwari2009a,Tiwari2012,Tiwari2013} observed that \ac{mrsi} is a more suitable modality than \ac{t2w} to highlight cancers.
+However, we are able to distinguish some interesting trends which deserves the attention of the community.
+\citeauthor{Tiwari2013} in~\cite{Tiwari2009a,Tiwari2012,Tiwari2013} observed that \ac{mrsi} is a more suitable modality than \ac{t2w} to highlight \ac{cap}.
 Moreover, \ac{adc} maps have shown a better discriminative power than \ac{t2w} as well~\cite{Langer2009,Viswanath2011,Peng2013}.
-Lately, Litjens et al. in~\cite{Litjens2014} observed that \ac{dw} modality was more suitable than both \ac{dce} and \ac{t2w} to distinguish \ac{cap} in their \ac{cadx} system. 
+Lately, \citeauthor{Litjens2014} observed that \ac{dw}-\ac{mri} modality is more suitable than both \ac{dce}-\ac{mri} and \ac{t2w}-\ac{mri} to distinguish \ac{cap} in their \ac{cadx} system~\cite{Litjens2014}. 
+Recently, \citeauthor{rampun2016computerb} showed, however, some promising results using \ac{t2w}-\ac{mri} only in conjunction with textons and \ac{bow}; this study should be transposed to other \ac{mri} modalities~\cite{rampun2016computerb}.
 
-\item Furthermore, multi-parametric has attracted the attention of both radiologists and computer vision researchers.
-Indeed, pioneer research groups included new modalities over years when at the same time, new research groups directly introduced multi-parametric \ac{cad} systems.
-These facts lead us to think that \ac{cap} researches will benefit from multi-parametric imaging techniques.
+\item Furthermore, \ac{mpmri} has attracted the attention of both radiologists and computer vision researchers.
+Indeed, pioneer research groups included new modalities over years when at the same time, new research groups directly introduced \ac{mpmri} \ac{cad} systems.
+These facts lead us to think that \ac{cap} researches will benefit from \ac{mpmri} techniques.
 
-\item When focusing on the different modalities used, it can be pointed out that no research reported the use of all modalities in a single framework: \ac{mrsi} is usually used as a standalone modality and never combined with the three remaining.
-Nevertheless, this modality has shown some overall good performances at the price of a lower resolution as well as an increased acquisition time.
+\item When focusing on the different modalities used, it can be pointed out that only \citeauthor{trigui2017automatic} reported the use of all modalities in a single framework by incorporating the \ac{mrsi} modality~\cite{trigui2016classification,trigui2017automatic}.
+Although the results reported are promising, the detection has been performed at \ac{mrsi} scale and further investigations need to be carried out.
+Nevertheless, \ac{mrsi} has shown some overall good classification performance at the price of a lower resolution as well as an increased acquisition time.
 Moreover, \ac{mrsi} analysis is more complex in comparison with the other modalities.
-To our mind, \ac{mrsi} could contribute in a multi-parametric framework and should be fused with the other modalities.
+To our mind, \ac{mrsi} could contribute in a \ac{mpmri} framework and should be fused with the other modalities.
 
-\item Lately, three studies focused on developing a region-based classification in which \ac{pz} and \ac{cg} will be analysed separately~\cite{Viswanath2012,Litjens2012,Litjens2014}.
-The promising results were obtained which indicates that this strategy should be further investigated.
+\item Lately, 3 studies focused on developing a region-based classification in which \ac{pz} and \ac{cg} will be analyzed separately~\cite{Viswanath2012,Litjens2012,Litjens2014}.
+The promising obtained results indicate that this strategy should be further investigated.
 
 \item Recent studies are using quantitative features in addition to \ac{si}.
-It seems that these quantitative features provide uncorrelated information with respect to \ac{si} features and should lead to better performances when combined all together. 
+It seems that these quantitative features provide uncorrelated information with respect to \ac{si} features and should lead to better classification performance when combined all together. 
 
-\item Regarding the methods used in the ``image regularisation'' (cf., pre-processing, segmentation and registration), it is particularly difficult to distinguish the benefit of a method over another since none of the studies focus on making comparison of these processing stages. The focus is usually entirely based on the ``image classification'' framework where different methods are directly compared. Note that the performance of a classifier is highly linked with the features vector extracted from particular data. Hence, one can not conclude that a machine learning method is more appropriate than another, but we can identify a trend in which \ac{svm} as well as ensemble learning classifiers (e.g., AdaBoost, GentleBoost and random forest) seem to perform better than neural network, \ac{lda} or Naive Bayes.
+\item Regarding the methods used in the ``image regularization'' --- i.e., pre-processing, segmentation, and registration --- it is particularly difficult to distinguish the benefit of a method over another since none of the studies focus on making comparison of these processing stages.
+The focus is usually entirely based on the ``image classification'' framework where different methods are directly compared.
+Note that the performance of a classifier is highly linked with the features vector extracted from particular data.
+Hence, one can not conclude that a machine learning method is more appropriate than another, but we can identify a trend in which \ac{svm} as well as ensemble learning classifiers --- i.e., AdaBoost, GentleBoost, and \ac{rf} --- seem to perform better than neural network, \ac{lda}, or Naive Bayes.
 
 \item We would like to draw the attention of the reader on the feature extraction/selection stage.
-This processing could reduce the complexity and also find a better feature space for classification.
+This processing could reduce the complexity and also allow to find a better feature space for classification.
 However, few studies are performing such approaches.
-Niaf et al.~\cite{Niaf2011,Niaf2012} are successfully applying a scheme to reduce the number of dimensions by selecting the most discriminative features.
+\citeauthor{Niaf2012}, \citeauthor{khalvati2015automated}, \citeauthor{chung2015prostate}, and \citeauthor{rampun2016computer} are successfully applying a scheme to reduce the number of dimensions by selecting the most discriminative features~\cite{Niaf2011,Niaf2012,khalvati2015automated,chung2015prostate,rampun2016computer,rampun2015computer}.
 It allows them to obtain improved performances compared with a classification performed with their initial feature vector.
-Another group of studies also applied different feature extraction methods~\cite{Viswanath2008a,Viswanath2008,Viswanath2012,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2010,Tiwari2012,Tiwari2013}.
+Another group of studies also applied different feature extraction methods~\cite{Viswanath2008a,Viswanath2008,Viswanath2012,Tiwari2007,Tiwari2008,Tiwari2009,Tiwari2010,Tiwari2012,Tiwari2013,lehaire2014computer,rampun2016computerb,rampun2015classifying}.
 In these specific cases, no comparison is performed against the original data.
 \end{enumerate}
 
-\subsection{General discussion}\label{subsec:chp3:dis:gen-dis}
-
-{\color{red} \textbf{CHECK THIS SECTION- this is where you want to mention all the points ? The last part about the dataset is commneted}}
+\section{Conclusion}\label{subsec:chp3:dis:gen-dis}
 
 This review leads to some general discussions which could direct to future avenues for research.
-As previously mentioned, no open multi-parametric dataset is currently available.
+As previously mentioned, no open \ac{mpmri} is currently available.
 This fact leads to an impossibility to fairly compare the different algorithms designed over years.
-Also, the availability of a full multi-parametric \ac{mri} dataset, could lead to the development of algorithms which use all the different modalities currently available.
-Recalling \ac{tab}~\ref{tab:sumpap}, it can be noted that none of the current works provides a solution using at the same time the four different modalities.
-Also, all the algorithms are focused on one type of scanner only, either 1.5 Tesla and 3.0 Tesla.
+Also, the availability of a full \ac{mpmri} dataset, could lead to the development of algorithms which use all the different modalities currently available.
+Recalling \acs{tab}~\ref{tab:sumpap}, it can be noted that a single research work provides a solution using at the same time the 4 different modalities.
+Also, all the algorithms are focused on one type of scanner only, either \SI{1.5}{\tesla} and \SI{3}{\tesla}.
 A dataset including both these types of imaging could allow development of more generic algorithms.
 
-Analysing the different stages of the \ac{cad} work-flow, it is seen that the current \ac{cad} systems do not include all the pre-processing steps.
+Analyzing the different stages of the \ac{cad} work-flow, it is seen that the current \ac{cad} systems do not include all the pre-processing steps.
 It could be interesting to evaluate the improvement using these pre-processing steps on the final results.
 Regarding segmentation and registration of the prostate, \ac{cad} systems could greatly benefit from specific research in these areas which could lead to a better automation of those systems.
-Moreover, other segmentation and registration methods not currently used in \ac{cad} systems could also obtain better results.
+%Moreover, other segmentation and registration methods does not currently used in \ac{cad} systems could also obtain better results.
 
-Regarding the classification framework, it seems that the current well-known pattern recognition methods have been widely studied.
-However, more investigations should be carried out regarding the feature detection stage.
-Lately, histogram-based features have shown good capabilities in the field of computer vision and could be further investigated.
-Only one study by~\cite{Liu2013} used some of these features.
+% Regarding the classification framework, it seems that the current well-known pattern recognition methods have been widely studied.
+% However, more investigations should be carried out regarding the feature detection stage.
+% Lately, histogram-based features have shown good capabilities in the field of computer vision and could be further investigated.
+% Only one study by~\cite{Liu2013} used some of these features.
+
+Additionally, no research focus on the problem of imbalanced dataset.
+While classifying at the voxel-level, the medical dataset are highly imbalanced regarding the frequencies of \ac{cap} against healthy samples.
+Imbalanced data substantially compromises the learning process since most of the standard machine learning algorithms expect balanced class distribution or an equal micslassification cost~\cite{he2009learning}.
+Therefore, it seems important to investigate this field of pattern recognition to improve the classification performance while developing \ac{cad} systems.
 
 An important point allowing a fair comparison between methods resides in the fact that no common dataset, nor universal evaluation model, nor metric has been defined by the research community allowing such comparison.
 
-%% This review aims to have an impact in that respect by providing a novel publicly available multi-parametric and multi-vendor \ac{mri} dataset (from a 1.5 Tesla General Electric scanner and a 3.0 Tesla Siemens scanner).
-%% This dataset is available at the following website address: \url{http://visor.udg.edu/dataset}. The dataset is composed of the four modalities discussed in this review with their corresponding ground-truth images. For each scanner type, each subset is composed of twenty patients with cancerous lesions and ten healthy patients, having a total of 60 patients. In addition of the repository activity, this website will aim at providing comparison between algorithms developed by the research community.
+
+% This review aims to have an impact in that respect by providing a novel publicly available multi-parametric and multi-vendor \ac{mri} dataset (from a 1.5 Tesla General Electric scanner and a 3.0 Tesla Siemens scanner).
+% This dataset is available at the following website address: \url{http://visor.udg.edu/dataset}. The dataset is composed of the four modalities discussed in this review with their corresponding ground-truth images. For each scanner type, each subset is composed of twenty patients with cancerous lesions and ten healthy patients, having a total of 60 patients. In addition of the repository activity, this website will aim at providing comparison between algorithms developed by the research community.
+
 

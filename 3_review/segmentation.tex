@@ -17,7 +17,7 @@ This approach ensures the right delineation of the organ; nevertheless this proc
 \paragraph{Region-based segmentation}
 \citeauthor{Litjens2012} used a multi-atlas-based segmentation using multi-modal images --- i.e., \ac{t2w}-\ac{mri} and \ac{adc} map --- to segment the prostate with an additional pattern recognition method to differentiate \ac{cg} and \ac{pz}~\cite{Litjens2012}, as proposed in~\cite{Litjens2012a}.
 This method consists in three different steps: (i) the registration between each atlas and the multi-modal images, (ii) the atlas selection, and finally (iii) the classification of the prostate voxels into either \ac{cg} or \ac{pz} classes.
-Each atlas and the \ac{mri} images are registered two successive registrations: a rigid registration to roughly align the atlases and the \ac{mri} images followed by an elastic registration using a B-spline transformation.
+Each atlas and the \ac{mri} images are registered through two successive registrations: a rigid registration to roughly align the atlases and the \ac{mri} images followed by an elastic registration using a B-spline transformation.
 The cost function driving the registration is defined as the weighted sum of the \ac{mi} of both \ac{t2w}-\ac{mri} and \ac{adc} map.
 The final atlas is selected using either a majority voting or the \ac{staple} approach~\cite{Warfield2004}.
 Subsequently, each voxel within the prostate are classified either as \ac{cg} or \ac{pz} using a \ac{lda} classifier.
@@ -35,7 +35,7 @@ The \ac{pz} is modelled using a quadratic function driven by the centre of the p
 
 %\item[$-$] \textbf{\textit{Model-based segmentation:}} 
 \paragraph{Model-based segmentation}
-\citeauthor{Viswanath2009} in~\cite{Viswanath2008a,Viswanath2009} used the \ac{mantra} method as proposed by \citeauthor{Toth2008}.
+\citeauthor{Viswanath2009} in~\cite{Viswanath2008a,Viswanath2009} used the \ac{mantra} method as proposed by \citeauthor{Toth2008}~\cite{Toth2008}.
 \ac{mantra}~\cite{Toth2008} is closely related to the \ac{asm} from~\cite{Cootes1995}.
 This algorithm consists of two stages: (i) a training stage where a shape and an appearance model are generated and (ii) the actual segmentation based on the learned model. 
 For the training stage, a set of landmarks is defined and the shape model is generated as in the original \ac{asm} method~\cite{Cootes1995}.
@@ -61,7 +61,7 @@ Similarly to \ac{mantra}, \ac{weritas} is also based on the \ac{asm} formulation
 %As with the \ac{mantra} method, \ac{weritas} is based on the \ac{asm} formulation.
 %In fact it is very close to the \ac{mantra} itself. 
 %The same texture features are used to construct the appearance models, but instead of using \ac{mi} between the landmarks and neighbour patches for adapting the landmark positions, it defines a metric based on the Mahalanobis distance.
-They differ in the last stage of the algorithm in which the Mahalanobis distance is used instead of the \ac{mi} metric, to adapt the positions of new landmarks.
+It differs in the last stage of the algorithm in which the Mahalanobis distance is used instead of the \ac{mi} metric, to adapt the positions of new landmarks.
 In the training stage, the Mahalanobis distance is computed between landmarks and neighbour patches for each of the features.
 Subsequently, a new metric is proposed as a linear weighted combination of those Mahalanobis distances which maximizes the correlation with the Euclidean distance between the patches and the true landmarks.
 In the segmentation step, this metric is then computed between the initialized landmarks and neighbouring patches in order to update landmark positions, in a similar fashion to other \ac{acm} models.
@@ -75,7 +75,7 @@ This rough segmentation is then used inside a Bayesian framework to refine the s
 \citeauthor{giannini2015fully} segmented the prostate with a multi-Otsu thresholding~\cite{otsu1975threshold} in \ac{adc} images~\cite{giannini2015fully}.
 Further morphological operations are applied to improve the segmentation.
 
-Only the work of \citeauthor{Tiwari2009} used the \ac{mrsi} modality to segment the prostate~\cite{Tiwari2009}.
+Only the work of \citeauthor{Tiwari2009} used the \ac{mrsi} modality to segment the prostate organ~\cite{Tiwari2009}.
 The prostate is segmented based on an unsupervised hierarchical spectral clustering.
 First, each \ac{mrsi} spectrum is projected into a lower-dimensional space using graph embedding~\cite{Shi2000}.
 To proceed, a similarity matrix $W$ is computed using a Gaussian similarity measure from Euclidean distance~\cite{Belkin2001} such that:
@@ -99,7 +99,7 @@ The projection can be performed as a generalized eigenvector problem such that:
 \end{eqnarray}
 
 \noindent where $D$ is the diagonal weight matrix, $L$ is the Laplacian matrix, $\lambda$ and $u$ represent the eigenvalues and eigenvectors.
-Once that the \ac{mrsi} spectra are projected into the lower-dimensional space, a replicate k-means clustering method is used to define 2 clusters.
+Once the \ac{mrsi} spectra are projected into the lower-dimensional space, a replicate k-means clustering method is used to define 2 clusters.
 Subsequently, the data corresponding to the largest cluster is assumed to belong to the non-prostate voxels and thus these voxels are eliminated from the processing.
 The full procedure is repeated until the total number of voxels left is inferior to a given threshold experimentally set.
 
