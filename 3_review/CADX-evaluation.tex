@@ -1,64 +1,58 @@
 \subsection{Evaluation measure} \label{subsec:chp3:img-clas:eval-mea}
 
 \begin{table}
-  \caption{Overview of the evaluation metrics used in \ac{cad} systems.}
-  \small
-  \renewcommand{\arraystretch}{.8}
-  \begin{tabular}{p{.55\linewidth} p{.35\linewidth}}
-    \hline \\ [-1.5ex]
-    \textbf{Evaluation metrics} & \textbf{References} \\ \\ [-1.5ex]
-    \hline \\ [-1.5ex]
-    \quad Accuracy & \cite{Artan2009,Artan2010,Liu2009,Sung2011,Tiwari2012} \\ \\ [-1.5ex]
-    \quad Sensitivity - Specificity & \cite{Artan2009,Artan2010,Giannini2013,Liu2009,Lopes2011,Mazzetti2011,Ozer2009,Ozer2010,Parfait2012,Peng2013,Tiwari2008,Tiwari2009,Viswanath2008,Viswanath2008a} \\ \\ [-1.5ex]
-    \quad \acs{roc} - \acs{auc} & \cite{Ampeliotis2008,Antic2013,Chan2003,Giannini2013,Kelm2007,Langer2009,Liu2013,Lopes2011,Lv2009,Matulewicz2013,Mazzetti2011,Niaf2011,Niaf2012,Peng2013,Tiwari2009a,Tiwari2010,Tiwari2012,Tiwari2013,Viswanath2009,Viswanath2011,Viswanath2012,Vos2008,Vos2008a,Vos2010} \\ \\ [-1.5ex]
-    \quad \acs{froc} & \cite{Litjens2011,Litjens2012,Vos2012} \\ \\ [-1.5ex]
-    \quad Dice's coefficient & \cite{Artan2009,Artan2010,Liu2009,Ozer2009} \\ \\ [-1.5ex]
-    \hline
-  \end{tabular}
+  \caption{Overview of the evaluation metrics used in \acs*{cad} systems.}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{@{}l >{\raggedleft\arraybackslash}X@{}}
+    \toprule
+    \textbf{Evaluation metrics} & \textbf{References} \\
+    \midrule
+    \quad Accuracy & \cite{Artan2009,Artan2010,Liu2009,Sung2011,Tiwari2012} \\
+    \quad Sensitivity - Specificity & \cite{Artan2009,Artan2010,Giannini2013,Liu2009,Lopes2011,Mazzetti2011,Ozer2009,Ozer2010,Parfait2012,Peng2013,Tiwari2008,Tiwari2009,Viswanath2008,Viswanath2008a,trigui2016classification,trigui2017automatic,samarasinghe2016semi,cameron2014multiparametric,cameron2016maps,khalvati2015automated} \\
+    \quad \acs*{roc} - \acs*{auc} & \cite{Ampeliotis2008,Antic2013,Chan2003,Giannini2013,Kelm2007,Langer2009,Liu2013,Lopes2011,Lv2009,Matulewicz2013,Mazzetti2011,Niaf2011,Niaf2012,Peng2013,Tiwari2009a,Tiwari2010,Tiwari2012,Tiwari2013,Viswanath2009,Viswanath2011,Viswanath2012,Vos2008,Vos2008a,Vos2010,giannini2015fully,lehaire2014computer,rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb,rampun2016quantitative} \\
+    \quad \acs*{froc} & \cite{Litjens2011,Litjens2012,Vos2012} \\
+    \quad Dice's coefficient & \cite{Artan2009,Artan2010,Liu2009,Ozer2009} \\
+    \bottomrule
+  \end{tabularx}
 \label{tab:evatec}
 \end{table}
 
-Several metrics can be used in order to assess the performance of a classifier and are summarized in \ac{tab}~\ref{tab:evatec}.
+Several metrics are used in order to assess the performance of a classifier and are summarized in \acs{tab}~\ref{tab:evatec}.
 Voxels in the \ac{mri} image are classified into healthy or malign tissue and compared with a ground-truth.
-This allows to compute a confusion matrix by counting true positive, true negative, false positive and false negative samples.
-From this analysis, different statistics can be extracted. 
+This allows to compute a confusion matrix by counting true positive (TP), true negative (TN), false positive (FP), and false negative (FN) samples.
+From this analysis, different statistics are extracted. 
 
 The first statistic used is the accuracy which is computed as the ratio of true detection to the number of samples.
-However, depending on the strategy employed in the \ac{cad} work-flow, this statistic can be highly biased by a high number of true negative samples which will boost the accuracy score overestimating the actual performance of the classifier.
-That is why, the most common statistic computed are sensitivity and specificity which give a full overview of the performance of the classifier.
-Sensitivity is also called the true positive rate and is equal to the ratio of the true positive samples over the true positive added with the false negative samples as shown in \acs{eq}\,\eqref{eq:sens}.
-Specificity is also named the true negative rate and is equal to the ratio of the true negative samples over the true negative added with the false positive samples as shown in \acs{eq}\,\eqref{eq:spec}.
+However, depending on the strategy employed in the \ac{cad} work-flow, this statistic is highly biased by a high number of true negative samples which boost the accuracy score overestimating the actual performance of the classifier.
+That is why, the most common statistic computed are sensitivity and specificity defined in \acs{eq}\,\eqref{eq:sens} and \acs{eq}\,\eqref{eq:spec}, respectively.
+The metrics give a full overview of the performance of the classifier.
 
 \begin{equation}
-  SEN = \frac{TP}{TP+FN} \ ,
+  \text{SEN} = \frac{\text{TP}}{\text{TP} + \text{FN}} \ ,
   \label{eq:sens}
 \end{equation}
 
 \begin{equation}
-  SPE = \frac{TN}{TN+FP} \ .
+  \text{SPE} = \frac{TN}{\text{TN} + \text{FP}} \ .
   \label{eq:spec}
 \end{equation}
 
-{\color{red} \textbf{Check the definitions, there was a mistake here in the definitions previously}}
-
-These statistics can be used to compute the \acf{roc} curves~\cite{Metz2006}.
-This analysis represents graphically the sensitivity as a function of (1 - specificity), which is in fact the false positive rate, by varying the discriminative threshold of the classifier.
-By varying this threshold, more true negative samples will be found but often at the cost of detecting more false negatives.
-However, this fact is interesting in \ac{cad} since it is possible to obtain a high sensitivity and to ensure that no cancers are missed even if more false alarms have to be investigated.
+These statistics are also used to compute the \ac{roc} curves~\cite{Metz2006}, which give information about voxel-wise classification.
+This analysis represents graphically the sensitivity as a function of $(1 - \text{specificity})$, which is in fact the false positive rate, by varying the discriminative threshold of the classifier.
+By varying this threshold, more true negative samples are found but often at the cost of detecting more false negatives.
+However, this fact is interesting in \ac{cad} since it is possible to obtain a high sensitivity and to ensure that no cancers are missed even if more false alarms have to be investigated or the opposite.
 A statistic derived from \ac{roc} analysis is the \acf{auc} which corresponds to the area under the \ac{roc} and is a measure used to make comparisons between models.
 
-The \ac{roc} analysis can be classified as a pixel-based evaluation method.
-However, a cancer can be also considered as a region.
-The \acf{froc} extends the \ac{roc} analysis but to a region-based level.
-The same confusion matrix can be computed were the sample are not pixels but lesions.
+The \acf{froc} extends the \ac{roc} analysis but to a lesion-based level.
+The same confusion matrix is computed where the sample are not pixels but lesions.
 However, it is important to define what is a true positive sample in that case.
 Usually, a lesion is considered as a true positive sample if the region detected by the classifier overlaps ``sufficiently'' the one delineated in the ground-truth.
-However, ``Sufficiently'' is a subjective measure defined by each researcher and can correspond to one pixel only.
-However, an overlap of 30 to 50 \% is usually adopted.
+However, ``sufficiently'' is a subjective measure defined by each researcher and can correspond to one pixel only.
+However, an overlap of \SIrange{30}{50}{\percent} is usually adopted.
 Finally, in addition to the overlap measure, the Dice's coefficient is often computed to evaluate the accuracy of the lesion localization.
-This coefficient consists of the ratio between twice the number of pixels in common and the sum of the pixels of the lesions in the ground-truth $GT$ and the output of the classifier $S$, defined as shown in \acs{eq}\,\eqref{eq:dice}.
+This coefficient consists of the ratio between twice the number of pixels in common and the sum of the pixels of the lesions in the ground-truth $\text{GT}$ and the output of the classifier $\text{S}$, defined as shown in \acs{eq}\,\eqref{eq:dice}.
 
 \begin{equation}
-  Q_D = \frac{2 | GT \cap S |}{| GT | + | S |} \ .
+  Q_D = \frac{2 | \text{GT} \cap \text{S} |}{| \text{GT} | + | \text{S} |} \ .
   \label{eq:dice}
 \end{equation}

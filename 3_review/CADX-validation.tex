@@ -1,32 +1,32 @@
 \subsection{Model validation} \label{subsec:chp3:img-clas:CADX-val}
 
-
 \begin{table}
-  \caption{Overview of the model validation techniques used in \ac{cad} systems.}
-  \small
+  \caption{Overview of the model validation techniques used in \acs*{cad} systems.}
+  \centering
+  \scriptsize
   % \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{p{.55\linewidth} p{.35\linewidth}}
-    \hline \\ [-1.5ex]
+  \begin{tabularx}{\textwidth}{@{}l >{\raggedleft\arraybackslash}X@{}}
+    \toprule
     \textbf{Model validation techniques} & \textbf{References} \\ \\ [-1.5ex]
-    \hline \\ [-1.5ex]
-    \quad \acs{loo} & \cite{Ampeliotis2007,Ampeliotis2008,Antic2013,Artan2009,Artan2010,Chan2003,Giannini2013,Kelm2007,Litjens2012,Litjens2014,Mazzetti2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Peng2013,Puech2009,Tiwari2013,Viswanath2011,Vos2008,Vos2008,Vos2010} \\ \\ [-1.5ex]
-    \quad \acs{kcv} & \cite{Litjens2011,Parfait2012,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2012,Viswanath2012,Viswanath2009,Vos2012} \\ \\ [-1.5ex]
-    \hline
-  \end{tabular}
+    \midrule
+    \quad \acs*{loo} & \cite{Ampeliotis2007,Ampeliotis2008,Antic2013,Artan2009,Artan2010,Chan2003,Giannini2013,Kelm2007,Litjens2012,Litjens2014,Mazzetti2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Peng2013,Puech2009,Tiwari2013,Viswanath2011,Vos2008,Vos2008,Vos2010,cameron2016maps,cameron2014multiparametric,lehaire2014computer,khalvati2015automated,chung2015prostate} \\ \\ [-1.5ex]
+    \quad \acs*{kcv} & \cite{Litjens2011,Parfait2012,Tiwari2009,Tiwari2009a,Tiwari2010,Tiwari2012,Viswanath2012,Viswanath2009,Vos2012,trigui2016classification,trigui2017automatic,rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb,rampun2016quantitative} \\ \\ [-1.5ex]
+    \bottomrule
+  \end{tabularx}
 \label{tab:valmod}
 \end{table}
 
-In pattern recognition, the use of model validation techniques to assessing the performance of a classifier plays an important role in the final results.
-Two techniques are broadly used in the development of \ac{cad} system and are summarized in Table.~\ref{tab:valmod}.
-The most popular technique used in \ac{cad} systems (see Table.~\ref{tab:valmod}) is the \acf{loo} technique.
+In pattern recognition, the use of model validation techniques to assessing the performance of a classifier plays an important role for reporting results.
+Two techniques are broadly used in the development of \ac{cad} system and are summarized in \acs{tab}~\ref{tab:valmod}.
+The most popular technique used in \ac{cad} systems is the \acf{loo} technique.
 From the whole data, one patient is kept for validation and the other cases are used for training.
 This manipulation is repeated until each patient has been used for validation.
 This technique is popular when working with a limited number of patients, allowing to train on representative number of cases even with a small dataset.
-However \ac{loo} can suffer from large variance and can be considered as an unreliable estimate \cite{Efron1983}.
+However, \ac{loo} cross-validation suffers from a large variance and is considered as an unreliable estimate~\cite{Efron1983}.
 
 The other technique is the \acf{kcv} technique which is based on splitting the dataset into $k$ subsets where the samples are randomly selected.
-Then, one fold is kept for the validation and the remaining subsets are used for training.
+Then, one fold is kept for testing and the remaining subsets are used for training.
 The classification is then repeated as in the \ac{loo} technique.
 In fact \acf{loo} is a particular case of \acf{kcv} when $k$ equals the number of patients.
-In the reviewed papers, the typical values used for $k$ were set to three and five.
+In the reviewed papers, the typical values used for $k$ has been set to three and five.
 \acf{kcv} is regarded as more appropriate than \acf{loo}, but the number of patients in the dataset needs to be large enough for the results to be meaningful.
