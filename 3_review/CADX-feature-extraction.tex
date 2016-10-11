@@ -53,7 +53,7 @@ From \acs{eq}\,\eqref{eq:tstat}, more the means of the class distribution diverg
 
 The $p$-value statistic is deduced from the $t$-test and corresponds to the probability of obtaining such an extreme test assuming that the null hypothesis is true~\cite{Goodman1999}.
 %Hence, smaller the $p$-value, the more likely we are to reject the null hypothesis and more relevant the feature is likely to be.
-Hence, smaller the $p$-value, the more likely the null hypothesis to be rejected the null hypothesis and more relevant the feature is likely to be.
+Hence, smaller the $p$-value, the more likely the null hypothesis to be rejected and more relevant the feature is likely to be.
 Finally, the features are ranked and the most significant features are selected.
 However, this technique suffers from a main drawback since it assumes that each feature is independent, which is unlikely to happen and introduces a high degree of redundancy in the features selected.
 
@@ -61,7 +61,7 @@ However, this technique suffers from a main drawback since it assumes that each 
 Taking the aforementioned formulation, the Fisher discriminant ratio is formalized as the ratio of the interclass variance to the intraclass variance as:
 
 \begin{equation}
-F_r = \frac{\bar{X}_1 - \bar{X}_2}{s^{2}_{X_1}+s^{2}_{X_2}} \ .
+F_r = \frac{(\bar{X}_1 - \bar{X}_2)^2}{s^{2}_{X_1}+s^{2}_{X_2}} \ .
 \label{eq:fisherratio}
 \end{equation}
 
@@ -173,7 +173,7 @@ The weight matrix $W$ is estimated using a least square optimization as in \acs{
 	&& \text{subject to } \sum_j W(i,j) = 1 \ , \nonumber
 \end{eqnarray}
 
-Then, the essence of \ac{lle} is to project the data into a low-dimensional space, while retaining the data saptial organization.
+Then, the essence of \ac{lle} is to project the data into a low-dimensional space, while retaining the data spatial organization.
 Therefore, the projection into the low-dimensional space is tackled as an optimization problem as:
 
 \begin{equation}
