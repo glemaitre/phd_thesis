@@ -72,9 +72,15 @@ Different feature selection and extraction methods were presented in Sect.~\ref{
 Among those \ac{pca} is used as feature extraction on  \ac{mrsi} and \ac{dce}-based features.
 In addition to \ac{pca}, sparse-\ac{pca} and \ac{ica} are also used to extract distinct features from \ac{mrsi} and \ac{dce}-based features.
 
-\Ac{ica} is defined as ....
+Similar to \ac{pca}, \ac{ica}~\cite{comon1994independent} is looking for independent components of the datat.
+However, it does not require orthogonolaity of the space and does not assume Gaussian distribution for each independent source.
+Therefore, opposit to \ac{pca} it can recover uniquely the signals themselve rather than  linear subspace in which the signals lie \cite{murphy2012machine}.
 
-Sparse-\ac{pca} is defined as .... 
+
+Sparse-\ac{pca}~\cite{zou2006sparse} is another approach for feaure extraction and dimension reduction.
+Similar to \ac{pca}, this apprcoach project the data into linear combination of input data.
+However, instaed of using original data, it uses the sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
+
 
 Fscore in conjuction with \ac{rf} is used as feature selection approach for image-based features.
 
