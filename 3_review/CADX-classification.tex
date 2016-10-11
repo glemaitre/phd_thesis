@@ -2,46 +2,7 @@
 
 %\subsubsection{Classifier} \label{subsubsec:chp3:img-clas:CADX-clas:clas}
 
-\begin{table}
-  \caption{Overview of the classifiers used in \acs*{cad} systems.}
-  \scriptsize
-  \begin{tabularx}{\textwidth}{l >{\raggedleft\arraybackslash}X@{}}
-    \toprule
-    \textbf{Classifier} & \textbf{References} \\
-    \midrule
-    \textbf{Rule-based method:} & \cite{Lv2009,Puech2009} \\ \\ [-1.5ex]
-    \textbf{Clustering methods:} & \\
-    \quad $k$-means clustering & \cite{Tiwari2007,Tiwari2008,Tiwari2009} \\
-    \quad \acs{knn} & \cite{Litjens2012,Niaf2011,Niaf2012,rampun2016computerb} \\ \\ [-1.5ex]
-    \textbf{Linear model classifiers:} & \\
-    \quad \acs{lda} & \cite{Antic2013,Chan2003,Litjens2014,Niaf2011,Niaf2012,Vos2012} \\
-    \quad Logistic regression & \cite{Kelm2007,Langer2009,lehaire2014computer,rampun2015computer} \\ \\ [-1.5ex]
-    \textbf{Non-linear classifier:} & \\
-    \quad \acs{qda} & \cite{Viswanath2012} \\ \\ [-1.5ex]
-    \textbf{Probabilistic classifier:} & \\
-    \quad Naive Bayes & \cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\ \\ [-1.5ex]
-    \textbf{Ensemble learning classifiers:} & \\
-    \quad AdaBoost & \cite{Litjens2014,Lopes2011} \\
-    \quad \acs*{rf} & \cite{Kelm2007,Litjens2014,Tiwari2012,Tiwari2013,Viswanath2009,trigui2017automatic,trigui2016classification,samarasinghe2016semi,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\
-    \quad Probabilistic boosting tree & \cite{Tiwari2009,Tiwari2010,Tiwari2012} \\ \\ [-1.5ex]
-    \textbf{Kernel method:} & \\
-    \quad Gaussian processes & \cite{Kelm2007} \\ \\ [-1.5ex]
-    \textbf{Sparse kernel methods:} & \\
-    \quad \acs{svm} & \cite{Artan2009,Artan2010,Chan2003,Litjens2011,Litjens2012,Liu2013,Lopes2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Parfait2012,Peng2013,Sung2011,Tiwari2012,Vos2008,Vos2008a,Vos2010,Vos2012,giannini2015fully,trigui2017automatic,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
-    \quad \acs{rvm} & \cite{Ozer2009,Ozer2010} \\ \\ [-1.5ex]
-    \textbf{Neural network:} & \\ 
-    \quad Multiple layer perceptron & \cite{Matulewicz2013,Parfait2012,trigui2017automatic,trigui2016classification,rampun2016computer} \\
-    \quad Probabilistic neural network & \cite{Ampeliotis2007,Ampeliotis2008,Viswanath2011} \\ \\ [-1.5ex]
-    \textbf{Graphical model classifiers:} & \\
-    \quad Markov random field & \cite{Liu2009,Ozer2010} \\
-    \quad Conditional random field & \cite{Artan2009,Artan2010,chung2015prostate} \\
-    \bottomrule
-  \end{tabularx}
-\label{tab:class}
-\end{table}
-
 Once the feature vector has been extracted and eventually the complexity reduced, it is possible to make a decision and classify this feature vector to belong to \ac{cap} or healthy tissue.
-Classification methods used in \ac{cad} system to distinguish these two classes are summarized in \acs{tab}~\ref{tab:class}.
 A full review of classification methods used in pattern recognition is available in~\cite{Bishop2006}.
 
 \paragraph{Rule-based method}
@@ -428,4 +389,44 @@ The difference between these 2 methods resides in the fact that conditional prob
 
 \noindent $V_{C1}(\cdot)$ is the state (or partition) feature function and $V_{C2}(\cdot)$ is the transition (or edge) feature function~\cite{Kato2012}.
 
+\subsubsection{Summary}
 
+Classification methods used to distinguish \ac{cap} from healthy tissue in in \ac{cad} systems are summarized in \acs{tab}~\ref{tab:class}.
+
+\begin{table}
+  \caption{Overview of the classifiers used in \acs*{cad} systems.}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{l >{\raggedleft\arraybackslash}X@{}}
+    \toprule
+    \textbf{Classifier} & \textbf{References} \\
+    \midrule
+    \textbf{Rule-based method:} & \cite{Lv2009,Puech2009} \\ \\ [-1.5ex]
+    \textbf{Clustering methods:} & \\
+    \quad $k$-means clustering & \cite{Tiwari2007,Tiwari2008,Tiwari2009} \\
+    \quad \acs{knn} & \cite{Litjens2012,Niaf2011,Niaf2012,rampun2016computerb} \\ \\ [-1.5ex]
+    \textbf{Linear model classifiers:} & \\
+    \quad \acs{lda} & \cite{Antic2013,Chan2003,Litjens2014,Niaf2011,Niaf2012,Vos2012} \\
+    \quad Logistic regression & \cite{Kelm2007,Langer2009,lehaire2014computer,rampun2015computer} \\ \\ [-1.5ex]
+    \textbf{Non-linear classifier:} & \\
+    \quad \acs{qda} & \cite{Viswanath2012} \\ \\ [-1.5ex]
+    \textbf{Probabilistic classifier:} & \\
+    \quad Naive Bayes & \cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\ \\ [-1.5ex]
+    \textbf{Ensemble learning classifiers:} & \\
+    \quad AdaBoost & \cite{Litjens2014,Lopes2011} \\
+    \quad \acs*{rf} & \cite{Kelm2007,Litjens2014,Tiwari2012,Tiwari2013,Viswanath2009,trigui2017automatic,trigui2016classification,samarasinghe2016semi,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\
+    \quad Probabilistic boosting tree & \cite{Tiwari2009,Tiwari2010,Tiwari2012} \\ \\ [-1.5ex]
+    \textbf{Kernel method:} & \\
+    \quad Gaussian processes & \cite{Kelm2007} \\ \\ [-1.5ex]
+    \textbf{Sparse kernel methods:} & \\
+    \quad \acs{svm} & \cite{Artan2009,Artan2010,Chan2003,Litjens2011,Litjens2012,Liu2013,Lopes2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Parfait2012,Peng2013,Sung2011,Tiwari2012,Vos2008,Vos2008a,Vos2010,Vos2012,giannini2015fully,trigui2017automatic,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
+    \quad \acs{rvm} & \cite{Ozer2009,Ozer2010} \\ \\ [-1.5ex]
+    \textbf{Neural network:} & \\ 
+    \quad Multiple layer perceptron & \cite{Matulewicz2013,Parfait2012,trigui2017automatic,trigui2016classification,rampun2016computer} \\
+    \quad Probabilistic neural network & \cite{Ampeliotis2007,Ampeliotis2008,Viswanath2011} \\ \\ [-1.5ex]
+    \textbf{Graphical model classifiers:} & \\
+    \quad Markov random field & \cite{Liu2009,Ozer2010} \\
+    \quad Conditional random field & \cite{Artan2009,Artan2010,chung2015prostate} \\
+    \bottomrule
+  \end{tabularx}
+\label{tab:class}
+\end{table}

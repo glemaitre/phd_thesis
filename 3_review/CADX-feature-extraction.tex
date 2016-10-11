@@ -3,33 +3,7 @@ As presented in the previous section, it is a common practise to extract a wide 
 While dealing with \ac{mpmri}, the feature space created is a high-dimensional space which might mislead or corrupt the classifier during the training phase.
 Therefore, it is of interest to reduce the number of dimensions before proceeding to the classification task.
 The strategies used can be grouped as: (i) feature selection and (ii) feature extraction.
-In this section only the methods used in \ac{cad} system are presented and summarized in \acs{tab}~\ref{tab:featext}.
-
-\begin{table}
-  \caption{Overview of the feature selection and extraction methods used in \acs*{cad} systems.}
-  \scriptsize
-  \centering
-  \begin{tabular}{l r}
-    \toprule
-    \textbf{Dimension reduction methods} & \textbf{References} \\
-    \midrule
-    \textbf{Feature selection:} & \\ \\ [-1.5ex]
-    \quad Statistical test & \cite{Niaf2011,Niaf2012,Vos2012} \\
-    \quad \ac{mi}-based methods & \cite{Niaf2011,Niaf2012,Vos2008,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
-    \quad Correlation-based methods & \cite{rampun2016computer,rampun2015computer} \\ \\ [-1.5ex]
-    \textbf{Feature extraction:} & \\ \\ [-1.5ex]
-    \quad Linear mapping & \\
-    \quad \quad \acs*{pca} & \cite{Tiwari2008,Tiwari2009} \\
-    \quad Non-linear mapping & \\
-    \quad \quad Laplacian eigenmaps & \cite{Tiwari2007,Tiwari2009a,Tiwari2009,Tiwari2010,Viswanath2008,Viswanath2011} \\
-    \quad \quad \acs*{lle} and \acs*{lle}-based & \cite{Tiwari2008,Tiwari2009,Viswanath2008a,Viswanath2008} \\
-    \quad Dictionary-based learning & \\
-    \quad \quad Sparse coding & \cite{lehaire2014computer} \\
-    \quad \quad \acs*{bow} & \cite{rampun2016computerb,rampun2015classifying} \\
-    \bottomrule
-  \end{tabular}
-\label{tab:featext}
-\end{table} 
+In this section only the methods used in \ac{cad} system are presented
 
 \subsubsection{Feature selection}\label{subsubsec:chp3:img-clas:CADX:fea-ext:sel}
 The feature selection strategy is based on selecting the most discriminative feature dimensions of the high-dimensional space.
@@ -251,3 +225,33 @@ The final descriptor is a histogram of size \textit{k} which represents the code
 %% \end{equation} 
 %% \noindent where $X_{l} \in R^{K \times P}$ is the sparse code matrix~\cite{sidibe2015discrimination}. 
 %% \end{description}
+
+\subsubsection{Summary}
+
+The feature selection and extraction used in \ac{cad} systems are summarized in \acs{tab}~\ref{tab:featext}.
+
+\begin{table}
+  \caption{Overview of the feature selection and extraction methods used in \acs*{cad} systems.}
+  \scriptsize
+  \centering
+  \begin{tabular}{l r}
+    \toprule
+    \textbf{Dimension reduction methods} & \textbf{References} \\
+    \midrule
+    \textbf{Feature selection:} & \\ \\ [-1.5ex]
+    \quad Statistical test & \cite{Niaf2011,Niaf2012,Vos2012} \\
+    \quad \ac{mi}-based methods & \cite{Niaf2011,Niaf2012,Vos2008,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
+    \quad Correlation-based methods & \cite{rampun2016computer,rampun2015computer} \\ \\ [-1.5ex]
+    \textbf{Feature extraction:} & \\ \\ [-1.5ex]
+    \quad Linear mapping & \\
+    \quad \quad \acs*{pca} & \cite{Tiwari2008,Tiwari2009} \\
+    \quad Non-linear mapping & \\
+    \quad \quad Laplacian eigenmaps & \cite{Tiwari2007,Tiwari2009a,Tiwari2009,Tiwari2010,Viswanath2008,Viswanath2011} \\
+    \quad \quad \acs*{lle} and \acs*{lle}-based & \cite{Tiwari2008,Tiwari2009,Viswanath2008a,Viswanath2008} \\
+    \quad Dictionary-based learning & \\
+    \quad \quad Sparse coding & \cite{lehaire2014computer} \\
+    \quad \quad \acs*{bow} & \cite{rampun2016computerb,rampun2015classifying} \\
+    \bottomrule
+  \end{tabular}
+\label{tab:featext}
+\end{table} 

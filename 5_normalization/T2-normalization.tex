@@ -1,35 +1,39 @@
 \section{Normalization of \ac{t2w}-\ac{mri} images} \label{sec:chp5:T2-norm}
-This section presents the state-of-the-art method poroposed for normalization of \ac{t2w}-\ac{mri} prostate images.
-Our proposed methods (Sect.~\ref{subsec:chp5:T2-norm:meth}), the designed experiments and finally the conclusions drawn from the results obtained. 
- 
-Artan \textit{et al.}~\cite{Artan2010,Artan2009} and Ozer \textit{et al.}~\cite{Ozer2009,Ozer2010} proposed to normalize the T2W-\ac{mri} images by computing the standard score (i.e., \textit{z-score}) of the \ac{pz} pixels such as: 
+
+This section focuses on \ac{t2w}-\ac{mri} normalization.
+First, the related work is presented in \ac{sec}\,\ref{subsec:chp5:relwork1} before to focus on two new normalization methods which are presented and investigated in \acs{sec}\,\ref{subsec:chp5:T2-norm:meth} and \acs{sec}\,\ref{subsec:chp5:T2-norm:Exp-res}
+
+\subsection{Related work}\label{subsec:chp5:relwork1}
+
+We briefly recall the state-of-the-art methods which have been proposed for the normalization of \ac{t2w}-\ac{mri} prostate images.
+
+\citeauthor{Artan2010}, \citeauthor{Ozer2010}, and \citeauthor{rampun2016computerb} used a parametric method to normalize \ac{t2w}\ac{mri} images~\cite{Artan2009,Artan2010,Ozer2009,Ozer2010,rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb}.
+This parametric method is based on computing the standard score --- also known as \emph{z-score} --- of the \ac{pz} voxels such as: 
 \begin{equation}
   I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ ,
   \label{eq:zscore}
 \end{equation}
-\noindent where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity. 
-This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
+\noindent where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity, respectively. 
+This transformation enforces the image \ac{pdf} to have a null mean and a unit standard deviation.
 However, this normalization is not appropriate if the \ac{pdf} do not follow a Gaussian distribution as illustrated in Fig.\,\ref{fig:fitting}
 
-Lv \textit{et al.}~\cite{Lv2009} used the method proposed by Nyul\,\textit{et al.}~\cite{Nyul2000}.
-For a given patient, a warping function is inferred by matching some specific landmarks (i.e., median and different percentiles) of the current \ac{pdf} to the same landmarks learned during a training phase from several patients. 
+\citeauthor{Lv2009}~cite{Lv2009} used the non-parametric method which is a piecewise-linear normalization, proposed by \citeauthor{Nyul2000} in~\cite{Nyul2000}.
+For a given patient, a warping function is inferred by matching some specific landmarks --- i.e., different percentiles --- of the current \ac{pdf} to the same landmarks learned during a training phase from several patients. 
 The mapping between each landmark is performed using a linear mapping.
-Viswanath \textit{et al.}~\cite{Viswanath2012} used a variant of the previous method by segmenting first the image using region growing with a pre-defined homogeneity criterion and keeping only the largest region to build the \ac{pdf}.
-Nevertheless, the warping functions inferred by these methods can suffer from abrupt changes around the landmarks position, leading to a disrupt \ac{pdf} in the normalized image.  
+\citeauthor{Viswanath2012} used a variant of the previous method by segmenting first the image using region growing with a pre-defined homogeneity criterion and keeping only the largest region to build the \ac{pdf}~\cite{Viswanath2012}.
+Nevertheless, the warping functions inferred by these methods suffer from abrupt changes around the landmarks position, leading to a disrupt \ac{pdf} in the normalized image.
 
-In this section, we evaluate and compare different normalization approaches in the context of T2W-\ac{mri} prostate images normalization.
-Our contribution is threefold: (i) a normalization approach based on a Rician \textit{a priori}; (ii) a normalization approach based on a method used in registration of functional data, without any assumption regarding the \ac{pdf} of the data; (iii) a novel evaluation metric to asses quantitatively the alignment of the \acp{pdf} independently of the assumed distribution. 
-These methods will be compared qualitatively and quantitatively, with both \textit{z-score} normalization and piecewise-linear normalization.
-
+In this section, we evaluate and compare different normalization approaches in the context of \ac{t2w}-\ac{mri} prostate image normalization.
+Our contribution is threefold: (i) a parametric normalization approach based on a Rician \textit{a priori}; (ii) a non-parametric normalization approach based on a method used in registration of functional data; and (iii) a novel evaluation metric to asses quantitatively the alignment of the \acp{pdf} independently of the assumed distribution. 
+These methods are compared qualitatively and quantitatively, with both \textit{z-score} normalization and piecewise-linear normalization.
 
 \subsection{Methodology}\label{subsec:chp5:T2-norm:meth}
 
-
-\subsubsection{Normalization using Rician \textit{a priori}}\label{subsubsec:chp5:T2-norm:meth:rician}
-As previosuly stated, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
-We believe that normalizing \ac{mri} data using a parametric model based on a Rician distribution would improve the results for the parametric case.
-Expecting this improvement by changing the data model from the widely used Gaussian distribution to Rician distribution is reasonable. 
-Indeed, Bernstein \textit{et al.}~\cite{Bernstein1989} state that \ac{mri} data theoretically follows a Rayleigh distribution for a low \ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases.
+\subsubsection{Parametric normalization using Rician \textit{a priori}}\label{subsubsec:chp5:T2-norm:meth:rician}
+As previously stated, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
+We believe that normalizing \ac{mri} data using a parametric model based on a Rician distribution would improve the results.
+Expecting this improvement by changing the data model from the widely used Gaussian distribution to Rician distribution is reasonable.
+Indeed, \citeauthor{Bernstein1989} state that \ac{mri} data theoretically follow a Rayleigh distribution for a low-\ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases~\citeauthor{Bernstein1989}.
 Figure~\ref{fig:fitting} shows the intensity spectrum for some \ac{mri} prostate data as well as the fitted Gaussian and Rician distributions.
 A qualitative assessment of the underlying distribution is performed by overlying the fitted distribution, while quantitative results of the fitting are given in terms of \ac{rms}.
 It can be highlighted that the Rician model better fits the data than the Gaussian model.
@@ -46,10 +50,15 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
   \label{fig:fitting}
 \end{figure}
 
-The normalization is carried out as: 
-(i) fit a Rician model to each prostate \ac{pdf} using non-linear least squares minimization; 
-(ii) compute the mean (see~Eq.\,\eqref{eq:meanr}) and variance (see~Eq.\,\eqref{eq:var}) of the Rician model;
-(iii) normalize the entire data using the \textit{z-score} similarly as in~Eq.\,\eqref{eq:zscore}.
+The normalization is carried out through the following 3 steps: 
+(i) fit a Rician model --- \acs{eq}\,\eqref{eq:rice} --- to each prostate \ac{pdf} using non-linear least squares minimization; 
+(ii) compute the mean --- \acs{eq}\,\eqref{eq:meanr} --- and variance --- \acs{eq}\,\eqref{eq:var} --- of the Rician model;
+(iii) normalize the entire data using the \textit{z-score} similarly as in~\acs{eq}\,\eqref{eq:zscore}.
+
+\begin{equation}
+  f(x| \nu, \sigma) = \frac{x}{\sigma^2}\exp\left( \frac{- (x^2 + \nu^2)}{2\sigma^2} \right) I_0 \left( \frac{x \nu}{\sigma^2} \right) \ ,
+  \label{eq:rice}
+\end{equation}
 
 \begin{equation}
   \mu_{r} = \sigma  \sqrt{\frac{\pi}{2}}\,\,L_{1/2}(-\frac{\nu^2}{2\sigma^2})  \ ,
@@ -61,16 +70,16 @@ The normalization is carried out as:
   \label{eq:var}
 \end{equation}
 
-\noindent where $\nu$ and $\sigma$ are the distance between the reference point and the center of the bivariate distribution and the scale, respectively; $L_{1/2}$ denotes a Laguerre polynomial.
+\noindent where $\nu$ and $\sigma$ are the distance between the reference point and the center of the bi-variate distribution and the scale, respectively; $L_{1/2}$ denotes a Laguerre polynomial; $I_0$ is the modified Bessel function of the first kind with order zero.
 
-\subsubsection{Normalization using generative models in functional data analysis}\label{subsubsec:chp5:T2-norm:gen-model}
+\subsubsection{Non-parametric normalization based on \acs*{srsf}}\label{subsubsec:chp5:T2-norm:gen-model}
 
-Srivastava \textit{et al.}~\cite{Srivastava2011} have proposed a generic method to register functional data, without any assumption regarding the models of different functions. 
-This framework (see Sect.\,\ref{sec:regfra}) relies on the \ac{srsf} representation (see Sect.\,\ref{sec:srsf}) which transforms the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between two functions in this new representation.
+\citeauthor{Srivastava2011} have proposed a generic method to register functional data, without any assumption regarding the models of the different functions~\cite{Srivastava2011}. 
+In a nutshell, this framework relies on the \ac{srsf} representation which transforms the Fisher-Rao metric into the conventional $\mathbb{L}^2$ metric, and thus allows to define a cost function corresponding to an Euclidean distance between 2 functions in this new representation.
 
-\paragraph{\acl*{srsf} representation} \label{par:chp5:T2-norm:srsf}
+\paragraph{\Ac{srsf} representation}
 
-In the proposed registration framework of functional data, two function $f_1$ and $f_2$ are registered by composing $f_2$ with a warping function $\gamma$ such that:
+In the proposed registration framework of functional data, 2 functions $f_1$ and $f_2$ are registered by composing $f_2$ with a warping function $\gamma$ such that:
 
 \begin{equation}
   \argmin_{\gamma \in \Gamma} D_{FR}(f_1, (f_2 \circ \gamma)) \ ,
@@ -107,7 +116,8 @@ Using this property, a cost function (named amplitude or $y$-distance) is define
 
 \paragraph{Registration framework}\label{par:chp5:T2-norm:regfra}
 
-The registration framework consists into two steps. First, an initialization in which the Karcher mean $\mu_f$ is computed as in Eq.\,\eqref{eq:mean}
+The registration framework consists of two steps.
+First, an initialization in which the Karcher mean $\mu_f$ is computed as in Eq.\,\eqref{eq:mean}
 
 \begin{equation}
   \mu_f = \argmin_{f \in \mathcal{F}} \sum_{i = 1}^{n} D_y(f, f_i)^2 \ .
@@ -126,14 +136,11 @@ Then, for each function $f_i$:
 
 \noindent where $n$ is the total number of functions to be aligned.
 
-This step is iteratively performed based on the gradient of the cost function given in Eq.\,\eqref{eq:mean}. 
-We refer the reader to the work of Srivastava\,\textit{et al.}~\cite{Srivastava2011} for more detailed discussion.
+This step is performed in an iterative manner based on the gradient of the cost function given in Eq.\,\eqref{eq:mean}. 
+We refer the reader to the work of \citeauthor{Srivastava2011} for more detailed discussion~\cite{Srivastava2011}.
 
 
-\subsection{Experiments and results}\label{subsec:chp5:T2-norm:Exp-res}
-
-\subsubsection{Experiments}\label{subsub:chp5:T2-norm:res}
-{\color{red}\textbf{This section has repetetive information according to data, it should be checked.}}
+\subsection{Materials}\label{subsec:chp5:T2-norm:Exp-res}
 
 The experiments are conducted on a subset of public multi-parametric \ac{mri} prostate publicly available dataset\footnote{\url{http://visor.udg.edu/i2cvb/}}~\cite{lemaitre2015boosting}.
 This dataset was acquired from a cohort of patients with higher-than-normal level of \ac{psa}. 
@@ -150,15 +157,59 @@ The model fitting for the Gaussian and Rician normalization is performed as a no
 The piecewise-linear normalization is performed using the following set of percentiles $s \in \{0, 5, 25, 50, 75, 95, 100 \}$ as landmarks.
 In the \ac{srsf}-based normalization, the \acp{pdf} are smoothed using spline-based denoising method.
 
-\subsubsection{Results}\label{subsub:chp5:T2-norm:res}
-\paragraph{Qualitative}
+\subsection{Results and discussion}
+
+\paragraph{Qualitative results}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=1.\textwidth]{5_normalization/figures/T2-normalization/qualitative.png}
+%   \caption{Qualitative evaluation by visual inspection of the alignment of the \ac{pdf}s for the full prostate and the \ac{cap}.}
+%   \label{fig:qu}
+% \end{figure}
+
+\begin{landscape}
 
 \begin{figure}
-  \centering
-  \includegraphics[width=1.\textwidth]{5_normalization/figures/T2-normalization/qualitative.png}
-  \caption{Qualitative evaluation by visual inspection of the alignment of the \ac{pdf}s for the full prostate and the \ac{cap}.}
+  \hspace*{\fill}
+  \subfigure[Raw prostate]{
+    \label{subfig:raw}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/raw.pdf}}
+  \hfill
+  \subfigure[Raw \acs*{cap}]{
+    \label{subfig:raw_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/raw_cap.pdf}}
+  \hspace*{\fill}
+  \\
+  \hspace*{\fill}
+  \subfigure[Gaussian prostate]{
+    \label{subfig:gaussian}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/gaussian.pdf}}
+  \hfill
+  \subfigure[Rician prostate]{
+    \label{subfig:rician}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/rician.pdf}}
+  \hfill
+  \subfigure[Linear prostate]{
+    \label{subfig:piecewise}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/piecewise.pdf}}
+  \hfill
+  \subfigure[\acs*{srsf} prostate]{
+    \label{subfig:srsf}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/srsf.pdf}}
+  \hspace*{\fill}\\
+  \hspace*{\fill}
+  \subfigure[Gaussian \acs*{cap}]{
+    \label{subfig:gaussian_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/gaussian_cap.pdf}}
+  \hfill
+  \subfigure[Rician \acs*{cap}]{
+    \label{subfig:rician_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/rician_cap.pdf}}
+  \hfill
+  \subfigure[Linear \acs*{cap}]{
+    \label{subfig:piecewise_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/piecewise_cap.pdf}}
+  \hfill
+  \subfigure[\acs*{srsf} \acs*{cap}]{
+    \label{subfig:srsf_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/srsf_cap.pdf}}
+  \hspace*{\fill}
+  \caption[Qualitative valuation for \acs*{t2w}-\acs*{mri}]{Qualitative evaluation by visual inspection of the alignment of the \acs*{pdf}s for the full prostate and the \acs*{cap} in \acs*{t2w}-\ac*{mri}x.}
   \label{fig:qu}
 \end{figure}
+
+\end{landscape}
 
 Figure~\ref{fig:qu} depicts the alignment of the different \ac{pdf}s using the different methods implemented. 
 All the methods seem to address the problem of the \ac{pdf} alignment of the full prostate data.
@@ -166,7 +217,7 @@ However, the Rician normalization seems to outperform the other methods when foc
 The \ac{pdf} computed in this specific area is more skewed from its original shape in the case of the piecewise-linear normalization than with the three other normalization strategies.
 The \ac{srsf} normalization gets unstable due to the warping function $\gamma$ found which is in practise non-smooth.
 
-\paragraph{Quantitative}
+\paragraph{Quantitative results}
 
 \begin{figure}
   \centering
