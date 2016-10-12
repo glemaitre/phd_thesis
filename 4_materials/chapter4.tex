@@ -29,24 +29,39 @@ coupled\,\cite{peng2011reproducible}.
 \label{fig:reproducibility_spectrum}
 \end{figure}
 
+Furthermore, \citeauthor{varoquaux2015Software} in his article
+\citetitle{varoquaux2015Software} summarizes a discussion taken place in
+\emph{\acs{mloss}} workshop regarding the issue of reproducible science. The
+take away is that the reproducibility spectrum proposed by
+\citeauthor{peng2011reproducible} falls short because it focuses on providing material to
+backup publications but oversights the importance of sound reusable material and
+methods, which are the foundation of future scientific developments despite
+being cast out of the success formula in academia where only impact factor seems
+to matter.
 
+With all this\footnote{better connector needed. Maybe a sentece}, the structure
+of this chapter is going to appear odd to some readers since our intention with
+this \nameref{chap:4} chapter is two fold:
+(i) use this chapter to position ourselves with respect of reproductible
+research;
+and, (ii) describe all the resources or outcomes from this thesis that make for
+reproductible research.
 
-This chapter is divided in two parts. The first part (@todo) encloses the
-systems and protocols we set in place in to make our research reproducible;
-namely the \emph{iccvb} website and its public code repository. 
-While the second part (@todo) describes the items to make our research
-reproducible; namely the prostate dataset made available at \emph{iccvb},
-the different toolboxes developed for and used in this thesis, as well the code
-to replicate the experiments described in further chapters.
+The former part is more of philosophical discussion or proclamation of the
+working systems and protocols emerging from this thesis work. While the later is
+a more concrete description of the resources to reproduce the work of our
+thesis. Underlying design choices are out of the scope of this chapter. Those
+regarding the methodologies developed for this thesis work can be found in other chapters.
 
-The aim of this chapter is two fold,
-describe the systems and protocols we set
-in place that make the research within this thesis reproducible. 
+\section{Our efforts towards reproducible research.}
+To conduct our research we have developed working strategies based on existing
+and in-house platforms. This section describes its current status with upcoming
+fixtures resulting from writing and reviewing this thesis, since these working
+strategies follow an iterative incremental procedure.
 
-
-\section{Open Data - i2cvb website: an attempt to.. with a treat FREE (as sex, not beer) DATA}
-\acs{iccvb} is a space we have created to deciminate our ideas about
-reproducible research as stated by its four core pillars: 
+\subsection{\acs{iccvb}}
+For this purpose we have created the \acs{iccvb} website and its associated
+github community, which stands on the following core pillars:
 
 \paragraph{Why?. our vision: to democratize the access to research}
 The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
@@ -68,8 +83,7 @@ I2CVB community challenges the impossible as well as the current status quo in r
 
 At I2CVB, we believe that Free Software and Quality Management have already reshaped the world and that it is time to apply some of the successful practices learned in such domains to expand the boundaries of research in computer vision and specially for the medical imaging case.
 
-
-\section{Open source}
+\subsection{Software Quality}
 
 All the different source code implemented for this thesis have been released to support future development and the possibility to build a consistent benchmark.
 All available code is primarily developed in Python with a concern of:
@@ -77,6 +91,11 @@ All available code is primarily developed in Python with a concern of:
 (ii) \emph{Continuous integration} is achieved through tools as Travis CI to easily integrate new contributions and ensure back-compatibility;
 (iii) \emph{Community-based development} by using collaborative tools --- git, GitHub, and gitter --- to ease collaborative programming, issue tracking, code integration, and idea discussions;
 (iv) \emph{Documentation} through a description of the developed API.
+
+\subsection{Working strategy}
+As aforesaid, we developed a website and a github community. The website is used
+mainly as facade to our project but its core is the \acs{iccvb} github community
+and this is how we strive for repeatable research. 
 
 \section{Open \acs*{mpmri} data}
 
