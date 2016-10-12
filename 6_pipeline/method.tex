@@ -1,20 +1,55 @@
 \section{Methodology}\label{sec:chp6:method}
 
-Our proposed \ac{cad} system consists of seven different steps of pre-processing, segmentation, registration, features extraction, balancing, feature selection and finally classification which are explained in the following.
+Our \ac{mpmri} \ac{cad} system consists of 7 different steps: pre-processing, segmentation, registration, feature detection, balancing, feature selection/extraction, and finally classification.
 %% It should be noted that \ac{cad} system designed deals with multiparametric \ac{mri} data. 
 
 \subsection{Pre-processing}\label{subsec:chp6:method:PP}
-Pre-processing referes to all the process applied to the original image/signal prior of further processing. 
-\ac{mri}-images, in particular \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} modalities are normalized using our own proposed approaches as presented in Chapter.~\ref{chap:5}.
-\ac{adc}-\ac{mri} images are normalized using piecewise-linear method proposed by {\color{red} \textbf{add reference}}.
 
-\ac{mrsi} signals are pre-processd 
+\begin{figure}
+  \hspace*{\fill}
+  \subfigure[]{\label{fig:adcpdf1}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:adcpdf2}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_2.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:adcpdf3}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_3.pdf}}
+  \hspace*{\fill}
+  \caption[Illustration of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate.]{Illustration of the variability of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate for 3 patients.}
+  \label{fig:adcpdf}
+\end{figure}
 
-\subsection{Segmentation}\label{subsec:chp6:method:Seg}
 
+The reader can refer to \acs{sec}\,\ref{subsec:chp3img-reg:prepro} to have an extensive overview of the state-of-the-art methods used to pre-process \ac{mpmri} data.
+Three types of pre-processing are used for \ac{mri} images: (i) noise filtering, (ii) bias correction, and (iii) standardization/normalization.
+Our dataset is based on \SI{3}{\tesla} images without endorectal coil and therefore, the two first types of correction have not been considered as necessary.
+Normalization is, however, a crucial step to reduce the inter-patient variations which allow to improve the learning during the classification stage.
+\Ac{chp}~\ref{chap:5} presented 2 normalization methods to pre-process \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri}, respectively.
+Therefore, we used these methods to standardize these images.
+Regarding the \ac{adc} map normalization, the \ac{pdf} within the prostate does not follow a known distribution as depicted in \acs{fig}\,\ref{fig:adcpdf}.
+Thus, one cannot use a parametric model to normalize these images and a non-parametric piecewise-linear normalization~\cite{Nyul2000} is the best option for this case.
 
-\subsection{Registration}\label{subsec:chp6:method:Reg}
+\subsection{Segmentation and registration}\label{subsec:chp6:method:Seg-Reg}
 
+For this study, no segmentation method has been developed and the manual segmentation given by our radiologist has been used.
+The prostate is suffering, however, from a misalignment between the different \ac{mri} modalities.
+Therefore, three registrations have been developed to: (i) the patient motion during the \ac{dce}-\ac{mri} acquisition, (ii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions, and (iii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{adc} map acquisition.
+All registrations are implemented in C++ using \ac{itk}.
+
+The \ac{dce}-\ac{mri} acquisition being dynamic, some intra-patient might occur during the acquisition.
+For each serie of this dynamic acquisition, each 3D volume is registered to the first volume acquired, to remove the residual motion.
+The appearance in the \ac{dce}-\ac{mri} images, however, varies due to the presence or not of the contrast media.
+Therefore, the metric chosen to be minimized is the \ac{mi} and the geometric transform has been set to a rigid transform.
+The optimization is performed using a regular step gradient descent.
+
+Once the intra-patient motions corrected, a registration to correct the alignment between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions is performed.
+For that matter, the prostate has been segmented in both modalities --- \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- to create 2 binary masks.
+Therefore, these 3D binary masks are directly registered using the \ac{mse} metric.
+Unlike the previous registration, we use a more complex geometric transform by successively finding a rigid transformation, a coarse elastic transformation, and a fine elastic transformation.
+B-splines transformation is used as the elastic transform.
+These successive transformation allow to get a good initialization for the next transformation.
+The transformation is inferred by minimizing the cost function using a regular step gradient descent.
+
+The \ac{t2w}-\ac{mri} and \ac{adc} map acquisitions are identically registered than the the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} modalities.
+Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\ac{mri} and thus the latter modality is used as the reference modality.
 
 \subsection{Feature detection}\label{subsec:chp6:method:fea-det}
 As presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec}, variety of features have been extracted depending on each modality.
