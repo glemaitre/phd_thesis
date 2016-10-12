@@ -1,0 +1,71 @@
+\begin{appendices}
+\chapter{Conversion from FLASH signal to media concentration}\label{app:signaltoconc}
+
+In this appendix, we show the demonstration used to extract the agent concentration from the \ac{mri} signal.
+
+The signal equation in FLASH sequence~\cite{haase1986flash} is defined as:
+
+\begin{equation}
+  s(t) = S_{eq} \sin \alpha \cdot \frac{1 - \exp\left(-TR\left(R_{10} + r_1 c(t)\right)\right)}{1 - \cos \alpha \cdot \exp\left(-TR\left(R_{10} + r_1 c(t)\right)\right)} ,
+  \label{eq:app:flash}
+\end{equation}
+
+\noindent where $s(t)$ is the \ac{mri} signal, $S_{eq}$ is the maximum signal amplitude of the spoiled gradient at the \ac{te} which is proportional to the \ac{pd}, $\alpha$ is the flip angle, $TR$ is the \acf{tr}, $R_{10}$ is the pre-contrast tissue relaxation time also equal to $\frac{1}{T_{10}}$, $r_1$ is the relaxitivity coefficient of the contrast agent, and $c(t)$ is the media concentration.
+
+Therefore, the pre-contrast signal prior to bolus injection of the media is defined as:
+
+\begin{equation}
+  S_0 = S_{eq} \sin \alpha \cdot \frac{1 - \exp\left(-TR \cdot R_{10}\right)}{1 - \cos \alpha \cdot \exp\left(-TR \cdot R_{10}\right)} .
+  \label{eq:app:precontrast}
+\end{equation}
+
+To simplify the demonstration, let us define:
+
+\begin{align}
+  A &= \exp(-TR \cdot R_{10}) , \\
+  B &= \exp(-TR \cdot r_1 c(t)) .
+\end{align}
+
+Let us define:
+
+\begin{align}
+  S^{*} &= \frac{S_0}{S_{eq} \sin \alpha} , \\
+  &= \frac{1 - A}{1 - A \cos \alpha} .
+\end{align}
+
+Thus,
+
+\begin{align}
+  S^{*}\frac{s(t)}{S_0} &= \frac{S_0}{S_{eq}\sin \alpha} \frac{s(t)}{S_0} , \\
+  &= \frac{1 - A B}{1 - A B \cos \alpha} .
+\end{align}
+
+Now, let us define:
+
+\begin{align}
+  \frac{1 - \cos \alpha \cdot S^{*}\frac{s(t)}{S_0}}{1 - S^{*}\frac{s(t)}{S_0}} &= \frac{ 1 - \cos \alpha\left(\frac{1 - A B}{1 - A B \cos \alpha}\right)} {1 - \frac{1 - A B}{1 - A B \cos \alpha}} , \\
+  &= \frac{1 - A B \cos \alpha - \cos \alpha(1 - A B)}{1 - A B \cos \alpha - (1 - A B)} , \\
+  &= \frac{1 - A B \cos \alpha - \cos \alpha + A B \cos \alpha}{1 - A B \cos \alpha - 1 + A B} , \\
+  &= \frac{1 - \cos \alpha}{ A B (1 - \cos \alpha)}, \\
+  &= \frac{1}{A B}.
+\end{align}
+
+Thus,
+
+\begin{equation}
+  -TR \cdot R_{10} -TR \cdot r_1 c(t) = \ln\left( \frac{1 - \cos \alpha \cdot S^{*}\frac{s(t)}{S_0}}{1 - S^{*}\frac{s(t)}{S_0}} \right) .
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+  c(t) = \frac{1}{TR \cdot r_1} \ln\left( \frac{1 - \cos \alpha \cdot S^{*}\frac{s(t)}{S_0}}{1 - S^{*}\frac{s(t)}{S_0}} \right) - \frac{R_{10}}{r_1} .
+\end{equation}
+
+
+\end{appendices}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../thesis.tex"
+%%% End: 
