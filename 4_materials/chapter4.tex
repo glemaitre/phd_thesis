@@ -1,6 +1,6 @@
 \chapter{Materials}\label{chap:4}
 
-\section{Open \acs*{mpmri} data}
+\section{Open \acs*{mpmri} data}\label{chp4:sec:data}
 
 \paragraph{\SI{1.5}{\tesla} General Electric scanner}
 
@@ -75,7 +75,7 @@ All available code is primarily developed in Python with a concern of:
 
 Several toolboxes and repository have been designed and are presented in the following sections.
 
-\subsection{\texttt{imbalanced-learn} toolbox}
+\subsection{\texttt{imbalanced-learn} toolbox}\label{chp4:sec:imblearn}
 
 The \texttt{imbalanced-learn} toolbox is an open-source python toolbox aiming at providing a wide range of methods to cope with the problem of imbalanced dataset frequently encountered in machine learning and pattern recognition.
 The implemented state-of-the-art methods can be categorized into 4 groups: (i) under-sampling, (ii) over-sampling, (iii) combination of over- and under-sampling, and (iv) ensemble learning methods.
@@ -107,7 +107,7 @@ pipeline.fit(X_train, y_train)
 y_hat = pipeline.predict(X_test)
 \end{lstlisting}
 
-\subsection{\texttt{protoclass} toolbox}
+\subsection{\texttt{protoclass} toolbox}\label{chp4:sec:protoclass}
 
 The \texttt{protoclass} toolbox is an open-source python toolbox providing tools for fast prototyping of machine learning pipeline in medical imaging.
 It implements most of the state-of-the-art feature detection techniques presented in \acs{chp}\,\ref{chap:3}.
