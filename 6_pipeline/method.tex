@@ -94,7 +94,6 @@ Similar to \ac{pca}, \ac{ica}~\cite{comon1994independent} is looking for indepen
 However, it does not require orthogonolaity of the space and does not assume Gaussian distribution for each independent source.
 Therefore, opposit to \ac{pca} it can recover uniquely the signals themselve rather than  linear subspace in which the signals lie \cite{murphy2012machine}.
 
-
 Sparse-\ac{pca}~\cite{zou2006sparse} is another approach for feaure extraction and dimension reduction.
 Similar to \ac{pca}, this apprcoach project the data into linear combination of input data.
 However, instaed of using original data, it uses the sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
@@ -107,7 +106,14 @@ Refereing to Eq.~\eqref{eq:eigpca}, the objective of sparse-\ac{pca} is formulat
 \end{eqnarray}
 \noindent where $k$ indicates that number of non-zero elements in $\mathbf{v}$.
 
-Fscore in conjuction with \ac{rf} is used as feature selection approach for image-based features.
+ANOVA F-test and \ac{rf} are used as feature selection approaches for image-based features.
+ANOVA F-test can assess the superiority or inferiority of the features 
+ANOVA F-test evaluates the potential of one feature at a time to predict the target label by measuring between group variability over within group variability.
+This test finds which features on average are superior of inferior to others versus the null hypothesis.
+%% \begin{equation}
+%% F = \frac{}{}
+%% \label{eq:Ftest}
+%% \end{equation} 
 
 
 \subsection{Classification}\label{subsec:chp6:method:clas}
