@@ -52,7 +52,16 @@ In \ac{nm3}, a subset $M$ containing samples from the majority class is generate
 Then, samples from the subset $M$ are selected such that for each sample, the average distance to the $k$ \ac{nn} samples from the minority class is maximum.
 In our experiment, $k$ and $m$ are fixed to 3.
 \item[\Ac{iht}]~\cite{smith2014instance} undersamples the samples which have a high hardness threshold.
-Hardness indicates the likelihood of missclassificatio rate for each samples.  
+Hardness indicates the likelihood of missclassification rate for each samples.
+The notation of instance hardness are drawn through the decomposition of $p(h \vert t)$ using Bayes' theorem, where $h$ represent the mapping function used to mapp input features to their corresponding labels and $t$ represents the training set.
+\begin{equation}
+  IH_h(\langle x_{i}, y_{i}\rangle) = 1 - p(y_i \vert x_i, h).\
+\label{eq:iht}
+\end{equation}
+The undersampling is performed by keeping the most probable samples (i.e, filtering the samples with high hardness value) through \ac{kcv} training sets while considering specific threshold for filtering.
+%% The hardness of an instance is depedent on the instances in the training data and the algorithm used to produced h (h is a function mapping input features to their corresponding label , i.e, the classifier, or base learner function).
+
+ 
 \end{description}
 
 \subsubsection{\Acl*{os}}
