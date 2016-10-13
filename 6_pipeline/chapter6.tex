@@ -1,12 +1,12 @@
-\chapter{Proposed CADe-CADx system for CAP}\label{chap:6}
-In this chapter we describe our developed \ac{cade}-\ac{cadx} framework for detection of prostate cancer.
-The developed frameworks follow the same outline as depicted in Fig.~\ref{fig:wkfcad}, 
-In the regularization step, different modalities undergo pre-processing, segmentation and registration. 
-While in the second phase varitey of features are detected, sampled and classified.
-In comparison to traditional \ac{cad} systems, the problem of imbalanced data is also considered and prior to feature selection we balance our training set using different techniques.
+\chapter{Proposed CAD system for CaP}\label{chap:6}
 
-Different aspects of the proposed \ac{cad} system including features detection, balancing, selction and finally classification are tested over variety of experiments.
-The reminder of this chapter presents the developed methodology, the designed experiments and the results obtained.
+In this chapter, we develop and investigate a \ac{cad} system for the \ac{cap} detection, using all \ac{mri} modalities, namely \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
+Furthermore, we address some of the issues drawn in the conclusion of \acs{chp}\,\ref{chap:3}: (i) the methods investigated in \acs{chp}\,\ref{chap:5} are used in the pre-processing step of the proposed \ac{cad}; (ii) the discriminative power of each individual modality is investigated; (iii) the problem of learning from imbalanced dataset is investigated using state-of-the-art methods as well as (iv) several strategies for feature selection and combination.
 
+Therefore, the organization of this chapter is as follows: the methodology is described in \acs{sec}\,\ref{sec:chp6:method} by presenting the image regularization framework as well as the image classification framework. \Acl{sec}~\ref{sec:chp6:exp-res} provide different experiments to investigate the performance of the proposed \ac{cad} system. This chapter is concluded by conceive discussion in \acs{sec}\,\ref{sec:chp6:discussion}.
 
 \input{6_pipeline/method.tex}
+
+\input{6_pipeline/experiments.tex}
+
+\input{6_pipeline/discussion.tex}

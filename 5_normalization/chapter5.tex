@@ -1,11 +1,12 @@
 \chapter{Normalization/Standardization of T2W-MRI and DCE-MRI Images} \label{chap:5}
-\Ac{cad} systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration and classification.
-As a pre-processing image and data normalization is a crutial and important step of the chain in order to design a robust classifier and overcome the inter-patients intensity variations.
-However little attention has been dedicated to the normalization.
-In this section, we first propose two methods for normalization of \ac{t2w}-\ac{mri} prostate images based on: (i) Rician \emph{a priori} and (ii) \ac{srsf} representation.
-Then we proposed a fully atumated framework for normalization of \ac{dce}-\ac{mri} images.
-In both cases, a comparison with the state-of-the-art methods are provided.
+\Ac{cad} systems are usually designed as a sequential process consisting of four stages: pre-processing, segmentation, registration, and classification.
+We presented in \acs{sec}\,\ref{subsubsec:ch3:mriprepro} the state-of-the-art techniques for normalization/standardization of \ac{mri} modality among other pre-processing steps.
+As a conclusion, we can stress that only little attention has been dedicated to this topic.
+Data normalization is, however, a crucial and important step of the chain to design a robust classifier and overcome the inter-patient intensity variations.
 
+In this chapter, we focus on the normalization of \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} modalities.
+On the one hand, we investigate two \ac{t2w}-\ac{mri} normalization methods based on (i) Rician \emph{a priori} and (ii) \ac{srsf} representation and compare them with the state-of-the-art methods.
+On the other hand, we propose and investigate a fully automated framework for \ac{dce}-\ac{mri} normalization, the first of its kind.
 
 \input{5_normalization/T2-normalization.tex}
 \input{5_normalization/DCE-normalization.tex}

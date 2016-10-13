@@ -1,20 +1,55 @@
 \section{Methodology}\label{sec:chp6:method}
 
-Our proposed \ac{cad} system consists of seven different steps of pre-processing, segmentation, registration, features extraction, balancing, feature selection and finally classification which are explained in the following.
+Our \ac{mpmri} \ac{cad} system consists of 7 different steps: pre-processing, segmentation, registration, feature detection, balancing, feature selection/extraction, and finally classification.
 %% It should be noted that \ac{cad} system designed deals with multiparametric \ac{mri} data. 
 
 \subsection{Pre-processing}\label{subsec:chp6:method:PP}
-Pre-processing referes to all the process applied to the original image/signal prior of further processing. 
-\ac{mri}-images, in particular \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} modalities are normalized using our own proposed approaches as presented in Chapter.~\ref{chap:5}.
-\ac{adc}-\ac{mri} images are normalized using piecewise-linear method proposed by {\color{red} \textbf{add reference}}.
 
-\ac{mrsi} signals are pre-processd 
+\begin{figure}
+  \hspace*{\fill}
+  \subfigure[]{\label{fig:adcpdf1}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:adcpdf2}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_2.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:adcpdf3}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_3.pdf}}
+  \hspace*{\fill}
+  \caption[Illustration of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate.]{Illustration of the variability of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate for 3 patients.}
+  \label{fig:adcpdf}
+\end{figure}
 
-\subsection{Segmentation}\label{subsec:chp6:method:Seg}
 
+The reader can refer to \acs{sec}\,\ref{subsec:chp3img-reg:prepro} to have an extensive overview of the state-of-the-art methods used to pre-process \ac{mpmri} data.
+Three types of pre-processing are used for \ac{mri} images: (i) noise filtering, (ii) bias correction, and (iii) standardization/normalization.
+Our dataset is based on \SI{3}{\tesla} images without endorectal coil and therefore, the two first types of correction have not been considered as necessary.
+Normalization is, however, a crucial step to reduce the inter-patient variations which allow to improve the learning during the classification stage.
+\Ac{chp}~\ref{chap:5} presented 2 normalization methods to pre-process \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri}, respectively.
+Therefore, we used these methods to standardize these images.
+Regarding the \ac{adc} map normalization, the \ac{pdf} within the prostate does not follow a known distribution as depicted in \acs{fig}\,\ref{fig:adcpdf}.
+Thus, one cannot use a parametric model to normalize these images and a non-parametric piecewise-linear normalization~\cite{Nyul2000} is the best option for this case.
 
-\subsection{Registration}\label{subsec:chp6:method:Reg}
+\subsection{Segmentation and registration}\label{subsec:chp6:method:Seg-Reg}
 
+For this study, no segmentation method has been developed and the manual segmentation given by our radiologist has been used.
+The prostate is suffering, however, from a misalignment between the different \ac{mri} modalities.
+Therefore, three registrations have been developed to: (i) the patient motion during the \ac{dce}-\ac{mri} acquisition, (ii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions, and (iii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{adc} map acquisition.
+All registrations are implemented in C++ using \ac{itk}.
+
+The \ac{dce}-\ac{mri} acquisition being dynamic, some intra-patient might occur during the acquisition.
+For each serie of this dynamic acquisition, each 3D volume is registered to the first volume acquired, to remove the residual motion.
+The appearance in the \ac{dce}-\ac{mri} images, however, varies due to the presence or not of the contrast media.
+Therefore, the metric chosen to be minimized is the \ac{mi} and the geometric transform has been set to a rigid transform.
+The optimization is performed using a regular step gradient descent.
+
+Once the intra-patient motions corrected, a registration to correct the alignment between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions is performed.
+For that matter, the prostate has been segmented in both modalities --- \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- to create 2 binary masks.
+Therefore, these 3D binary masks are directly registered using the \ac{mse} metric.
+Unlike the previous registration, we use a more complex geometric transform by successively finding a rigid transformation, a coarse elastic transformation, and a fine elastic transformation.
+B-splines transformation is used as the elastic transform.
+These successive transformation allow to get a good initialization for the next transformation.
+The transformation is inferred by minimizing the cost function using a regular step gradient descent.
+
+The \ac{t2w}-\ac{mri} and \ac{adc} map acquisitions are identically registered than the the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} modalities.
+Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\ac{mri} and thus the latter modality is used as the reference modality.
 
 \subsection{Feature detection}\label{subsec:chp6:method:fea-det}
 As presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec}, variety of features have been extracted depending on each modality.
@@ -51,7 +86,17 @@ In \ac{nm1}, samples from the majority class are selected such that for each sam
 In \ac{nm3}, a subset $M$ containing samples from the majority class is generated by finding the $m$ \ac{nn} from each sample of the minority class.
 Then, samples from the subset $M$ are selected such that for each sample, the average distance to the $k$ \ac{nn} samples from the minority class is maximum.
 In our experiment, $k$ and $m$ are fixed to 3.
-\item[\Ac{iht}]
+\item[\Ac{iht}]~\cite{smith2014instance} undersamples the samples which have a high hardness threshold.
+Hardness indicates the likelihood of missclassification rate for each samples.
+The notation of instance hardness are drawn through the decomposition of $p(h \vert t)$ using Bayes' theorem, where $h$ represent the mapping function used to mapp input features to their corresponding labels and $t$ represents the training set.
+\begin{equation}
+  IH_h(\langle x_{i}, y_{i}\rangle) = 1 - p(y_i \vert x_i, h).\
+\label{eq:iht}
+\end{equation}
+The undersampling is performed by keeping the most probable samples (i.e, filtering the samples with high hardness value) through \ac{kcv} training sets while considering specific threshold for filtering.
+%% The hardness of an instance is depedent on the instances in the training data and the algorithm used to produced h (h is a function mapping input features to their corresponding label , i.e, the classifier, or base learner function).
+
+ 
 \end{description}
 
 \subsubsection{\Acl*{os}}
@@ -63,8 +108,16 @@ The following methods are compared for \ac{os} techniques.
 Let define $x_i$ as a sample belonging to the minority class.
 Let define $x_{nn}$ as a randomly selected sample from the $k$ \ac{nn} of $x_i$, with $k$ set to 3.
 Therefore, a new sample $x_j$ is generated such that $x_j = x_i + \sigma \left( x_{nn} - x_i \right)$, where $\sigma$ is a random number in the interval $\left[0,1\right]$.
-\item[\Ac{smoteb1}]
-\item[\Ac{smoteb2}]
+\item[\Ac{smoteb1}]~\cite{han2005borderline} over samples the minority samples similar to \ac{smote}.
+However, instead of usig all the minority samples, it focuses on the borderline samples of minority class.
+Borderline samples simply indicate the samples that are closer to the other class.
+In this method first the borderline samples of minority class are detected.
+The sample, $x_{i}$ belongs to borderline samples if more than half of its $k$ \ac{nn} samples belong to majority class.
+Synthetic data is then created based on \ac{smote} method for borderline samples and selection of their $s$ \ac{nn} from the minority class.
+ 
+\item[\Ac{smoteb2}]~\cite{han2005borderline} performs similar to \ac{smoteb1}.
+However, instead of generating synthetic samples from borderline samples and their $s$ \ac{nn} from the minority class, it also generate samples based on their \ac{nn} of majority samples.
+Synthetic samples created based on majority samples are placed closer to samples of minority class.
 \end{description}
 
 \subsection{Feature selection and extraction}\label{subsec:chp6:method:fea-sel}
@@ -72,11 +125,30 @@ Different feature selection and extraction methods were presented in Sect.~\ref{
 Among those \ac{pca} is used as feature extraction on  \ac{mrsi} and \ac{dce}-based features.
 In addition to \ac{pca}, sparse-\ac{pca} and \ac{ica} are also used to extract distinct features from \ac{mrsi} and \ac{dce}-based features.
 
-\Ac{ica} is defined as ....
+Similar to \ac{pca}, \ac{ica}~\cite{comon1994independent} is looking for independent components of the datat.
+However, it does not require orthogonolaity of the space and does not assume Gaussian distribution for each independent source.
+Therefore, opposit to \ac{pca} it can recover uniquely the signals themselve rather than  linear subspace in which the signals lie \cite{murphy2012machine}.
 
-Sparse-\ac{pca} is defined as .... 
+Sparse-\ac{pca}~\cite{zou2006sparse} is another approach for feaure extraction and dimension reduction.
+Similar to \ac{pca}, this apprcoach project the data into linear combination of input data.
+However, instaed of using original data, it uses the sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
+Refereing to Eq.~\eqref{eq:eigpca}, the objective of sparse-\ac{pca} is formulated as maximizing the variance while maintinaing the sparse constraint:
 
-Fscore in conjuction with \ac{rf} is used as feature selection approach for image-based features.
+\begin{eqnarray}
+ && \argmax \quad   \mathbf{v}^{-1} \Sigma \mathbf{v}\ , \label{eq:sparsepca}\\ 
+ && \text{subject to }  \Vert \mathbf{v} \Vert_{2} = 1\ , \nonumber \\
+ && \Vert \mathbf{v} \Vert_{0} \leq k\ . \nonumber
+\end{eqnarray}
+\noindent where $k$ indicates that number of non-zero elements in $\mathbf{v}$.
+
+ANOVA F-test and \ac{rf} are used as feature selection approaches for image-based features.
+ANOVA F-test can assess the superiority or inferiority of the features 
+ANOVA F-test evaluates the potential of one feature at a time to predict the target label by measuring between group variability over within group variability.
+This test finds which features on average are superior of inferior to others versus the null hypothesis.
+%% \begin{equation}
+%% F = \frac{}{}
+%% \label{eq:Ftest}
+%% \end{equation} 
 
 
 \subsection{Classification}\label{subsec:chp6:method:clas}

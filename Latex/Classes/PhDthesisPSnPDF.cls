@@ -333,7 +333,7 @@
     % {{\@firstlab}{ - }{\@secondlab} \par}
     %     \vspace*{1ex}
     % {{\@firstuni}{ - }{\@seconduni} \par}
-	\vspace*{30mm}
+	\vspace*{20mm}
     {\small \textbf{Supervised by: } \par \@supervisora, \@supervisorb \par \@supervisorc, \@supervisord \par}
 	\vspace*{5mm}
     % {\small {\submittedtext} \par}

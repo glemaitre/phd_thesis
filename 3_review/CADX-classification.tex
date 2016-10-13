@@ -2,47 +2,8 @@
 
 %\subsubsection{Classifier} \label{subsubsec:chp3:img-clas:CADX-clas:clas}
 
-\begin{table}
-  \caption{Overview of the classifiers used in \acs*{cad} systems.}
-  \scriptsize
-  \begin{tabularx}{\textwidth}{l >{\raggedleft\arraybackslash}X@{}}
-    \toprule
-    \textbf{Classifier} & \textbf{References} \\
-    \midrule
-    \textbf{Rule-based method:} & \cite{Lv2009,Puech2009} \\ \\ [-1.5ex]
-    \textbf{Clustering methods:} & \\
-    \quad $k$-means clustering & \cite{Tiwari2007,Tiwari2008,Tiwari2009} \\
-    \quad \acs{knn} & \cite{Litjens2012,Niaf2011,Niaf2012,rampun2016computerb} \\ \\ [-1.5ex]
-    \textbf{Linear model classifiers:} & \\
-    \quad \acs{lda} & \cite{Antic2013,Chan2003,Litjens2014,Niaf2011,Niaf2012,Vos2012} \\
-    \quad Logistic regression & \cite{Kelm2007,Langer2009,lehaire2014computer,rampun2015computer} \\ \\ [-1.5ex]
-    \textbf{Non-linear classifier:} & \\
-    \quad \acs{qda} & \cite{Viswanath2012} \\ \\ [-1.5ex]
-    \textbf{Probabilistic classifier:} & \\
-    \quad Naive Bayes & \cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\ \\ [-1.5ex]
-    \textbf{Ensemble learning classifiers:} & \\
-    \quad AdaBoost & \cite{Litjens2014,Lopes2011} \\
-    \quad \acs*{rf} & \cite{Kelm2007,Litjens2014,Tiwari2012,Tiwari2013,Viswanath2009,trigui2017automatic,trigui2016classification,samarasinghe2016semi,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\
-    \quad Probabilistic boosting tree & \cite{Tiwari2009,Tiwari2010,Tiwari2012} \\ \\ [-1.5ex]
-    \textbf{Kernel method:} & \\
-    \quad Gaussian processes & \cite{Kelm2007} \\ \\ [-1.5ex]
-    \textbf{Sparse kernel methods:} & \\
-    \quad \acs{svm} & \cite{Artan2009,Artan2010,Chan2003,Litjens2011,Litjens2012,Liu2013,Lopes2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Parfait2012,Peng2013,Sung2011,Tiwari2012,Vos2008,Vos2008a,Vos2010,Vos2012,giannini2015fully,trigui2017automatic,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
-    \quad \acs{rvm} & \cite{Ozer2009,Ozer2010} \\ \\ [-1.5ex]
-    \textbf{Neural network:} & \\ 
-    \quad Multiple layer perceptron & \cite{Matulewicz2013,Parfait2012,trigui2017automatic,trigui2016classification,rampun2016computer} \\
-    \quad Probabilistic neural network & \cite{Ampeliotis2007,Ampeliotis2008,Viswanath2011} \\ \\ [-1.5ex]
-    \textbf{Graphical model classifiers:} & \\
-    \quad Markov random field & \cite{Liu2009,Ozer2010} \\
-    \quad Conditional random field & \cite{Artan2009,Artan2010,chung2015prostate} \\
-    \bottomrule
-  \end{tabularx}
-\label{tab:class}
-\end{table}
-
 Once the feature vector has been extracted and eventually the complexity reduced, it is possible to make a decision and classify this feature vector to belong to \ac{cap} or healthy tissue.
-Classification methods used in \ac{cad} system to distinguish these two classes are summarized in \acs{tab}~\ref{tab:class}.
-A full review of classification methods used in pattern recognition is available found in~\cite{Bishop2006}.
+A full review of classification methods used in pattern recognition is available in~\cite{Bishop2006}.
 
 \paragraph{Rule-based method}
 \citeauthor{Lv2009} make use of a decision stump classifier to distinguish \ac{cap} and healthy classes~\cite{Lv2009}. 
@@ -78,7 +39,7 @@ The linear discriminant function is defined as:
 	\label{eq:ldafun}
 \end{equation}
 
-\noindent where $\mathbf{x}_i$ is an unlabelled feature vector, $\Sigma$ is the covariance matrix of the training data, $\mu_k$ is the mean vector of the class $k$, and $\pi_k$ is the prior probability of class $k$.
+\noindent where $\mathbf{x}_i = \{x_1, x_2, \dots , x_n\}$ is an unlabelled feature vector of $n$ features, $\Sigma$ is the covariance matrix of the training data, $\mu_k$ is the mean vector of the class $k$, and $\pi_k$ is the prior probability of class $k$.
 To perform the classification, a sample $\mathbf{x}_i$ is assigned to the class which maximizes the discriminant function as in \acs{eq}\,\eqref{eq:ldaclass}.
 \begin{equation}
 	C(\mathbf{x}_i) = \argmax_k \delta_k(\mathbf{x}_i) \ .
@@ -114,10 +75,11 @@ This method has been used to create a linear probabilistic model in~\cite{Kelm20
 Unlike in \ac{lda} in which one assumes that the class covariance matrix $\Sigma$ is identical for all classes, a covariance matrix $\Sigma_k$ specific to each class is computed.
 Thus, \acs{eq}\,\eqref{eq:ldafun} becomes:
 \begin{equation}
-	\delta_{k}(\mathbf{x}_i) = \mathbf{x}_i^{\text{T}} \Sigma_{k}^{-1} \mu_k - \frac{1}{2} \mu_{k}^{\text{T}} \Sigma_{k}^{-1} \mu_k + \log (\pi_k) \ .
+	\delta_{k}(\mathbf{x}_i) = \mathbf{x}_i^{\text{T}} \Sigma_{k}^{-1} \mu_k - \frac{1}{2} \mu_{k}^{\text{T}} \Sigma_{k}^{-1} \mu_k + \log (\pi_k) \ ,
 	\label{eq:qdafun}
 \end{equation}
 
+\noindent where $\mathbf{x}_i$ has additional terms corresponding to the pairwise products of individual features such as $\{x_1, x_2, \dots , x_n, x_1^2, x_1x_2, \dots x_n^2\}$.
 The classification scheme in the case of the \ac{qda} is identical to \acs{eq}\,\eqref{eq:ldaclass}.
 
 \paragraph{Probabilistic classifiers}
@@ -181,7 +143,7 @@ Thus, after $T$ iterations, the final strong classifier corresponds to the linea
 
 \citeauthor{Lopes2011} make use of the AdaBoost classifier to perform their classification~\cite{Lopes2011} while \citeauthor{Litjens2014} used the GentleBoost variant~\cite{Friedman1998} which provides a modification of the function affecting the weight at each weak classifier~\cite{Litjens2014}.
 
-\ac{rf} is a classification method which is based on creating an ensemble of decision trees and was introduced in~\cite{Breiman2001}.
+\Ac{rf} is a classification method which is based on creating an ensemble of decision trees and was introduced in~\cite{Breiman2001}.
 In the learning stage, multiple decision tree learners~\cite{Breiman1984} are trained.
 However, each decision tree is trained using a different dataset.
 Each of these datasets corresponds to a bootstrap sample generated by randomly choosing $n$ samples with replacement from the initially $N$ samples available~\cite{Efron1979}.
@@ -258,7 +220,7 @@ First, for a new observation $\mathbf{x}_*$, the corresponding probability $p(f(
 	W & = & \nabla \nabla \log p(\mathbf{y}|f(\mathbf{x})) \ , \nonumber
 \end{eqnarray}
 
-\noindent where $K_{**}$ is the variance of the testing sample $\mathbf{x}_*$, $K_{*}$ is the covariance of training-testing samples $\mathbf{x}$ and $\mathbf{x}_*$.
+\noindent where $K_{**}$ is the covariance function $k(\mathbf{x}_*, \mathbf{x}_*)$ the testing sample $\mathbf{x}_*$, $K_{*}$ is the covariance function $k(\mathbf{x}, \mathbf{x}_*)$ of training-testing samples $\mathbf{x}$ and $\mathbf{x}_*$.
 Then, the function $f(\mathbf{x}_*)$ is squashed using the sigmoid function and the probability of the class membership is defined such that:
 
 \begin{equation}
@@ -332,12 +294,12 @@ In \ac{cad} for \ac{cap} systems, \ac{svm} is the most popular classification me
 \end{equation}
 
 \noindent where $\phi(\cdot)$ is a Gaussian basis function, $\mathbf{x}_i|i=\{1,\cdots,N\}$ are the $N$ training points, and $\boldsymbol{\alpha}$ are the weights vector.
-As mentioned in~\cite{Quinonero-Candela2002}, the sparsity regarding the relevance vector arises if $j \alpha_j^{-1} = 0$.
+As mentioned in~\cite{Quinonero-Candela2002}, the sparsity regarding the relevance vector arises for some $j$, the weight $\alpha_j^{-1} = 0$.
 The set of weights $\boldsymbol{\alpha}$ is inferred using the expectation maximization algorithm.
-\citeauthor{Ozer2010} usde of \ac{rvm} and make a comparison with \ac{svm} for the task of \ac{cap} detection~\cite{Ozer2009,Ozer2010}.
+\citeauthor{Ozer2010} used of \ac{rvm} and make a comparison with \ac{svm} for the task of \ac{cap} detection~\cite{Ozer2009,Ozer2010}.
 
 \paragraph{Neural network} 
-Multilayer perceptron is a feed-forward neural networks considered as the most successful model of this kind in pattern recognition~\cite{Bishop2006}.
+Multilayer perceptron is a feed-forward neural network considered as the most successful model of this kind in pattern recognition~\cite{Bishop2006}.
 The most well known model used is based on 2 layers where a prediction of an observation is computed as:
 
 \begin{equation}
@@ -427,4 +389,44 @@ The difference between these 2 methods resides in the fact that conditional prob
 
 \noindent $V_{C1}(\cdot)$ is the state (or partition) feature function and $V_{C2}(\cdot)$ is the transition (or edge) feature function~\cite{Kato2012}.
 
+\subsubsection{Summary}
 
+Classification methods used to distinguish \ac{cap} from healthy tissue in in \ac{cad} systems are summarized in \acs{tab}~\ref{tab:class}.
+
+\begin{table}
+  \caption{Overview of the classifiers used in \acs*{cad} systems.}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{l >{\raggedleft\arraybackslash}X@{}}
+    \toprule
+    \textbf{Classifier} & \textbf{References} \\
+    \midrule
+    \textbf{Rule-based method:} & \cite{Lv2009,Puech2009} \\ \\ [-1.5ex]
+    \textbf{Clustering methods:} & \\
+    \quad $k$-means clustering & \cite{Tiwari2007,Tiwari2008,Tiwari2009} \\
+    \quad \acs{knn} & \cite{Litjens2012,Niaf2011,Niaf2012,rampun2016computerb} \\ \\ [-1.5ex]
+    \textbf{Linear model classifiers:} & \\
+    \quad \acs{lda} & \cite{Antic2013,Chan2003,Litjens2014,Niaf2011,Niaf2012,Vos2012} \\
+    \quad Logistic regression & \cite{Kelm2007,Langer2009,lehaire2014computer,rampun2015computer} \\ \\ [-1.5ex]
+    \textbf{Non-linear classifier:} & \\
+    \quad \acs{qda} & \cite{Viswanath2012} \\ \\ [-1.5ex]
+    \textbf{Probabilistic classifier:} & \\
+    \quad Naive Bayes & \cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\ \\ [-1.5ex]
+    \textbf{Ensemble learning classifiers:} & \\
+    \quad AdaBoost & \cite{Litjens2014,Lopes2011} \\
+    \quad \acs*{rf} & \cite{Kelm2007,Litjens2014,Tiwari2012,Tiwari2013,Viswanath2009,trigui2017automatic,trigui2016classification,samarasinghe2016semi,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\
+    \quad Probabilistic boosting tree & \cite{Tiwari2009,Tiwari2010,Tiwari2012} \\ \\ [-1.5ex]
+    \textbf{Kernel method:} & \\
+    \quad Gaussian processes & \cite{Kelm2007} \\ \\ [-1.5ex]
+    \textbf{Sparse kernel methods:} & \\
+    \quad \acs{svm} & \cite{Artan2009,Artan2010,Chan2003,Litjens2011,Litjens2012,Liu2013,Lopes2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Parfait2012,Peng2013,Sung2011,Tiwari2012,Vos2008,Vos2008a,Vos2010,Vos2012,giannini2015fully,trigui2017automatic,lehaire2014computer,khalvati2015automated,chung2015prostate} \\
+    \quad \acs{rvm} & \cite{Ozer2009,Ozer2010} \\ \\ [-1.5ex]
+    \textbf{Neural network:} & \\ 
+    \quad Multiple layer perceptron & \cite{Matulewicz2013,Parfait2012,trigui2017automatic,trigui2016classification,rampun2016computer} \\
+    \quad Probabilistic neural network & \cite{Ampeliotis2007,Ampeliotis2008,Viswanath2011} \\ \\ [-1.5ex]
+    \textbf{Graphical model classifiers:} & \\
+    \quad Markov random field & \cite{Liu2009,Ozer2010} \\
+    \quad Conditional random field & \cite{Artan2009,Artan2010,chung2015prostate} \\
+    \bottomrule
+  \end{tabularx}
+\label{tab:class}
+\end{table}
