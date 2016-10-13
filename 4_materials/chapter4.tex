@@ -6,84 +6,74 @@
   experiment or trial to obtain a consistent result.
 \end{quote}
 
-Such definition of \emph{replication} reveals the importance of reproducible
-research, since confirmation of results obtained from independent studies is
-considered the scientific gold standard to build our body of knowledge.
+Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
 
-\citeauthor{peng2011reproducible} states the excitement and wanders that
-computational science brings to the scientific landscape, but he also exposes
-the limitations in the scientific community to evaluate its published findings
-due to the lack of reproducibility. In order to overcome such limitations,
-\citeauthor{peng2011reproducible} proposes reproducibility spectrum to be
-covered in order to move from a mere non reproducible publication to fully
-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
-Specifically, \citeauthor{peng2011reproducible} argues that the original data,
-the code of methods developed should both be made available along with the
-executable that lead to the published results so that the three are fully
-coupled\,\cite{peng2011reproducible}.
+\citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility.
+In order to overcome such limitations, \citeauthor{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
+%% sik:
+%% Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code of methods developed should both be made available along with the executable that lead to the published results so that the three are fully coupled\,\cite{peng2011reproducible}.
+Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code and the executables that leads to the published results should be all coupled and  availabe. 
 
 \begin{figure}
 \centering
-\includegraphics[width=.50\textwidth]{reproducibility_spectrum}
+\includegraphics[width=.7\textwidth]{reproducibility_spectrum}
 \caption[The spectrum of reproducibility.]{The spectrum of reproducibility (copyright by~\cite{peng2011reproducible}).}
 \label{fig:reproducibility_spectrum}
 \end{figure}
 
-Furthermore, \citeauthor{varoquaux2015Software} in his article
-%\citetitle{varoquaux2015Software}
-\emph{Of Software and Science. Reproducible science: what, why, and how}
-summarizes a discussion taken place in
-\emph{\acs{mloss}} workshop regarding the issue of reproducible science. The
-take away is that the reproducibility spectrum proposed by
-\citeauthor{peng2011reproducible} falls short because it focuses on providing material to
-backup publications but oversights the importance of sound reusable material and
-methods, which are the foundation of future scientific developments despite
-being cast out of the success formula in academia where only impact factor seems
-to matter.
+Furthermore, \citeauthor{varoquaux2015Software} in his article %\citetitle{varoquaux2015Software}
+\emph{Of Software and Science. Reproducible science: what, why, and how} summarizes a discussion taken place in \emph{\acs{mloss}} workshop regarding the issue of reproducible science.
+%% sik:
+%% The take away is that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing material to backup publications but oversights the importanc of sound reusable material and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
+He concluded that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing materials to backup publications but oversights the importanc of sound reusable materials and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
 
-With all this\footnote{better connector needed. Maybe a sentece}, the structure
-of this chapter is going to appear odd to some readers since our intention with
-this \nameref{chap:4} chapter is two fold:
-(i) use this chapter to position ourselves with respect of reproductible
-research;
-and, (ii) describe all the resources or outcomes from this thesis that make for
-reproductible research.
-
-The former part is more of philosophical discussion or proclamation of the
-working systems and protocols emerging from this thesis work. While the later is
-a more concrete description of the resources to reproduce the work of our
-thesis. Underlying design choices are out of the scope of this chapter. Those
-regarding the methodologies developed for this thesis work can be found in other chapters.
+%% sik:
+%% With all this\footnote{better connector needed. Maybe a sentece}, the structure of this chapter is going to appear odd to some readers since our intention with this \nameref{chap:4} chapter is two fold:
+%% (i) use this chapter to position ourselves with respect of reproductible research; and, (ii) describe all the resources or outcomes from this thesis that make for reproductible research.
+With respect to aforementioned discussion our intention with \nameref{chap:4} chapter is two fold: (i) use this chapter to position ourselves with respect to reproducible research; (ii) describe all the resources and outcomes from this thesis that allows our experiments be reproducible.
+%% sik:
+%% The former part is more of philosophical discussion or proclamation of the working systems and protocols emerging from this thesis work.
+The former part is a philosophical discussion of the working framework used during the thesis. 
+%% While the later is a more concrete description of the resources to reproduce the work of our thesis.
+While the latter is a concrete description of the resources to reproduce the work of this thesis.
+In this extent in the reminder of this section first we present the structure of our framework towards reproducible research, second we present our dataset which is publicly avaiable through our website.
+In the third and fourth section the open source toolboxes developed for the thesis is presented.
+%% Underlying design choices are out of the scope of this chapter.
+%% Those regarding the methodologies developed for this thesis work can be found in other chapters.
 
 \section{Our efforts towards reproducible research.}
-To conduct our research we have developed working strategies based on existing
-and in-house platforms. This section describes its current status with upcoming
-fixtures resulting from writing and reviewing this thesis, since these working
-strategies follow an iterative incremental procedure.
+To conduct our research we have developed working strategies based on existing and in-house platforms.
+This section describes the current and upcoming states of the framework, which is refine through the thesis.
+%% sik:
+%% This section describes its current status with upcoming fixtures resulting from writing and reviewing this thesis, since these working strategies follow an iterative incremental procedure.
 
 \subsection{\acs{iccvb}}
-For this purpose we have created the \acs{iccvb} website and its associated
-github community, which stands on the following core pillars stated on the website:
+For this purpose we have created the \acs{iccvb} website and its associated github community, which stands on the following core pillars stated on the website:
 
-\paragraph{Why?. our vision: to democratize the access to research}
+\paragraph{Why? Vision: Ease the access to research}
 The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
+However, data gathering is an entrance barrier for most of the researchers mainly due to factors as diverse costs, infrastructure, availability, etc.
+Moreover, isolated endeavours to gather these data without granting public access lead to the creation of muda ("waste"): waste of resources and inability to compare results and validate conclusions.
 
-However, data gathering is an entrance barrier for most of the researchers mainly due to factors as diverse costs, infrastructure, availability, etc. Moreover, isolated endeavours to gather these data without granting public access lead to the creation of muda ("waste"): waste of resources and inability to compare results and validate conclusions.
+Despite being highlighted by numerous research works, the lack of usable, public, reliable, and accessible data remains disregarded in many fields.
+The \ac{iccvb} is a wake-up call for addressing and breaking the entrance barriers in research due to data and/or isolation by applying collaborative strategies.
 
-Despite being highlighted by numerous research works, the lack of usable, public, reliable, and accessible data remains disregarded in many fields. The I2CVB is a wake-up call for addressing and breaking the entrance barriers in research due to data and/or isolation by applying collaborative strategies.
+\paragraph{What? Mission: Provide open data; evaluation methods; comparison framework; reporting platform}
+The lack of common data combined with non-aggregated assessing strategies result in non-existent or misleading comparisons make difficult to acknowledge relevant novel methodologies.
+A common duty to the research and development communities is to overcome these limitations, which can be successfully addressed by co-creation and collaborative work.
 
-\paragraph{What?. mission: to democratize the access to research}
-The lack of common data combined with non-aggregated assessing strategies result in non-existent or misleading comparisons make difficult to acknowledge relevant novel methodologies. A common duty to the research and development communities is to overcome these limitations, which can be successfully addressed by co-creation and collaborative work.
+\Ac{iccvb} aims at serving as foundation for collecting and sharing data as well as providing common evaluation methodologies.
+Furthermore, the use of common data and evaluation is the only way to achieve fair comparison.
 
-I2CVB aims at serving as foundation for collecting and sharing data as well as providing common evaluation methodologies. Furthermore, the use of common data and evaluation is the only way to achieve fair comparison.
+\paragraph{Who?. Protagonists: Research groups and individuals from all walks of life to shape a transparent community}
+\Ac{iccvb} creates for everyone the opportunity to pursue common goals through sharing, collaborating and team-working, to empower the individuals by taking advantages of personal skills and resources.
+As a consequence, young researchers will find an eco-system for self-improvement in which work will be rewarded through benchmarking compilation.
 
-\paragraph{Who?. protagonists: Research groups and individuals from all walks of life to shape a transparent community}
-I2CVB creates for everyone the opportunity to pursue common goals through sharing, collaborating and team-working, to empower the individuals by taking advantages of personal skills and resources. As a consequence, young researchers will find an eco-system for self-improvement in which work will be rewarded through benchmarking compilation.
+\paragraph{How?. Strategy: Transfer successful practises from free software and quality management}
+\Ac{iccvb} community challenges the impossible as well as the current status quo in research.
+Therefore, we strive to settle a multi-skilled community pursuing common goals to achieve excellence through collaborative continuous improvement.
 
-\paragraph{How?. strategy Transfer successful practises from Free Software and Quality Managemen}
-I2CVB community challenges the impossible as well as the current status quo in research. Therefore, we strive to settle a multi-skilled community pursuing common goals to achieve excellence through collaborative continuous improvement.
-
-At I2CVB, we believe that Free Software and Quality Management have already reshaped the world and that it is time to apply some of the successful practices learned in such domains to expand the boundaries of research in computer vision and specially for the medical imaging case.
+At \ac{iccvb}, we believe that Free software and quality management have already reshaped the world and that it is time to apply some of the successful practices learned in such domains to expand the boundaries of research in computer vision and specially for the medical imaging case.
 
 \subsection{Software Quality}
 
@@ -95,44 +85,36 @@ All available code is primarily developed in Python with a concern of:
 (iv) \emph{Documentation} through a description of the developed API.
 
 \subsection{Working strategy}
-As aforesaid, we developed a website and a github community. The website is used
-mainly as facade to our project but its core is the \acs{iccvb} github community
-and this is how we strive for repeatable research.
+As aforesaid, we developed a website and a github community.
+%% sik:
+%% The website is used mainly as facade to our project but its core is the \acs{iccvb} github community and this is how we strive for repeatable research.
+The website is used mainly as front-hand of our project while the \ac{iccvb} github community is the main core and this is how we strive for repeatable research.
+Our research is based on collaborating with specialists to collect data, coding experiments, interpret and communicate the observations.
+%% Back to the data, re-code the experiments, re-interpret the observations.
+%% In essence research is an iterative incremental process that require to ensure the quality at each step and its final deliver of each iteration is a manuscript that pin-point a position in the history of this research.
+In essence research is an iterative incremental process that needs to ensure the quality of each of its step. 
+The final derliverable of each iteration is a manuscript which shows the thinking process of this thesis.
+For some publication it might refer to an small portion of our research or quick proof of concept while for other works it refers to a larger portion.
 
-Our research is based on collecting data, coding experiments, interpret and
-communicate the observations. Back to the data, re-code the experiments,
-re-interpret the observations. In essence research is an iterative incremental
-process that require to ensure the quality at each step and its final deliver of
-each iteration is a manuscript that pin-point a position in the history of this
-research. For some publication it might refer to an small portion of our research
-or quick proof of concept while for other works it refers to a larger portion.
-
-Consolidating an analysis pipeline, a standard visualization, or any
-computational aspect of work into a software library is a sure way to make
-the publications more reproducible. Maintaining the library will ensure that results
-are still reproducible on new hardware, or with evolution of the general
-software stack. Documentation and curated examples will lower the bar to reuse
-and facilitate replication of the original scientific results.
-To avoid feature technical debt, libraries call for focused efforts
-on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
+%% Consolidating an analysis pipeline, a standard visualization, or any computational aspect of work into a software library is a sure way to make the publications more reproducible.
+%% Maintaining the library will ensure that results are still reproducible on new hardware, or with evolution of the general software stack.
+%% Documentation and curated examples will lower the bar to reuse and facilitate replication of the original scientific results.
+%% To avoid feature technical debt, libraries call for focused efforts on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
 
 \paragraph{publication releases}
-The rest of this section summarizes our working strategy based on the experience
-acquired during this thesis that lead to the aforesaid. Publications,
-experiments, etc. become projects. These projects have their code and
-documentation hosted in github while its associated publications are subprojects
-with their source also hosted in github. This allow us to review projects and
-publications in the same manner taking advantage of issue tracking and \acs{ci}.
-The data of the project is hosted at \acs{cern}, provided with a \acs{doi} using
-\emph{Zenodo} and disseminated through \acs{iccvb} website. At the time of
-publication, the code is released to freeze its state. \emph{Zenodo} provides a
-\acs{doi} to reference the release. Releases are incorporated to the \acs{ci}
-systems to detect back-compatibility breaks and fix them by release reviews.
+%% The rest of this section summarizes our working strategy based on the experience acquired during this thesis that lead to the aforesaid.
+%% Publications, experiments, etc. become projects.
+
+Publications of each project are subprojects of the main projects which are both hosted in github.
+%% These projects have their code and documentation hosted in github while its associated publications are subprojects with their source also hosted in github.
+This allow us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
+The data of the project is hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo} and disseminated through \acs{iccvb} website.
+At the time of publication, the code is released to freeze its state. 
+\emph{Zenodo} provides a \acs{doi} to reference the release. Releases are incorporated to the \acs{ci} systems to detect back-compatibility breaks and fix them by release reviews.
 Evolution of our tools and libraries also captured by the \acs{ci}.
 
 \section{Prostate data}
-This section describe the datasets used in this thesis which are also available
-through the \acs{iccvb} website.
+This section describe the datasets used in this thesis which are also available through the \acs{iccvb} website.
 
 \subsection{\SI{1.5}{\tesla} General Electric scanner}
 
@@ -143,7 +125,7 @@ Aside of the \ac{mri} examination, these patients also have undergone a guided-b
 % Therefore, 13 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}, and finally 2 patients are considered as ``healthy''.
 % An experienced radiologist has segmented the prostate organ as well as the prostate zones, and \ac{cap} on the \ac{t2w}-\ac{mri}.
 
-Three-dimensional \ac{t2w} fast spin-echo (\ac{tr}/\ac{te}/\ac{etl}: \SI{3480}{\ms}/\SI{113.6}{\ms}/16, slice thickness: \SI{3}{\mm}) images are then acquired in an oblique axial plane with a  $320 \times 224$ acquisition matrix and a pixel spacing of \SI{0.27}{\milli\metre}.
+Three-dimensional \ac{t2w} fast spin-echo (\ac{tr}:\SI{3480}{\ms}, \ac{te}:\SI{113.6}{\ms}, \ac{etl}: 16, slice thickness: \SI{3}{\mm}) images are then acquired in an oblique axial plane with a  $320 \times 224$ acquisition matrix and a pixel spacing of \SI{0.27}{\milli\metre}.
 
 %The nominal matrix and \ac{fov} of the 3D \ac{t2w} fast spin-echo images are \SI[product-units=repeat]{320x256}{\milli\metre\squared} and \SI[product-units=repeat]{280x240}{\milli\metre\squared}, respectively, thereby affording sub-millimetric pixel resolution within the imaging plane.
 
@@ -171,11 +153,11 @@ The dataset is composed of a total of 20 patients of which 18 patients have biop
 Therefore, 13 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}, and finally 2 patients are considered as ``healthy''.
 An experienced radiologist has segmented the prostate organ --- on \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and \ac{adc}-\ac{mri} --- as well as the prostate zones --- i.e., \ac{pz} and \ac{cg} ---, and \ac{cap} on the \ac{t2w}-\ac{mri}.
 
-A \SI{3}{\mm} slice fat-suppressed \ac{t2w} fast spin-echo sequence (\ac{tr}/\ac{te}/\ac{etl}: \SI{3400}{\ms}/\SI{85}{\ms}/13) is used to acquire images in sagittal and oblique coronal planes, the latter planes being orientated perpendicular or parallel to the prostate \ac{pz} – rectal wall axis.
-Three-dimensional \ac{t2w} fast spin-echo (\ac{tr}/\ac{te}/\ac{etl}: \SI{3600}{\ms}/\SI{143}{\ms}/109, slice thickness: \SI{1.25}{\mm}) images are then acquired in an oblique axial plane.
+A \SI{3}{\mm} slice fat-suppressed \ac{t2w} fast spin-echo sequence (\ac{tr}: \SI{3400}{\ms}, \ac{te}: \SI{85}{\ms}, \ac{etl}:13) is used to acquire images in sagittal and oblique coronal planes, the latter planes being orientated perpendicular or parallel to the prostate \ac{pz} – rectal wall axis.
+Three-dimensional \ac{t2w} fast spin-echo (\ac{tr}: \SI{3600}{\ms}, \ac{te}: \SI{143}{\ms}, \ac{etl}: 109, slice thickness: \SI{1.25}{\mm}) images are then acquired in an oblique axial plane.
 The nominal matrix and \ac{fov} of the 3D \ac{t2w} fast spin-echo images are \SI[product-units=repeat]{320x256}{\milli\metre\squared} and \SI[product-units=repeat]{280x240}{\milli\metre\squared}, respectively, thereby affording sub-millimetric pixel resolution within the imaging plane.
 
-\ac{dce}-\ac{mri} is performed using a fat suppressed 3D T$_1$ VIBE sequence (\ac{tr}/\ac{te}/Flip angle: \SI{3.25}{\ms}/\SI{1.12}{\ms}/\SI{10}{\degree}; Matrix: $256 \times 192$; \ac{fov}: $280 \times 210$ (with \SI{75}{\percent} rectangular \ac{fov}); slab of 16 partitions of \SI{3.5}{\mm} thickness; temporal resolution: \SI{6}{\s}/slab over approximately \SI{5}{\minute}).
+\ac{dce}-\ac{mri} is performed using a fat suppressed 3D T$_1$ VIBE sequence (\ac{tr}: \SI{3.25}{\ms},\ac{te}: \SI{1.12}{\ms}, Flip angle:\SI{10}{\degree}; Matrix: $256 \times 192$; \ac{fov}: $280 \times 210$ (with \SI{75}{\percent} rectangular \ac{fov}); slab of 16 partitions of \SI{3.5}{\mm} thickness; temporal resolution: \SI{6}{\s}/slab over approximately \SI{5}{\minute}).
 A power injector (Medrad, Indianola, USA) is used to provide a bolus injection of Gd-DTPA (Dotarem, Guerbet, Roissy, France) at a dose of \SI{0.2}{\ml} Gd-DTPA/kg of body weight.
 
 \ac{dw}-\ac{mri} images have been acquired using the single-shot spin-echo echo-planar imaging (EPI) technique.
