@@ -1,6 +1,6 @@
 \section{Methodology}\label{sec:chp6:method}
 
-Our \ac{mpmri} \ac{cad} system consists of 7 different steps: pre-processing, segmentation, registration, feature detection, balancing, feature selection/extraction, and finally classification.
+Our \ac{mpmri} \ac{cad} system consists of seven different steps: pre-processing, segmentation, registration, feature detection, balancing, feature selection/extraction, and finally classification.
 %% It should be noted that \ac{cad} system designed deals with multiparametric \ac{mri} data. 
 
 \subsection{Pre-processing}\label{subsec:chp6:method:PP}
@@ -46,58 +46,32 @@ The iterative low-pass filter enforce to much the smoothness of the baseline.
 The \ac{nmr} signal is formalized as a sum of a pure signal, the baseline function, and an additive Gaussian noise such as:
 
 \begin{equation}
-  y_i = b_i + \mu_i e^{n_i} + \varepsilon_i
+  y_i = b_i + \mu_i e^{n_i} + \varepsilon_i \ ,
   \label{eq:methodBaselineDetectionModel}
 \end{equation}
 
 \noindent where $y_i$ is the \ac{nmr} signal, $b_i$ is the baseline, $\mu_i$ is the true signal, and $n_i$ and $\varepsilon_i$ are Gaussian noises.
 
-\citeauthor{xi2008baseline} propose to find the baseline function
-
-Xi et al. built the cost function presented in equation \ref{eq:methodBaselineDetectionCostFunction} based on the assumption of the model chosen (equation \ref{eq:methodBaselineDetectionModel}) and that the baseline estimated should be smooth without being necessarily flat (figure \ref{fig:methodBaselineDetection2}) and that should be laid on the middle of the data in segments where there is only noise (figure \ref{fig:methodBaselineDetection3}) \cite{Xi2008}.
+\citeauthor{xi2008baseline} propose to find the baseline function through an iterative optimization by maximizing the following cost function:
 
 \begin{equation}
-  F(b) = \sum_i b_i - A \sum_i (b_{i+1} + b_{i-1} - 2 b_i)^2 - B \sum_i (b_i - \gamma_i)^2 g(b_i - \gamma_i)
+  F(b) = \sum_{i = 1}^{N} b_i - \frac{A^{*} N^4}{\sigma} \sum_{i = 1}^{N} (b_{i+1} + b_{i-1} - 2 b_i)^2 - \frac{1.25 B^{*}}{\sigma} \sum_{i = 1}^{N} (b_i - \gamma_i)^2 g(b_i - \gamma_i) \ ,
   \label{eq:methodBaselineDetectionCostFunction}
 \end{equation}
-where $g(\bullet)$ is the Heaviside function.
 
-The cost function $F(b)$ is composed of three main terms:
+\noindent where $g(b_i - \gamma_i)$ is the Heaviside function, $A^*$ and $B^*$ are the terms controlling the smoothness and negative penalties, respectively, $\sigma$ is an estimation of the standard deviation of the noise, and $N$ is the total number of points in the \ac{mrsi} signal.
 
-\begin{itemize}
-  \item $\sum_i b_i$ is the sum of all baseline points.
-    \item $- A \sum_i (b_{i+1} + b_{i-1} - 2 b_i)^2$ is the smoothness penalty. This term tends to be small for linear segments while it will be large for small curvature radii.
-      \item $- B \sum_i (b_i - \gamma_i)^2 g(b_i - \gamma_i)$ is the negative penalty. This term tends to be nonzero when the baseline is above the data point.
-\end{itemize}
+The standard deviation of the noise $\sigma$ is estimated as in~\cite{xi2008baseline}, and the $A^{*}$ and $B^{*}$ are empirically set to $5 \times 10^{-6}$ and $100$, respectively, for all the \ac{mrsi} signal.
+Setting these parameters allows to obtain an estimation of a smooth and possibly negative baseline, required by the aspect of the citrate peak in our \ac{mrsi} acquisition, as depicted in \acs{fig}\,\ref{fig:baselinemrsi}.
 
-In order to compute the optimal baseline, the first term has to be maximized subject to both second and third terms (equation \ref{eq:methodBaselineDetectionMaxim}). 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{6_pipeline/figures/baseline_mrsi.pdf}
+  \caption{Illustration of the detection of the baseline on an \acs*{mrsi} spectrum.}
+  \label{fig:baselinemrsi}
+\end{figure}
 
-\begin{equation}
-  b_0 = \text{arg}\, \max F(\textbf{b})
-  \label{eq:methodBaselineDetectionMaxim}
-\end{equation}
-
-At this stage, the two parameter $A$ and $B$ have to be chosen. Xi et al. have shown that the theoritical values are as in equation \ref{eq:methodBaselineDetectionParametersA} and \ref{eq:methodBaselineDetectionParametersB}.
-
-\begin{equation}
-  A = \frac{5 \times 10^{-9} n^4}{\sigma}
-  \label{eq:methodBaselineDetectionParametersA}
-\end{equation}
-\begin{equation}
-  B = \frac{1.25}{\sigma}
-  \label{eq:methodBaselineDetectionParametersB}
-\end{equation}
-where $\sigma$ is an estimation of the standard deviation of the noise and $n$ is the total number of data point.
-
-Hence, an estimation of the standard deviation of the noise of the spectrum has to be performed. In order to estimate this parameter, Xi et al. proposed to divide the spectrum into smaller sections and compute the variance and mean intensity for each region. Then, they proposed to use the LOWESS regression to fit a model to the variance versus mean intensity signal. Finally, the estimation of the standard deviation of the noise is the square root of the variance at zero mean intensity in the LOWESS regression (equation \ref{eq:methodBaselineDetectionNoise}).
-
-\begin{equation}
-  \sigma = \sqrt{\sigma^2_\varepsilon}
-  \label{eq:methodBaselineDetectionNoise}
-\end{equation}
-where $\sigma^2_\varepsilon$ is the variance at zero mean intensity inferred using the LOWESS regression.
-
-Once that all parameters are found, $\frac{\partial F(\textbf{b})}{\partial \textbf{b}} = 0$ has to be solved in order to maximize the function $F(\textbf{b})$ \cite{Xi2008}.
+Additionally, each \ac{mrsi} spectrum is normalized using the L$_2$ norm, which has been shown to be the most efficient normalization method in \ac{mrsi} as discussed in \acs{sec}\,\ref{subsec:chp3img-reg:prepro}.
 
 \subsection{Segmentation and registration}\label{subsec:chp6:method:Seg-Reg}
 
@@ -125,23 +99,95 @@ Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\
 
 \subsection{Feature detection}\label{subsec:chp6:method:fea-det}
 
+\begin{table}
+  \caption{Features extracted in \acs*{t2w}-\acs*{mri} and \acs*{adc} volumes.}
+  \centering
+  \scriptsize
+  \begin{tabularx}{\textwidth}{lXc}
+    \toprule
+    \textbf{Features} & Parameters & \# dimensions \\
+    \midrule
+    Intensity &  & 1 \\
+    \acs*{dct} decomposition & window: \SI[product-units=repeat]{9x9x3}{\px} & 243 \\
+    Kirsch filter &  & 2 \\
+    Laplacian filter &  & 1 \\
+    Prewitt filter &  & 3 \\
+    Scharr filter &  & 3 \\
+    Sobel filter &  & 3 \\
+    Gabor filters & 4 frequencies $f \in [0.05, 0.25]$; 4 azimuth angles $\alpha \in [0, \pi]$; 8 elevation angles $\alpha \in [0, 2\pi]$ & 256 \\
+    Phase congruency filter & 5 orientations; 6 scales & 3 \\
+    Haralick filter & window: \SI[product-units=repeat]{9x9x3}{\px}; \# grey levels: 8; distance: \SI{1}{\px}; 13 directions & 169 \\
+    \acs*{lbp} filter & 2 radii $r=\{1, 2\}$; 2 neighborhood sizes $N = \{8, 16\}$ & 3 \\
+    \bottomrule
+  \end{tabularx}
+  \label{tab:featureadct2w}
+\end{table}
 
+\begin{figure}
+  \hspace*{\fill}
+  \subfigure[]{\label{fig:goodfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:wrongfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting_wrong.pdf}}
+  \hspace*{\fill}
+  \caption[Illustration of the metabolite fitting.]{Illustration of the metabolite fitting: \subref{fig:goodfit} the models are perfectly fitted for both citrate and choline; \subref{fig:wrongfit} the fitting of the citrate metabolite is inaccurate since it does not follow the \textit{a priori} model.}
+  \label{fig:fitmeta}
+\end{figure}
 
+To approach the task of automatic detection of \ac{cap} using machine learning, one has to extract a variety of feature specific to the \ac{mri} modality as presented in \acs*{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec}.
 
-As presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec}, variety of features have been extracted depending on each modality.
-In this work we extract image, \ac{dce}, and \ac{mrsi}-based features from \ac{t2w}-\ac{mri} and \ac{adc}-\ac{mri} images, \ac{dce}-\ac{mri}, and \ac{mrsi}-signals respectively.
+\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features}
+Apart of using the normalized intensity, edge- and texture-based features are commonly extracted from \ac{t2w}-\ac{mri} and \ac{adc} map.
+A set of common features earlier reported in \acs*{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec} have been computed.
+The following set of filters characterizing edges have been used: (i) Kirsch, (ii) Laplacian, (iii) Prewitt, (iv) Scharr, (v) Sobel, and (vi) Gabor.
+Apart of Kirsch filter, the other filters are applied in 3D to get more information using a volume and not a slice, as it is usually done.
+The extension of the most common edge detectors in 3D is obvious and will not be recall.
+However, 3D Gabor filters~\cite{wang2005face} are not commonly used and we recall their formulation in \acs*{eq}\,\eqref{eq:gabor3d}.
 
-Voxel-wise texture, edge, and position-based 3-dimensional features are detected as image-based features.
-Laplacian, Prewitt, Sobel, Kirsch operators as well as {\color{red} shaar} and Gabor filter bank are detected as edge-based features.
-These features were extensively discussed in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec}.
-\ac{dct}, \ac{glcm} and \ac{lbp} features are detected as part of texture-based features.
+\begin{equation}
+  g(\mathbf{x};\boldsymbol{\sigma},f,\theta,\phi) = \hat{g}(\mathbf{x};\boldsymbol{\sigma}) \exp(j 2 \pi f \left( x \sin \theta \cos \phi + y \sin \theta \sin \phi + z \cos \theta \right)) \ ,
+  \label{eq:gabor3d}
+\end{equation}
 
-All the \ac{dce}-features presented in Sect.~\ref{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea} are extracted from \ac{dce}-\ac{mri} modality.
-Whole-spectra, semi-quantitative and quantitative features were explained in details in Chapter.~\ref{chap:5}, Sect.~\ref{subsubsec:chp5:DCE-norm:stateart}.
+\noindent where,
 
-\ac{mrsi}-based features were previously explained in Sect.~\ref{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}. 
-Whole sepctra and quantification features are extracted from \ac{mrsi}-modality.
-  
+\begin{equation}
+  \hat{g}(\mathbf{x};\boldsymbol{\sigma}) = \frac{1}{{\left(2 \pi\right)}^{\frac{3}{2}}} \exp \left( -\frac{1}{2} \left( \frac{x^2}{\sigma_x^2} + \frac{y^2}{\sigma_y^2} + \frac{z^2}{\sigma_z^2} \right) \right) \ ,
+  \label{eq:gabor3dgaussian}
+\end{equation}
+
+\noindent where $\mathbf{x}$ is the position vector $\{x,y,z\}$, $\boldsymbol{\sigma}$ is the standard deviation vector $\{\sigma_x,\sigma_y,\sigma_z\}$ of the 3D Gaussian envelope, $f$ is the radial center frequency of the sine wave, $\theta$ is the elevation angle, and $\phi$ is the azimuth angle.
+
+Additionally, features based on phase congruency as proposed by \citeauthor{kovesi1999image} are computed~\cite{kovesi1999image}.
+Therefore, from a set of Log-Gabor filter bank, the orientation image, the local weighted mean phase angle, and the phase angle are estimated at each voxel.
+
+To characterize the local texture, both second-order \ac{glcm}-based features~\cite{Haralick1973} and rotation invariant and uniform \ac{lbp}~\cite{ojala2002multiresolution}.
+To encode 3D information, the 13 first Haralick features --- refer to \acs{tab}~\ref{tab:glcm} --- are computed for the 13 possible directions.
+For the same reason, the \ac{lbp} codes are computed for the three-orthogonal-planes of each \ac{mri} volume.
+
+\Acl{tab}~\ref{tab:featureadct2w} summarizes the different features extracted with their corresponding parameters.
+Note that all these features are extracted at each voxel of the volume.
+
+\paragraph{\ac{dce}-\ac{mri} features} The extracted features for the \ac{dce}-\ac{mri} are exactly the same than in the previous chapter.
+The reader can refer to \ac{sec}\,\ref{subsubsec:chp5:DCE-norm:stateart} for a detailed presentation of the different methods used.
+In brief, the entire enhanced signal, semi-quantitative, and quantitative methods are computed. 
+
+\paragraph{\ac{mrsi} features} \ac{mrsi}-based features have been previously explained in \acs{sec}\,\ref{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}.
+Due to unavailability of some unsuppressed water acquisition, absolute quantification as presented by \citeauthor{trigui2017automatic} could not be computed~\cite{trigui2017automatic}.
+Therefore, likewise in~\cite{Parfait2012}, two different techniques are used to extract discriminative features: (i) relative quantification based on metabolite quantification, (ii) relative quantification based on bounds integration, and (iii) spectra extraction.
+
+Relative quantification based on metabolite quantification relies on a robust integration of the citrate and choline signal based on peak modelling.
+Therefore, we propose to tackle this problem as a non-linear least squares optimization problem by (i) quantifying the citrate peaks as a Gaussian mixture and (ii) quantifying the choline as a single Gaussian.
+
+As illustrated in \acs{fig}\,\ref{fig:goodfit}, the \ac{mrsi} sequence imply a 3-peaks citrate metabolite.
+Therefore, we propose the following cost function to represent our function:
+
+\begin{equation}
+  C(x) = \alpha_1 \mathcal{N}(x; \mu, \sigma_1) + \alpha_2 \mathcal{N}(x; \mu + \delta_2, \sigma_2) + \alpha_3 \mathcal{N(x; \mu - \delta_3, \sigma_3)} \ ,
+\end{equation}
+
+Theoretically, one could suggest to fit a Voigt mixtures instead of a Gaussian mixtures due to the presence of noise during the acquisition.
+However, the use of Gaussian distributions reduces the number of parameters to be optimized and allow for a more robust optimization process regarding the choices of the bounds.
+
 \subsection{Feature balancing}\label{subsec:chp6:method:fea-bal}
 Data imbalanced is a common problem while classifiying medical data.
 Considering a binary classification problem, there is always a class (often the class indicating cancer, or disease patients) that have smallest number of samples (i.e, minority class) in comparison to the other class (i.e, majority class).
