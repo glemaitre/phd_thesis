@@ -21,11 +21,83 @@ Our \ac{mpmri} \ac{cad} system consists of 7 different steps: pre-processing, se
 The reader can refer to \acs{sec}\,\ref{subsec:chp3img-reg:prepro} to have an extensive overview of the state-of-the-art methods used to pre-process \ac{mpmri} data.
 Three types of pre-processing are used for \ac{mri} images: (i) noise filtering, (ii) bias correction, and (iii) standardization/normalization.
 Our dataset is based on \SI{3}{\tesla} images without endorectal coil and therefore, the two first types of correction have not been considered as necessary.
-Normalization is, however, a crucial step to reduce the inter-patient variations which allow to improve the learning during the classification stage.
-\Ac{chp}~\ref{chap:5} presented 2 normalization methods to pre-process \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri}, respectively.
+Normalization is, however, a crucial step to reduce the inter-patient variations which allows to improve the learning during the classification stage.
+\Ac{chp}~\ref{chap:5} presented two normalization methods to pre-process \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri}, respectively.
 Therefore, we used these methods to standardize these images.
 Regarding the \ac{adc} map normalization, the \ac{pdf} within the prostate does not follow a known distribution as depicted in \acs{fig}\,\ref{fig:adcpdf}.
 Thus, one cannot use a parametric model to normalize these images and a non-parametric piecewise-linear normalization~\cite{Nyul2000} is the best option for this case.
+
+Additionally, the \ac{mrsi} modality requires a specific pre-processing based on signal processing rather than image processing.
+Therefore, the \ac{mrsi} modality has been pre-process to correct the phase, baseline, and frequency.
+Regarding the problem of phase correction and frequency alignment, we use the most efficient method of the state-of-the-art review in \acs{sec}\,\ref{subsec:chp3img-reg:prepro}.
+Indeed, as \citeauthor{Parfait2012} and \citeauthor{trigui2017automatic}~\cite{Parfait2012,trigui2016classification,trigui2017automatic}, the phase of each \ac{mrsi} spectra is corrected using the approach of \citeauthor{Chen2002}~\cite{Chen2002}.
+Along the same line, the frequency shift of each spectra is corrected by aligning to \SI{4.65}{\ppm} the maximum of an inferred function fitted to the residuals of water, using a Voigt profile as in \acs{eq}\,\eqref{eq:voigt}.
+
+\begin{equation}
+  V(x; \sigma, \gamma) = \frac{\mathbf{R} \left[ w(z) \right]}{\sigma \sqrt{2\pi}} \ ,
+  \label{eq:voigt}
+\end{equation}
+
+\noindent where $\mathbf{R} \left[ w(z) \right]$ is the real part of the Faddeva function for $z = \frac{x + i \gamma}{\sigma \sqrt{2}}$.
+
+By assessing the qualitative results obtained in~\cite{Parfait2010}, the baseline correction method used by \citeauthor{Parfait2012} and \citeauthor{trigui2017automatic} does not provide an optimal solution for that matter.
+The iterative low-pass filter enforce to much the smoothness of the baseline.
+\citeauthor{xi2008baseline} propose a baseline detection derived from a parametric smoothing model~\cite{xi2008baseline}.
+The \ac{nmr} signal is formalized as a sum of a pure signal, the baseline function, and an additive Gaussian noise such as:
+
+\begin{equation}
+  y_i = b_i + \mu_i e^{n_i} + \varepsilon_i
+  \label{eq:methodBaselineDetectionModel}
+\end{equation}
+
+\noindent where $y_i$ is the \ac{nmr} signal, $b_i$ is the baseline, $\mu_i$ is the true signal, and $n_i$ and $\varepsilon_i$ are Gaussian noises.
+
+\citeauthor{xi2008baseline} propose to find the baseline function
+
+Xi et al. built the cost function presented in equation \ref{eq:methodBaselineDetectionCostFunction} based on the assumption of the model chosen (equation \ref{eq:methodBaselineDetectionModel}) and that the baseline estimated should be smooth without being necessarily flat (figure \ref{fig:methodBaselineDetection2}) and that should be laid on the middle of the data in segments where there is only noise (figure \ref{fig:methodBaselineDetection3}) \cite{Xi2008}.
+
+\begin{equation}
+  F(b) = \sum_i b_i - A \sum_i (b_{i+1} + b_{i-1} - 2 b_i)^2 - B \sum_i (b_i - \gamma_i)^2 g(b_i - \gamma_i)
+  \label{eq:methodBaselineDetectionCostFunction}
+\end{equation}
+where $g(\bullet)$ is the Heaviside function.
+
+The cost function $F(b)$ is composed of three main terms:
+
+\begin{itemize}
+  \item $\sum_i b_i$ is the sum of all baseline points.
+    \item $- A \sum_i (b_{i+1} + b_{i-1} - 2 b_i)^2$ is the smoothness penalty. This term tends to be small for linear segments while it will be large for small curvature radii.
+      \item $- B \sum_i (b_i - \gamma_i)^2 g(b_i - \gamma_i)$ is the negative penalty. This term tends to be nonzero when the baseline is above the data point.
+\end{itemize}
+
+In order to compute the optimal baseline, the first term has to be maximized subject to both second and third terms (equation \ref{eq:methodBaselineDetectionMaxim}). 
+
+\begin{equation}
+  b_0 = \text{arg}\, \max F(\textbf{b})
+  \label{eq:methodBaselineDetectionMaxim}
+\end{equation}
+
+At this stage, the two parameter $A$ and $B$ have to be chosen. Xi et al. have shown that the theoritical values are as in equation \ref{eq:methodBaselineDetectionParametersA} and \ref{eq:methodBaselineDetectionParametersB}.
+
+\begin{equation}
+  A = \frac{5 \times 10^{-9} n^4}{\sigma}
+  \label{eq:methodBaselineDetectionParametersA}
+\end{equation}
+\begin{equation}
+  B = \frac{1.25}{\sigma}
+  \label{eq:methodBaselineDetectionParametersB}
+\end{equation}
+where $\sigma$ is an estimation of the standard deviation of the noise and $n$ is the total number of data point.
+
+Hence, an estimation of the standard deviation of the noise of the spectrum has to be performed. In order to estimate this parameter, Xi et al. proposed to divide the spectrum into smaller sections and compute the variance and mean intensity for each region. Then, they proposed to use the LOWESS regression to fit a model to the variance versus mean intensity signal. Finally, the estimation of the standard deviation of the noise is the square root of the variance at zero mean intensity in the LOWESS regression (equation \ref{eq:methodBaselineDetectionNoise}).
+
+\begin{equation}
+  \sigma = \sqrt{\sigma^2_\varepsilon}
+  \label{eq:methodBaselineDetectionNoise}
+\end{equation}
+where $\sigma^2_\varepsilon$ is the variance at zero mean intensity inferred using the LOWESS regression.
+
+Once that all parameters are found, $\frac{\partial F(\textbf{b})}{\partial \textbf{b}} = 0$ has to be solved in order to maximize the function $F(\textbf{b})$ \cite{Xi2008}.
 
 \subsection{Segmentation and registration}\label{subsec:chp6:method:Seg-Reg}
 
@@ -41,17 +113,21 @@ Therefore, the metric chosen to be minimized is the \ac{mi} and the geometric tr
 The optimization is performed using a regular step gradient descent.
 
 Once the intra-patient motions corrected, a registration to correct the alignment between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions is performed.
-For that matter, the prostate has been segmented in both modalities --- \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- to create 2 binary masks.
+For that matter, the prostate has been segmented in both modalities --- \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- to create two binary masks.
 Therefore, these 3D binary masks are directly registered using the \ac{mse} metric.
 Unlike the previous registration, we use a more complex geometric transform by successively finding a rigid transformation, a coarse elastic transformation, and a fine elastic transformation.
 B-splines transformation is used as the elastic transform.
-These successive transformation allow to get a good initialization for the next transformation.
+These successive transformations allow to get a good initialization for the next transformation.
 The transformation is inferred by minimizing the cost function using a regular step gradient descent.
 
 The \ac{t2w}-\ac{mri} and \ac{adc} map acquisitions are identically registered than the the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} modalities.
 Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\ac{mri} and thus the latter modality is used as the reference modality.
 
 \subsection{Feature detection}\label{subsec:chp6:method:fea-det}
+
+
+
+
 As presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-dec}, variety of features have been extracted depending on each modality.
 In this work we extract image, \ac{dce}, and \ac{mrsi}-based features from \ac{t2w}-\ac{mri} and \ac{adc}-\ac{mri} images, \ac{dce}-\ac{mri}, and \ac{mrsi}-signals respectively.
 
