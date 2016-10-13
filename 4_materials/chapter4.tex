@@ -30,7 +30,9 @@ coupled\,\cite{peng2011reproducible}.
 \end{figure}
 
 Furthermore, \citeauthor{varoquaux2015Software} in his article
-\citetitle{varoquaux2015Software} summarizes a discussion taken place in
+%\citetitle{varoquaux2015Software}
+\emph{Of Software and Science. Reproducible science: what, why, and how}
+summarizes a discussion taken place in
 \emph{\acs{mloss}} workshop regarding the issue of reproducible science. The
 take away is that the reproducibility spectrum proposed by
 \citeauthor{peng2011reproducible} falls short because it focuses on providing material to
@@ -61,7 +63,7 @@ strategies follow an iterative incremental procedure.
 
 \subsection{\acs{iccvb}}
 For this purpose we have created the \acs{iccvb} website and its associated
-github community, which stands on the following core pillars:
+github community, which stands on the following core pillars stated on the website:
 
 \paragraph{Why?. our vision: to democratize the access to research}
 The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
@@ -95,11 +97,44 @@ All available code is primarily developed in Python with a concern of:
 \subsection{Working strategy}
 As aforesaid, we developed a website and a github community. The website is used
 mainly as facade to our project but its core is the \acs{iccvb} github community
-and this is how we strive for repeatable research. 
+and this is how we strive for repeatable research.
 
-\section{Open \acs*{mpmri} data}
+Our research is based on collecting data, coding experiments, interpret and
+communicate the observations. Back to the data, re-code the experiments,
+re-interpret the observations. In essence research is an iterative incremental
+process that require to ensure the quality at each step and its final deliver of
+each iteration is a manuscript that pin-point a position in the history of this
+research. For some publication it might refer to an small portion of our research
+or quick proof of concept while for other works it refers to a larger portion.
 
-\paragraph{\SI{1.5}{\tesla} General Electric scanner}
+Consolidating an analysis pipeline, a standard visualization, or any
+computational aspect of work into a software library is a sure way to make
+the publications more reproducible. Maintaining the library will ensure that results
+are still reproducible on new hardware, or with evolution of the general
+software stack. Documentation and curated examples will lower the bar to reuse
+and facilitate replication of the original scientific results.
+To avoid feature technical debt, libraries call for focused efforts
+on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
+
+\paragraph{publication releases}
+The rest of this section summarizes our working strategy based on the experience
+acquired during this thesis that lead to the aforesaid. Publications,
+experiments, etc. become projects. These projects have their code and
+documentation hosted in github while its associated publications are subprojects
+with their source also hosted in github. This allow us to review projects and
+publications in the same manner taking advantage of issue tracking and \acs{ci}.
+The data of the project is hosted at \acs{cern}, provided with a \acs{doi} using
+\emph{Zenodo} and disseminated through \acs{iccvb} website. At the time of
+publication, the code is released to freeze its state. \emph{Zenodo} provides a
+\acs{doi} to reference the release. Releases are incorporated to the \acs{ci}
+systems to detect back-compatibility breaks and fix them by release reviews.
+Evolution of our tools and libraries also captured by the \acs{ci}.
+
+\section{Prostate data}
+This section describe the datasets used in this thesis which are also available
+through the \acs{iccvb} website.
+
+\subsection{\SI{1.5}{\tesla} General Electric scanner}
 
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{1.5}{\tesla} whole body GE Signa \ac{mri} scanner (General Electric, Milwaukee, WI, USA) with an endorectal coil (Medrad, Pittsburgh, PA, USA), using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
@@ -127,7 +162,7 @@ Datasets have been acquired as $16 \times 8 \times 8$ phase-encoded spectral arr
 %A combination of an elliptic weighted averaged k-space acquisition scheme 3D filtering of the signal in k-space have been used, the latter in order to reduce intervoxel signal combination.
 %Shimming has been carried out using the Siemenbens 3D Mapshim routine on a voxel adapted to the volume of the entire prostate gland.
 
-\paragraph{\SI{3}{\tesla} Siemens scanner}
+\subsection{\SI{3}{\tesla} Siemens scanner}
 
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
@@ -230,6 +265,4 @@ t2w_mod = t2w_norm.normalize(t2w_mod, ground_truth=gt_mod,
 ise = IntensitySignalExtraction(t2w_mod)
 data = ise.transform(t2w_mod, ground_truth=gt_mod, cat=label_gt[0])
 \end{lstlisting}
-
-\section{Pipeline-data releases}
 
