@@ -1,8 +1,140 @@
+\graphicspath{{4_materials/figures/}}
 \chapter{Materials}\label{chap:4}
 
-\section{Open \acs*{mpmri} data}\label{chp4:sec:data}
+\begin{quote}
+  \textbf{Replication}\quad \emph{1.2}~The repetition of a scientific
+  experiment or trial to obtain a consistent result.
+\end{quote}
 
-\paragraph{\SI{1.5}{\tesla} General Electric scanner}
+Such definition of \emph{replication} reveals the importance of reproducible
+research, since confirmation of results obtained from independent studies is
+considered the scientific gold standard to build our body of knowledge.
+
+\citeauthor{peng2011reproducible} states the excitement and wanders that
+computational science brings to the scientific landscape, but he also exposes
+the limitations in the scientific community to evaluate its published findings
+due to the lack of reproducibility. In order to overcome such limitations,
+\citeauthor{peng2011reproducible} proposes reproducibility spectrum to be
+covered in order to move from a mere non reproducible publication to fully
+reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
+Specifically, \citeauthor{peng2011reproducible} argues that the original data,
+the code of methods developed should both be made available along with the
+executable that lead to the published results so that the three are fully
+coupled\,\cite{peng2011reproducible}.
+
+\begin{figure}
+\centering
+\includegraphics[width=.50\textwidth]{reproducibility_spectrum}
+\caption[The spectrum of reproducibility.]{The spectrum of reproducibility (copyright by~\cite{peng2011reproducible}).}
+\label{fig:reproducibility_spectrum}
+\end{figure}
+
+Furthermore, \citeauthor{varoquaux2015Software} in his article
+%\citetitle{varoquaux2015Software}
+\emph{Of Software and Science. Reproducible science: what, why, and how}
+summarizes a discussion taken place in
+\emph{\acs{mloss}} workshop regarding the issue of reproducible science. The
+take away is that the reproducibility spectrum proposed by
+\citeauthor{peng2011reproducible} falls short because it focuses on providing material to
+backup publications but oversights the importance of sound reusable material and
+methods, which are the foundation of future scientific developments despite
+being cast out of the success formula in academia where only impact factor seems
+to matter.
+
+With all this\footnote{better connector needed. Maybe a sentece}, the structure
+of this chapter is going to appear odd to some readers since our intention with
+this \nameref{chap:4} chapter is two fold:
+(i) use this chapter to position ourselves with respect of reproductible
+research;
+and, (ii) describe all the resources or outcomes from this thesis that make for
+reproductible research.
+
+The former part is more of philosophical discussion or proclamation of the
+working systems and protocols emerging from this thesis work. While the later is
+a more concrete description of the resources to reproduce the work of our
+thesis. Underlying design choices are out of the scope of this chapter. Those
+regarding the methodologies developed for this thesis work can be found in other chapters.
+
+\section{Our efforts towards reproducible research.}
+To conduct our research we have developed working strategies based on existing
+and in-house platforms. This section describes its current status with upcoming
+fixtures resulting from writing and reviewing this thesis, since these working
+strategies follow an iterative incremental procedure.
+
+\subsection{\acs{iccvb}}
+For this purpose we have created the \acs{iccvb} website and its associated
+github community, which stands on the following core pillars stated on the website:
+
+\paragraph{Why?. our vision: to democratize the access to research}
+The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
+
+However, data gathering is an entrance barrier for most of the researchers mainly due to factors as diverse costs, infrastructure, availability, etc. Moreover, isolated endeavours to gather these data without granting public access lead to the creation of muda ("waste"): waste of resources and inability to compare results and validate conclusions.
+
+Despite being highlighted by numerous research works, the lack of usable, public, reliable, and accessible data remains disregarded in many fields. The I2CVB is a wake-up call for addressing and breaking the entrance barriers in research due to data and/or isolation by applying collaborative strategies.
+
+\paragraph{What?. mission: to democratize the access to research}
+The lack of common data combined with non-aggregated assessing strategies result in non-existent or misleading comparisons make difficult to acknowledge relevant novel methodologies. A common duty to the research and development communities is to overcome these limitations, which can be successfully addressed by co-creation and collaborative work.
+
+I2CVB aims at serving as foundation for collecting and sharing data as well as providing common evaluation methodologies. Furthermore, the use of common data and evaluation is the only way to achieve fair comparison.
+
+\paragraph{Who?. protagonists: Research groups and individuals from all walks of life to shape a transparent community}
+I2CVB creates for everyone the opportunity to pursue common goals through sharing, collaborating and team-working, to empower the individuals by taking advantages of personal skills and resources. As a consequence, young researchers will find an eco-system for self-improvement in which work will be rewarded through benchmarking compilation.
+
+\paragraph{How?. strategy Transfer successful practises from Free Software and Quality Managemen}
+I2CVB community challenges the impossible as well as the current status quo in research. Therefore, we strive to settle a multi-skilled community pursuing common goals to achieve excellence through collaborative continuous improvement.
+
+At I2CVB, we believe that Free Software and Quality Management have already reshaped the world and that it is time to apply some of the successful practices learned in such domains to expand the boundaries of research in computer vision and specially for the medical imaging case.
+
+\subsection{Software Quality}
+
+All the different source code implemented for this thesis have been released to support future development and the possibility to build a consistent benchmark.
+All available code is primarily developed in Python with a concern of:
+(i) \emph{Quality insurance} by developing unit tests, automatic code quality checking, and code consistency checking using \texttt{PEP8} standards;
+(ii) \emph{Continuous integration} is achieved through tools as Travis CI to easily integrate new contributions and ensure back-compatibility;
+(iii) \emph{Community-based development} by using collaborative tools --- git, GitHub, and gitter --- to ease collaborative programming, issue tracking, code integration, and idea discussions;
+(iv) \emph{Documentation} through a description of the developed API.
+
+\subsection{Working strategy}
+As aforesaid, we developed a website and a github community. The website is used
+mainly as facade to our project but its core is the \acs{iccvb} github community
+and this is how we strive for repeatable research.
+
+Our research is based on collecting data, coding experiments, interpret and
+communicate the observations. Back to the data, re-code the experiments,
+re-interpret the observations. In essence research is an iterative incremental
+process that require to ensure the quality at each step and its final deliver of
+each iteration is a manuscript that pin-point a position in the history of this
+research. For some publication it might refer to an small portion of our research
+or quick proof of concept while for other works it refers to a larger portion.
+
+Consolidating an analysis pipeline, a standard visualization, or any
+computational aspect of work into a software library is a sure way to make
+the publications more reproducible. Maintaining the library will ensure that results
+are still reproducible on new hardware, or with evolution of the general
+software stack. Documentation and curated examples will lower the bar to reuse
+and facilitate replication of the original scientific results.
+To avoid feature technical debt, libraries call for focused efforts
+on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
+
+\paragraph{publication releases}
+The rest of this section summarizes our working strategy based on the experience
+acquired during this thesis that lead to the aforesaid. Publications,
+experiments, etc. become projects. These projects have their code and
+documentation hosted in github while its associated publications are subprojects
+with their source also hosted in github. This allow us to review projects and
+publications in the same manner taking advantage of issue tracking and \acs{ci}.
+The data of the project is hosted at \acs{cern}, provided with a \acs{doi} using
+\emph{Zenodo} and disseminated through \acs{iccvb} website. At the time of
+publication, the code is released to freeze its state. \emph{Zenodo} provides a
+\acs{doi} to reference the release. Releases are incorporated to the \acs{ci}
+systems to detect back-compatibility breaks and fix them by release reviews.
+Evolution of our tools and libraries also captured by the \acs{ci}.
+
+\section{Prostate data}
+This section describe the datasets used in this thesis which are also available
+through the \acs{iccvb} website.
+
+\subsection{\SI{1.5}{\tesla} General Electric scanner}
 
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{1.5}{\tesla} whole body GE Signa \ac{mri} scanner (General Electric, Milwaukee, WI, USA) with an endorectal coil (Medrad, Pittsburgh, PA, USA), using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
@@ -30,7 +162,7 @@ Datasets have been acquired as $16 \times 8 \times 8$ phase-encoded spectral arr
 %A combination of an elliptic weighted averaged k-space acquisition scheme 3D filtering of the signal in k-space have been used, the latter in order to reduce intervoxel signal combination.
 %Shimming has been carried out using the Siemenbens 3D Mapshim routine on a voxel adapted to the volume of the entire prostate gland.
 
-\paragraph{\SI{3}{\tesla} Siemens scanner}
+\subsection{\SI{3}{\tesla} Siemens scanner}
 
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
@@ -64,18 +196,8 @@ Systematic verification of the global shim --- i.e., over the complete 3D PRESS-
 The line widths for individual voxels are of the order of \SIrange{8}{12}{\hertz}.
 The total examination time, including the time spent positioning the patient, is approximately 45 minutes.
 
-\section{Open source}
 
-All the different source code implemented for this thesis have been released to support future development and the possibility to build a consistent benchmark.
-All available code is primarily developed in Python with a concern of:
-(i) \emph{Quality insurance} by developing unit tests, automatic code quality checking, and code consistency checking using \texttt{PEP8} standards;
-(ii) \emph{Continuous integration} is achieved through tools as Travis CI to easily integrate new contributions and ensure back-compatibility;
-(iii) \emph{Community-based development} by using collaborative tools --- git, GitHub, and gitter --- to ease collaborative programming, issue tracking, code integration, and idea discussions;
-(iv) \emph{Documentation} through a description of the developed API.
-
-Several toolboxes and repository have been designed and are presented in the following sections.
-
-\subsection{\texttt{imbalanced-learn} toolbox}\label{chp4:sec:imblearn}
+\section{\texttt{imbalanced-learn} toolbox}\label{chp4:sec:imblearn}
 
 The \texttt{imbalanced-learn} toolbox is an open-source python toolbox aiming at providing a wide range of methods to cope with the problem of imbalanced dataset frequently encountered in machine learning and pattern recognition.
 The implemented state-of-the-art methods can be categorized into 4 groups: (i) under-sampling, (ii) over-sampling, (iii) combination of over- and under-sampling, and (iv) ensemble learning methods.
@@ -107,7 +229,7 @@ pipeline.fit(X_train, y_train)
 y_hat = pipeline.predict(X_test)
 \end{lstlisting}
 
-\subsection{\texttt{protoclass} toolbox}\label{chp4:sec:protoclass}
+\section{\texttt{protoclass} toolbox}\label{chp4:sec:protoclass}
 
 The \texttt{protoclass} toolbox is an open-source python toolbox providing tools for fast prototyping of machine learning pipeline in medical imaging.
 It implements most of the state-of-the-art feature detection techniques presented in \acs{chp}\,\ref{chap:3}.
@@ -144,6 +266,3 @@ ise = IntensitySignalExtraction(t2w_mod)
 data = ise.transform(t2w_mod, ground_truth=gt_mod, cat=label_gt[0])
 \end{lstlisting}
 
-\subsection{Pipeline-data releases}
-
-\section{Website development}
