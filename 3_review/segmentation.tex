@@ -11,8 +11,7 @@ An exhaustive review of prostate segmentation methods in \ac{mri} is available i
 \paragraph{Manual segmentation}
 To highlight the importance of prostate segmentation task in \ac{cad} systems, it is interesting to note the large number of studies which manually segment the prostate organs~\cite{Artan2009,Artan2010,Matulewicz2013,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Puech2009,Vos2008,Vos2008a,trigui2016classification,trigui2017automatic,lehaire2014computer}.
 In all the cases, the boundaries of the prostate gland are manually defined in order to limit further processing to only this area.
-This approach ensures the right delineation of the organ; nevertheless this procedure is highly time consuming and should be performed by a radiologist.
-
+This approach ensures the right delineation of the organ, although is subjective and prone to the rater variability; nevertheless this procedure is highly time consuming and should be performed by a radiologist.
 %\item[$-$] \textbf{\textit{Region-based segmentation:}} 
 \paragraph{Region-based segmentation}
 \citeauthor{Litjens2012} used a multi-atlas-based segmentation using multi-modal images --- i.e., \ac{t2w}-\ac{mri} and \ac{adc} map --- to segment the prostate with an additional pattern recognition method to differentiate \ac{cg} and \ac{pz}~\cite{Litjens2012}, as proposed in~\cite{Litjens2012a}.
@@ -20,8 +19,8 @@ This method consists in three different steps: (i) the registration between each
 Each atlas and the \ac{mri} images are registered through two successive registrations: a rigid registration to roughly align the atlases and the \ac{mri} images followed by an elastic registration using a B-spline transformation.
 The cost function driving the registration is defined as the weighted sum of the \ac{mi} of both \ac{t2w}-\ac{mri} and \ac{adc} map.
 The final atlas is selected using either a majority voting or the \ac{staple} approach~\cite{Warfield2004}.
-Subsequently, each voxel within the prostate are classified either as \ac{cg} or \ac{pz} using a \ac{lda} classifier.
-Three types of feature are considered to characterized the voxels: (i) anatomy, (ii) intensity, and (iii) texture.
+Subsequently, each voxel within the prostate is classified either as \ac{cg} or \ac{pz} using a \ac{lda} classifier.
+Three types of features are considered to characterize the voxels: (i) anatomy, (ii) intensity, and (iii) texture.
 The relative position and the relative distance from the voxel to the border of the prostate encode the anatomical information.
 The intensity features consist in the intensity of the voxel in the \ac{adc} coefficient and the T$_2$ map.
 The texture features are composed of 5 different features: homogeneity, correlation~\cite{Amadasun1989}, entropy, texture strength~\cite{Li2005a}, and \ac{lbp}~\cite{Ojala1996}.
@@ -34,8 +33,7 @@ Finally, \citeauthor{rampun2016computerb} recurrently used a method to segment t
 The \ac{pz} is modelled using a quadratic function driven by the centre of the prostate, the left-most, and the right-most coordinates of the prostate boundaries.
 
 %\item[$-$] \textbf{\textit{Model-based segmentation:}} 
-\paragraph{Model-based segmentation}
-\citeauthor{Viswanath2009} in~\cite{Viswanath2008a,Viswanath2009} used the \ac{mantra} method as proposed by \citeauthor{Toth2008}~\cite{Toth2008}.
+\paragraph{Model-based segmentation} \citeauthor{Viswanath2009} used the \ac{mantra} method~\cite{Toth2008} in~\cite{Viswanath2008a,Viswanath2009}.
 \ac{mantra}~\cite{Toth2008} is closely related to the \ac{asm} from~\cite{Cootes1995}.
 This algorithm consists of two stages: (i) a training stage where a shape and an appearance model are generated and (ii) the actual segmentation based on the learned model. 
 For the training stage, a set of landmarks is defined and the shape model is generated as in the original \ac{asm} method~\cite{Cootes1995}.
@@ -107,7 +105,7 @@ The full procedure is repeated until the total number of voxels left is inferior
 
 \subsubsection{Summary}
 
-The segmentation used in \ac{cad} system for the detection of \ac{cap} are summarized in \ac{tab}~\ref{tab:summary-seg}.
+The segmentation algorithms used in \ac{cad} system for the detection of \ac{cap} are summarized in \ac{tab}~\ref{tab:summary-seg}.
 
 \begin{table}
   \caption{Overview of the segmentation methods used in \ac{cad} systems.}

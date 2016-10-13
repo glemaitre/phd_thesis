@@ -62,7 +62,7 @@
       \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
     \end{pgfonlayer}
 
-    \path (roi.west |- roi.north) +(.6,0.4) node (bgfea) {\Large \textbf{CADe}};
+    \path (roi.west |- roi.north) +(.75,0.4) node (bgfea) {\Large \textbf{CADe}};
 
     \begin{pgfonlayer}{background}
       \path (det.west |- det.north)+(-0.25,0.8) node (c) {};
@@ -71,13 +71,13 @@
       \path[fill=blue!20,rounded corners, draw=blue!25, dashed] (c) rectangle (d);
     \end{pgfonlayer}
 
-    \path (roi.west |- det.north) +(.6,0.4) node (bgfea) {\Large \textbf{CADx}};     
+    \path (roi.west |- det.north) +(.75,0.4) node (bgfea) {\Large \textbf{CADx}};     
 
     % Define the place where the arrow should start anf finish
-    \path (seg.east |- seg.north)+(+0.9,0) node (e) {};
-    \path (sel.west |- seg.north)+(-0.8,0) node (f) {};
+    \path (seg.east |- seg.north)+(+1.15,0) node (e) {};
+    \path (sel.west |- seg.north)+(-1.0,0) node (f) {};
 
-    \draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (e) -- (f) node[midway,above] {\Large Regularized data};
+    \draw[double distance =3pt,preaction={-triangle 90,thin,draw,shorten >=-1mm}] (e) -- (f) node[midway,above] {\large Regularized data};
 
     \begin{scope}[yshift=34,xshift=-86]
       \transparent{0.6}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
@@ -89,7 +89,7 @@
 
     \begin{scope}[yshift=28,xshift=-80]
       \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-      \path (0,0)+(-1.5,0.3) node {\Large T$_2$-W MRI};
+      \path (0,0)+(-1.65,0.3) node {\Large T$_2$-W MRI};
     \end{scope}
 
     \begin{scope}[yshift=-33,xshift=-86]
@@ -102,7 +102,7 @@
 
     \begin{scope}[yshift=-39,xshift=-80]
       \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/t2.eps] (0,0) rectangle (1.0,1.0);
-      \path (0,0)+(-1.2,0.3) node {\Large T$_2$ map};
+      \path (0,0)+(-1.35,0.3) node {\Large T$_2$ map};
     \end{scope}
 
     \begin{scope}[yshift=-100,xshift=-86]
@@ -115,7 +115,7 @@
 
     \begin{scope}[yshift=-106,xshift=-80]
       \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dce.eps] (0,0) rectangle (1.0,1.0);
-      \path (0,0)+(-1.5,0.3) node {\Large DCE MRI};
+      \path (0,0)+(-1.65,0.3) node {\Large DCE MRI};
     \end{scope}
 
     \begin{scope}[yshift=-167,xshift=-86]
@@ -128,7 +128,7 @@
 
     \begin{scope}[yshift=-173,xshift=-80]
       \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/dwi1.eps] (0,0) rectangle (1.0,1.0);
-      \path (0,0)+(-1.5,0.3) node {\Large DW MRI};
+      \path (0,0)+(-1.65,0.3) node {\Large DW MRI};
     \end{scope}
 
     \begin{scope}[yshift=-234,xshift=-86]
@@ -154,7 +154,7 @@
 
     \begin{scope}[yshift=-307,xshift=-80]
       \transparent{0.8}\draw[path image=2_modality/figures/tikzimage/mrsi.eps] (0,0) rectangle (1.0,1.0);
-      \path (0,0)+(-1,0.3) node {\Large MRSI};
+      \path (0,0)+(-1.1,0.3) node {\Large MRSI};
     \end{scope}
 
     \path (pre.west |- roi.north)+(-3.5,1.0+\blockdist) node (g) {};

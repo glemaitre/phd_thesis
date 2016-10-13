@@ -342,7 +342,7 @@
     %     \vspace*{0.5ex}
     {\small \@degreedate \par}
         \vspace*{10mm}
-    {\small Doctorate in Technology \par}
+    {\small Doctoratal Programme in Technology \par}
         \vspace*{5mm}
     {\scriptsize Work submitted to the Universitat de Girona and Universit\'e de Bourgogne Franche-Comt\'e in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
 \newpage

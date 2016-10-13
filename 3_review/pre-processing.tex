@@ -23,7 +23,7 @@ Furthermore, \ac{mri} images visualized by radiologists are in fact the magnitud
 The complex Fourier transform does not affect the Gaussian noise characteristics since this is a linear and orthogonal transform~\cite{Nowak1999}.
 However, the calculation of the magnitude is a non-linear transform --- i.e., the square root of the sum of squares of real and the imaginary parts --- implying that the noise distribution is no longer Gaussian; it indeed follows a Rician distribution making the denoising task more challenging.
 Briefly, a Rician distribution is characterized as follows: in low-\ac{si} region (low-\ac{snr}), it can be approximated with a Rayleigh distribution while in high-\ac{si} region (high-\ac{snr}), it is similar to a Gaussian distribution~\cite{Manjon2008}.
-Refer to \acs{fig}\,\ref{fig:noisedistr} to observe the difference between a Gaussian and Rayleigh distribution.
+Refer to \acs{fig}\,\ref{fig:noisedistr} to observe the difference between a Gaussian and a Rayleigh distribution.
 Comprehensive reviews regarding denoising methods can be found in~\cite{Buades2005,Mohan2014}.
 
 Median filtering is the simplest approach used to address the denoising issue in \ac{mri} images~\cite{Ozer2009,Ozer2010}.
@@ -40,7 +40,7 @@ That is why more complex approaches have been proposed to overcome this problem.
 Another common method used to denoise \ac{mri} images is based on wavelet decomposition and shrinkage.
 This filtering exploits the sparsity property of the wavelet decomposition.
 The projection of a noisy signal from the spatial-domain to the wavelet-domain implies that only few wavelet coefficients contribute to the ``signal-free noise'' while all wavelet coefficients contribute to the noise~\cite{Donoho1994}.
-Therefore, insignificant wavelet coefficients are thresholded/attenuated to enforce the sparsity in the wavelet-domain, which result to a denoising process in the spatial domain.
+Therefore, insignificant wavelet coefficients are thresholded/attenuated to enforce the sparsity in the wavelet-domain, which results to a denoising process in the spatial domain.
 Investigations focus on the strategies to perform the most adequate coefficient shrinkage (e.g., thresholding, singularity property, or Bayesian framework)~\cite{Pizurica2002}.
 \citeauthor{Ampeliotis2008} denoised the magnitude \ac{mri} images~\cite{Ampeliotis2007,Ampeliotis2008} --- i.e., \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} --- by wavelet shrinkage, using thresholding techniques~\cite{Mallat2008}.
 However, since the wavelet transform is an orthogonal transform, the Rician distribution of the noise is preserved in the wavelet-domain.
@@ -145,14 +145,14 @@ Taking advantage of the logarithm property, the model in \acs{eq}\,\eqref{eq:bia
 \noindent where $S(\cdot)$, $B(\cdot)$, and $O(\cdot)$ are the \acp{pdf} of $s(\cdot)$, $b(\cdot)$, and $o(\cdot)$, respectively.
 
 The corrupted signal $s$ is restored by finding the multiplicative field $b$ which maximizes the frequency content of the distribution $O$.
-\citeauthor{Sled1998} argued that a brute-force search through all possible fields $b$ and selecting the one which maximizes the high frequency content of $O$ is possible but far to complex.
+\citeauthor{Sled1998} argued that a brute-force search through all possible fields $b$ and selecting the one which maximizes the high frequency content of $O$ is possible but far too complex.
 By assimilating the bias field distribution to be a near Gaussian distribution as \textit{a priori}, it is then possible to infer the distribution $O$ using the Wiener deconvolution given $B$ and $S$ and later estimate the corresponding smooth field $b$.
 
 \citeauthor{Lv2009} corrected the non-homogeneity in \ac{t2w}-\ac{mri} images~\cite{Lv2009} by using the method proposed in~\cite{Madabhushi2006}.
 \citeauthor{Madabhushi2006} proposed to correct the \ac{mri} images by detecting the image foreground via \ac{gscale} in an iterative manner and estimating a bias field function based on a 2\textsuperscript{nd} order polynomial model.
 First, the background of the \ac{mri} image is eliminated by thresholding, in which the threshold value is commonly equal to the mean \ac{si} of the considered image.
 Then, a seeded region growing algorithm is applied in the image foreground, considering every thresholded pixel as a potential seed.
-However, pixels already assigned to a region are not considered any more as potential seed.
+However, pixels already assigned to a region are not considered any more as a potential seed.
 As in seeded region growing algorithm~\cite{Shapiro2001}, two criteria are taken into account to expand a region.
 First, the region grows using a connected-neighbourhood, initially defined by the user.
 Then, the homogeneity of \ac{si} is based on a fuzzy membership function taking into account the absolute difference of two pixel \ac{si}.
@@ -251,7 +251,7 @@ Once the foreground is detected, the largest region is extracted, and the regula
 
 The standardization problem can be tackled by normalizing the MRI images using the \ac{si} of some known organs present in these images. 
 \citeauthor{Niaf2012} and \citeauthor{lehaire2014computer} normalized \ac{t2w}-\ac{mri} images by dividing the original \ac{si} of the images by the mean \ac{si} of the bladder~\cite{Niaf2011,Niaf2012,lehaire2014computer}, which is depicted in \acs{fig}\,\ref{subfig:bladder}.
-\citeauthor{giannini2015fully} also normalized the same modality but using the signal intensity of obturator muscle~\cite{giannini2015fully}.
+\citeauthor{giannini2015fully} also normalized the same modality but using the signal intensity of the obturator muscle~\cite{giannini2015fully}.
 Likewise, \citeauthor{Niaf2011} standardized the \ac{t1w}-\ac{mri} images using the \ac{aif}~\cite{Niaf2011}.
 They computed the \ac{aif} by taking the mean of the \ac{si} in the most enhanced part of the common femoral arteries --- refer to \acs{fig}\,\ref{subfig:arteries} --- as proposed in~\cite{Wiart2007}.
 Along the same line, \citeauthor{samarasinghe2016semi} normalized the \ac{si} of lesion regions in \ac{t1w}-\ac{mri} using the mean intensity of the prostate gland in the same modality~\cite{samarasinghe2016semi}.
@@ -270,7 +270,7 @@ Hence, specific pre-processing steps for this type of signals have been applied 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth]{3_review/figures/processing/pre-processing/phase/phase.eps}
-  \caption[Illustration of phase malignant in an \acs*{mrsi} spectra.]{Illustration of phase misalignment in an \acs*{mrsi} spectra acquire with a \SI{3}{\tesla} \ac*{mrsi} scanner. Note the distortion of the signal specially visible for the water and citrate peaks.}
+  \caption[Illustration of phase malignant in an \acs*{mrsi} spectra.]{Illustration of phase misalignment in an \acs*{mrsi} spectra acquired with a \SI{3}{\tesla} \ac*{mrsi} scanner. Note the distortion of the signal specially visible for the water and citrate peaks visible at 5 and 3 ppm, respectively}
   \label{fig:phase}
 \end{figure}
 
@@ -306,7 +306,7 @@ Once the best parameter $\Phi$ vector is obtained, the \ac{mrsi} signal is corre
 \end{figure}
 
 %\item[$-$] \textbf{\textit{Water and lipid residuals filtering:}} 
-\paragraph{Water and lipid residuals filtering} The water and lipid metabolites occur in much higher concentrations than the metabolites of interests, namely choline, creatine, and citrate~\cite{Zhu2010,Osorio-Garcia2012}.
+\paragraph{Water and lipid residuals filtering} The water and lipid metabolites occur in much higher concentrations than the metabolites of interest, namely choline, creatine, and citrate~\cite{Zhu2010,Osorio-Garcia2012}.
 Fortunately, specific \ac{mrsi} sequences have been developed in order to suppress water and lipid metabolites using pre-saturation techniques~\cite{Zhu2010}.
 However, these techniques do not perfectly remove water and lipids peaks and some residuals are still present in the \ac{mrsi} spectra as illustrated in \ac{fig}\,\ref{fig:waterfat}.
 Therefore, different post-processing methods have been proposed to enhance the quality of the \ac{mrsi} spectra by removing these residuals.
@@ -321,7 +321,7 @@ For instance, \citeauthor{Kelm2007} used the HSVD algorithm proposed by \citeaut
 \noindent where $a_k$ is the amplitude proportional to the metabolite concentration with a resonance frequency $f_{k}$, $d_k$ represents the damping factor of the exponential, $\phi_k$ is the first-order phase, and $\eta(t)$ is a complex white noise.
 
 The ``noise-free signal'' can be found using the \ac{svd} decomposition~\cite{Pijnappel1992}.
-Therefore, the noisy signal is reorganized inside an Hankel matrix $H$.
+Therefore, the noisy signal is reorganized inside a Hankel matrix $H$.
 It can be shown that the signal is considered as a ``noise-free signal'' if the rank of $H$ is equal to rank $K$.
 However, due to the presence of noise, $H$ is in fact a full rank matrix.
 Thus, to recover the ``noise-free signal'', the rank of $H$ is truncated to $K$ using its \ac{svd} decomposition.
@@ -346,7 +346,7 @@ Then, the values of the fitted polynomial are re-assigned as:
 
 Finally, this procedure of fitting and re-assignment is repeated on $p_f(x)$ until a stopping criterion is reached.
 The final polynomial function is subtracted from the original signal $s(x)$ to correct it.
-\cite{Parfait2012} modified this algorithm by convolving a Gaussian kernel to smooth the \ac{mrsi} signal instead of fitting a polynomial function, keeping the rest of the algorithm identical. 
+\citeauthor{Parfait2012} modified this algorithm by convolving a Gaussian kernel to smooth the \ac{mrsi} signal instead of fitting a polynomial function, keeping the rest of the algorithm identical. 
 Unlike~\citeauthor{Lieber2003}, \citeauthor{Devos2004} corrected the baseline in the time domain by multiplying the \ac{mrsi} signal by a decreasing exponential function~\cite{Devos2004} as:
 \begin{equation}
 	c(t) = \exp (- \beta t) \ ,
@@ -355,9 +355,10 @@ Unlike~\citeauthor{Lieber2003}, \citeauthor{Devos2004} corrected the baseline in
 
 \noindent with a typical $\beta$ value of $0.15$.
 However, \citeauthor{Parfait2012} concluded that the method proposed in~\cite{Lieber2003} outperformed the one in~\cite{Devos2004}.
-The later study of \citeauthor{trigui2017automatic} used these conclusion and adopted the same method~\cite{trigui2016classification,trigui2017automatic}.
+The later study of \citeauthor{trigui2017automatic} used this conclusion and adopted the same method~\cite{trigui2016classification,trigui2017automatic}.
 
-In the contemporary work of \citeauthor{Tiwari2012}, the authors detected the baseline using a local non-linear fitting method avoiding regions with significant peaks which have been detected using an experimentally parametric signal-to-noise ratio, which has been set to a value larger than \SI{5}{\decibel}.
+In the contemporary work of \citeauthor{Tiwari2012}, the authors detected the baseline using a local non-linear fitting method avoiding regions with significant peaks, which have been detected using an experimentally parametric signal-to-noise ratio set to a value larger than \SI{5}{\decibel}.
+
 
 \begin{figure}
 \centering

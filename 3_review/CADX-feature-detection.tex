@@ -2,7 +2,7 @@
 
 Discriminative features which help to recognize \ac{cap} from healthy tissue need to be first detected.
 This processing is known in computer vision as feature extraction. 
-However, feature extraction also refer to the name given in pattern recognition to some types of dimension reduction methods which are later presented.
+However, feature extraction also refers to the name given in pattern recognition to some types of dimension reduction methods which are later presented.
 In order to avoid confusion between these two aspects, in this survey, the procedure ``detecting'' or ``extracting'' features from images and signals is defined as feature detection.
 This section summarizes the different features used in \ac{cad} for \ac{cap}.
 
@@ -36,7 +36,7 @@ Multiple studies used the resulting magnitude and orientation of the edges compu
 Gabor filters~\cite{Gabor1946,Daugman1985} offer an alternative to the usual edge detector, with the possibility to tune the direction and the frequency of the filter to encode a specific pattern. 
 A Gabor filter is defined by the modulation of a Gaussian function with a sine wave which can be further rotated and is formalized as in \acs{eq}\,\ref{eq:gabor}.
 \begin{equation}
-	g(x,y;\theta,\psi,\sigma,\gamma) = \exp \left( - \frac{x'^{2}+ \gamma^{2}y'^{2}}{2 \sigma^{2}} \right) \cos \left( 2 \pi \frac{x'}{\lambda} + \phi \right) \ ,
+	g(x,y;\theta,\psi,\sigma,\gamma) = \exp \left( - \frac{x'^{2}+ \gamma^{2}y'^{2}}{2 \sigma^{2}} \right) \cos \left( 2 \pi \frac{x'}{\lambda} + \psi \right) \ ,
         \label{eq:gabor}
 \end{equation}
 
@@ -93,7 +93,7 @@ The fractal dimension is estimated through a wavelet-based method in multi-resol
 They showed that cancerous tissues have a higher fractal dimension than healthy tissue.
 
 \citeauthor{Chan2003} described texture using the frequency signature via the \acf{dct}\cite{Ahmed1974} defining a neighbourhood of \SI[product-units=repeat]{7x7}{\px} for modalities used, namely \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri}.
-The \ac{dct} allows to decompose a portion of image into a coefficient space, where few of these coefficients encode the significant information.
+The \ac{dct} allows to decompose a portion of an image into a coefficient space, where few of these coefficients encode the significant information.
 The \ac{dct} coefficients are computed such as:
 
 \begin{equation}
@@ -102,7 +102,7 @@ The \ac{dct} coefficients are computed such as:
 
 \noindent where $C_{k_1,k_2}$ is the \ac{dct} coefficient at the position $k_1,k_2$, $M$ and $N$ are the dimension of the neighbourhood and $p_{m,n}$ is the pixel \ac{si} at the position $\{m,n\}$.
 
-\citeauthor{Viswanath2012} projected \ac{t2w}-\ac{mri} images into the wavelet space, using the Haar wavelet, and used the resulting coefficients as features~\cite{Viswanath2012}.
+Regarding other features, \citeauthor{Viswanath2012} projected \ac{t2w}-\ac{mri} images into the wavelet space, using the Haar wavelet, and used the resulting coefficients as features~\cite{Viswanath2012}.
 %The wavelet family used for the decomposition was the Haar wavelet.
 \citeauthor{Litjens2011} computed the texture map based on \ac{t2w}-\ac{mri} images using a Gaussian filter bank~\cite{Litjens2011}.
 Likewise, \citeauthor{rampun2016computer} employed a rotation invariant filter bank proposed in~\cite{leung2001representing}.
@@ -120,7 +120,7 @@ Additionally, some studies extract additional statistical landmarks based on per
 The percentiles to use are manually determined by observing the \ac{pdf} of the features and checking which values allow the best to differentiate malignant from healthy tissue.
 
 Further statistics are computed through the use of histogram-based features.
-\citeauthor{Liu2013} introduced 4 different types of histogram-based features to characterized hand-delineated lesions~\cite{Liu2013}.
+\citeauthor{Liu2013} introduced 4 different types of histogram-based features to characterize hand-delineated lesions~\cite{Liu2013}.
 The first type corresponds to the histogram of the \ac{si} of the image.
 The second type is the \ac{hog}~\cite{Dalal2005} which encodes the local shape of the object of interest by using the distribution of the gradient directions.
 This descriptor is extracted mainly in three steps.
@@ -153,7 +153,7 @@ The second fractal dimension is estimated using the \ac{pdf} of each image and c
 \subsubsection{\acs*{dce}-based features}\label{subsubsec:chp3:img-clas:CADX-fea-dec:DCE-fea}
 
 \ac{dce}-\ac{mri} is more commonly based on a \ac{si} analysis over time as presented in \acs{sec}\,\ref{subsec:chp2:imaging:dce}.
-In this section, the features extracted for \ac{dce}-\ac{mri} analysis are presented.
+In this section, the specific features extracted for \ac{dce}-\ac{mri} analysis are presented.
 
 \begin{table}
   \caption{Parameters used as features for a \acs*{dce} semi-quantitative analysis in \acs*{cad} systems.}
@@ -214,14 +214,14 @@ This model is formalized such as:
 \noindent where $S(\cdot)$ is the \ac{dce} signal, $A$ is the parameter simulating the tissue properties, $k_{el}$ is the parameter related to the first-order elimination from the plasma compartment, and $k_{ep}$ is the parameter of the transvascular permeability.
 The parameters $k_{ep}$, $k_{el}$, and $A$ are computed from the \ac{mri} data and used as features.
 
-Another model is Tofts model~\cite{Tofts1997} which have been used in~\cite{Langer2009,Giannini2013,Niaf2011,Niaf2012,Mazzetti2011,lehaire2014computer,giannini2015fully}.
+Another model is Tofts model~\cite{Tofts1997} which has been used in~\cite{Langer2009,Giannini2013,Niaf2011,Niaf2012,Mazzetti2011,lehaire2014computer,giannini2015fully}.
 In this model, the \ac{dce} signal relative to the concentration is presented as:
 \begin{equation}
 	C_t(t) = v_p C_p(t) + K_{trans} \int_{0}^{t} C_p(\tau) \exp( -k_{ep}(t-\tau) ) \ d\tau \ ,
 	\label{eq:tofts} 
 \end{equation}
 
-\noindent where $C_t(\cdot)$ is the concentration of the medium, $C_p(\cdot)$ is the \ac{aif} which have to be estimated independently, $K_{trans}$ is the parameter related to the diffuse transport of media across the capillary endothelium, $k_{ep}$ is the parameter related to the exchanges back into the vascular space, and $v_e$ is the extravascular-extracellular space fraction defined such that $v_e = 1 - v_p$.
+\noindent where $C_t(\cdot)$ is the concentration of the medium, $C_p(\cdot)$ is the \ac{aif} which has to be estimated independently, $K_{trans}$ is the parameter related to the diffuse transport of media across the capillary endothelium, $k_{ep}$ is the parameter related to the exchanges back into the vascular space, and $v_e$ is the extravascular-extracellular space fraction defined such that $v_e = 1 - v_p$.
 In this model, parameters $K_{trans}$, $k_{ep}$, and $v_e$ are computed and used as features.
 
 \citeauthor{Mazzetti2011} and \citeauthor{giannini2015fully} used the Weibull function~\cite{Mazzetti2011,Giannini2013,giannini2015fully} which is formalized as:

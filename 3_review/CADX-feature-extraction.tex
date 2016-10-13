@@ -3,7 +3,7 @@ As presented in the previous section, it is a common practise to extract a wide 
 While dealing with \ac{mpmri}, the feature space created is a high-dimensional space which might mislead or corrupt the classifier during the training phase.
 Therefore, it is of interest to reduce the number of dimensions before proceeding to the classification task.
 The strategies used can be grouped as: (i) feature selection and (ii) feature extraction.
-In this section only the methods used in \ac{cad} system are presented
+In this section only the methods used in \ac{cad} for \ac{cap} systems are presented.
 
 \subsubsection{Feature selection}\label{subsubsec:chp3:img-clas:CADX:fea-ext:sel}
 The feature selection strategy is based on selecting the most discriminative feature dimensions of the high-dimensional space.
@@ -132,14 +132,14 @@ However, in order to use the combined kernel, \acs{eq}\,\eqref{eq:geeig} is rewr
 
 \Ac{lle} is another common non-linear dimension reduction technique widely used, first proposed in~\cite{Roweis2000}.
 \ac{lle} is based on the fact that a data point in the feature space is characterized by its neighbourhood.
-Thus, each data point in the high-dimensional space is transform to represent a linear combination of its $k$-nearest neighbours.
+Thus, each data point in the high-dimensional space is transformed to represent a linear combination of its $k$-nearest neighbours.
 This can be expressed as:
 \begin{equation}
 	\hat{\mathbf{x}}_i = \sum_j W(i,j) \mathbf{x}_j \ ,
 	\label{eq:lincomlle}
 \end{equation}
 
-\noindent where $\hat{\mathbf{x}}_i$ are the data point estimated using its neighbouring data points $\mathbf{x}_j$, and $W$ is the weight matrix.
+\noindent where $\hat{\mathbf{x}}_i$ are the data points estimated using its neighbouring data points $\mathbf{x}_j$, and $W$ is the weight matrix.
 The weight matrix $W$ is estimated using a least square optimization as in \acs{eq}\,\eqref{eq:lslle}.
 %Hence, this problem which has to be solved at this stage is to estimate the weight matrix $W$. This problem can be tackled using a least square optimization scheme by optimizing the following objective function:
 \begin{eqnarray}
@@ -163,7 +163,7 @@ The different embeddings obtained are then fused using the \ac{ml} estimation.
 Another way of reducing the complexity of high-dimensional feature space is to use the family of so-called dictionary-based methods.
 \Ac{scf} representation has become very popular in other computer vision application and has been used by \citeauthor{lehaire2014computer} in~\cite{lehaire2014computer}.
 The main goal of sparse modeling is to efficiently represent the images as a linear combination of a few typical patterns, called atoms, selected from a dictionary.
-Sparse coding consists of three main steps: (i) dictionary learning and low-level features projection~\cite{rubinstein2008efficient}.
+Sparse coding consists of three main steps: sparse approximation, dictionary learning and low-level features projection~\cite{rubinstein2008efficient}.
 
 \emph{Sparse approximation -} Given a dictionary $\mathbf{D} \in \mathbb{R}^{n \times K}$ composed of $K$ atoms and an original signal $\mathbf{y} \in \mathbb{R}^{n}$ --- i.e., one feature vector ---, the sparse approximation corresponds to find the sparest vector $\mathbf{x} \in \mathbb{R}^{K}$ such that:
 
@@ -186,10 +186,11 @@ Given $\mathbf{D}$, $\mathbf{X}$ is computed using the batch-\ac{omp} algorithm,
 
 \emph{Low-level features projection -} Once the dictionary is learned, each set of low-level features $\mathbf{F}_{I}$ previously extracted is encoded using the dictionary $\mathbf{D}$, solving the optimization problem presented in \acs{eq}\,\eqref{eq:sprapp} such that $\mathbf{F}_{I} \simeq \mathbf{DX}_{I}$.
 
-\ac{bow} approach offer an alternative methods~\cite{Sivic2003} which has been used by \citeauthor{rampun2016computerb} in~\cite{rampun2015classifying}.
+The \ac{bow} approach offers an alternative method~\cite{Sivic2003} for feature extraction.
+\Ac{bow} was used by \citeauthor{rampun2016computerb} in~\cite{rampun2015classifying,rampun2016computerb}.
 This model represents the features by creating a codebook or visual dictionary, from the set of low-level features.
 The set of low-level features are clustered using \textit{k}-means to create the dictionary with \textit{k} clusters known as visual words.
-Once the codebook created from the training set, the low-level descriptors are replaced by their closest word within the codebook.
+Once the codebook is created from the training set, the low-level descriptors are replaced by their closest word within the codebook.
 The final descriptor is a histogram of size \textit{k} which represents the codebook occurrences for a given mapping.
 
 % THIS IS FROM MY THESIS, YOU CAN USE THIS, If you like

@@ -26,7 +26,7 @@ As previously mentioned, the registration process is equivalent to find a geomet
 From all \ac{cad} systems reviewed, only parametric methods have been implemented.
 Three different groups of parametric transformation models have been used --- i.e., rigid, affine, and elastic --- each of them characterized by a specific degree of freedom.
 
-The simplest transformation used in terms of degree of freedom is usually referred to as rigid transformation.
+The simplest transformation used in terms of degrees of freedom is usually referred to as rigid transformation.
 This type of transformation is only composed of a rotation and a translation.
 Therefore, for the 2D case where $\mathbf{x} = (x,y) \in \mathbb{R}^2$, a rigid transformation $\mathcal{T}_R$ is formalized as:
 
@@ -51,7 +51,7 @@ In the case of 3D registration using volume, an additional component $z$ is intr
 Thus, the rotation matrix $\mathbf{R}$ becomes of size $3 \times 3$ whereas the translation vector $\mathbf{t}$ consists of a vector of 3 variables. 
 The geometric transformation $\mathcal{T}_R(\cdot)$ is embedded into a matrix of size $4 \times 4$.
 
-The affine transformation provide additional degrees of freedom, providing rotation, translation, --- as with the rigid transformations --- and also shearing and scaling.
+The affine transformation provides additional degrees of freedom, providing rotation, translation, --- as with the rigid transformations --- and also shearing and scaling.
 Hence, for a 2D space where $\mathbf{x} = (x,y) \in \mathbb{R}^2$, an affine transformation $\mathcal{T}_A$ is formalized as: 
 
 \begin{eqnarray}
@@ -70,9 +70,9 @@ Hence, for a 2D space where $\mathbf{x} = (x,y) \in \mathbb{R}^2$, an affine tra
 	\end{bmatrix} \ . \label{eq:afftra}% 
 \end{eqnarray}
 \noindent where the 4 parameters $\{a_{11},a_{12},a_{21},a_{22}\}$ of the affine matrix and $\{ t_x, t_y \}$ of the translation encode the deformation.
-As in the rigid registration case, in 3D the affine transformation $\mathcal{T}_A(\cdot)$ is of size $4 \times 4$ with 12 parameters involved.
+As in the rigid registration case, in 3D the affine transformation $\mathcal{T}_A(\cdot)$ is of size $4 \times 4$ but now with 12 parameters involved.
 
-Finally, the last group of transformation is known as elastic transformation and offers the advantage to handle local distortions.
+Finally, the last group of transformations is known as elastic transformations and offers the advantage to handle local distortions.
 In the reviewed \ac{cad} systems, the radial basis functions are used to formalize the local distortions such as:
 
 \begin{equation}
@@ -115,7 +115,7 @@ This metric is not well suited when \ac{mpmri} images are involved due to the ti
         \label{fig:jointhisto}
 \end{figure}
 
-In this regard, \ac{mi} has been introduced as a similarity measure in registration framework in the late 1990's by \citeauthor{Pluim2003}.
+In this regard, \ac{mi} was introduced as a similarity measure in registration framework in the late 1990's by \citeauthor{Pluim2003}.
 The \ac{mi} measure finds its foundation in the assumption that a homogeneous region in the first modality image should also appear as a homogeneous region in the second modality, even if their \acp{si} are not identical.
 Thus, those regions share information and the registration task is achieved by maximizing this common information.
 Hence, \Ac{mi} of two images $A$ and $B$ is defined as:
@@ -159,7 +159,7 @@ However, commonly used methods are bi-linear, nearest-neighbour, bi-cubic, splin
 
 %\item[$-$] \textbf{\textit{Registration methods used in \ac{cad} systems:}} 
 \paragraph{Registration methods used in \ac{cad} systems}
-\acs{tab}~\ref{tab:regtab} summarized the framework used to register \ac{mpmri} images in \ac{cad} for \ac{cap}.
+\acs{tab}~\ref{tab:regtab} summarizes the framework used to register \ac{mpmri} images in \ac{cad} for \ac{cap}.
 
 \begin{table}
   \centering
@@ -195,8 +195,8 @@ However, commonly used methods are bi-linear, nearest-neighbour, bi-cubic, splin
 By using image symmetries and the \ac{mse} metric, they found the parameters of an affine transformation but without using a common objective function.
 The scale factor, the rotation, and the translation are independently and sequentially estimated.
 
-\cite{Giannini2013} used also a in-house registration method for 2D \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} images using an affine model~\cite{Giannini2013,giannini2015fully}.
-The bladder is first segmented in both modalities in order to obtain its contours and to focus on the registration and minimize the distance between the contours.
+\citeauthor{Giannini2013} used also a in-house registration method for 2D \ac{t2w}-\ac{mri} and \ac{dw}-\ac{mri} images using an affine model~\cite{Giannini2013,giannini2015fully}.
+The bladder is first segmented in both modalities in order to obtain its contours which are then used as a metric function (i.e. distance between contours) for registration.
 
 \citeauthor{Giannini2013} and also \citeauthor{Vos2010} used a framework based on finding an affine transformation to register the \ac{t2w}-\ac{mri} and \ac{dce}-\ac{mri} images using \ac{mi}~\cite{Rueckert1999,Giannini2013,Vos2010}.
 Then, an elastic registration using B-spline takes place using the affine parameters to initialize the geometric model with the same similarity measure.

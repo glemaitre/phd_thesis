@@ -1,7 +1,7 @@
 %\section{\acs*{mri} imaging techniques}\label{sec:chp2:imaging}
 
 \ac{mri} provides promising imaging techniques to overcome the drawbacks of current clinical screening techniques mentioned in \acs{sec}\,\ref{chap:1}.
-Unlike \ac{trus} biopsy, \ac{mri} examination is a non-invasive protocol and has been shown to be the most acute and harmless technique available currently~\cite{Turkbey2012}.
+Unlike \ac{trus} biopsy, \ac{mri} examination is a non-invasive protocol and has been shown to be the most accurate and harmless technique currently available~\cite{Turkbey2012}.
 In this section, we review different \ac{mri} imaging techniques developed for \ac{cap} detection and diagnosis.
 Features strengthening each modality will receive particular attention together with their drawbacks.
 Commonly, these features form the basis for developing analytic tools and automatic algorithms.
@@ -14,7 +14,7 @@ However, we refer the reader to \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-de
 \begin{figure}
 \centering
 	\hspace*{\fill}
-	\subfigure[\acs*{t2w}-\acs*{mri} slice of an healthy prostate acquire with a \SI{1.5}{\tesla} \acs*{mri} with an endorectal coil. The blue contour represents the \acs*{cg} while the \acs*{pz} corresponds to the green contour.]{\label{subfig:t2whealthy}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_healthy.eps}} \hfill
+	\subfigure[\acs*{t2w}-\acs*{mri} slice of a healthy prostate acquire with a \SI{1.5}{\tesla} \acs*{mri} with an endorectal coil. The blue contour represents the \acs*{cg} while the \acs*{pz} corresponds to the green contour.]{\label{subfig:t2whealthy}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_healthy.eps}} \hfill
 	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{pz} using a \SI{3}{\tesla} \acs*{mri} scanner without an endorectal coil.]{\label{subfig:t2wcancerpz}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_pz.eps}} \hfill
 	\subfigure[\acs*{t2w}-\acs*{mri} slice of a prostate with a \acs*{cap} highlighted in the \acs*{cg} using a \SI{1.5}{\tesla} \acs*{mri} scanner with an endorectal coil.]{\label{subfig:t2wcancercg}\includegraphics[width=0.3\linewidth]{2_modality/figures/t2w/t2w_cancer_cg.eps}}
 	\hspace*{\fill}
@@ -55,16 +55,16 @@ However, T$_2$ values alone have been shown to be more discriminative~\cite{Liu2
 T$_2$ values are computed using the characteristics of transverse relaxation which is formalized as in \acs{eq}\,\eqref{eq:tramag}.
 
 \begin{equation}
-	M_{x,y}(t) = M_{x,y}(0) \exp \left( - \frac{t}{\text{T}_2} \right) \ ,
+	M_{xy}(t) = M_{xy}(0) \exp \left( - \frac{t}{\text{T}_2} \right) \ ,
 	\label{eq:tramag}
 \end{equation}
 
-\noindent where $M_{x,y}(0)$ is the initial value of $M_{x,y}(t)$ and T$_2$ is the relaxation time.
+\noindent where $M_{xy}(0)$ is the initial value of $M_{xy}(t)$ and T$_2$ is the relaxation time.
 
 By rearranging \acs{eq}\,\eqref{eq:tramag}, T$_2$ map is computed by performing a linear fitting on the model presented in \acs{eq}\,\eqref{eq:t2map} using several TE, $t=\{ \text{TE}_1,\text{TE}_2, \dotsc ,\text{TE}_m \}$.
 
 \begin{equation}
-	\ln \left[ \frac{M_{x,y}(t)}{M_{x,y}(0)} \right] = - \frac{t}{\text{T}_2} \ .
+	\ln \left[ \frac{M_{xy}(t)}{M_{xy}(0)} \right] = - \frac{t}{\text{T}_2} \ .
 	\label{eq:t2map}
 \end{equation}
 
@@ -194,7 +194,7 @@ Then, the \ac{adc} map can be computed as:
 	\label{eq:adcres1}
 \end{equation}
 
-More accurate \ac{adc} map are computed by acquiring a set of images with different values for the parameter $b$ and fitting linearly a semi-logarithm function using the model presented in \acs{eq}\,\eqref{eq:t2adcrew}.
+More accurate \ac{adc} maps are computed by acquiring a set of images with different values for the parameter $b$ and fitting linearly a semi-logarithm function using the model presented in \acs{eq}\,\eqref{eq:t2adcrew}.
 
 Regarding the appearance of the \ac{adc} maps, it has been previously stated that by increasing the value of $b$, the signal of \ac{cap} tissue increases significantly.
 Considering \acs{eq}\,\eqref{eq:adcres1}, the tissue appearance in the \ac{adc} map is the inverse of \ac{dw}-\ac{mri} images.
@@ -209,10 +209,10 @@ It has also been noted that a high variability of the \ac{adc} occurs between di
 \begin{figure}
 	\centering
 	\hspace*{\fill}
-	\subfigure[Illustration of an \acs*{mrsi} spectrum of an healthy voxel acquired with a \SI{3}{\tesla} \acs*{mri}.]{\label{subfig:mrsihea}\includegraphics[width=0.45\linewidth]{2_modality/figures/mrsi/mrsi_healthy.eps}} \hfill
+	\subfigure[Illustration of an \acs*{mrsi} spectrum of a healthy voxel acquired with a \SI{3}{\tesla} \acs*{mri}.]{\label{subfig:mrsihea}\includegraphics[width=0.45\linewidth]{2_modality/figures/mrsi/mrsi_healthy.eps}} \hfill
 	\subfigure[Illustration of an \acs*{mrsi} spectrum of a cancerous voxel acquired with a \SI{3}{\tesla} \acs*{mri}.]{\label{subfig:mrsican}\includegraphics[width=0.45\linewidth]{2_modality/figures/mrsi/mrsi_cancer.eps}}
 	\hspace*{\fill}
-	\caption[Illustration of healthy and cancerous \acs*{mrsi} spectrum.]{Illustration of an \acs*{mrsi} spectrum both healthy and cancerous voxel with a \SI{3}{\tesla} \acs*{mri}. The highlighted areas corresponds to the related concentration of the metabolites which is computed by integrating the area under each peak. Acronyms: choline (Cho), spermine (Spe), creatine (Cr) and citrate (Cit).}
+	\caption[Illustration of healthy and cancerous \acs*{mrsi} spectrum.]{Illustration of an \acs*{mrsi} spectrum for both healthy and cancerous voxels with a \SI{3}{\tesla} \acs*{mri}. The highlighted areas correspond to the related concentration of the metabolites which is computed by integrating the area under each peak. Acronyms: choline (Cho), spermine (Spe), creatine (Cr) and citrate (Cit).}
 	\label{fig:mrsi}
 \end{figure}
 
@@ -263,13 +263,13 @@ In addition, \ac{mrsi} suffers from low spatial resolution due to the fact that 
 However, this issue is addressed by developing new scanners with higher magnetic field strengths such as \SI{7.5}{\tesla}~\cite{Giskeodegard2013}.
 Finally, a high variability of the relative concentrations between patients has been observed~\cite{Choi2007}.
 The same observation has been made depending on the zones studied (ie., \ac{pz}, \ac{cg}, base, mid-gland, apex)~\cite{Walker2010,Lemaitre2011}.
-Due to this variability, it is difficult to use a fixed thresholds in order to differentiate \ac{cap} from healthy tissue.
+Due to this variability, it is difficult to use a fixed threshold in order to differentiate \ac{cap} from healthy tissue.
 
 \section{Summary and conclusions}
 
 \acs{tab}~\ref{tab:modmri} provides an overview of the different modalities presented in the previous section.
-Indeed, each \ac{mri} modality alone provides different discriminative level to distinguish \ac{cap} from healthy tissue.
-A recurrent statement in the literature is, however, the ability to combine these \ac{mri} modalities which lead to the best diagnosis performance.
+Indeed, each \ac{mri} modality alone provides a different discriminative level to distinguish \ac{cap} from healthy tissue.
+A recurrent statement in the literature is, however, the ability to combine these \ac{mri} modalities would lead to the best diagnosis performance.
 In this regard, we will present in the next chapter automatic tools which have been developed to design \ac{mpmri} \ac{cad} systems for the detection of \ac{cap}.
 
 \input{2_modality/Table-features-modality.tex}
