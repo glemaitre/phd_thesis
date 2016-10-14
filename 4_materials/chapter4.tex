@@ -2,17 +2,17 @@
 \chapter{Materials}\label{chap:4}
 
 \begin{quote}
-  \textbf{Replication}\quad \emph{1.2}~The repetition of a scientific
+  \textbf{Replication}\quad The repetition of a scientific
   experiment or trial to obtain a consistent result.
 \end{quote}
 
 Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
 
-\citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility.
+\citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility~\cite{peng2011reproducible}.
 In order to overcome such limitations, \citeauthor{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
 %% sik:
 %% Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code of methods developed should both be made available along with the executable that lead to the published results so that the three are fully coupled\,\cite{peng2011reproducible}.
-Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code and the executables that leads to the published results should be all coupled and  availabe. 
+Specifically, \citeauthor{peng2011reproducible} argues that the original data and executable code which lead to the published results should be all coupled and available. 
 
 \begin{figure}
 \centering
@@ -22,33 +22,33 @@ Specifically, \citeauthor{peng2011reproducible} argues that the original data, t
 \end{figure}
 
 Furthermore, \citeauthor{varoquaux2015Software} in his article %\citetitle{varoquaux2015Software}
-\emph{Of Software and Science. Reproducible science: what, why, and how} summarizes a discussion taken place in \emph{\acs{mloss}} workshop regarding the issue of reproducible science.
+\emph{Of Software and Science. Reproducible science: what, why, and how} summarizes a discussion which took place in \emph{\acs{mloss}} workshop regarding the issue of reproducible science.
 %% sik:
 %% The take away is that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing material to backup publications but oversights the importanc of sound reusable material and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
-He concluded that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing materials to backup publications but oversights the importanc of sound reusable materials and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
+He concluded that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing materials to backup publications but oversights the importance of sound reusable materials and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
 
 %% sik:
 %% With all this\footnote{better connector needed. Maybe a sentece}, the structure of this chapter is going to appear odd to some readers since our intention with this \nameref{chap:4} chapter is two fold:
 %% (i) use this chapter to position ourselves with respect of reproductible research; and, (ii) describe all the resources or outcomes from this thesis that make for reproductible research.
-With respect to aforementioned discussion our intention with \nameref{chap:4} chapter is two fold: (i) use this chapter to position ourselves with respect to reproducible research; (ii) describe all the resources and outcomes from this thesis that allows our experiments be reproducible.
+With respect to aforementioned discussion our intention with this chapter is two fold: (i) position ourselves with respect to reproducible research and (ii) describe all the resources and outcomes from this thesis that allow our experiments be reproducible.
 %% sik:
 %% The former part is more of philosophical discussion or proclamation of the working systems and protocols emerging from this thesis work.
 The former part is a philosophical discussion of the working framework used during the thesis. 
 %% While the later is a more concrete description of the resources to reproduce the work of our thesis.
-While the latter is a concrete description of the resources to reproduce the work of this thesis.
-In this extent in the reminder of this section first we present the structure of our framework towards reproducible research, second we present our dataset which is publicly avaiable through our website.
-In the third and fourth section the open source toolboxes developed for the thesis is presented.
+The latter is a concrete description of the resources to reproduce the work of this thesis.
+Therefore, in the remainder of this section we first present the structure of our framework towards reproducible research, before to present our dataset which is publicly available through our website.
+We conclude by presented the open source toolboxes developed during this thesis.
 %% Underlying design choices are out of the scope of this chapter.
 %% Those regarding the methodologies developed for this thesis work can be found in other chapters.
 
 \section{Our efforts towards reproducible research.}
 To conduct our research we have developed working strategies based on existing and in-house platforms.
-This section describes the current and upcoming states of the framework, which is refine through the thesis.
+This section describes the current and upcoming states of the framework, which has been refined through the thesis.
 %% sik:
 %% This section describes its current status with upcoming fixtures resulting from writing and reviewing this thesis, since these working strategies follow an iterative incremental procedure.
 
 \subsection{\acs{iccvb}}
-For this purpose we have created the \acs{iccvb} website and its associated github community, which stands on the following core pillars stated on the website:
+We have created the \acs{iccvb} website and its associated github community, which stands on the following core pillars stated on the website\footnote{\url{http://i2cvb.github.io/}}.
 
 \paragraph{Why? Vision: Ease the access to research}
 The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
@@ -65,11 +65,11 @@ A common duty to the research and development communities is to overcome these l
 \Ac{iccvb} aims at serving as foundation for collecting and sharing data as well as providing common evaluation methodologies.
 Furthermore, the use of common data and evaluation is the only way to achieve fair comparison.
 
-\paragraph{Who?. Protagonists: Research groups and individuals from all walks of life to shape a transparent community}
+\paragraph{Who? Protagonists: Research groups and individuals from all walks of life to shape a transparent community}
 \Ac{iccvb} creates for everyone the opportunity to pursue common goals through sharing, collaborating and team-working, to empower the individuals by taking advantages of personal skills and resources.
 As a consequence, young researchers will find an eco-system for self-improvement in which work will be rewarded through benchmarking compilation.
 
-\paragraph{How?. Strategy: Transfer successful practises from free software and quality management}
+\paragraph{How? Strategy: Transfer successful practises from free software and quality management}
 \Ac{iccvb} community challenges the impossible as well as the current status quo in research.
 Therefore, we strive to settle a multi-skilled community pursuing common goals to achieve excellence through collaborative continuous improvement.
 
@@ -89,32 +89,33 @@ As aforesaid, we developed a website and a github community.
 %% sik:
 %% The website is used mainly as facade to our project but its core is the \acs{iccvb} github community and this is how we strive for repeatable research.
 The website is used mainly as front-hand of our project while the \ac{iccvb} github community is the main core and this is how we strive for repeatable research.
-Our research is based on collaborating with specialists to collect data, coding experiments, interpret and communicate the observations.
+Our research is based on collaborating with specialists to collect data, coding experiments, interpret, and communicate the observations.
 %% Back to the data, re-code the experiments, re-interpret the observations.
 %% In essence research is an iterative incremental process that require to ensure the quality at each step and its final deliver of each iteration is a manuscript that pin-point a position in the history of this research.
-In essence research is an iterative incremental process that needs to ensure the quality of each of its step. 
-The final derliverable of each iteration is a manuscript which shows the thinking process of this thesis.
-For some publication it might refer to an small portion of our research or quick proof of concept while for other works it refers to a larger portion.
+In essence, research is an iterative and incremental process that needs to ensure the quality of each of its step. 
+%% The final deliverable of each iteration is a manuscript which shows the thinking process of this thesis.
+%% For some publication it might refer to a small portion of our research or quick proof of concept while for other works it refers to a larger portion.
 
 %% Consolidating an analysis pipeline, a standard visualization, or any computational aspect of work into a software library is a sure way to make the publications more reproducible.
 %% Maintaining the library will ensure that results are still reproducible on new hardware, or with evolution of the general software stack.
 %% Documentation and curated examples will lower the bar to reuse and facilitate replication of the original scientific results.
 %% To avoid feature technical debt, libraries call for focused efforts on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
 
-\paragraph{publication releases}
+\paragraph{Publication releases}
 %% The rest of this section summarizes our working strategy based on the experience acquired during this thesis that lead to the aforesaid.
 %% Publications, experiments, etc. become projects.
 
-Publications of each project are subprojects of the main projects which are both hosted in github.
+Publications of each project are sub-projects of the main projects which are both hosted in github.
 %% These projects have their code and documentation hosted in github while its associated publications are subprojects with their source also hosted in github.
 This allow us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
-The data of the project is hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo} and disseminated through \acs{iccvb} website.
+The data of the project are hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo}, and disseminated through \acs{iccvb} website.
 At the time of publication, the code is released to freeze its state. 
-\emph{Zenodo} provides a \acs{doi} to reference the release. Releases are incorporated to the \acs{ci} systems to detect back-compatibility breaks and fix them by release reviews.
+\emph{Zenodo} provides a \acs{doi} to reference the release.
+Releases are incorporated to the \acs{ci} systems to detect back-compatibility breaks and fix them by release reviews.
 Evolution of our tools and libraries also captured by the \acs{ci}.
 
 \section{Prostate data}
-This section describe the datasets used in this thesis which are also available through the \acs{iccvb} website.
+This section describes the datasets used in this thesis which are also available through the \acs{iccvb} website.
 
 \subsection{\SI{1.5}{\tesla} General Electric scanner}
 
@@ -144,7 +145,7 @@ Datasets have been acquired as $16 \times 8 \times 8$ phase-encoded spectral arr
 %A combination of an elliptic weighted averaged k-space acquisition scheme 3D filtering of the signal in k-space have been used, the latter in order to reduce intervoxel signal combination.
 %Shimming has been carried out using the Siemenbens 3D Mapshim routine on a voxel adapted to the volume of the entire prostate gland.
 
-\subsection{\SI{3}{\tesla} Siemens scanner}
+\subsection{\SI{3}{\tesla} Siemens scanner}\label{sec:data3t}
 
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.

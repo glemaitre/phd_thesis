@@ -105,7 +105,7 @@ Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\
   \scriptsize
   \begin{tabularx}{\textwidth}{lXc}
     \toprule
-    \textbf{Features} & Parameters & \# dimensions \\
+    \textbf{Features} & \textbf{Parameters} & \textbf{\# dimensions} \\
     \midrule
     Intensity &  & 1 \\
     \acs*{dct} decomposition & window: \SI[product-units=repeat]{9x9x3}{\px} & 243 \\
@@ -122,16 +122,6 @@ Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\
   \end{tabularx}
   \label{tab:featureadct2w}
 \end{table}
-
-\begin{figure}
-  \hspace*{\fill}
-  \subfigure[]{\label{fig:goodfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting.pdf}}
-  \hfill
-  \subfigure[]{\label{fig:wrongfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting_wrong.pdf}}
-  \hspace*{\fill}
-  \caption[Illustration of the metabolite fitting.]{Illustration of the metabolite fitting: \subref{fig:goodfit} the models are perfectly fitted for both citrate and choline; \subref{fig:wrongfit} the fitting of the citrate metabolite is inaccurate since it does not follow the \textit{a priori} model.}
-  \label{fig:fitmeta}
-\end{figure}
 
 To approach the task of automatic detection of \ac{cap} using machine learning, one has to extract a variety of feature specific to the \ac{mri} modality as presented in \acs*{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec}.
 
@@ -171,90 +161,154 @@ Note that all these features are extracted at each voxel of the volume.
 The reader can refer to \ac{sec}\,\ref{subsubsec:chp5:DCE-norm:stateart} for a detailed presentation of the different methods used.
 In brief, the entire enhanced signal, semi-quantitative, and quantitative methods are computed. 
 
-\paragraph{\ac{mrsi} features} \ac{mrsi}-based features have been previously explained in \acs{sec}\,\ref{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}.
+\begin{figure}
+  \hspace*{\fill}
+  \subfigure[]{\label{fig:goodfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting.pdf}}
+  \hfill
+  \subfigure[]{\label{fig:wrongfit}\includegraphics[width=.49\textwidth]{6_pipeline/figures/meta_fitting_wrong.pdf}}
+  \hspace*{\fill}
+  \caption[Illustration of the metabolite fitting.]{Illustration of the metabolite fitting: \subref{fig:goodfit} the models are perfectly fitted for both citrate and choline; \subref{fig:wrongfit} the fitting of the citrate metabolite is inaccurate since it does not follow the \textit{a priori} model.}
+  \label{fig:fitmeta}
+\end{figure}
+
+\paragraph{\ac{mrsi} features} \ac{mrsi}-based features have been explained in \acs{sec}\,\ref{subsubsec:chp3:img-clas:CADX-fea-dec:MRSI-fea}.
 Due to unavailability of some unsuppressed water acquisition, absolute quantification as presented by \citeauthor{trigui2017automatic} could not be computed~\cite{trigui2017automatic}.
-Therefore, likewise in~\cite{Parfait2012}, two different techniques are used to extract discriminative features: (i) relative quantification based on metabolite quantification, (ii) relative quantification based on bounds integration, and (iii) spectra extraction.
+Therefore, likewise in~\cite{Parfait2012}, three different techniques are used to extract discriminative features: (i) relative quantification based on metabolite quantification, (ii) relative quantification based on bounds integration, and (iii) spectra extraction.
 
 Relative quantification based on metabolite quantification relies on a robust integration of the citrate and choline signal based on peak modelling.
 Therefore, we propose to tackle this problem as a non-linear least squares optimization problem by (i) quantifying the citrate peaks as a Gaussian mixture and (ii) quantifying the choline as a single Gaussian.
 
 As illustrated in \acs{fig}\,\ref{fig:goodfit}, the \ac{mrsi} sequence imply a 3-peaks citrate metabolite.
-Therefore, we propose the following cost function to represent our function:
+Therefore, we propose the following cost function to represent our function as in \acs{eq}\,\eqref{eq:costcit}.
 
 \begin{equation}
-  C(x) = \alpha_1 \mathcal{N}(x; \mu, \sigma_1) + \alpha_2 \mathcal{N}(x; \mu + \delta_2, \sigma_2) + \alpha_3 \mathcal{N(x; \mu - \delta_3, \sigma_3)} \ ,
+  C_1(x; \mathbf{w}) = \alpha_1 \mathcal{N}(x; \mu, \sigma_1) + \alpha_2 \mathcal{N}(x; \mu + \delta_2, \sigma_2) + \alpha_3 \mathcal{N(x; \mu - \delta_3, \sigma_3)} \ ,
+  \label{eq:costcit}
 \end{equation}
 
+\noindent where $\mathcal{N}(\cdot)$ is a Gaussian distribution, $\mu$ is the central mean of the citrate, $\delta_2$ and $\delta_3$ are the shifts from the citrate central peak to the citrate side peaks, $\{\alpha_1, \alpha_2, \alpha_3\}$ are the amplitude factors of each Gaussian distribution, and $\{\sigma_1, \sigma_2, \sigma_3\}$ are the standard deviations of each Gaussian distribution. Additionally, we defined $\mathbf{w}$ as the vector containing the free parameters.
+
+\Acl{eq}~\eqref{eq:costcit} is minimized under constraints as in \acs{eq}\,\eqref{eq:mincostcit}.
+
+
+\begin{equation}
+\begin{aligned}
+& \argmin_{\mathbf{w}} 
+& & | S(x) - C_1(x; \mathbf{w}) |^{2} \ , \label{eq:mincostcit} \\
+& \text{subject to}
+& & 2.54 < \mu < 2.68 \ , \\
+&&& 0.06 < \delta_1, \delta_2 < 0.16 \ , \\
+&&& 0.01 < \sigma_1, \sigma_2, \sigma_3 < 0.1 \ , \\
+&&& \alpha_1, \alpha_2, \alpha_3 > 0 \ ,
+\end{aligned}
+\end{equation}
+
+\noindent where $S(x)$ is the \ac{mrsi} signal. The different constraints are empirically set but based on the \emph{a priori} location of the peaks.
+
+\Acl{fig}~\ref{fig:fitmeta} illustrates two fitting cases.
+If the \ac{mrsi} signal follows the assumption regarding the model, which is generally the case --- i.e., a mixture of 3 Gaussian distributions ---, the signal is perfectly fitted as shown in \acs{fig}\,\ref{fig:goodfit}.
+However, if the \ac{mrsi} signal does not obey to the model, the signal is fitted inaccurately as depicted in \acs{fig}\,\ref{fig:wrongfit}.
+
 Theoretically, one could suggest to fit a Voigt mixtures instead of a Gaussian mixtures due to the presence of noise during the acquisition.
-However, the use of Gaussian distributions reduces the number of parameters to be optimized and allow for a more robust optimization process regarding the choices of the bounds.
+However, the use of Gaussian distributions reduces the number of parameters to be optimized and allow for a more robust optimization due to less interdependence between the bounds.
+
+The choline metabolite is quantified on a similar manner assuming that there is only a single Gaussian distribution rather than a mixture.
+Therefore the problem is formulated as:
+
+\begin{equation}
+  C_2(x; \mu, \sigma) = \alpha \mathcal{N}(x; \mu, \sigma) \ ,
+  \label{eq:costcho}
+\end{equation}
+
+\noindent where $\mathcal{N}(\cdot)$ is a Gaussian distribution, $\mu$ is the center of the choline, $alpha$ is the amplitude factor, and $\sigma$ is the standard deviation. The optimization is performed such as:
+
+\begin{equation}
+\begin{aligned}
+& \argmin_{\mathbf{\mu, \sigma}} 
+& & | S(x) - C_2(x; \mu, \sigma) |^{2} \ , \label{eq:mincostcho} \\
+& \text{subject to}
+& & 3.17 < \mu < 3.21 \ , \\
+&&& 0.001 < \sigma < 0.02 \ , \\
+&&& \alpha > 0 \ .
+\end{aligned}
+\end{equation}
+
+Finally, the citrate and choline fitted function are integrated to obtain the relative concentration of each metabolite.
+Additionally, the ratio of the citrate over the choline is also computed.
+
+A second solution to compute the relative concentration of each metabolite is proposed for the sake of comparison.
+For both the choline and citrate, a local maximum is found near of the theoretical position of the peak.
+Subsequently, a range is defined around each peak ---i.e., \SI{0.36}{\ppm} for the citrate and \SI{0.08}{\ppm} for the choline --- and the integral of the signal is computed using the Simpson's rule.
+
+The third and last option correspond on a cropping of the \ac{mrsi} signal from \SIrange{2}{4}{\ppm}.
 
 \subsection{Feature balancing}\label{subsec:chp6:method:fea-bal}
-Data imbalanced is a common problem while classifiying medical data.
-Considering a binary classification problem, there is always a class (often the class indicating cancer, or disease patients) that have smallest number of samples (i.e, minority class) in comparison to the other class (i.e, majority class).
-The problem of data balancing corresponds to equalize the number of samples of both the minority and majority classes.
-This task can be achieved in either data or feature space while performing over-sampling of minority samples or under-sampling of majority samples.
-In this section we compare different under and over-sampling techniques applied in feature space.
+Data imbalanced is a recurrent issue in classification, notably in medical data.
+The problem of imbalanced dataset lies in the fact that one of the class has a smallest number of data --- i.e., in medical data correspond to patient with a disease --- compared with the other classes.
+Therefore, solving the problem of imbalanced is equivalent to under- or over-sampling part of the dataset to obtain equal number of samples in the different classes.
+In this section, several methods which will be used in the experiments are presented.
 
 \subsubsection{\Acl*{us1}}
 Techniques that reduce the number of samples of the majority class to be equal to the number of samples of minority class are referred as \ac{us1} techniques.
 %Considering the problem of imbalanced, \ac{us} is performed such that the number of samples of the majority class is reduced to be equal to the number of samples of the minority class.
-The following methods are considered to perform such balancing.
 
 \begin{description}
-  \item[\Ac{rus}] is performed by randomly selecting without replacement a subset of samples from the majority class such that the number of samples is then equal in both minority and majority classes.
   \item[\Ac{nm}] offers three different methods to under-sample the majority class~\cite{mani2003knn}.
 In \ac{nm1}, samples from the majority class are selected such that for each sample, the average distance to the $k$ \ac{nn} samples from the minority class is minimum.
 \ac{nm2} diverges from \ac{nm1} by considering the $k$ farthest neighbours samples from the minority class.
 In \ac{nm3}, a subset $M$ containing samples from the majority class is generated by finding the $m$ \ac{nn} from each sample of the minority class.
 Then, samples from the subset $M$ are selected such that for each sample, the average distance to the $k$ \ac{nn} samples from the minority class is maximum.
 In our experiment, $k$ and $m$ are fixed to 3.
-\item[\Ac{iht}]~\cite{smith2014instance} undersamples the samples which have a high hardness threshold.
-Hardness indicates the likelihood of missclassification rate for each samples.
-The notation of instance hardness are drawn through the decomposition of $p(h \vert t)$ using Bayes' theorem, where $h$ represent the mapping function used to mapp input features to their corresponding labels and $t$ represents the training set.
+\item[\Ac{iht}] select samples with a high hardness threshold~\cite{smith2014instance}.
+Hardness indicates the likelihood of mis-classification rate for each samples.
+The notation of instance hardness are drawn through the decomposition of $p(h \vert t)$ using Bayes' theorem, where $h$ represent the mapping function used to map input features to their corresponding labels and $t$ represents the training set.
 \begin{equation}
   IH_h(\langle x_{i}, y_{i}\rangle) = 1 - p(y_i \vert x_i, h).\
 \label{eq:iht}
 \end{equation}
-The undersampling is performed by keeping the most probable samples (i.e, filtering the samples with high hardness value) through \ac{kcv} training sets while considering specific threshold for filtering.
+Therefore, under-sampling is performed by keeping the most probable samples --- i.e, filtering the samples with high hardness value --- through \ac{kcv} training sets while considering specific threshold for filtering.
 %% The hardness of an instance is depedent on the instances in the training data and the algorithm used to produced h (h is a function mapping input features to their corresponding label , i.e, the classifier, or base learner function).
 
  
 \end{description}
 
 \subsubsection{\Acl*{os}}
-Contratry to \ac{us1} techniques, the data balancing can be performed by \ac{os} in which the new samples belonging to the minority class are generated aiming at equalizing the number of samples in both classes.
-The following methods are compared for \ac{os} techniques.
+In the contrary to \ac{us1} techniques, data can be balanced by \ac{os} in which the new samples belonging to the minority class are generated, aiming at equalizing the number of samples in both classes.
+
 \begin{description}
-\item[\Ac{ros}] is performed by randomly replicating the samples of the minority class such that the number of samples is equal in both minority and majority classes.
 \item[\Ac{smote}] is a method to generate synthetic samples in the feature space~\cite{chawla2002smote}.
 Let define $x_i$ as a sample belonging to the minority class.
-Let define $x_{nn}$ as a randomly selected sample from the $k$ \ac{nn} of $x_i$, with $k$ set to 3.
-Therefore, a new sample $x_j$ is generated such that $x_j = x_i + \sigma \left( x_{nn} - x_i \right)$, where $\sigma$ is a random number in the interval $\left[0,1\right]$.
-\item[\Ac{smoteb1}]~\cite{han2005borderline} over samples the minority samples similar to \ac{smote}.
-However, instead of usig all the minority samples, it focuses on the borderline samples of minority class.
+Let define $x_{nn}$ as a randomly selected sample from the $k$-\ac{nn} of $x_i$, with $k$ set to 3.
+A new sample $x_j$ is generated such that $x_j = x_i + \sigma \left( x_{nn} - x_i \right)$, where $\sigma$ is a random number in the interval $\left[0,1\right]$.
+\item[\Ac{smoteb1}] over-samples the minority class similarly to \ac{smote}~\cite{han2005borderline}.
+However, instead of using all the minority samples, it focuses on the borderline samples of minority class.
 Borderline samples simply indicate the samples that are closer to the other class.
-In this method first the borderline samples of minority class are detected.
-The sample, $x_{i}$ belongs to borderline samples if more than half of its $k$ \ac{nn} samples belong to majority class.
-Synthetic data is then created based on \ac{smote} method for borderline samples and selection of their $s$ \ac{nn} from the minority class.
+First, the borderline samples of minority class are detected.
+A sample $x_{i}$ belongs to borderline samples if more than half of its $k$-\ac{nn} samples belong to the majority class.
+Synthetic data is then created based on \ac{smote} method for borderline samples, by selecting 
+Then, $s$-\ac{nn} of the minority class are selected to generate synthetic sample similarly to \ac{smote}.
  
-\item[\Ac{smoteb2}]~\cite{han2005borderline} performs similar to \ac{smoteb1}.
-However, instead of generating synthetic samples from borderline samples and their $s$ \ac{nn} from the minority class, it also generate samples based on their \ac{nn} of majority samples.
-Synthetic samples created based on majority samples are placed closer to samples of minority class.
+\item[\Ac{smoteb2}] performs similarly to \ac{smoteb1}~\cite{han2005borderline}.
+However, the $s$-\ac{nn} are not computing by only considering the minority class but by considering both classes.
+The same generation rules as \ac{smote} is used.
 \end{description}
 
 \subsection{Feature selection and extraction}\label{subsec:chp6:method:fea-sel}
-Different feature selection and extraction methods were presented in Sect.~\ref{subsec:chp3:img-clas:CADX-fea-ext}.
-Among those \ac{pca} is used as feature extraction on  \ac{mrsi} and \ac{dce}-based features.
-In addition to \ac{pca}, sparse-\ac{pca} and \ac{ica} are also used to extract distinct features from \ac{mrsi} and \ac{dce}-based features.
 
-Similar to \ac{pca}, \ac{ica}~\cite{comon1994independent} is looking for independent components of the datat.
-However, it does not require orthogonolaity of the space and does not assume Gaussian distribution for each independent source.
-Therefore, opposit to \ac{pca} it can recover uniquely the signals themselve rather than  linear subspace in which the signals lie \cite{murphy2012machine}.
 
-Sparse-\ac{pca}~\cite{zou2006sparse} is another approach for feaure extraction and dimension reduction.
-Similar to \ac{pca}, this apprcoach project the data into linear combination of input data.
-However, instaed of using original data, it uses the sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
-Refereing to Eq.~\eqref{eq:eigpca}, the objective of sparse-\ac{pca} is formulated as maximizing the variance while maintinaing the sparse constraint:
+Feature selection and extraction are used in the experiment: (i) signal-based data --- i.e., \ac{mrsi} and \ac{dce}-\ac{mri} --- are decomposed using feature extraction methods while (ii) image-based features are selected through different feature selection methods.
+These methods have been presented in \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-ext}.
+
+Among those, \ac{pca}, sparse-\ac{pca}, and \ac{ica} are used to decompose signal-based data.
+
+Similarly to \ac{pca} decomposition, \ac{ica} is projecting data on independent components~\cite{comon1994independent}.
+However, it does not require orthogonality of the space and does not assume Gaussian distribution for each independent source.
+Therefore, opposite to \ac{pca} it can recover uniquely the signals themselves rather than linear subspace in which the signals lie~\cite{murphy2012machine}.
+
+Sparse-\ac{pca} is another approach for feature extraction and dimension reduction~\cite{zou2006sparse}.
+Similarly to \ac{pca}, this approach project the data as a linear combination of input data.
+However, instead of using original data, it uses a sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
+Referring to \acs{eq}\,\eqref{eq:eigpca}, the cost function of sparse-\ac{pca} is formulated to maximize the variance while maintaining the sparsity constraint:
 
 \begin{eqnarray}
  && \argmax \quad   \mathbf{v}^{-1} \Sigma \mathbf{v}\ , \label{eq:sparsepca}\\ 
@@ -263,23 +317,33 @@ Refereing to Eq.~\eqref{eq:eigpca}, the objective of sparse-\ac{pca} is formulat
 \end{eqnarray}
 \noindent where $k$ indicates that number of non-zero elements in $\mathbf{v}$.
 
-ANOVA F-test and \ac{rf} are used as feature selection approaches for image-based features.
-ANOVA F-test can assess the superiority or inferiority of the features 
-ANOVA F-test evaluates the potential of one feature at a time to predict the target label by measuring between group variability over within group variability.
-This test finds which features on average are superior of inferior to others versus the null hypothesis.
-%% \begin{equation}
-%% F = \frac{}{}
-%% \label{eq:Ftest}
-%% \end{equation} 
+Additionally to feature extraction, we use two methods of feature selection during the experiments.
+The first feature selection is the one-way \ac{anova} test.
+This test is based on computing the F-test which is the ratio of the between-group variability over the with-in group variability.
+The F-value is computed for each pair of feature and the $K$ feature dimensions corresponding to the largest F-values are kept.
 
+Apart of using \ac{rf} as our main classifier, \ac{rf} provide information regarding the importance of each feature.
+The feature importance in \ac{rf} is linked with the Gini importance.
+In a tree classifier, the Gini impurity criterion of the child nodes is inferior to the parent node.
+For each individual feature, adding the decrease of the Gini impurity along the tree gives information about the feature importance: the higher, the better.
+Therefore, one can add the decrease of the Gini impurity across all the trees of a forest and obtain the importance of a specific feature for this forest.
+Subsequently, the $K$ most important features are selected to perform the feature selection.
 
 \subsection{Classification}\label{subsec:chp6:method:clas}
-Variety of classifiers were explained in Sect.~\ref{subsec:chp3:img-clas:CADX-clas}. 
-Among those \ac{rf} is used as ensemble approach while classifying inidiviual modalities, where as a meta classifier using stacking of \ac{rf} is used for combination of different modalities.
+Variety of classifiers have been explained in \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-clas}. 
 
-Staking~\cite{wolpert1992stacked} is a way to create a meta classifier using different base learners.
+Among those, \ac{rf} showed its reliability to lead to high classification performance.
+That is why, \ac{rf} has been chosen to as our base classifier --- allowing for feature selection as well --- to perform classification of individual modality as well as the combination of modalities.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{6_pipeline/figures/stacking_gb.png}
+  \caption[The principle of stacking.]{The principle of stacking. First, training samples (red) are used to train each individual \ac{rf}. Subsequently, a validation set (green) is provided to each \ac{rf} which output a set of probability used for the classification of the meta-classifier. Finally, a test set is used to asses the classification performance to whole stack.}
+  \label{fig:stacking}
+\end{figure}
+
+Additionally, we will use stacking is a way to create a meta classifier using different base learners~\cite{wolpert1992stacked}.
 This method uses the prediction of different base learners as input for a meta leaner and combines them into a final decision.
-Each base learner is trained on the training set and its prediction on the validation set is fet to the meta learner.
+Each base learner is trained on the training set and its prediction on the validation set is fed to the meta learner.
 The test sample, in a similar way is first classified by the base learners and their prediction is passed through the meta learner in order to achieve the final decision.
-
  

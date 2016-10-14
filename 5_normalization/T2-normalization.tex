@@ -154,11 +154,11 @@ Therefore, the cumulative sum of the normalized eigenvalues as well as the \ac{a
 
 \subsection{Materials}\label{subsec:chp5:T2-norm:Exp-res}
 
-The experiments are conducted on a subset of the public \ac{mpmri} prostate presented in \acs{sec}\,\ref{chp4:sec:data}.
+The experiments are conducted on a subset of the public \ac{mpmri} prostate presented in \acs{sec}\,\ref{sec:data3t}.
 We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients of which 18 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
 In this study, our subset consists of 17 patients with \ac{cap}.
 
-The different normalization methods are implemented in Python and are part of the \texttt{protoclass} toolbox presented in \acs{sec}\,\ref{chp4:sec:data}.
+The different normalization methods are implemented in Python and are part of the \texttt{protoclass} toolbox presented in \acs{sec}\,\ref{chp4:sec:protoclass}.
 The normalization based on \ac{srsf} uses the implementation\footnote{\url{https://bitbucket.org/tetonedge/fdasrsf}} of \citeauthor{Tucker2013}~\cite{Tucker2013}.
 The piecewise-linear normalization is performed using the following set of percentiles $s \in \{0, 5, 25, 50, 75, 95, 100 \}$ as landmarks.
 In the \ac{srsf}-based normalization, the \acp{pdf} are smoothed using spline-based denoising method.
