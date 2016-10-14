@@ -46,7 +46,7 @@ Once the features are ordered, the authors select the feature dimensions with th
 This method has previously been presented in \acs{sec}\,\ref{subsec:chp3:img-reg:reg} and expressed in \acs{eq}\,\eqref{eq:midef}.
 %%%% As previously presented in Sect.~\ref{subsec:chp3:img-reg:reg} (see Eq.~\eqref{eq:midef}), the computation of the entropies involves the estimation of some \acp{pdf} and the data being usually continous variables, it is then necessary to estimate the \acp{pdf} using a method such as Parzen windows.
 %%%% Definition of the \ac{mi} was presented in Sect.~\ref{subsec:chp3img-reg:reg} and formalized in Eq. \eqref{eq:midef} and as previously mentioned, the computation of the entropies involves the estimation of some \acp{pdf} and the data being usually continuous variables, it is then necessary to estimate the \acp{pdf} using a method such as Parzen windows.
-\citeauthor{Peng2005} introduced two main criteria to select the feature dimensions based on \ac{mi}: (i) maximal relevance and (ii) minimum redundancy.
+\citeauthor{Peng2005}~\cite{Peng2005} introduced two main criteria to select the feature dimensions based on \ac{mi}: (i) maximal relevance and (ii) minimum redundancy.
 Maximal relevance criterion is based on the paradigm that the classes and the feature dimension which has to be selected have to share a maximal \ac{mi} and is formalized as:
 \begin{equation}
   \argmax Rel(\mathbf{x},c) = \frac{1}{|\mathbf{x}|} \sum_{x_i \in \mathbf{x}} MI(x_i,c)  \ , 
@@ -111,7 +111,7 @@ Then, the low-dimensional space is found by solving the generalized eigenvectors
 
 \noindent where $D$ is a diagonal matrix such that $D(i,i) = \sum_j W(j,i)$.
 Finally the low-dimensional space is defined by the $k$ eigenvectors of the $k$ smallest eigenvalues~\cite{Belkin2001}.
-\citeauthor{Tiwari2009a} and \citeauthor{Viswanath2008} used this spectral clustering to project their feature vector into a low-dimensional space~\cite{Tiwari2007,Tiwari2009,Tiwari2009a,Viswanath2008}.
+\citeauthor{Tiwari2009a}~\cite{Tiwari2007,Tiwari2009,Tiwari2009a} and \citeauthor{Viswanath2008}~\cite{Viswanath2008} used this spectral clustering to project their feature vector into a low-dimensional space.
 The feature space in these studies is usually composed of features extracted from a single or multiple modalities and then concatenated before applying the Laplacian eigenmaps dimension reduction technique.
 
 \citeauthor{Tiwari2013} used a slightly different approach by combining the Laplacian eigenmaps techniques with a prior multi-kernel learning strategy~\cite{Tiwari2009,Tiwari2013}.

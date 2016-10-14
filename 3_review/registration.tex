@@ -115,7 +115,7 @@ This metric is not well suited when \ac{mpmri} images are involved due to the ti
         \label{fig:jointhisto}
 \end{figure}
 
-In this regard, \ac{mi} was introduced as a similarity measure in registration framework in the late 1990's by \citeauthor{Pluim2003}.
+In this regard, \ac{mi} was introduced as a similarity measure in registration framework in the late 1990's by \citeauthor{Pluim2003}~\cite{Pluim2003}.
 The \ac{mi} measure finds its foundation in the assumption that a homogeneous region in the first modality image should also appear as a homogeneous region in the second modality, even if their \acp{si} are not identical.
 Thus, those regions share information and the registration task is achieved by maximizing this common information.
 Hence, \Ac{mi} of two images $A$ and $B$ is defined as:
@@ -131,7 +131,7 @@ The joint entropy measure is related to the degree of uncertainty or dispersion 
 As shown in \acs{fig}\,\ref{fig:jointhisto}, the data in the joint histogram are concentrated in the case of aligned images (see \acs{fig}\,\ref{subfig:histoalgn}) while it is more randomly distributed in the case of misaligned images (see \acs{fig}\,\ref{subfig:histomisalgn}).
 The entropy is computed based on an estimation of the \ac{pdf} of the images and thus histogram or Parzen window methods are a common way to estimate these \acp{pdf}.
 
-A generalized form of \ac{mi}, \ac{cmi}, has been proposed by \citeauthor{Chappelow2011}.
+A generalized form of \ac{mi}, \ac{cmi}, has been proposed by \citeauthor{Chappelow2011}~\cite{Chappelow2011}.
 \ac{cmi} encompasses interdependent information such as texture and gradient information into the metric.
 Hence, for both of images $A$ and $B$, the image ensembles $\epsilon^{A}_n$ and $\epsilon^{B}_m$ are generated and composed of $n$ and $m$ images based on the texture and gradient.
 Then, the \ac{cmi} is formulated such as:
