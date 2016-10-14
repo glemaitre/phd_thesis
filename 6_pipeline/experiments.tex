@@ -1,34 +1,51 @@
 \section{Experiments and results}\label{sec:chp6:exp-res}
-In this section, we present a variety to validate out \ac{mpmri} \ac{cad} for the detection of \ac{cap}.
-These experiments and the results obtained are discussed in details in the reminder of this section. 
-Pre-processing, segmentation and registration of each modalities are common steps across all the designed experiments.
+In this section, different experiments are proposed to design and investigate our \ac{mpmri} \ac{cad} for the detection of \ac{cap}.
+First, the classification performance of each independent modality is investigated in \acs{sec}\,\ref{subec:chp6:exp-res:Ex1}.
+For each modality, the ``quantification'' approaches maximizing the classification performance are selected.
+Additionally, we attend to directly combined \ac{mpmri} modalities, which we referred as ``coarse'' combination as presented in \acs*{sec}\,\ref{subsec:chp6:exp-res:Ex2}.
+Subsequently, \acs{sec}\,\ref{subsec:chp6:exp-res:Ex3} presents the benefit of balancing the dataset on the learning stage and strategies for feature selection and extraction, for each feature modality as well as an aggregation of them.
+Consequently, different combination classifier rules are studied using the previous fine-tuned feature space in \acs{sec}\,\ref{subsec:chp6:exp-res:Ex4}.
+Finally, we conclude in \acs{sec}\,\ref{subsec:chp6:exp-res:Ex5} by investigating the benefit of fusing the \ac{mrsi} information with the other modality.
 
-\subsection{Experiment-1: Assessment of inidivual modalities}\label{subec:chp6:exp-res:Ex1} 
+\subsection{Assessment of classification performance of individual modality}\label{subec:chp6:exp-res:Ex1}
 
-The main goal of this experiment is to eavluate the potential of each inividual modality and their corresponding features. 
-Different features as presented in Sect.~\ref{subsec:chp6:method:fea-det} are extracted for different modalities. 
-For all the modalities, the extracted features without any extraction or selection process are used to train a \ac{rf} classifier, using a \ac{lopo}. 
-These experiments are performed using {\color{red} which dataset}.
-The results are presented in terms of \ac{roc} analysis and averaged \ac{auc} over \ac{lopo}.
-Figure~\ref{fig:res-Ex1} illustrate the obtained results.
+In this experiment, we attend to assess the classification performance of each individual \ac{mri} modality.
+
+\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features} All features presented in \acs{tab}~\ref{tab:featureadct2w} are extracted for both \ac{t2w}-\ac{mri} and \ac{adc} map.
+These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
+
+\paragraph{\ac{dce}-\ac{mri} features} This experiment has been presented in \acs{sec}\,\ref{subsec:chp5:DCE-norm:exp-res}.
+We attend to find the most discriminative ``quantification'' methods in terms of classification performance to extract information of \ac{dce}-\ac{mri} modality.
+Therefore, the pharmacokinetic parameters from the Brix, Hoffmann, Tofts, and \ac{pun} models as well as the semi-quantitative parameters and the enhanced signal are separately used for training different \ac{rf} classifiers.
+
+\paragraph{\ac{mrsi} features} Similarly to \ac{dce}-\ac{mri}, four \ac{rf} classifiers are trained on different features:
+(i) the cropped \ac{mrsi} signal,
+(ii) the relative concentration of the citrate over the relative concentration of the choline, both computed through fitting as presented in the previous section,
+(iii) the ratio of the two previous features, and finally
+(iv) the ratio of the relative concentration of the citrate over the relative concentration of the choline, using the fix bounds integration.
+
+\paragraph{Results}
 
 \begin{figure}
   \hspace*{\fill}
-  \subfigure[Performance of the quantitative methods on \acs*{dce}-\acs*{mri}.]{\label{fig:}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/normalized_methods_0.pdf}}
+  \subfigure[Performance of the quantitative methods on \acs*{dce}-\acs*{mri}.]{\label{fig:inddcemodel}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/normalized_methods_0.pdf}}
   \hfill
-  \subfigure[Performance of enhanced \acs*{dce}-\acs*{mri} signal.]{\label{fig:}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/full_signal_0.pdf}}
+  \subfigure[Performance of enhanced \acs*{dce}-\acs*{mri} signal.]{\label{fig:inddcesignal}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/full_signal_0.pdf}}
   \hspace*{\fill} \\
   \hspace*{\fill}
-  \subfigure[Performance of image-based features for \acs*{t2w}-\acs*{mri} and \acs*{adc} map.]{\label{fig:}\includegraphics[width=.49\textwidth]{6_pipeline/figures/exp-1/t2w_adc.pdf}}
+  \subfigure[Performance of image-based features for \acs*{t2w}-\acs*{mri} and \acs*{adc} map.]{\label{fig:indadct2w}\includegraphics[width=.49\textwidth]{6_pipeline/figures/exp-1/t2w_adc.pdf}}
   \hfill
-  \subfigure[Performance of different approach for the \acs*{mrsi} modality.]{\label{fig:}\includegraphics[width=.49\textwidth]{6_pipeline/figures/exp-1/mrsi_all.pdf}}
+  \subfigure[Performance of different approach for the \acs*{mrsi} modality.]{\label{fig:indmrsi}\includegraphics[width=.49\textwidth]{6_pipeline/figures/exp-1/mrsi_all.pdf}}
   \hspace*{\fill}
   \caption[Analysis of the classification performance for each individual \acs*{mri} modality.]{Analysis of the classification performance for each individual \acs*{mri} modality.}
   \label{fig:res-Ex1}
 \end{figure}
 
+Each trained \ac{rf} is evaluated using a \ac{lopo} cross-validation.
+A \ac{roc} analysis with its corresponding \ac{auc} is carried out to report the classification performance of each classifier.
+The results are depicted in \acs{fig}\,\ref{fig:res-Ex1}.
 
-\subsection{Experiment-2: Coarse combination} \label{subsec:chp6:exp-res:Ex2}
+\subsection{Coarse combination of \acs*{mpmri} modalities} \label{subsec:chp6:exp-res:Ex2}
 The objective of this experiment is to evaluate the combination of all the modalities.
 To this extent, three different approaches are considered: (i) feature aggregation, (ii) statcking using \ac{adb}, (iii) stacking using \ac{gb}. 
 In the first approach, feature aggregation, the features extracted from each modalities (\ac{t2w}, \ac{adc}, normalized-whole-\ac{dce} and normalized-whole-\ac{mrsi}, as concluded in experiment-1) are concatenated together and used with a \ac{rf} classifier and \ac{lopo}. 
@@ -45,7 +62,7 @@ The obtained results of this experiment are shown in Fig.~\ref{fig:res-Exp2}.
   \label{fig:res-Exp2}
 \end{figure}
 
-\subsection{Experiment-3: Fine tuning}\label{subsec:chp6:exp-res:Ex3}
+\subsection{Benefit of data balancing and feature selection/extraction}\label{subsec:chp6:exp-res:Ex3}
 In the previous experiments (1 \& 2) the original features were used, without any adjustment or tunning. 
 In this section, as we call it fine tuning, first we evaluate the performance and benefits of having a balance set, then we eavaluate different feature selection and extraction techniques.
 The main aim of this experiment is to find the best balancing technique and feature selection approach suited for each modality. 
@@ -172,23 +189,6 @@ Figure~\ref{fig:res-Ex3-bal} shows the comparison of these techniques on each mo
   \label{tab:mrsifeatext}
 \end{table}
 
-
-\end{landscape}
-
-\subsection{Experiment-4: Fine combination}\label{subsec:chp6:exp-res:Ex4}
-This experiments evaluates the combination of all the modalities after applying fine tunning and adjusting the feature space. 
-Two different approaches are compared: (i) Feature aggregation and (ii) stacking using \ac{gb}. 
-The second approach of experiment-2 was ignored, since as previously concluded, \ac{gb} had a slightly better performance than \ac{adb}.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.7\linewidth]{6_pipeline/figures/exp-5/combine_all.pdf}
-  \caption[Analysis of feature combination approaches after fine tuning.]{Analysis of feature combination approaches after fine tuning through balancing and feature selection/extraction.}
-  \label{fig:res-Ex4}
-\end{figure}
-
-
-\begin{landscape}
 \begin{table}
   \caption{Results in terms of \acs*{auc} of the feature selection based on \acs*{anova} F-value for the aggregation of feature from all \acs*{mpmri} features.}
   \centering
@@ -221,7 +221,20 @@ The second approach of experiment-2 was ignored, since as previously concluded, 
   \label{tab:anovacomb}
 \end{table}
 
+
 \end{landscape}
+
+\subsection{Fine-tuned combination of \ac{mpmri} modalities}\label{subsec:chp6:exp-res:Ex4}
+This experiments evaluates the combination of all the modalities after applying fine tunning and adjusting the feature space. 
+Two different approaches are compared: (i) Feature aggregation and (ii) stacking using \ac{gb}. 
+The second approach of experiment-2 was ignored, since as previously concluded, \ac{gb} had a slightly better performance than \ac{adb}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth]{6_pipeline/figures/exp-5/combine_all.pdf}
+  \caption[Analysis of feature combination approaches after fine tuning.]{Analysis of feature combination approaches after fine tuning through balancing and feature selection/extraction.}
+  \label{fig:res-Ex4}
+\end{figure}
 
 \begin{figure}
   \centering
@@ -229,6 +242,8 @@ The second approach of experiment-2 was ignored, since as previously concluded, 
   \caption{Individual patient \acs*{auc} for the best configuration of the \acs*{mpmri} \acs*{cad}.}
   \label{fig:indauc}
 \end{figure}
+
+\subsection{Benefit of the \acs*{mrsi} modality}\label{subsec:chp6:exp-res:Ex5}
 
 \begin{figure}
   \centering
