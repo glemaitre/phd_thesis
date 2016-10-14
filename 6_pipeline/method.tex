@@ -13,7 +13,7 @@ Our \ac{mpmri} \ac{cad} system consists of seven different steps: pre-processing
   \hfill
   \subfigure[]{\label{fig:adcpdf3}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_3.pdf}}
   \hspace*{\fill}
-  \caption[Illustration of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate.]{Illustration of the variability of the \acs*{pdf} of the \acs*{adc} coefficient within the prostate for 3 patients.}
+  \caption[Illustration of the \acs*{pdf} of the \acs*{adc} coefficients within the prostate.]{Illustration of the variability of the \acs*{pdf} of the \acs*{adc} coefficients within the prostate for 3 patients.}
   \label{fig:adcpdf}
 \end{figure}
 
@@ -28,7 +28,7 @@ Regarding the \ac{adc} map normalization, the \ac{pdf} within the prostate does 
 Thus, one cannot use a parametric model to normalize these images and a non-parametric piecewise-linear normalization~\cite{Nyul2000} is the best option for this case.
 
 Additionally, the \ac{mrsi} modality requires a specific pre-processing based on signal processing rather than image processing.
-Therefore, the \ac{mrsi} modality has been pre-process to correct the phase, baseline, and frequency.
+Therefore, the \ac{mrsi} modality has been pre-processed to correct the phase, baseline, and frequency.
 Regarding the problem of phase correction and frequency alignment, we use the most efficient method of the state-of-the-art review in \acs{sec}\,\ref{subsec:chp3img-reg:prepro}.
 Indeed, as \citeauthor{Parfait2012} and \citeauthor{trigui2017automatic}~\cite{Parfait2012,trigui2016classification,trigui2017automatic}, the phase of each \ac{mrsi} spectra is corrected using the approach of \citeauthor{Chen2002}~\cite{Chen2002}.
 Along the same line, the frequency shift of each spectra is corrected by aligning to \SI{4.65}{\ppm} the maximum of an inferred function fitted to the residuals of water, using a Voigt profile as in \acs{eq}\,\eqref{eq:voigt}.
@@ -41,8 +41,8 @@ Along the same line, the frequency shift of each spectra is corrected by alignin
 \noindent where $\mathbf{R} \left[ w(z) \right]$ is the real part of the Faddeva function for $z = \frac{x + i \gamma}{\sigma \sqrt{2}}$.
 
 By assessing the qualitative results obtained in~\cite{Parfait2010}, the baseline correction method used by \citeauthor{Parfait2012} and \citeauthor{trigui2017automatic} does not provide an optimal solution for that matter.
-The iterative low-pass filter enforce to much the smoothness of the baseline.
-\citeauthor{xi2008baseline} propose a baseline detection derived from a parametric smoothing model~\cite{xi2008baseline}.
+The iterative low-pass filter enforces too much the smoothness of the baseline.
+\citeauthor{xi2008baseline} proposed a baseline detection derived from a parametric smoothing model~\cite{xi2008baseline}.
 The \ac{nmr} signal is formalized as a sum of a pure signal, the baseline function, and an additive Gaussian noise such as:
 
 \begin{equation}
@@ -117,7 +117,7 @@ Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\
     Gabor filters & 4 frequencies $f \in [0.05, 0.25]$; 4 azimuth angles $\alpha \in [0, \pi]$; 8 elevation angles $\alpha \in [0, 2\pi]$ & 256 \\
     Phase congruency filter & 5 orientations; 6 scales & 3 \\
     Haralick filter & window: \SI[product-units=repeat]{9x9x3}{\px}; \# grey levels: 8; distance: \SI{1}{\px}; 13 directions & 169 \\
-    \acs*{lbp} filter & 2 radii $r=\{1, 2\}$; 2 neighborhood sizes $N = \{8, 16\}$ & 3 \\
+    \acs*{lbp} filter & 2 radii $r=\{1, 2\}$; 2 neighborhood sizes $N = \{8, 16\}$ & 6 \\
     \bottomrule
   \end{tabularx}
   \label{tab:featureadct2w}
@@ -130,7 +130,7 @@ Apart of using the normalized intensity, edge- and texture-based features are co
 A set of common features earlier reported in \acs*{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec} have been computed.
 The following set of filters characterizing edges have been used: (i) Kirsch, (ii) Laplacian, (iii) Prewitt, (iv) Scharr, (v) Sobel, and (vi) Gabor.
 Apart of Kirsch filter, the other filters are applied in 3D to get more information using a volume and not a slice, as it is usually done.
-The extension of the most common edge detectors in 3D is obvious and will not be recall.
+The extension of the most common edge detectors in 3D is obvious and will not be recalled.
 However, 3D Gabor filters~\cite{wang2005face} are not commonly used and we recall their formulation in \acs*{eq}\,\eqref{eq:gabor3d}.
 
 \begin{equation}
@@ -150,7 +150,7 @@ However, 3D Gabor filters~\cite{wang2005face} are not commonly used and we recal
 Additionally, features based on phase congruency as proposed by \citeauthor{kovesi1999image} are computed~\cite{kovesi1999image}.
 Therefore, from a set of Log-Gabor filter bank, the orientation image, the local weighted mean phase angle, and the phase angle are estimated at each voxel.
 
-To characterize the local texture, both second-order \ac{glcm}-based features~\cite{Haralick1973} and rotation invariant and uniform \ac{lbp}~\cite{ojala2002multiresolution}.
+To characterize the local texture, both second-order \ac{glcm}-based features~\cite{Haralick1973} and rotation invariant and uniform \ac{lbp}~\cite{ojala2002multiresolution} are extracted.
 To encode 3D information, the 13 first Haralick features --- refer to \acs{tab}~\ref{tab:glcm} --- are computed for the 13 possible directions.
 For the same reason, the \ac{lbp} codes are computed for the three-orthogonal-planes of each \ac{mri} volume.
 
@@ -210,7 +210,7 @@ If the \ac{mrsi} signal follows the assumption regarding the model, which is gen
 However, if the \ac{mrsi} signal does not obey to the model, the signal is fitted inaccurately as depicted in \acs{fig}\,\ref{fig:wrongfit}.
 
 Theoretically, one could suggest to fit a Voigt mixtures instead of a Gaussian mixtures due to the presence of noise during the acquisition.
-However, the use of Gaussian distributions reduces the number of parameters to be optimized and allow for a more robust optimization due to less interdependence between the bounds.
+However, the use of Gaussian distributions reduces the number of parameters to be optimized and allows for a more robust optimization due to less interdependence between the bounds.
 
 The choline metabolite is quantified on a similar manner assuming that there is only a single Gaussian distribution rather than a mixture.
 Therefore the problem is formulated as:
@@ -242,9 +242,11 @@ Subsequently, a range is defined around each peak ---i.e., \SI{0.36}{\ppm} for t
 
 The third and last option correspond on a cropping of the \ac{mrsi} signal from \SIrange{2}{4}{\ppm}.
 
+Beside aforementioned features specific to each modality anatomical features as proposed by \citeauthor{Chen2002}~cite{Chen2002} and \citeauthor{Litjens2014}~cite{Litjens2014} are computed as well. 
+
 \subsection{Feature balancing}\label{subsec:chp6:method:fea-bal}
 Data imbalanced is a recurrent issue in classification, notably in medical data.
-The problem of imbalanced dataset lies in the fact that one of the class has a smallest number of data --- i.e., in medical data correspond to patient with a disease --- compared with the other classes.
+The problem of imbalanced dataset lies in the fact that one of the class has a smallest number of data --- i.e., in medical data, the class corresponding to patients with a disease --- compared with the other classes.
 Therefore, solving the problem of imbalanced is equivalent to under- or over-sampling part of the dataset to obtain equal number of samples in the different classes.
 In this section, several methods which will be used in the experiments are presented.
 

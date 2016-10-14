@@ -9,10 +9,10 @@
 Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
 
 \citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility~\cite{peng2011reproducible}.
-In order to overcome such limitations, \citeauthor{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
+In order to overcome such limitations, \citeauthor{peng2011reproducible}~cite{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
 %% sik:
 %% Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code of methods developed should both be made available along with the executable that lead to the published results so that the three are fully coupled\,\cite{peng2011reproducible}.
-Specifically, \citeauthor{peng2011reproducible} argues that the original data and executable code which lead to the published results should be all coupled and available. 
+Specifically, \citeauthor{peng2011reproducible}~cite{peng2011reproducible} argues that the original data and executable code which lead to the published results should be all coupled and available. 
 
 \begin{figure}
 \centering
@@ -21,11 +21,11 @@ Specifically, \citeauthor{peng2011reproducible} argues that the original data an
 \label{fig:reproducibility_spectrum}
 \end{figure}
 
-Furthermore, \citeauthor{varoquaux2015Software} in his article %\citetitle{varoquaux2015Software}
+Furthermore, \citeauthor{varoquaux2015Software}~cite{varoquaux2015Software} in his article %\citetitle{varoquaux2015Software}
 \emph{Of Software and Science. Reproducible science: what, why, and how} summarizes a discussion which took place in \emph{\acs{mloss}} workshop regarding the issue of reproducible science.
 %% sik:
 %% The take away is that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing material to backup publications but oversights the importanc of sound reusable material and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
-He concluded that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible} falls short because it focuses on providing materials to backup publications but oversights the importance of sound reusable materials and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
+He concluded that the reproducibility spectrum proposed by \citeauthor{peng2011reproducible}~cite{peng2011reproducible} falls short because it focuses on providing materials to backup publications but oversights the importance of sound reusable materials and methods, which are the foundation of future scientific developments despite being cast out of the success formula in academia where only impact factor seems to matter.
 
 %% sik:
 %% With all this\footnote{better connector needed. Maybe a sentece}, the structure of this chapter is going to appear odd to some readers since our intention with this \nameref{chap:4} chapter is two fold:
@@ -101,11 +101,12 @@ In essence, research is an iterative and incremental process that needs to ensur
 %% Documentation and curated examples will lower the bar to reuse and facilitate replication of the original scientific results.
 %% To avoid feature technical debt, libraries call for focused efforts on selecting the most important operations and become projects on their own.\,\cite{varoquaux2015Software}.
 
-\paragraph{Publication releases}
+%\paragraph{Publication releases}
 %% The rest of this section summarizes our working strategy based on the experience acquired during this thesis that lead to the aforesaid.
 %% Publications, experiments, etc. become projects.
 
-Publications of each project are sub-projects of the main projects which are both hosted in github.
+The outcome of any research is highlighted through publications.
+In our work stratgey publications of each project are sub-projects of the main projects which are both hosted in github.
 %% These projects have their code and documentation hosted in github while its associated publications are subprojects with their source also hosted in github.
 This allow us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
 The data of the project are hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo}, and disseminated through \acs{iccvb} website.
