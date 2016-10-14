@@ -438,6 +438,34 @@
    \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
+
+\newenvironment{abstractCatalan} {\begin{alwayssingle} \pagestyle{empty}
+  \begin{center}
+  \vspace*{1.5cm}
+  {\Large \bfseries  Resum}
+  \end{center}
+  \vspace{0.5cm}
+   \begin{quote}}
+{\end{quote}\end{alwayssingle}}
+
+\newenvironment{abstractSpanish} {\begin{alwayssingle} \pagestyle{empty}
+  \begin{center}
+  \vspace*{1.5cm}
+  {\Large \bfseries  Resumen}
+  \end{center}
+  \vspace{0.5cm}
+   \begin{quote}}
+{\end{quote}\end{alwayssingle}}
+
+\newenvironment{abstractFrench} {\begin{alwayssingle} \pagestyle{empty}
+  \begin{center}
+  \vspace*{1.5cm}
+  {\Large \bfseries  R\'esum\'e}
+  \end{center}
+  \vspace{0.5cm}
+   \begin{quote}}
+{\end{quote}\end{alwayssingle}}
+
 %The abstractlong environment puts a large, bold, centered "Abstract" label at
 %the top of the page. The abstract itself does not appears in a quote
 %environment so you can get more in.
