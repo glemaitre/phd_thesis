@@ -14,6 +14,11 @@ In this study, our subset consists of 17 patients with \ac{cap}.
 
 \subsection{Assessment of classification performance of individual modality}\label{subec:chp6:exp-res:Ex1}
 
+In this experiment, we attend to assess the classification performance of each individual \ac{mri} modality.
+
+\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features} All features presented in \acs{tab}~\ref{tab:featureadct2w} are extracted for both \ac{t2w}-\ac{mri} and \ac{adc} map.
+These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
+
 \begin{landscape}
 \begin{figure}
   \hspace*{\fill}
@@ -31,10 +36,6 @@ In this study, our subset consists of 17 patients with \ac{cap}.
 \end{figure}
 \end{landscape}
 
-In this experiment, we attend to assess the classification performance of each individual \ac{mri} modality.
-
-\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features} All features presented in \acs{tab}~\ref{tab:featureadct2w} are extracted for both \ac{t2w}-\ac{mri} and \ac{adc} map.
-These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
 
 \paragraph{\ac{dce}-\ac{mri} features} This experiment has been presented in \acs{sec}\,\ref{subsec:chp5:DCE-norm:exp-res}.
 We attend to find the most discriminative ``quantification'' method for \ac{dce}-\ac{mri} modality, by assessing the classification performance of the different models.
@@ -88,7 +89,23 @@ A \ac{roc} analysis is carried out for each combination and the \ac{auc} is comp
 A single learner using aggregated features outperform the stacking-based classifier with an \ac{auc} of $0.802 \pm 0.130$.
 Furthermore, \ac{gb} chosen as a meta-classifier lead to better classification performance than \ac{adb}, with an improved \ac{auc} from $0.761 \pm 0.135$ to $0.769 \pm 0.128$.
 
-\subsection{Benefit of data balancing and feature selection/extraction}\label{subsec:chp6:exp-res:Ex3}
+\subsection{Benefits of data balancing and feature selection/extraction}\label{subsec:chp6:exp-res:Ex3}
+
+In this section, we attend to optimize the different feature set used in the previous classification.
+Therefore, our contribution is twofold: (i) we compare the different balancing methods to distinguish which method is the best suited and (ii) feature selection/extraction methods are used to identify which feature are the most discriminative among each set.
+
+\paragraph{Comparison of balancing strategies}
+For this experiment, a \ac{rf} classifier is trained for each feature set selected from the first experiment.
+As in the previous experiment, a \ac{lopo} is used as validation model.
+During the learning phase, the training set are balanced using the methods presented in \acs{sec}\,\ref{subsec:chp6:method:fea-bal}.
+The possible improvements offered by the balancing methods is analyzed through a \ac{roc} analysis and computing the \ac{auc}.
+The results are depicted in \acs{fig}\,\ref{fig:res-Ex3-bal} and give rise to two observations:
+(i) there is at least one balancing method which improves the classification performance and
+(ii) \ac{iht} and \ac{smote} are the methods performing the best.
+On the one hand, \ac{iht} outperforms the other methods while balancing the feature sets based on the \ac{dce}-\ac{mri} and \ac{adc} map.
+The \ac{auc} increases of $0.019$ and $0.018$ for the feature sets of the \ac{dce}-\ac{mri} and \ac{adc} map, respectively.
+On the other hand, \ac{smote} increases the \ac{auc} of $0.042$ for \ac{t2w}-\ac{mri}.
+However, there is no significant improvement for the \ac{mrsi} since only the standard deviation of the \ac{auc} decreases of $0.019$.
 
 \begin{landscape}
 \begin{figure}
