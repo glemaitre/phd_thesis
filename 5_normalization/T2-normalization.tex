@@ -1,13 +1,13 @@
 \section{Normalization of \ac{t2w}-\ac{mri} images} \label{sec:chp5:T2-norm}
 
 This section focuses on \ac{t2w}-\ac{mri} normalization.
-First, the related work is presented in \ac{sec}\,\ref{subsec:chp5:relwork1} before to focus on two new normalization methods which are presented and investigated in \acs{sec}\,\ref{subsec:chp5:T2-norm:meth} and \acs{sec}\,\ref{subsec:chp5:T2-norm:Exp-res}
+First, the related work is presented in \ac{sec}\,\ref{subsec:chp5:relwork1} before focusing on two new normalization methods which are presented and investigated in \acs{sec}\,\ref{subsec:chp5:T2-norm:meth} and \acs{sec}\,\ref{subsec:chp5:T2-norm:Exp-res}
 
 \subsection{Related work}\label{subsec:chp5:relwork1}
 
 We briefly recall the state-of-the-art methods which have been proposed for the normalization of \ac{t2w}-\ac{mri} prostate images.
 
-\citeauthor{Artan2010}, \citeauthor{Ozer2010}, and \citeauthor{rampun2016computerb} used a parametric method to normalize \ac{t2w}\ac{mri} images~\cite{Artan2009,Artan2010,Ozer2009,Ozer2010,rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb}.
+\citeauthor{Artan2010}~\cite{Artan2009,Artan2010}, \citeauthor{Ozer2010}~\cite{Ozer2009,Ozer2010}, and \citeauthor{rampun2016computerb}~\cite{rampun2015classifying,rampun2015computer,rampun2016computer,rampun2016computerb} used a parametric method to normalize \ac{t2w}\ac{mri} images.
 This parametric method is based on computing the standard score --- also known as \emph{z-score} --- of the \ac{pz} voxels such as: 
 \begin{equation}
   I_{s}(x) = \frac{I_{r}(x) - \mu_{PZ}}{\sigma_{PZ}}, \forall x\in PZ ,
@@ -15,9 +15,9 @@ This parametric method is based on computing the standard score --- also known a
 \end{equation}
 \noindent where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity, respectively. 
 This transformation enforces the image \ac{pdf} to have a null mean and a unit standard deviation.
-However, this normalization is not appropriate if the \ac{pdf} do not follow a Gaussian distribution as illustrated in Fig.\,\ref{fig:fitting}
+However, this normalization is not appropriate if the \ac{pdf} does not follow a Gaussian distribution as illustrated in Fig.\,\ref{fig:fitting}
 
-\citeauthor{Lv2009}~cite{Lv2009} used the non-parametric method which is a piecewise-linear normalization, proposed by \citeauthor{Nyul2000} in~\cite{Nyul2000}.
+\citeauthor{Lv2009}~\cite{Lv2009} used the non-parametric method which is a piecewise-linear normalization, proposed by \citeauthor{Nyul2000} in~\cite{Nyul2000}.
 For a given patient, a warping function is inferred by matching some specific landmarks --- i.e., different percentiles --- of the current \ac{pdf} to the same landmarks learned during a training phase from several patients. 
 The mapping between each landmark is performed using a linear mapping.
 \citeauthor{Viswanath2012} used a variant of the previous method by segmenting first the image using region growing with a pre-defined homogeneity criterion and keeping only the largest region to build the \ac{pdf}~\cite{Viswanath2012}.
@@ -33,8 +33,9 @@ These methods are compared qualitatively and quantitatively, with both \textit{z
 As previously stated, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
 We believe that normalizing \ac{mri} data using a parametric model based on a Rician distribution would improve the results.
 Expecting this improvement by changing the data model from the widely used Gaussian distribution to Rician distribution is reasonable.
-Indeed, \citeauthor{Bernstein1989} state that \ac{mri} data theoretically follow a Rayleigh distribution for a low-\ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases~\citeauthor{Bernstein1989}.
+Indeed, \citeauthor{Bernstein1989}~\cite{Bernstein1989} state that \ac{mri} data theoretically follow a Rayleigh distribution for a low-\ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases~\citeauthor{Bernstein1989}~\cite{Bernstein1989}.
 Figure~\ref{fig:fitting} shows the intensity spectrum for some \ac{mri} prostate data as well as the fitted Gaussian and Rician distributions.
+In this figure the solid-black line represents the Rician fitting while the dotted-black shows the fitted Gaussian.
 A qualitative assessment of the underlying distribution is performed by overlying the fitted distribution, while quantitative results of the fitting are given in terms of \ac{rms}.
 It can be highlighted that the Rician model better fits the data than the Gaussian model.
 
@@ -46,7 +47,7 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
     \label{fig:p2}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/06}}\hfill
 %  \subfloat[][]{
 %    \label{fig:p3}\includegraphics[width=0.3\textwidth]{14}}
-  \caption{Visual evaluation of the goodness of fitting using Rician and Gaussian distribution.}
+  \caption{Visual evaluation of the goodness of fitting using Rician and Gaussian distribution for two different \ac{mri} prostate data. For each data the solid black line represents the Rician fitting while the dotted represents the Gaussian distribution.}
   \label{fig:fitting}
 \end{figure}
 
@@ -146,7 +147,7 @@ However, this measure can be biased since that the mean can also be used as a la
 Furthermore, considering a single statistic does not allow to evaluate the overall performance of a normalization.
 Indeed, this statistic corresponds to evaluate a single point of the mapping function and thus a large portion of the mapping functions are disregarded. 
 
-That is why, to evaluate the performance of the different metric, we propose to use a spectral evaluation by decomposing the set of normalized \ac{pdf}s using \ac{pca} under the assumption that they are linearly dependent. 
+That is why, to evaluate the performance of the different metrics, we propose to use a spectral evaluation by decomposing the set of normalized \ac{pdf}s using \ac{pca} under the assumption that they are linearly dependent. 
 Intuitively, the eigenvalues of the \ac{pca} decomposition are correlated with the alignment of the different \acp{pdf}.
 Thus, in the case of a perfect alignment of the \ac{pdf}s, the first eigenvalue is much greater than the remaining since that the first eigenvector encodes all the information.
 In the contrary, in the case of a misalignment of the \ac{pdf}s, more eigenvectors are needed to encode the information synonymous with larger eigenvalues.
@@ -251,7 +252,7 @@ The parametric methods outperform the non-parametric while evaluating the \ac{pd
 Furthermore, the Rician normalization is more appropriate than the Gaussian normalization.
 The \ac{srsf}-based normalization is shown to perform poorly which might be due to the instability of the mapping function inferred.
 However, by focusing on the solely on the \ac{cap} region, the \ac{srsf} outperforms the other methods followed by the Rician normalization.
-Therefor, the Rician normalization outperforms the other methods with an \ac{auc} of $99.74$ and $98.25$ considering the full prostate and \ac{cap}, respectively.
+Therefore, the Rician normalization outperforms the other methods with an \ac{auc} of $99.74$ and $98.25$ considering the full prostate and \ac{cap}, respectively.
 
 \subsection{Conclusion}\label{subsec:chp5:T2-norm:dis-con}
 In this section, we propose to normalize the \ac{t2w}-\ac{mri} prostate images using two new strategies: (i) based on a Rician \textit{a priori} and (ii) based on a \ac{srsf} representation.

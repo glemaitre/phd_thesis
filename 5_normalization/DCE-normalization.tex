@@ -1,6 +1,6 @@
 \section{Normalization of \acs*{dce}-\acs*{mri} images}\label{sec:chp5:DCE-norm}
 
-This section focus on \ac{dce}-\ac{mri} normalization.
+This section focuses on \ac{dce}-\ac{mri} normalization.
 We recall that in \ac{dce}-\ac{mri}, a contrast media is injected intravenously and a set of images is acquired over time.
 Consequently, each voxel in an image corresponds to a dynamic signal which is related to both contrast agent concentration and the vascular properties of the tissue.
 Therefore, changes of the enhanced signal allows to discriminate healthy from \ac{cap} tissues.
@@ -9,7 +9,7 @@ In fact, these properties are automatically extracted using quantitative or semi
 \emph{Quantitative} approaches uses pharmacokinetic modelling based on a bicompartment model, namely Brix~\cite{brix1991pharmacokinetic} and Tofts~\cite{tofts1995quantitative} models.
 The parameters of the Brix model are inferred assuming a linear relationship between the media concentration and the \ac{mri} signal intensity.
 This assumption has shown, however, to lead to inaccurately estimate the pharmacokinetic parameters~\cite{heilmann2006determination}.
-In the contrary, Tofts model requires a conversion from \ac{mri} signal intensity to concentration, which becomes a non-linear relationship using specific equation of \ac{mri} sequences (e.g., FLASH sequence).
+Instead, the Tofts model requires a conversion from the \ac{mri} signal intensity to concentration, which becomes a non-linear relationship using the specific equations of the \ac{mri} sequences (e.g., FLASH sequence).
 Tofts modelling suffers, however, from a higher complexity~\cite{gliozzi2011phenomenological}.
 Indeed, the conversion using the non-linear approach requires to acquire a T$_1$ map which is not always possible during clinical examination.
 Additionally, the parameter calculation requires the \ac{aif} which is challenging to measure and can also lead to an inaccurate estimation.
@@ -66,7 +66,7 @@ Therefore, these variations can be corrected using a $z$-score approach --- i.e.
   \subfigure[]{\label{subfig:pat1}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/pat1_annotated.pdf}} \hfill
   \subfigure[]{\label{subfig:pat2}\includegraphics[width=.49\textwidth]{5_normalization/figures/DCE-normalization/pat2_annotated.pdf}} \hfill
   \hspace*{\fill}
-  \caption[Illustration of the heatmap in \ac{dce}-\ac{mri} images.]{\subref{subfig:pathhist} Illustration of the heatmap representation: all \ac*{pdf}s of the prostate gland are concatenated together to build an heatmap; \subref{subfig:pat1}-\subref{subfig:pat2} Illustration of inter-patient variations (i.e., $\Delta_i$, $\Delta_t$, and $\alpha_i$) \acs*{pdf} over time of two patients in a \ac{dce}-\ac{mri}.}
+  \caption[Illustration of the heatmap in \ac{dce}-\ac{mri} images.]{\ac{dce} normalization: \subref{subfig:pathhist} Illustration of the heatmap representation: all \ac*{pdf}s of the prostate gland are concatenated together to build an heatmap; \subref{subfig:pat1}-\subref{subfig:pat2} Illustration of inter-patient variations (i.e., $\Delta_i$, $\Delta_t$, and $\alpha_i$) \acs*{pdf} over time of two patients in a \ac{dce}-\ac{mri}.}
   \label{fig:heatmap}
 \end{figure}
 
@@ -138,7 +138,7 @@ The parametric model to perform the registration is formulated as in \acs{eq}\,\
   \label{eq:model}
 \end{equation}
 
-\noindent where $\alpha$ and $\tau$ are the two parameters handling the time offset $\Delta_i$ and global scale $\sigma_i$, respectively, $f(\cdot)$ is the \ac{rmse} function define as:
+\noindent where $\tau$ and $\alpha$ are the two parameters handling the time offset $\Delta_i$ and global scale $\sigma_i$, respectively, $f(\cdot)$ is the \ac{rmse} function defined as:
 
 \begin{equation}
   f(t) = \sqrt{ \left( \frac{\sum_{n=1}^{N} x(t)_{n}^2}{N}  \right) },
@@ -243,13 +243,14 @@ Therefore, Tofts model requires to:
     (iii) exclude region next to the endorectal coil, and
     (iv) select the best 5 candidates which meet enhancement characteristics and that are correlated.
 
-    All the above methods are rather complex and thus we propose a simpler method which is based on the following reasonable assumptions:
+    All the above methods are rather complex compromising robustness and generalisation.
+    Thus we propose a simpler method which is based on the following reasonable assumptions:
     (i) all possible \ac{aif} signal candidates should have a similar shape,
     (ii) a high enhancement, and
     (iii) the arteries should be almost round and within a size range.
     Therefore, each slice is clustered into regions using K-means clustering with $k=6$.
     The cluster made of the most enhanced signals is selected since it contains the artery signals.
-    In this regards, the selection criteria corresponds to the 90\textsuperscript{th} percentile of the maximum \ac{dce}-\ac{mri} signal.
+    In this regard, the selection criteria corresponds to the 90\textsuperscript{th} percentile of the maximum \ac{dce}-\ac{mri} signal.
     Finally, regions with an eccentricity smaller than $0.5$ and an area in the range of $[100, 400]$ voxels are kept.
     Additionally, to remove voxels contaminated by partial volume effect, only the \SI{10}{\percent} most enhanced voxels of the possible candidates are kept as proposed by~\cite{schabel2008uncertainty} and the average signal is computed.
     A summary of the different segmentation steps is presented in \acs{fig}\,\ref{fig:aif}.
@@ -319,7 +320,7 @@ In this work, we use the model presented by~\citeauthor{huisman2001accurate}~\ci
 
 \noindent where $s(t)$ is the \ac{mri} signal intensity, $S_0$ is the pre-contrast signal intensity, $t_0$ is the time corresponding to the start of enhancement, $S_M$ and $\tau$ is the maximum of the signal and the exponential time constant, and $w$ is the slope of the linear part.
 
-\citeauthor{huisman2001accurate} argue that curve fitting via least-squares minimization using Nelder-Mead algorithm leads to inaccurate estimation of the free parameters: mainly the issue come from an incorrect estimation of the start of enhancement $t_0$ leading to incorrect estimation of the other parameters.
+\citeauthor{huisman2001accurate}~\cite{huisman2001accurate} argue that curve fitting via least-squares minimization using Nelder-Mead algorithm leads to inaccurate estimation of the free parameters: mainly the issue comes from an incorrect estimation of the start of enhancement $t_0$ leading to incorrect estimation of the other parameters.
 Therefore, they propose to:
 (i) estimate robustly $t_0$,
 (ii) estimate $S_0$ by averaging the samples between $0$ and $t_0$
@@ -383,7 +384,7 @@ The data used for this work are also publicly available\footnote{\url{https://ze
 \end{table}
 
 Parameter estimation of the quantification methods are related to fit a specific model to the \ac{dce}-\ac{mri} data.
-Therefore, this section report the goodness of fitting by computing the coefficient of determination $R^2$ such as in \acs{eq}\,\eqref{eq:r2}
+Therefore, this section reports the goodness of fitting by computing the coefficient of determination $R^2$ such as in \acs{eq}\,\eqref{eq:r2}
 
 \begin{equation}
   R^2 = 1 - \frac{\sum_{t = 1}^{T} (s_t - \hat{s}_t)^2}{\sum_{t = 1}^{T} (s_t - \bar{s})^2} ,
@@ -445,7 +446,7 @@ The large standard deviation for this model might imply that there are some case
   \centering
   \subfigure[Without normalization.]{\label{fig:rfpharmaunorm}\includegraphics[width=.7\textwidth]{5_normalization/figures/DCE-normalization/unormalized_methods_0.pdf}} \\
   \subfigure[With normalization.]{\label{fig:rfpharmanorm}\includegraphics[width=.7\textwidth]{5_normalization/figures/DCE-normalization/normalized_methods_0.pdf}}
-  \caption{\acs*{roc} analysis using a \acs*{rf} classifier with and without normalization \acs*{dce}-\acs*{mri} data for different pharmacokinetic models.}
+  \caption{\acs*{roc} analysis using a \acs*{rf} classifier (a) with and (b) without normalization of \acs*{dce}-\acs*{mri} data for different pharmacokinetic models.}
   \label{fig:normpharmarf}
 \end{figure}
 

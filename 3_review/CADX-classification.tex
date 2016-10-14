@@ -8,13 +8,13 @@ A full review of classification methods used in pattern recognition is available
 \paragraph{Rule-based method}
 \citeauthor{Lv2009} make use of a decision stump classifier to distinguish \ac{cap} and healthy classes~\cite{Lv2009}. 
 \citeauthor{Puech2009} detect \ac{cap} by implementing a given set of rules and scores based on a medical support approach~\cite{Puech2009}.
-During the testing, the feature vector go through these different rules, and a final score is computed resulting to a final decision.
+During the testing, the feature vector goes through these different rules, and a final score is computed resulting to a final decision.
 
 \paragraph{Clustering methods}
 \acf{knn} is one of the simplest supervised machine learning classification methods.
 In this method, a new unlabelled vector is assigned to the most represented class from its $k$ nearest-neighbours in the feature space.
 The parameter $k$ is usually an odd number in order to avoid any tie case.
-\ac{knn} has been one of the method used in~\cite{Niaf2011,Niaf2012,rampun2016computerb} mainly to make a comparison with different machine learning techniques.
+\ac{knn} has been one of the methods used in~\cite{Niaf2011,Niaf2012,rampun2016computerb} mainly to make a comparison with different machine learning techniques.
 \citeauthor{Litjens2012} used this method to roughly detect potential \ac{cap} voxels before performing a region-based classification~\cite{Litjens2012}.
 
 The $k$-means algorithm is an unsupervised clustering method in which the data is partitioned into $k$ clusters in an iterative manner.
@@ -25,9 +25,9 @@ The number of clusters $k$ is usually defined as the number of classes.
 This algorithm can also be used for ``on-line'' learning.
 In case that new data has to be incorporated, the initial centroid positions correspond to the results of a previous $k$-means training and is followed by the assignment-updating stage previously explained.
 \citeauthor{Tiwari2009} used $k$-means in an iterative procedure~\cite{Tiwari2007,Tiwari2009}.
-Three clusters have been defined corresponding to \ac{cap}, healthy, and non-prostate.
+Three clusters were defined corresponding to \ac{cap}, healthy, and non-prostate.
 $k$-means is repeatedly applied and at each iteration, the voxels corresponding to the largest cluster are excluded under the assumption that it is assigned to ``non-prostate'' cluster.
-The algorithm stopped when the number of voxels in all remaining clusters are smaller than a given threshold.
+The algorithm stopped when the number of voxels in all remaining clusters were smaller than a given threshold.
 \citeauthor{Tiwari2008} and \citeauthor{Viswanath2008a} used $k$-means in a repetitive manner in order to be less sensitive to the centroids initialization~\cite{Viswanath2008,Viswanath2008a,Tiwari2008}.
 Thus, $k$ clusters are generated $T$ times and the final assignment is performed by majority voting using a co-association matrix as proposed in~\cite{Fred2005}.
 
@@ -282,7 +282,7 @@ The decision to assign the label to a new observation $\mathbf{x}_i$ is taken su
 
 \ac{svm} can also be used as a non-linear classifier by performing a Kernel trick~\cite{Boser1992}.
 The original data $\mathbf{x}$ is projected to a high-dimensional space in which it is assumed that a linear hyper-plane splits the 2 classes.
-Different kernels are popular such as the \ac{rbf} kernel, polynomial kernels, or sigmoid kernel.
+Different kernels are popular such as the \ac{rbf} kernel, polynomial kernels, or sigmoid kernels.
 In \ac{cad} for \ac{cap} systems, \ac{svm} is the most popular classification method and has been used in a multitude of research works~\cite{Artan2009,Artan2010,Chan2003,Litjens2011,Litjens2012,Liu2013,Lopes2011,Niaf2011,Niaf2012,Ozer2009,Ozer2010,Parfait2012,Peng2013,Sung2011,Tiwari2012,Vos2008,Vos2008a,Vos2010,Vos2012,giannini2015fully,trigui2017automatic,lehaire2014computer,khalvati2015automated,chung2015prostate}.
 
 \Acf{rvm} is a sparse version of Gaussian process previously presented, proposed in~\cite{Tipping2001}.
