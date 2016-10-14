@@ -242,7 +242,10 @@ Subsequently, a range is defined around each peak ---i.e., \SI{0.36}{\ppm} for t
 
 The third and last option correspond on a cropping of the \ac{mrsi} signal from \SIrange{2}{4}{\ppm}.
 
-Beside aforementioned features specific to each modality anatomical features as proposed by \citeauthor{Chen2002}~cite{Chen2002} and \citeauthor{Litjens2014}~cite{Litjens2014} are computed as well. 
+\paragraph{Anatomical features}
+
+Beside the aforementioned features specific at each modality, anatomical features as proposed by \citeauthor{Chen2002} and \citeauthor{Litjens2014} are computed~\cite{Chen2002,Litjens2014}.
+Therefore, 4 different metrics are computed based on the relative distance to the prostate boundary as well as the prostate center, and the relative position in the Euclidean and cylindrical coordinate systems.
 
 \subsection{Feature balancing}\label{subsec:chp6:method:fea-bal}
 Data imbalanced is a recurrent issue in classification, notably in medical data.

@@ -15,14 +15,15 @@ In this experiment, we attend to assess the classification performance of each i
 These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
 
 \paragraph{\ac{dce}-\ac{mri} features} This experiment has been presented in \acs{sec}\,\ref{subsec:chp5:DCE-norm:exp-res}.
-We attend to find the most discriminative ``quantification'' methods in terms of classification performance to extract information of \ac{dce}-\ac{mri} modality.
-Therefore, the pharmacokinetic parameters from the Brix, Hoffmann, Tofts, and \ac{pun} models as well as the semi-quantitative parameters and the enhanced signal are separately used for training different \ac{rf} classifiers.
+We attend to find the most discriminative ``quantification'' method for \ac{dce}-\ac{mri} modality, by assessing the classification performance of the different models.
+Therefore, the pharmacokinetic parameters from the Brix, Hoffmann, Tofts, and \ac{pun} models, the semi-quantitative parameters, and the enhanced \ac{dce}-\ac{mri} signal are extracted.
+For each set of feature, a \ac{rf} classifier is trained.
 
-\paragraph{\ac{mrsi} features} Similarly to \ac{dce}-\ac{mri}, four \ac{rf} classifiers are trained on different features:
+\paragraph{\ac{mrsi} features} Similarly to \ac{dce}-\ac{mri}, 4 \ac{rf} classifiers are trained on different features:
 (i) the cropped \ac{mrsi} signal,
 (ii) the relative concentration of the citrate over the relative concentration of the choline, both computed through fitting as presented in the previous section,
 (iii) the ratio of the two previous features, and finally
-(iv) the ratio of the relative concentration of the citrate over the relative concentration of the choline, using the fix bounds integration.
+(iv) the ratio of the relative concentration of the citrate over the relative concentration of the choline, using fix integration bounds.
 
 \paragraph{Results}
 
@@ -37,15 +38,22 @@ Therefore, the pharmacokinetic parameters from the Brix, Hoffmann, Tofts, and \a
   \hfill
   \subfigure[Performance of different approach for the \acs*{mrsi} modality.]{\label{fig:indmrsi}\includegraphics[width=.49\textwidth]{6_pipeline/figures/exp-1/mrsi_all.pdf}}
   \hspace*{\fill}
-  \caption[Analysis of the classification performance for each individual \acs*{mri} modality.]{Analysis of the classification performance for each individual \acs*{mri} modality.}
+  \caption[Analysis of the classification performance for each individual \acs*{mri} modality.]{Analysis of the classification performance for each individual \acs*{mri} modality. Different models have been tested for \acs*{dce}-\acs*{mri} and \acs*{mrsi} modalities.}
   \label{fig:res-Ex1}
 \end{figure}
 
-Each trained \ac{rf} is evaluated using a \ac{lopo} cross-validation.
-A \ac{roc} analysis with its corresponding \ac{auc} is carried out to report the classification performance of each classifier.
+Each trained \ac{rf} is evaluated using a \ac{lopo}.
+A \ac{roc} analysis is carried out and the \ac{auc} score is computed to report and compare the classification performance of each classifier.
 The results are depicted in \acs{fig}\,\ref{fig:res-Ex1}.
+As presented is the previous chapter, classification of \ac{dce}-\ac{mri} data using the normalized enhanced \ac{dce}-\ac{mri} signal is strategy leading the highest \ac{auc} --- i.e., $0.666 \pm 0.154$ ---, outperforming any quantification method.
+Similarly these findings, classification of the cropped \ac{mrsi} signal outperforms other quantification-based methods, with an \ac{auc} of $0.697 \pm 0.165$.
+Classification of the extracted features based on \ac{adc} offer an close performance with an identical mean \ac{auc} and a smaller standard deviation of $0.128$.
+Finally, the features extracted from \ac{t2w}-\ac{mri} are shown to be the most discrimnative with an \ac{auc} reaching $0.720 \pm 0.122$.
 
 \subsection{Coarse combination of \acs*{mpmri} modalities} \label{subsec:chp6:exp-res:Ex2}
+
+
+
 The objective of this experiment is to evaluate the combination of all the modalities.
 To this extent, three different approaches are considered: (i) feature aggregation, (ii) statcking using \ac{adb}, (iii) stacking using \ac{gb}. 
 In the first approach, feature aggregation, the features extracted from each modalities (\ac{t2w}, \ac{adc}, normalized-whole-\ac{dce} and normalized-whole-\ac{mrsi}, as concluded in experiment-1) are concatenated together and used with a \ac{rf} classifier and \ac{lopo}. 

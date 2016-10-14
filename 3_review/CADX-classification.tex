@@ -108,12 +108,12 @@ These parameters are inferred from the training set by using the \ac{mle} approa
 The naive Bayes classifier has been used in~\cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer}.
 
 \paragraph{Ensemble learning classifiers}
-AdaBoost is an adaptive method based on an ensemble learning method and initially proposed in~\cite{Freund1997}. 
-AdaBoost linearly combines several weak learners resulting into a final strong classifier.
+\Ac{adb} is an adaptive method based on an ensemble learning method and initially proposed in~\cite{Freund1997}. 
+\Ac{adb} linearly combines several weak learners resulting into a final strong classifier.
 A weak learner is defined as a classification method performing slightly better than a random classifier.
 Popular choices regarding the weak learner classifiers are: decision stump or decision tree learners such as \ac{id3}~\cite{Quinlan1986}, C4.5~\cite{Quinlan1993}, and \ac{cart}~\cite{Breiman1984}.
 
-AdaBoost is considered as an adaptive method in the way that the weak learners are selected.
+\Ac{adb} is considered as an adaptive method in the way that the weak learners are selected.
 The selection is performed in an iterative manner.
 At each iteration $t$, the weak learner selected $h_t$ corresponds to the one minimizing the classification error on a distribution of weights $D_t$, that is associated with the training samples.
 Each weak learner is assigned a weight $\alpha_t$ as:
@@ -141,7 +141,7 @@ Thus, after $T$ iterations, the final strong classifier corresponds to the linea
 	\label{eq:strclaada}
 \end{equation}
 
-\citeauthor{Lopes2011} make use of the AdaBoost classifier to perform their classification~\cite{Lopes2011} while \citeauthor{Litjens2014} used the GentleBoost variant~\cite{Friedman1998} which provides a modification of the function affecting the weight at each weak classifier~\cite{Litjens2014}.
+\citeauthor{Lopes2011} make use of the \ac{adb} classifier to perform their classification~\cite{Lopes2011} while \citeauthor{Litjens2014} used the GentleBoost variant~\cite{Friedman1998} which provides a modification of the function affecting the weight at each weak classifier~\cite{Litjens2014}.
 
 \Ac{rf} is a classification method which is based on creating an ensemble of decision trees and was introduced in~\cite{Breiman2001}.
 In the learning stage, multiple decision tree learners~\cite{Breiman1984} are trained.
@@ -178,8 +178,8 @@ The \ac{rf} classifier has been used in~\cite{Kelm2007,Litjens2014,Tiwari2012,Ti
 \label{fig:pbtsim}
 \end{figure}
 
-Probabilistic boosting-tree is another ensemble learning classifier which shares principles with AdaBoost but using them inside a decision tree~\cite{Tu2005}. 
-In the training stage, the probabilistic boosting-tree method grows a decision tree and at each node, a strong classifier is learned in an almost comparable scheme to AdaBoost.
+Probabilistic boosting-tree is another ensemble learning classifier which shares principles with \ac{adb} but using them inside a decision tree~\cite{Tu2005}. 
+In the training stage, the probabilistic boosting-tree method grows a decision tree and at each node, a strong classifier is learned in an almost comparable scheme to \ac{adb}.
 Once the strong learner is trained, the training set is split into two subsets which are used to train the next strong classifiers in the next descending nodes.
 Thus, three cases are conceivable to decide in which branch to propagate each sample training $\mathbf{x}_i$:
 
@@ -189,7 +189,7 @@ Thus, three cases are conceivable to decide in which branch to propagate each sa
 	\item else $\mathbf{x}_i$ will be propagated in both branches with $w_i=q(+1, \mathbf{x}_i)$ in the right branch and $w_i=q(-1, \mathbf{x}_i)$ in the left branch.
 \end{itemize}
 
-\noindent with $\mathbf{w} = w_i, i=\{1,\cdots,N\}$ corresponding to distribution of weights, $N$ the number of samples as in AdaBoost and $q(\cdot)$ is defined as:
+\noindent with $\mathbf{w} = w_i, i=\{1,\cdots,N\}$ corresponding to distribution of weights, $N$ the number of samples as in \ac{adb} and $q(\cdot)$ is defined as:
 
 \begin{eqnarray}
 	q(+1, \mathbf{x}_i) & = & \frac{\exp(2H(\mathbf{x}_i))}{1+\exp(2H(\mathbf{x}_i))} \ , \label{eq:regada1} \\
@@ -412,7 +412,7 @@ Classification methods used to distinguish \ac{cap} from healthy tissue in in \a
     \textbf{Probabilistic classifier:} & \\
     \quad Naive Bayes & \cite{Giannini2013,Mazzetti2011,Niaf2011,Niaf2012,cameron2014multiparametric,cameron2016maps,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\ \\ [-1.5ex]
     \textbf{Ensemble learning classifiers:} & \\
-    \quad AdaBoost & \cite{Litjens2014,Lopes2011} \\
+    \quad \acs*{adb} & \cite{Litjens2014,Lopes2011} \\
     \quad \acs*{rf} & \cite{Kelm2007,Litjens2014,Tiwari2012,Tiwari2013,Viswanath2009,trigui2017automatic,trigui2016classification,samarasinghe2016semi,rampun2015classifying,rampun2016computerb,rampun2015computer,rampun2016computer} \\
     \quad Probabilistic boosting tree & \cite{Tiwari2009,Tiwari2010,Tiwari2012} \\ \\ [-1.5ex]
     \textbf{Kernel method:} & \\
