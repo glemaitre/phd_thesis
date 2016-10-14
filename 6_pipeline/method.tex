@@ -347,8 +347,9 @@ That is why, \ac{rf} has been chosen to as our base classifier --- allowing for 
   \label{fig:stacking}
 \end{figure}
 
-Additionally, we will use stacking is a way to create a meta classifier using different base learners~\cite{wolpert1992stacked}.
-This method uses the prediction of different base learners as input for a meta leaner and combines them into a final decision.
-Each base learner is trained on the training set and its prediction on the validation set is fed to the meta learner.
-The test sample, in a similar way is first classified by the base learners and their prediction is passed through the meta learner in order to achieve the final decision.
- 
+Additionally, we use stacking to create ensemble of base learners using a meta-classifier~\cite{wolpert1992stacked}.
+\Acl{fig}~\ref{fig:stacking} illustrate the principle of stacking.
+Stacking consists in a two-stage learning:
+(i) First, a set of training samples is used to train each individual base learner and
+(ii) subsequently, a set of validation samples is provided to each \ac{rf} which individually output a corresponding set of probability used to train a meta-classifier.
+Finally, the stack of classifier is assessed by providing a test set which is going through the base learners and the meta-classifier.
