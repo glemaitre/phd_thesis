@@ -35,7 +35,7 @@
 
 %if output to PDF then put the following in PDF header
 \ifpdf  
-    \pdfinfo { /Title  (Computer Aided Diagnosis system for prostatic biopsy guidance and follow-up fusing multi-modal imaging)
+    \pdfinfo { /Title  (Computer Aided Diagnosis for Prostate Cancer Using Multi-Parametric Magnetic Resonance Imaging)
                /Creator (TeX)
                /Producer (pdfTeX)
                /Author (Guillaume Lemaitre g.lemaitre58@gmail.com)
@@ -48,7 +48,7 @@
 \fi
 
 
-\title{Computer Aided Diagnosis system for prostatic biopsy guidance and follow-up fusing multi-modal imaging}
+\title{Computer Aided Diagnosis for Prostate Cancer Using Multi-Parametric Magnetic Resonance Imaging}
 
 
 
@@ -146,7 +146,7 @@ Reviewers:
 \begin{itemize}
 \item[] Su Ruan, Professor at Universit\'e de Rouen - LITIS
 \item[] Reyer Zwiggelaar Ir, Professor at Aberystwyth Universtiy - Vision, Graphics, and Visualisation Group
-\item[] Soumya Ghose, Research Associate at Case Western Reserve University
+%\item[] Soumya Ghose, Research Associate at Case Western Reserve University
 \end{itemize}
 
 \vspace{20mm}
@@ -173,7 +173,6 @@ Day of the defense: December 2016
 
 \frontmatter
 \include{0_frontmatter/dedication}
-\include{0_frontmatter/acknowledgement}
 \include{0_frontmatter/publication}
 
 %: ----------------------- contents ------------------------
@@ -186,13 +185,15 @@ Day of the defense: December 2016
 %: ----------------------- list of acronyms/figures/tables ------------------------
 
 \addcontentsline{toc}{chapter}{List of Abbreviations}
-\printacronyms[name = List of Abbreviations]
+\printacronyms[exclude-classes= latex, name = List of Abbreviations]
 
 
 \listoffigures	% print list of figures
 
 \listoftables  % print list of tables
 
+
+\include{0_frontmatter/acknowledgement}
 
 \tableofcontents            % print the table of contents
 \include{0_frontmatter/abstract}
