@@ -116,6 +116,14 @@ However, there is no significant improvement for the \ac{mrsi} since only the st
 Once all features are concatenated together, \ac{nm3} is the method providing the best enhancement of the classification performance with an \ac{auc} of $0.824 \pm 0.076$, as depicted in \acs{fig}\,\ref{fig:allbalance}.
 In conclusion, the methods leading to the best performance are applied prior to feature selection/extraction for the remainder of the experiment.
 
+\paragraph{Feature selection and extraction}
+
+Noisy or non-discriminative features included in the learning process might degrade the overall performance of a classifier.
+Thus, the feature selection and extraction methods presented in \acs{sec}\,\ref{subsec:chp6:method:fea-bal} are used to obtain a fine-tuned feature space.
+The selection approaches --- i.e., \ac{anova} F-value and Gini importance --- are applied on the image-based features extracted from \ac{t2w}-\ac{mri} and \ac{adc} map modalities.
+For both methods, a threshold defines the percentage of feature to select.
+Additionally, several thresholds are defined to find the number of features maximizing the classification performance.
+
 \begin{landscape}
 \begin{figure}
   \hspace*{\fill}
@@ -288,13 +296,6 @@ In conclusion, the methods leading to the best performance are applied prior to 
 
 \end{landscape}
 
-\paragraph{Feature selection and extraction}
-
-Noisy or non-discriminative features included in the learning process might degrade the overall performance of a classifier.
-Thus, the feature selection and extraction methods presented in \acs{sec}\,\ref{subsec:chp6:method:fea-bal} are used to obtain a fine-tuned feature space.
-The selection approaches --- i.e., \ac{anova} F-value and Gini importance --- are applied on the image-based features extracted from \ac{t2w}-\ac{mri} and \ac{adc} map modalities.
-For both methods, a threshold defines the percentage of feature to select.
-Additionally, several thresholds are defined to find the number of features maximizing the classification performance.
 Features computed from \ac{mrsi} and \ac{dce}-\ac{mri} modalities are related to signal and feature extraction seems more appropriate than feature selection rather than feature selection.
 Therefore, the 3 feature extraction methods --- i.e., \ac{pca}, sparse-\ac{pca}, and \ac{ica} --- are applied by varying the number of components or the sparsity level, which allow to find the level which maximized the classification performance.
 Finally, the feature selection methods have been applied on the concatenation of all the features.
@@ -352,11 +353,11 @@ Three strategies are applied:
 As previously done, the experiment is performed in a \ac{lopo} fashion and a \ac{roc} analysis is carried out.
 The comparative results are shown in \acs{fig}\,\ref{fig:res-Ex4}.
 In overall, classification using the fine-tuned features improve the classification performance.
-The third classification configuration is, however, the one which outperforms others with an \ac{auc} of $0.831 \pm 0.100$.
-The improvement in terms of \ac{auc} is of $0.023$ and $0.045$ compared with the 1\textsuperscript{st} and 2\textsuperscript{nd}, respectively.
+The third classification configuration is, however, the one which outperforms others with an \ac{auc} of $0.836 \pm 0.083$.
+The improvement in terms of \ac{auc} is of $0.028$ and $0.050$ compared with the 1\textsuperscript{st} and 2\textsuperscript{nd}, respectively.
 
 Additionally, the individual \ac{roc} analysis for each patient for the best configuration is shown in \acs{fig}\,\ref{fig:indauc}.
-It can be noted that 12 patients have an \ac{auc} superior to $0.80$ and 2 patients have a rather low \ac{auc} below $0.700$.
+It can be noted that 12 patients have an \ac{auc} superior to $0.800$ and 2 patients have a rather low \ac{auc} below $0.700$.
 Regarding the 4 patients with an \ac{auc} below $0.800$, 3 patients have a \ac{cap} localized in the \ac{cg}.
 
 \subsection{Benefit of the \acs*{mrsi} modality}\label{subsec:chp6:exp-res:Ex5}
