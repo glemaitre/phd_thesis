@@ -94,6 +94,13 @@ Furthermore, \ac{gb} chosen as a meta-classifier lead to better classification p
 In this section, we attend to optimize the different feature set used in the previous classification.
 Therefore, our contribution is twofold: (i) we compare the different balancing methods to distinguish which method is the best suited and (ii) feature selection/extraction methods are used to identify which feature are the most discriminative among each set.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth]{6_pipeline/figures/exp-3/all.pdf}
+  \caption{Analysis of the benefit of balancing the training dataset before the learning process while concatenating all features.}
+  \label{fig:allbalance}
+\end{figure}
+
 \paragraph{Comparison of balancing strategies}
 For this experiment, a \ac{rf} classifier is trained for each feature set selected from the first experiment.
 As in the previous experiment, a \ac{lopo} is used as validation model.
@@ -101,11 +108,12 @@ During the learning phase, the training set are balanced using the methods prese
 The possible improvements offered by the balancing methods is analyzed through a \ac{roc} analysis and computing the \ac{auc}.
 The results are depicted in \acs{fig}\,\ref{fig:res-Ex3-bal} and give rise to two observations:
 (i) there is at least one balancing method which improves the classification performance and
-(ii) \ac{iht} and \ac{smote} are the methods performing the best.
+(ii) \ac{iht} and \ac{smote} are the methods performing the best on individual modality features.
 On the one hand, \ac{iht} outperforms the other methods while balancing the feature sets based on the \ac{dce}-\ac{mri} and \ac{adc} map.
 The \ac{auc} increases of $0.019$ and $0.018$ for the feature sets of the \ac{dce}-\ac{mri} and \ac{adc} map, respectively.
 On the other hand, \ac{smote} increases the \ac{auc} of $0.042$ for \ac{t2w}-\ac{mri}.
 However, there is no significant improvement for the \ac{mrsi} since only the standard deviation of the \ac{auc} decreases of $0.019$.
+Once all features are concatenated together, \ac{nm3} is the method providing the best enhancement of the classification performance with an \ac{auc} of $0.824 \pm 0.076$, as depicted in \acs{fig}\,\ref{fig:allbalance}.
 In conclusion, the methods leading to the best performance are applied prior to feature selection/extraction for the remainder of the experiment.
 
 \begin{landscape}
@@ -120,7 +128,7 @@ In conclusion, the methods leading to the best performance are applied prior to 
   \hfill
   \subfigure[\ac{mrsi}-\ac{mri}]{\label{fig:ex3-MRSI}\includegraphics[height=.4\textheight]{6_pipeline/figures/exp-3/mrsi.pdf}}
   \hspace*{\fill}
-  \caption[Analysis of the benefit of balancing the training dataset before learning process.]{Analysis of the benefit of balancing the training dataset before learning process.}
+  \caption{Analysis of the benefit of balancing the training dataset before learning process for each modality.}
   \label{fig:res-Ex3-bal}
 \end{figure}
 
@@ -233,12 +241,12 @@ In conclusion, the methods leading to the best performance are applied prior to 
     \toprule
     \multirow{2}{*}{\textbf{Methods}} & \multicolumn{7}{c}{\textbf{Percentiles}} \\
     \cmidrule{2-8}
-    & 5 & 7.5 & 10 & 12.5 & 15 & 17.5 & 20 \\
+    & 10 & 12.5 & 15 & 17.5 & 20 & 22.5 & 25 \\
     \midrule
-    \acs*{anova} F-score & $0.771 \pm 0.133$ & $0.783 \pm 0.144$ & $0.789 \pm 0.133$ & $0.822 \pm 0.114$ & $\mathbf{0.822 \pm 0.112}$ & $0.817 \pm 0.113$ & $0.810 \pm 0.120$ \\
+    \acs*{anova} F-score & $0.764 \pm 0.095$ & $0.765 \pm 0.079$ & $0.800 \pm 0.083$ & $0.817 \pm 0.089$ & $\mathbf{0.828 \pm 0.084}$ & $0.822 \pm 0.0.084$ & $0.815 \pm 0.086$ \\
     \bottomrule
   \end{tabularx}
-  \label{tab:ginicomb}
+  \label{tab:anovacomb}
 \end{table}
 
 \begin{table}
@@ -249,12 +257,12 @@ In conclusion, the methods leading to the best performance are applied prior to 
     \toprule
     \multirow{2}{*}{\textbf{Methods}} & \multicolumn{7}{c}{\textbf{Percentiles}} \\
     \cmidrule{2-8}
-    & 1 & 2 & 5 & 7.5 & 10 & 12.5 & 15 \\
+    & 10 & 12.5 & 15 & 17.5 & 20 & 22.5 & 25 \\
     \midrule
-    Gini importance & $0.773 \pm 0.142$ & $0.827 \pm 0.099$ & $0.822 \pm 0.105$ & $0.823 \pm 0.101$ & $\mathbf{0.831 \pm 0.100}$ & $0.816 \pm 0.113$ & $0.816 \pm 0.115$ \\
+    Gini importance & $0.834 \pm 0.085$ & $0.834 \pm 0.088$ & $0.834 \pm 0.084$ & $\mathbf{0.836 \pm 0.083}$ & $0.834 \pm 0.079$ & $0.828 \pm 0.086$ & $0.830 \pm 0.077$ \\
     \bottomrule
   \end{tabularx}
-  \label{tab:anovacomb}
+  \label{tab:ginicomb}
 \end{table}
 
 \begin{table}
@@ -265,14 +273,14 @@ In conclusion, the methods leading to the best performance are applied prior to 
     \toprule
     \multicolumn{1}{c}{\textbf{\acs*{t2w}-\acs*{mri}}} & \multicolumn{1}{c}{\textbf{\acs*{adc}}} & \multicolumn{1}{c}{\textbf{\acs*{t2w}-\acs*{mri}}} & \multicolumn{1}{c}{\textbf{\acs*{adc}}} & \multicolumn{1}{c}{\textbf{\acs*{dce}-\acs*{mri}}} & \multicolumn{1}{c}{\textbf{\acs*{mrsi}}} \\
     \cmidrule(lr){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-6}
-    8 edges & 1 \acs*{dct} & 1 \acs*{dct} & 1 \acs*{dct} & 11 samples  & 82 samples \\
-    155 Gabor filters & 32 Gabor filters & 33 Gabor filters & 16 Gabor filters & & \\ 
-    2 Haralick features & 1 phase congruency & 1 phase congruency & 2 phase congruency & & \\
-    1 intensity & & 4 edges & & & \\
+    8 edges & 1 \acs*{dct} & 113 Gabor filters & 53 Gabor filters & 14 samples  & 78 samples \\
+    155 Gabor filters & 32 Gabor filters & 1 phase congruency & 2 phase congruency & & \\ 
+    2 Haralick features & 1 phase congruency & 4 edges & & & \\
+    1 intensity & & 1 intensity & & & \\
     4 \acs*{lbp} & & & & & \\
     2 phase congruency & & & & & \\
     \cmidrule(lr){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-6}
-    \multicolumn{1}{c}{\textbf{172 features}} & \multicolumn{1}{c}{\textbf{34 features}} & \multicolumn{4}{c}{\textbf{151 features}} \\
+    \multicolumn{1}{c}{\textbf{172 features}} & \multicolumn{1}{c}{\textbf{34 features}} & \multicolumn{4}{c}{\textbf{267 features}} \\
     \bottomrule
   \end{tabular}
   \label{tab:selfeatocc}
@@ -314,10 +322,10 @@ However, only the projection applied to \ac{dce}-\ac{mri} features leads to impr
 % feature selection for concatenation
 % results
 Gini importance selection method is also outperforming \ac{anova}-based method while selecting the features from the concatenation of all of them.
-The reported \ac{auc} is $0.831 \pm 0.100$ with an increase of $0.029$.
+The reported \ac{auc} is $0.836 \pm 0.083$ with an increase of $0.034$.
 % which features are selected
 The feature which has been selected are reported from the 3\textsuperscript{rd} to the 6\textsuperscript{th} columns of \acs{tab}~\ref{tab:selfeatocc}.
-To conclude, from the 1533 original features, 151 features are selected from the entire set of feature.
+To conclude, from the 1533 original features, 267 features are selected from the entire set of feature.
 
 \subsection{Fine-tuned combination of \ac{mpmri} modalities}\label{subsec:chp6:exp-res:Ex4}
 
@@ -339,7 +347,7 @@ This experiment aims at providing the most efficient \ac{mpmri} \ac{cad} for \ac
 Three strategies are applied:
 (i) the selected features from each modality --- i.e., 331 features --- are concatenated together and used in a \ac{rf} classifier,
 (ii) the selected features from each modality --- i.e., 331 features --- are used to train a stacking classifier with a \ac{gb} as meta-classifier, and
-(iii) the selected features from the concatenated set of feature --- i.e., 151 features --- are used to train a single \ac{rf} classifier.
+(iii) the selected features from the concatenated set of feature --- i.e., 267 features --- are used to train a single \ac{rf} classifier.
 
 As previously done, the experiment is performed in a \ac{lopo} fashion and a \ac{roc} analysis is carried out.
 The comparative results are shown in \acs{fig}\,\ref{fig:res-Ex4}.
@@ -348,8 +356,8 @@ The third classification configuration is, however, the one which outperforms ot
 The improvement in terms of \ac{auc} is of $0.023$ and $0.045$ compared with the 1\textsuperscript{st} and 2\textsuperscript{nd}, respectively.
 
 Additionally, the individual \ac{roc} analysis for each patient for the best configuration is shown in \acs{fig}\,\ref{fig:indauc}.
-It can be noted that 12 patients have an \ac{auc} superior to $0.80$ and 2 patients have a rather low \ac{auc} below $0.650$.
-Regarding the 4 patients with an \ac{auc} below $0.78$, 2 patients have a \ac{cap} localized in the \ac{cg}.
+It can be noted that 12 patients have an \ac{auc} superior to $0.80$ and 2 patients have a rather low \ac{auc} below $0.700$.
+Regarding the 4 patients with an \ac{auc} below $0.800$, 3 patients have a \ac{cap} localized in the \ac{cg}.
 
 \subsection{Benefit of the \acs*{mrsi} modality}\label{subsec:chp6:exp-res:Ex5}
 

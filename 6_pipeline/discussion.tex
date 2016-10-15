@@ -9,10 +9,12 @@ The experiment link to the feature selection highlights some interesting facts r
 On the one hand, the Gabor filters and the phase congruency are always selected, independently of the strategy and modality during the feature selection process.
 Additionally, edge filters --- i.e., Kirsch, Prewitt, Scharr, and Sobel --- have been only selected for the \ac{t2w}-\ac{mri}.
 A possible explanation might due to the fact that \ac{t2w}-\ac{mri} is the modality with the highest spatial resolution and in which the level of details is the most important.
+Subsequently, the intensity feature of the \ac{t2w}-\ac{mri} modality is always selected, implying that our normalization method proposed in \acs{sec}\,\ref{sec:chp5:T2-norm} is efficient.
+
 While applying the feature selection on the concatenated set of features, \ac{mrsi} appeared to be one of the most significant feature by keeping most of the information.
 Along the same line, we show that removing this modality from the stacking classifier decrease drastically the classification performance.
 
-In conclusion, we can highlight that the classification performance obtained are the worst with patient having a \ac{cap} localized in the \ac{cg}. 
+In conclusion, we can highlight that the classification performance obtained are the worst with patients having a \ac{cap} localized in the \ac{cg}. 
 
 As avenues for future research, one could switch from voxel-based classification to super-voxel classification such that spatial structure are classified instead of voxel.
 Furthermore, all features from this chapter can be defined as hand-crafted features.
