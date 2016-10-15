@@ -106,6 +106,7 @@ On the one hand, \ac{iht} outperforms the other methods while balancing the feat
 The \ac{auc} increases of $0.019$ and $0.018$ for the feature sets of the \ac{dce}-\ac{mri} and \ac{adc} map, respectively.
 On the other hand, \ac{smote} increases the \ac{auc} of $0.042$ for \ac{t2w}-\ac{mri}.
 However, there is no significant improvement for the \ac{mrsi} since only the standard deviation of the \ac{auc} decreases of $0.019$.
+In conclusion, the methods leading to the best performance are applied prior to feature selection/extraction for the remainder of the experiment.
 
 \begin{landscape}
 \begin{figure}
@@ -122,18 +123,6 @@ However, there is no significant improvement for the \ac{mrsi} since only the st
   \caption[Analysis of the benefit of balancing the training dataset before learning process.]{Analysis of the benefit of balancing the training dataset before learning process.}
   \label{fig:res-Ex3-bal}
 \end{figure}
-
-\end{landscape}
-
-In the previous experiments (1 \& 2) the original features were used, without any adjustment or tunning. 
-In this section, as we call it fine tuning, first we evaluate the performance and benefits of having a balance set, then we eavaluate different feature selection and extraction techniques.
-The main aim of this experiment is to find the best balancing technique and feature selection approach suited for each modality. 
-Therefore, simiar to experiment-1, only the performance of individual modalities are comapered. 
-
-The \ac{us1} and \ac{os} techniques used to balance our training set were explained in Sect.~\ref{subsec:chp6:method:fea-bal}.
-Figure~\ref{fig:res-Ex3-bal} shows the comparison of these techniques on each modality.
-
-\begin{landscape}
 
 \begin{table}
   \caption{Results in terms of \acs*{auc} of the feature selection based on \acs*{anova} F-value for \acs*{t2w}-\acs*{mri}.}
@@ -246,7 +235,7 @@ Figure~\ref{fig:res-Ex3-bal} shows the comparison of these techniques on each mo
     \cmidrule{2-8}
     & 5 & 7.5 & 10 & 12.5 & 15 & 17.5 & 20 \\
     \midrule
-    \acs*{anova} F-score & $0.771 \pm 0.133$ & $0.783 \pm 0.144$ & $0.789 \pm 0.133$ & $0.822 \pm 0.114$ & $\mathbf{0.822 \pm 0.112}$ & $0.817 \pm 0.113$ & $0.810 \pm 0.120B$ \\
+    \acs*{anova} F-score & $0.771 \pm 0.133$ & $0.783 \pm 0.144$ & $0.789 \pm 0.133$ & $0.822 \pm 0.114$ & $\mathbf{0.822 \pm 0.112}$ & $0.817 \pm 0.113$ & $0.810 \pm 0.120$ \\
     \bottomrule
   \end{tabularx}
   \label{tab:ginicomb}
@@ -268,20 +257,58 @@ Figure~\ref{fig:res-Ex3-bal} shows the comparison of these techniques on each mo
   \label{tab:anovacomb}
 \end{table}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{6_pipeline/figures/exp-5/combine_all.pdf}
+  \caption[Analysis of feature combination approaches after fine tuning.]{Analysis of feature combination approaches after fine tuning through balancing and feature selection/extraction.}
+  \label{fig:res-Ex4}
+\end{figure}
+
 
 \end{landscape}
+
+\paragraph{Feature selection and extraction}
+
+Noisy or non-discriminative features included in the learning process might degrade the overall performance of a classifier.
+Thus, the feature selection and extraction methods presented in \acs{sec}\,\ref{subsec:chp6:method:fea-bal} are used to obtain a fine-tuned feature space.
+The selection approaches --- i.e., \ac{anova} F-value and Gini importance --- are applied on the image-based features extracted from \ac{t2w}-\ac{mri} and \ac{adc} map modalities.
+For both methods, a threshold defines the percentage of feature to select.
+Additionally, several thresholds are defined to find the number of features maximizing the classification performance.
+Features computed from \ac{mrsi} and \ac{dce}-\ac{mri} modalities are related to signal and feature extraction seems more appropriate than feature selection rather than feature selection.
+Therefore, the 3 feature extraction methods --- i.e., \ac{pca}, sparse-\ac{pca}, and \ac{ica} --- are applied by varying the number of components or the sparsity level, which allow to find the level which maximized the classification performance.
+Finally, the feature selection methods have been applied on the concatenation of all the features.
+
+As the previous experiments, the classification is performed using a \ac{rf} with \ac{lopo} model validation.
+A \ac{roc} analysis is performed and for each \ac{roc}, the \ac{auc} score is computed.
+The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:anovacomb}, in which the best results are highlighted in \textbf{bold}.
+
+% feature selection
+% results
+In overall, feature selection or extraction lead to increase the classification performance.
+For features extracted from the \ac{t2w}\ac{mri}, \ac{anova}-based selection lead to better performance than Gini importance selection, with a \ac{auc} of $0.784 \pm 0.067$.
+The opposite conclusion is drawn for the features extracted from the \ac{adc} map.
+The selection using the Gini importance criterion leads to an \ac{auc} of $0.743 \pm 0.139$.
+% improvements
+Therefore, the feature selection leads to an improve \ac{auc} of $0.022$ and $0.013$ for \ac{t2w}-\ac{mri} and \ac{adc} map, respectively.
+% which features are selected
+The feature which has been selected are reported in Table ....
+
+% feature extraction
+Regarding feature extraction, \ac{ica} outperforms other methods for both \ac{mrsi} and \ac{dce}-\ac{mri} with \ac{auc} scores of $0.677 \pm 0.171$ and $0.691 \pm 0.158$, respectively.
+However, only the projection applied to \ac{dce}-\ac{mri} features leads to improved results with a gain of $0.013$.
+
+% feature selection for concatenation
+% results
+
+% improvements
+
+% which features are selected
+
 
 \subsection{Fine-tuned combination of \ac{mpmri} modalities}\label{subsec:chp6:exp-res:Ex4}
 This experiments evaluates the combination of all the modalities after applying fine tunning and adjusting the feature space. 
 Two different approaches are compared: (i) Feature aggregation and (ii) stacking using \ac{gb}. 
 The second approach of experiment-2 was ignored, since as previously concluded, \ac{gb} had a slightly better performance than \ac{adb}.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.7\linewidth]{6_pipeline/figures/exp-5/combine_all.pdf}
-  \caption[Analysis of feature combination approaches after fine tuning.]{Analysis of feature combination approaches after fine tuning through balancing and feature selection/extraction.}
-  \label{fig:res-Ex4}
-\end{figure}
 
 \begin{figure}
   \centering
