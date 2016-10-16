@@ -124,6 +124,14 @@ The selection approaches --- i.e., \ac{anova} F-value and Gini importance --- ar
 For both methods, a threshold defines the percentage of features to select.
 Additionally, several thresholds are defined to find the number of features maximizing the classification performance.
 
+Features computed from \ac{mrsi} and \ac{dce}-\ac{mri} modalities are related to signal and feature extraction seems more appropriate than feature selection rather than feature selection.
+Therefore, the 3 feature extraction methods --- i.e., \ac{pca}, sparse-\ac{pca}, and \ac{ica} --- are applied by varying the number of components or the sparsity level, which allow to find the level which maximized the classification performance.
+Finally, the feature selection methods have been applied on the concatenation of all the features.
+
+As the previous experiments, the classification is performed using a \ac{rf} with \ac{lopo} model validation.
+A \ac{roc} analysis is performed and for each \ac{roc}, the \ac{auc} score is computed.
+The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:anovacomb}, in which the best results are highlighted in \textbf{bold}.
+
 \begin{landscape}
 \begin{figure}
   \hspace*{\fill}
@@ -295,14 +303,6 @@ Additionally, several thresholds are defined to find the number of features maxi
 \end{table}
 
 \end{landscape}
-
-Features computed from \ac{mrsi} and \ac{dce}-\ac{mri} modalities are related to signal and feature extraction seems more appropriate than feature selection rather than feature selection.
-Therefore, the 3 feature extraction methods --- i.e., \ac{pca}, sparse-\ac{pca}, and \ac{ica} --- are applied by varying the number of components or the sparsity level, which allow to find the level which maximized the classification performance.
-Finally, the feature selection methods have been applied on the concatenation of all the features.
-
-As the previous experiments, the classification is performed using a \ac{rf} with \ac{lopo} model validation.
-A \ac{roc} analysis is performed and for each \ac{roc}, the \ac{auc} score is computed.
-The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:anovacomb}, in which the best results are highlighted in \textbf{bold}.
 
 % feature selection
 % results

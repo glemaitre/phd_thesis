@@ -1,3 +1,4 @@
+\acresetall
 \graphicspath{{4_materials/figures/}}
 \chapter{Materials}\label{chap:4}
 
@@ -6,7 +7,7 @@
   experiment or trial to obtain a consistent result.
 \end{quote}
 
-Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
+\noindent Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
 
 \citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility~\cite{peng2011reproducible}.
 In order to overcome such limitations, \citeauthor{peng2011reproducible}~\cite{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
@@ -218,6 +219,7 @@ y_hat = pipeline.predict(X_test)
 The \texttt{protoclass} toolbox is an open-source python toolbox providing tools for fast prototyping of machine learning pipeline in medical imaging.
 It implements most of the state-of-the-art feature detection techniques presented in \acs{chp}\,\ref{chap:3}.
 To illustrate the API, an example is given in which a \ac{t2w}-\ac{mri} volume is normalized and the voxels corresponding to the prostate are extracted and can be used easily with \texttt{scikit-learn}.
+This toolbox is publicly available on GitHub\footnote{https://github.com/glemaitre/protoclass}.
 
 \begin{lstlisting}[language=Python, caption=Code snippet to normalize a volume and extract some voxels.]
 import os
