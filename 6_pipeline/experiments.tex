@@ -350,6 +350,27 @@ Three strategies are applied:
 (ii) the selected features from each modality --- i.e., 331 features --- are used to train a stacking classifier with a \ac{gb} as meta-classifier, and
 (iii) the selected features from the concatenated set of feature --- i.e., 267 features --- are used to train a single \ac{rf} classifier.
 
+\begin{landscape}
+\begin{figure}
+  \hspace*{\fill}
+  \subfigure[\acs*{auc} = 0.922]{\label{fig:pat634}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_634.pdf}}
+  \hfill
+  \subfigure[\acs*{auc} = 0.942]{\label{fig:pat778}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_778.pdf}}
+  \hfill
+  \subfigure[\acs*{auc} = 0.914]{\label{fig:pat1036}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_1036.pdf}}
+  \hspace*{\fill}\\
+  \hspace*{\fill}
+  \subfigure[\acs*{auc} = 0.692]{\label{fig:pat634}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_410.pdf}}
+  \hfill
+  \subfigure[\acs*{auc} = 0.784]{\label{fig:pat778}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_778.pdf}}
+  \hfill
+  \subfigure[\acs*{auc} = 0.1041]{\label{fig:pat1036}\includegraphics[width=.45\textwidth]{6_pipeline/figures/examples/patient_1041.pdf}}
+  \hspace*{\fill}
+  \caption[Illustration the resulting detection of our \acs*{mpmri} \acs*{cad} for \acs*{cap} detection.]{Illustration the resulting detection of our \acs*{mpmri} \acs*{cad} for \acs*{cap} detection. The blue contours corresponds to the \ac{cap} while the \texttt{jet} overlay represents the probability.}
+  \label{fig:resultcad}
+\end{figure}
+\end{landscape}
+
 As previously done, the experiment is performed in a \ac{lopo} fashion and a \ac{roc} analysis is carried out.
 The comparative results are shown in \acs{fig}\,\ref{fig:res-Ex4}.
 In overall, classification using the fine-tuned features improve the classification performance.
@@ -359,6 +380,8 @@ The improvement in terms of \ac{auc} is of $0.028$ and $0.050$ compared with the
 Additionally, the individual \ac{roc} analysis for each patient for the best configuration is shown in \acs{fig}\,\ref{fig:indauc}.
 It can be noted that 12 patients have an \ac{auc} superior to $0.800$ and 2 patients have a rather low \ac{auc} below $0.700$.
 Regarding the 4 patients with an \ac{auc} below $0.800$, 3 patients have a \ac{cap} localized in the \ac{cg}.
+
+To illustrate qualitatively the results of our \ac{mpmri} \ac{cad} system, 6 diverse examples are presented in \acs{fig}\,\ref{fig:resultcad} by overlapping the probability map of having a \ac{cap} with the original \ac{t2w}-\ac{mri} slice.
 
 \subsection{Benefit of the \acs*{mrsi} modality}\label{subsec:chp6:exp-res:Ex5}
 
