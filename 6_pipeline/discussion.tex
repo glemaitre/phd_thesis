@@ -2,8 +2,8 @@
 
 We would like to stress the following findings drawn during the previous experiments.
 The classification of individual modality highlights the weakness of the quantification methods --- i.e., pharmokinetic models, semi-quantitative model, and relative quantification of metabolites --- which might be due to the loss of information during the quantification procedure.
-Furthermore, the features extracted from the \ac{t2w}-\ac{mri} are the most discriminative and even after selecting features.
-The same observations is made regarding \ac{dce}-\ac{mrsi} being the less efficient method.
+Furthermore, the features extracted from the \ac{t2w}-\ac{mri} are the most discriminative even after features selection.
+Unlike \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mrsi} is constantly the less efficient method.
 
 The experiment link to the feature selection highlights some interesting facts regarding the most efficient features.
 On the one hand, the Gabor filters and the phase congruency are always selected, independently of the strategy and modality during the feature selection process.
@@ -12,7 +12,7 @@ A possible explanation might due to the fact that \ac{t2w}-\ac{mri} is the modal
 Subsequently, the intensity feature of the \ac{t2w}-\ac{mri} modality is always selected, implying that our normalization method proposed in \acs{sec}\,\ref{sec:chp5:T2-norm} is efficient.
 
 While applying the feature selection on the concatenated set of features, \ac{mrsi} appeared to be one of the most significant feature by keeping most of the information.
-Along the same line, we show that removing this modality from the stacking classifier decrease drastically the classification performance.
+Along the same line, we show that removing this modality from the stacking classifier decreases drastically the classification performance.
 
 In conclusion, we can highlight that the classification performance obtained are the worst with patients having a \ac{cap} localized in the \ac{cg}. 
 
