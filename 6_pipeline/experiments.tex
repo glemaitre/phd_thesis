@@ -121,7 +121,7 @@ In conclusion, the methods leading to the best performance are applied prior to 
 Noisy or non-discriminative features included in the learning process might degrade the overall performance of a classifier.
 Thus, the feature selection and extraction methods presented in \acs{sec}\,\ref{subsec:chp6:method:fea-bal} are used to obtain a fine-tuned feature space.
 The selection approaches --- i.e., \ac{anova} F-value and Gini importance --- are applied on the image-based features extracted from \ac{t2w}-\ac{mri} and \ac{adc} map modalities.
-For both methods, a threshold defines the percentage of feature to select.
+For both methods, a threshold defines the percentage of features to select.
 Additionally, several thresholds are defined to find the number of features maximizing the classification performance.
 
 \begin{landscape}
@@ -313,8 +313,8 @@ The selection using the Gini importance criterion leads to an \ac{auc} of $0.743
 % improvements
 Therefore, the feature selection leads to an improve \ac{auc} of $0.022$ and $0.013$ for \ac{t2w}-\ac{mri} and \ac{adc} map, respectively.
 % which features are selected
-The feature which has been selected are reported in the 1\textsuperscript{st} and 2\textsuperscript{nd} columns of \acs{tab}~\ref{tab:selfeatocc}.
-To conclude, from the 690 original features, 172 and 43 features are selected from the \ac{t2w}-ac{mri} and ac{adc} map, respectively.
+The features which have been selected are reported in the 1\textsuperscript{st} and 2\textsuperscript{nd} columns of \acs{tab}~\ref{tab:selfeatocc}.
+To conclude, from the 690 original features, 172 and 43 features are selected from the \ac{t2w}-\ac{mri} and \ac{adc} map, respectively.
 
 % feature extraction
 Regarding feature extraction, \ac{ica} outperforms other methods for both \ac{mrsi} and \ac{dce}-\ac{mri} with \ac{auc} scores of $0.677 \pm 0.171$ and $0.691 \pm 0.158$, respectively.
@@ -325,7 +325,7 @@ However, only the projection applied to \ac{dce}-\ac{mri} features leads to impr
 Gini importance selection method is also outperforming \ac{anova}-based method while selecting the features from the concatenation of all of them.
 The reported \ac{auc} is $0.836 \pm 0.083$ with an increase of $0.034$.
 % which features are selected
-The feature which has been selected are reported from the 3\textsuperscript{rd} to the 6\textsuperscript{th} columns of \acs{tab}~\ref{tab:selfeatocc}.
+The features which have been selected are reported from the 3\textsuperscript{rd} to the 6\textsuperscript{th} columns of \acs{tab}~\ref{tab:selfeatocc}.
 To conclude, from the 1533 original features, 267 features are selected from the entire set of feature.
 
 \subsection{Fine-tuned combination of \ac{mpmri} modalities}\label{subsec:chp6:exp-res:Ex4}
