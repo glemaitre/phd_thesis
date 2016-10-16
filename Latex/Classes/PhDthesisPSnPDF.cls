@@ -365,10 +365,10 @@
 \newenvironment{dedication}
 {\begin{alwayssingle}
   \pagestyle{empty}
-  \begin{center}
+  \begin{flushright}
   \vspace*{1.5cm}
   {\LARGE }
-  \end{center}
+  \end{flushright}
   \vspace{0.5cm}
   \begin{quote} \begin{center}}
 {\end{center} \end{quote} \end{alwayssingle}}
