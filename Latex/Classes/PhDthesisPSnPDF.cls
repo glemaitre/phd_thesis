@@ -333,7 +333,7 @@
     % {{\@firstlab}{ - }{\@secondlab} \par}
     %     \vspace*{1ex}
     % {{\@firstuni}{ - }{\@seconduni} \par}
-	\vspace*{34mm}
+	\vspace*{40mm}
     {\small \textbf{Supervised by: } \par \@supervisora, \@supervisorb \par \@supervisorc, \@supervisord \par}
 	\vspace*{5mm}
     % {\small {\submittedtext} \par}
@@ -342,7 +342,7 @@
     %     \vspace*{0.5ex}
     {\small \@degreedate \par}
         \vspace*{10mm}
-    {\small Doctoratal Programme in Technology \par}
+    {\small Doctoral Program in Technology \par}
         \vspace*{5mm}
     {\scriptsize Work submitted to the Universitat de Girona and Universit\'e de Bourgogne Franche-Comt\'e in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
 \newpage
