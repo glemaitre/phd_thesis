@@ -12,13 +12,6 @@ All these experiments are conducted on a subset of the public \ac{mpmri} prostat
 We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients of which 18 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
 In this study, our subset consists of 17 patients with \ac{cap}.
 
-\subsection{Assessment of classification performance of individual modality}\label{subec:chp6:exp-res:Ex1}
-
-In this experiment, we attend to assess the classification performance of each individual \ac{mri} modality.
-
-\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features} All features presented in \acs{tab}~\ref{tab:featureadct2w} are extracted for both \ac{t2w}-\ac{mri} and \ac{adc} map.
-These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
-
 \begin{landscape}
 \begin{figure}
   \hspace*{\fill}
@@ -36,6 +29,12 @@ These features are combined per modality and for each of them, a \ac{rf} classif
 \end{figure}
 \end{landscape}
 
+\subsection{Assessment of classification performance of individual modality}\label{subec:chp6:exp-res:Ex1}
+
+In this experiment, we attend to assess the classification performance of each individual \ac{mri} modality.
+
+\paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features} All features presented in \acs{tab}~\ref{tab:featureadct2w} are extracted for both \ac{t2w}-\ac{mri} and \ac{adc} map.
+These features are combined per modality and for each of them, a \ac{rf} classifier is trained.
 
 \paragraph{\ac{dce}-\ac{mri} features} This experiment has been presented in \acs{sec}\,\ref{subsec:chp5:DCE-norm:exp-res}.
 We attend to find the most discriminative ``quantification'' method for \ac{dce}-\ac{mri} modality, by assessing the classification performance of the different models.
@@ -127,10 +126,6 @@ Additionally, several thresholds are defined to find the number of features maxi
 Features computed from \ac{mrsi} and \ac{dce}-\ac{mri} modalities are related to signal and feature extraction seems more appropriate than feature selection rather than feature selection.
 Therefore, the 3 feature extraction methods --- i.e., \ac{pca}, sparse-\ac{pca}, and \ac{ica} --- are applied by varying the number of components or the sparsity level, which allow to find the level which maximized the classification performance.
 Finally, the feature selection methods have been applied on the concatenation of all the features.
-
-As the previous experiments, the classification is performed using a \ac{rf} with \ac{lopo} model validation.
-A \ac{roc} analysis is performed and for each \ac{roc}, the \ac{auc} score is computed.
-The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:anovacomb}, in which the best results are highlighted in \textbf{bold}.
 
 \begin{landscape}
 \begin{figure}
@@ -303,6 +298,10 @@ The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:
 \end{table}
 
 \end{landscape}
+
+As the previous experiments, the classification is performed using a \ac{rf} with \ac{lopo} model validation.
+A \ac{roc} analysis is performed and for each \ac{roc}, the \ac{auc} score is computed.
+The results are reported from \acs{tab}~\ref{tab:ginit2w} to \acs{tab}~\ref{tab:anovacomb}, in which the best results are highlighted in \textbf{bold}.
 
 % feature selection
 % results
