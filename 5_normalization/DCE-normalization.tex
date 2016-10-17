@@ -238,13 +238,13 @@ Therefore, Tofts model requires to:
     \citeauthor{zhu2011automated} proposed an iterative method selecting voxels which best fit a gamma variate function~\cite{zhu2011automated}.
     However, it requires to compute first and second derivatives as well as maximum curvature points.
     \citeauthor{shanbhag2012generalized} proposed a 4-steps algorithm~\cite{shanbhag2012generalized,fennessy2015quantitative}:
-    (i) remove slices with artefacts and find the best slices based on intrinsic anatomic landmarks and enhancement characteristics,
+    (i) remove slices with artifacts and find the best slices based on intrinsic anatomic landmarks and enhancement characteristics,
     (ii) find the voxel candidates using the maximum enhanced voxels and a multi-label maximum entropy based thresholding algorithm,
     (iii) exclude region next to the endorectal coil, and
     (iv) select the best 5 candidates which meet enhancement characteristics and that are correlated.
 
-    All the above methods are rather complex compromising robustness and generalisation.
-    Thus we propose a simpler method which is based on the following reasonable assumptions:
+    All the above methods are rather complex compromising robustness and generalization.
+    Thus, we propose a simpler method which is based on the following reasonable assumptions:
     (i) all possible \ac{aif} signal candidates should have a similar shape,
     (ii) a high enhancement, and
     (iii) the arteries should be almost round and within a size range.
@@ -391,7 +391,7 @@ Therefore, this section reports the goodness of fitting by computing the coeffic
   \label{eq:r2}
 \end{equation}
 
-\noindent where $s_t$ and $\hat{s}_t$ are the signal to be fitted and the estimated signal at time $t$, respectively; $\bar{s}$ is the average signal to be fitted.
+\noindent where $s_t$ and $\hat{s}_t$ are the original and fitted signals at time $t$, respectively; $\bar{s}$ is the average signal to be fitted.
 
 Mean and standard-deviation of the coefficient of determination $R^{2}$ is reported in \acs{tab}~\ref{tab:r2} for each quantification model.
 Brix, Hoffmann, and Tofts models are fitted with a coefficient $R^{2}$ superior to 0.80.

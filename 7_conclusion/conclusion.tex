@@ -4,7 +4,7 @@ This manuscript begins by introducing problematic and societal challenges relate
 An overview is given in \acs{chp}\,\ref{chap:2} regarding the \ac{mri} techniques currently used for medical screening.
 Therefore, in \acs{chp}\,\ref{chap:3} we focus on reviewing the current state-of-the-art on mono- and \ac{mpmri} \ac{cad} systems for the detection of \ac{cap}.
 As a conclusion, the target of this thesis has been fixed to design and investigate a new \ac{mpmri} \ac{cad} system based on all \ac{mri} modalities currently in used in clinical settings.
-Additionally, we point out several missing pieces from the given puzzle: (i) no \ac{mpmri} dataset nor \ac{cad} system are currently publicly available, (ii) the knowledge about pre-processing methods in the current \ac{cad} systems is limited, and (iv) the problem of data balancing never has been explored in the past.
+Additionally, we point out several missing pieces from the given puzzle: (i) no \ac{mpmri} dataset nor \ac{cad} system are currently publicly available, (ii) the knowledge about pre-processing methods in the current \ac{cad} systems is limited, and (iii) the problem of data balancing never has been explored in the past.
 Subsequently, we present in \acs{chp}\,\ref{chap:4} the contours of our working materials --- i.e., \ac{mpmri} dataset, source code, communication website --- which we made publicly available along this thesis.
 Finally, \acs{chp}\,\ref{chap:5} and \acs{chp}\,\ref{chap:6} present the technical investigations regarding pre-processing and our \ac{mpmri} \ac{cad} system for the detection of \ac{cap}.
 
@@ -21,9 +21,9 @@ This \ac{cad} system uses all current \ac{mri} modalities currently in use in cl
 
 \section{Avenues for future research}
 
-Although the proposed \ac{mpmri} \ac{cad} system provide a decent result, drastic improvements are needed to the system to become in use in clinical environment.
+Although the proposed \ac{mpmri} \ac{cad} system provides a decent result, drastic improvements are needed to the system to become in use in clinical environment.
 The current \ac{cad} system is taking decision at the voxel level.
-Spatial information is, however, an important factor to be included which suggest us to move from a voxel-based system to a super-voxel based system.
+Spatial information is, however, an important factor to be included which suggests us to move from a voxel-based system to a super-voxel based system.
 In \acs{chp}\,\ref{chap:6}, we identified strong image features --- i.e., Gabor filters and phase congruency features --- which should be further investigated.
 In the context of the search for large number of quantitative features~\cite{lambin2012radiomics} --- a.k.a. \emph{radiomics} ---, these two types of features have the merit to be further investigated.
 Additionally, other strategies to avoid hand-crafted feature detection have to be explored such as deep convolutional neural-network.

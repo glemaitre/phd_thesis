@@ -33,8 +33,8 @@ These methods are compared qualitatively and quantitatively, with both \textit{z
 As previously stated, proper normalization of the \ac{mri} data during pre-processing is a key problem that has been addressed using parametric and non-parametric strategies.
 We believe that normalizing \ac{mri} data using a parametric model based on a Rician distribution would improve the results.
 Expecting this improvement by changing the data model from the widely used Gaussian distribution to Rician distribution is reasonable.
-Indeed, \citeauthor{Bernstein1989}~\cite{Bernstein1989} state that \ac{mri} data theoretically follow a Rayleigh distribution for a low-\ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases~\citeauthor{Bernstein1989}~\cite{Bernstein1989}.
-Figure~\ref{fig:fitting} shows the intensity spectrum for some \ac{mri} prostate data as well as the fitted Gaussian and Rician distributions.
+Indeed, \citeauthor{Bernstein1989} state that \ac{mri} data theoretically follow a Rayleigh distribution for a low-\ac{snr} scenarios while it appears closer to a Gaussian distribution when the \ac{snr} increases~\cite{Bernstein1989}.
+Figure~\ref{fig:fitting} shows the intensity spectrum for some \ac{mri} prostate data as well as the fitted Gaussian and Rician distributions for 2 different patients.
 In this figure the solid-black line represents the Rician fitting while the dotted-black shows the fitted Gaussian.
 A qualitative assessment of the underlying distribution is performed by overlying the fitted distribution, while quantitative results of the fitting are given in terms of \ac{rms}.
 It can be highlighted that the Rician model better fits the data than the Gaussian model.
@@ -47,7 +47,7 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
     \label{fig:p2}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/06}}\hfill
 %  \subfloat[][]{
 %    \label{fig:p3}\includegraphics[width=0.3\textwidth]{14}}
-  \caption{Visual evaluation of the goodness of fitting using Rician and Gaussian distribution for two different \acs*{mri} prostate data. For each data the solid black line represents the Rician fitting while the dotted represents the Gaussian distribution.}
+  \caption[Visual evaluation of the goodness of fitting using Rician and Gaussian distribution for 2 different \acs*{mri} prostate data.]{Visual evaluation of the goodness of fitting using Rician and Gaussian distribution for 2 different \acs*{mri} prostate data. For each data the solid black line represents the Rician fitting while the dotted represents the Gaussian distribution.}
   \label{fig:fitting}
 \end{figure}
 
@@ -160,7 +160,7 @@ We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients o
 In this study, our subset consists of 17 patients with \ac{cap}.
 
 The different normalization methods are implemented in Python and are part of the \texttt{protoclass} toolbox presented in \acs{sec}\,\ref{chp4:sec:protoclass}.
-The normalization based on \ac{srsf} uses the implementation\footnote{\url{https://bitbucket.org/tetonedge/fdasrsf}} of \citeauthor{Tucker2013}~\cite{Tucker2013}.
+The normalization based on \ac{srsf} uses the implementation\footnote{\url{https://github.com/glemaitre/fdasrsf}} of \citeauthor{Tucker2013}~\cite{Tucker2013}.
 The piecewise-linear normalization is performed using the following set of percentiles $s \in \{0, 5, 25, 50, 75, 95, 100 \}$ as landmarks.
 In the \ac{srsf}-based normalization, the \acp{pdf} are smoothed using spline-based denoising method.
 
