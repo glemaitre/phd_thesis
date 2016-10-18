@@ -7,7 +7,7 @@
   experiment or trial to obtain a consistent result.
 \end{quote}
 
-\noindent Such definition of \emph{replication} reveals the importance of reproducible research, since confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
+\noindent Such definition of \emph{replication} reveals the importance of reproducible research, since the confirmation of results obtained from independent studies is considered the scientific gold standard to build our body of knowledge.
 
 \citeauthor{peng2011reproducible} states the excitement and wanders that computational science brings to the scientific landscape, but he also exposes the limitations in the scientific community to evaluate its published findings due to the lack of reproducibility~\cite{peng2011reproducible}.
 In order to overcome such limitations, \citeauthor{peng2011reproducible}~\cite{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
@@ -38,7 +38,7 @@ The former part is a philosophical discussion of the working framework used duri
 %% While the later is a more concrete description of the resources to reproduce the work of our thesis.
 The latter is a concrete description of the resources to reproduce the work of this thesis.
 Therefore, in the remainder of this section we first present the structure of our framework towards reproducible research, before to present our dataset which is publicly available through our website.
-We conclude by presented the open source toolboxes developed during this thesis.
+We conclude by presenting the open source toolboxes developed during this thesis.
 %% Underlying design choices are out of the scope of this chapter.
 %% Those regarding the methodologies developed for this thesis work can be found in other chapters.
 
@@ -60,7 +60,7 @@ Despite being highlighted by numerous research works, the lack of usable, public
 The \ac{iccvb} is a wake-up call for addressing and breaking the entrance barriers in research due to data and/or isolation by applying collaborative strategies.
 
 \paragraph{What? Mission: Provide open data; evaluation methods; comparison framework; reporting platform}
-The lack of common data combined with non-aggregated assessing strategies result in non-existent or misleading comparisons make difficult to acknowledge relevant novel methodologies.
+The lack of common data combined with non-aggregated assessing strategies result in non-existent or misleading comparisons which make difficult to acknowledge relevant novel methodologies.
 A common duty to the research and development communities is to overcome these limitations, which can be successfully addressed by co-creation and collaborative work.
 
 \Ac{iccvb} aims at serving as foundation for collecting and sharing data as well as providing common evaluation methodologies.
@@ -78,9 +78,9 @@ At \ac{iccvb}, we believe that Free software and quality management have already
 
 \subsection{Software Quality}
 
-All the different source code implemented for this thesis have been released to support future development and the possibility to build a consistent benchmark.
+All the different implemented source codes for this thesis have been released to support future development and the possibility to build a consistent benchmark.
 All available code is primarily developed in Python with a concern of:
-(i) \emph{Quality insurance} by developing unit tests, automatic code quality checking, and code consistency checking using \texttt{PEP8} standards;
+(i) \emph{Quality assurance} by developing unit tests, automatic code quality checking, and code consistency checking using \texttt{PEP8} standards;
 (ii) \emph{Continuous integration} is achieved through tools as Travis CI to easily integrate new contributions and ensure back-compatibility;
 (iii) \emph{Community-based development} by using collaborative tools --- git, GitHub, and gitter --- to ease collaborative programming, issue tracking, code integration, and idea discussions;
 (iv) \emph{Documentation} through a description of the developed API.
@@ -109,7 +109,7 @@ In essence, research is an iterative and incremental process that needs to ensur
 The outcome of any research is highlighted through publications.
 In our work stratgey publications of each project are sub-projects of the main projects which are both hosted in github.
 %% These projects have their code and documentation hosted in github while its associated publications are subprojects with their source also hosted in github.
-This allow us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
+This allows us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
 The data of the project are hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo}, and disseminated through \acs{iccvb} website.
 At the time of publication, the code is released to freeze its state. 
 \emph{Zenodo} provides a \acs{doi} to reference the release.
@@ -153,7 +153,7 @@ The \ac{mpmri} data are acquired from a cohort of patients with higher-than-norm
 The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
 Aside of the \ac{mri} examination, these patients also have undergone a guided-biopsy.
 The dataset is composed of a total of 20 patients of which 18 patients have biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies.
-Therefore, 13 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}, and finally 2 patients are considered as ``healthy''.
+From those 18, 13 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}.
 An experienced radiologist has segmented the prostate organ --- on \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and \ac{adc}-\ac{mri} --- as well as the prostate zones --- i.e., \ac{pz} and \ac{cg} ---, and \ac{cap} on the \ac{t2w}-\ac{mri}.
 
 A \SI{3}{\mm} slice fat-suppressed \ac{t2w} fast spin-echo sequence (\ac{tr}: \SI{3400}{\ms}, \ac{te}: \SI{85}{\ms}, \ac{etl}:13) is used to acquire images in sagittal and oblique coronal planes, the latter planes being orientated perpendicular or parallel to the prostate \ac{pz} – rectal wall axis.
@@ -184,7 +184,7 @@ The total examination time, including the time spent positioning the patient, is
 
 \section{\texttt{imbalanced-learn} toolbox}\label{chp4:sec:imblearn}
 
-The \texttt{imbalanced-learn} toolbox is an open-source python toolbox aiming at providing a wide range of methods to cope with the problem of imbalanced dataset frequently encountered in machine learning and pattern recognition.
+The \texttt{imbalanced-learn} toolbox\footnote{G. Lema\^itre is one of the core contributors} is an open-source python toolbox aiming at providing a wide range of methods to cope with the problem of imbalanced dataset frequently encountered in machine learning and pattern recognition.
 The implemented state-of-the-art methods can be categorized into 4 groups: (i) under-sampling, (ii) over-sampling, (iii) combination of over- and under-sampling, and (iv) ensemble learning methods.
 The proposed toolbox only depends on \texttt{numpy}, \texttt{scipy}, and \texttt{scikit-learn} and is distributed under MIT license.
 Furthermore, it is fully compatible with \texttt{scikit-learn} and is part of the \texttt{scikit-learn-contrib} supported project.
@@ -216,10 +216,10 @@ y_hat = pipeline.predict(X_test)
 
 \section{\texttt{protoclass} toolbox}\label{chp4:sec:protoclass}
 
-The \texttt{protoclass} toolbox is an open-source python toolbox providing tools for fast prototyping of machine learning pipeline in medical imaging.
+The \texttt{protoclass} toolbox\footnote{G. Lema\^itre is the lead contributor} is an open-source python toolbox providing tools for fast prototyping of machine learning pipeline in medical imaging.
 It implements most of the state-of-the-art feature detection techniques presented in \acs{chp}\,\ref{chap:3}.
 To illustrate the API, an example is given in which a \ac{t2w}-\ac{mri} volume is normalized and the voxels corresponding to the prostate are extracted and can be used easily with \texttt{scikit-learn}.
-This toolbox is publicly available on GitHub\footnote{https://github.com/glemaitre/protoclass}.
+This toolbox is publicly available on GitHub\footnote{\url{https://github.com/glemaitre/protoclass}}.
 
 \begin{lstlisting}[language=Python, caption=Code snippet to normalize a volume and extract some voxels.]
 import os

@@ -29,7 +29,7 @@ Thus, one cannot use a parametric model to normalize these images and a non-para
 
 Additionally, the \ac{mrsi} modality requires a specific pre-processing based on signal processing rather than image processing.
 Therefore, the \ac{mrsi} modality has been pre-processed to correct the phase, baseline, and frequency.
-Regarding the problem of phase correction and frequency alignment, we use the most efficient method of the state-of-the-art review in \acs{sec}\,\ref{subsec:chp3img-reg:prepro}.
+Regarding the problem of phase correction and frequency alignment, we use the most efficient method of the state-of-the-art reviewed in \acs{sec}\,\ref{subsec:chp3img-reg:prepro}.
 Indeed, as \citeauthor{Parfait2012} and \citeauthor{trigui2017automatic}~\cite{Parfait2012,trigui2016classification,trigui2017automatic}, the phase of each \ac{mrsi} spectra is corrected using the approach of \citeauthor{Chen2002}~\cite{Chen2002}.
 Along the same line, the frequency shift of each spectra is corrected by aligning to \SI{4.65}{\ppm} the maximum of an inferred function fitted to the residuals of water, using a Voigt profile as in \acs{eq}\,\eqref{eq:voigt}.
 
@@ -80,7 +80,7 @@ The prostate is suffering, however, from a misalignment between the different \a
 Therefore, three registrations have been developed to: (i) the patient motion during the \ac{dce}-\ac{mri} acquisition, (ii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} acquisitions, and (iii) the patient motion between the \ac{t2w}-\ac{mri} and the \ac{adc} map acquisition.
 All registrations are implemented in C++ using \ac{itk}.
 
-The \ac{dce}-\ac{mri} acquisition being dynamic, some intra-patient might occur during the acquisition.
+The \ac{dce}-\ac{mri} acquisition being dynamic, some intra-patient motions might occur during the acquisition.
 For each serie of this dynamic acquisition, each 3D volume is registered to the first volume acquired, to remove the residual motion.
 The appearance in the \ac{dce}-\ac{mri} images, however, varies due to the presence or not of the contrast media.
 Therefore, the metric chosen to be minimized is the \ac{mi} and the geometric transform has been set to a rigid transform.
@@ -94,8 +94,9 @@ B-splines transformation is used as the elastic transform.
 These successive transformations allow to get a good initialization for the next transformation.
 The transformation is inferred by minimizing the cost function using a regular step gradient descent.
 
-The \ac{t2w}-\ac{mri} and \ac{adc} map acquisitions are identically registered than the the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} modalities.
-Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\ac{mri} and thus the latter modality is used as the reference modality.
+The \ac{t2w}-\ac{mri} and \ac{adc} map acquisitions are registered using the same approach as for the registration of the \ac{t2w}-\ac{mri} and the \ac{dce}-\ac{mri} modalities.
+
+Additionally, the \ac{cap}, \ac{pz}, and \ac{cg} are segmented on the \ac{t2w}-\ac{mri} and thus \ac{t2w}-\ac{mri} is used as the reference modality.
 
 \subsection{Feature detection}\label{subsec:chp6:method:fea-det}
 
@@ -128,7 +129,7 @@ To approach the task of automatic detection of \ac{cap} using machine learning, 
 \paragraph{\ac{t2w}-\ac{mri} and \ac{adc} map features}
 Apart of using the normalized intensity, edge- and texture-based features are commonly extracted from \ac{t2w}-\ac{mri} and \ac{adc} map.
 A set of common features earlier reported in \acs*{sec}\,\ref{subsec:chp3:img-clas:CADX-fea-dec} have been computed.
-The following set of filters characterizing edges have been used: (i) Kirsch, (ii) Laplacian, (iii) Prewitt, (iv) Scharr, (v) Sobel, and (vi) Gabor.
+The following set of filters characterizing edges has been used: (i) Kirsch, (ii) Laplacian, (iii) Prewitt, (iv) Scharr, (v) Sobel, and (vi) Gabor.
 Apart of Kirsch filter, the other filters are applied in 3D to get more information using a volume and not a slice, as it is usually done.
 The extension of the most common edge detectors in 3D is obvious and will not be recalled.
 However, 3D Gabor filters~\cite{wang2005face} are not commonly used and we recall their formulation in \acs*{eq}\,\eqref{eq:gabor3d}.
@@ -157,7 +158,7 @@ For the same reason, the \ac{lbp} codes are computed for the three-orthogonal-pl
 \Acl{tab}~\ref{tab:featureadct2w} summarizes the different features extracted with their corresponding parameters.
 Note that all these features are extracted at each voxel of the volume.
 
-\paragraph{\ac{dce}-\ac{mri} features} The extracted features for the \ac{dce}-\ac{mri} are exactly the same than in the previous chapter.
+\paragraph{\ac{dce}-\ac{mri} features} The extracted features for the \ac{dce}-\ac{mri} are exactly the ones describes in the previous chapter.
 The reader can refer to \ac{sec}\,\ref{subsubsec:chp5:DCE-norm:stateart} for a detailed presentation of the different methods used.
 In brief, the entire enhanced signal, semi-quantitative, and quantitative methods are computed. 
 
@@ -179,10 +180,10 @@ Relative quantification based on metabolite quantification relies on a robust in
 Therefore, we propose to tackle this problem as a non-linear least squares optimization problem by (i) quantifying the citrate peaks as a Gaussian mixture and (ii) quantifying the choline as a single Gaussian.
 
 As illustrated in \acs{fig}\,\ref{fig:goodfit}, the \ac{mrsi} sequence imply a 3-peaks citrate metabolite.
-Therefore, we propose the following cost function to represent our function as in \acs{eq}\,\eqref{eq:costcit}.
+Therefore, we propose the following model to represent our function as in \acs{eq}\,\eqref{eq:costcit}.
 
 \begin{equation}
-  C_1(x; \mathbf{w}) = \alpha_1 \mathcal{N}(x; \mu, \sigma_1) + \alpha_2 \mathcal{N}(x; \mu + \delta_2, \sigma_2) + \alpha_3 \mathcal{N(x; \mu - \delta_3, \sigma_3)} \ ,
+  M_1(x; \mathbf{w}) = \alpha_1 \mathcal{N}(x; \mu, \sigma_1) + \alpha_2 \mathcal{N}(x; \mu + \delta_2, \sigma_2) + \alpha_3 \mathcal{N(x; \mu - \delta_3, \sigma_3)} \ ,
   \label{eq:costcit}
 \end{equation}
 
@@ -194,7 +195,7 @@ Therefore, we propose the following cost function to represent our function as i
 \begin{equation}
 \begin{aligned}
 & \argmin_{\mathbf{w}} 
-& & | S(x) - C_1(x; \mathbf{w}) |^{2} \ , \label{eq:mincostcit} \\
+& & | S(x) - M_1(x; \mathbf{w}) |^{2} \ , \label{eq:mincostcit} \\
 & \text{subject to}
 & & 2.54 < \mu < 2.68 \ , \\
 &&& 0.06 < \delta_1, \delta_2 < 0.16 \ , \\
@@ -216,7 +217,7 @@ The choline metabolite is quantified on a similar manner assuming that there is 
 Therefore the problem is formulated as:
 
 \begin{equation}
-  C_2(x; \mu, \sigma) = \alpha \mathcal{N}(x; \mu, \sigma) \ ,
+  M_2(x; \mu, \sigma) = \alpha \mathcal{N}(x; \mu, \sigma) \ ,
   \label{eq:costcho}
 \end{equation}
 
@@ -225,7 +226,7 @@ Therefore the problem is formulated as:
 \begin{equation}
 \begin{aligned}
 & \argmin_{\mathbf{\mu, \sigma}} 
-& & | S(x) - C_2(x; \mu, \sigma) |^{2} \ , \label{eq:mincostcho} \\
+& & | S(x) - M_2(x; \mu, \sigma) |^{2} \ , \label{eq:mincostcho} \\
 & \text{subject to}
 & & 3.17 < \mu < 3.21 \ , \\
 &&& 0.001 < \sigma < 0.02 \ , \\
@@ -240,7 +241,7 @@ A second solution to compute the relative concentration of each metabolite is pr
 For both the choline and citrate, a local maximum is found near of the theoretical position of the peak.
 Subsequently, a range is defined around each peak ---i.e., \SI{0.36}{\ppm} for the citrate and \SI{0.08}{\ppm} for the choline --- and the integral of the signal is computed using the Simpson's rule.
 
-The third and last option correspond on a cropping of the \ac{mrsi} signal from \SIrange{2}{4}{\ppm}.
+The third and last option corresponds on a cropping of the \ac{mrsi} signal from \SIrange{2}{4}{\ppm} as proposed in~\cite{Parfait2012}.
 
 \paragraph{Anatomical features}
 
@@ -254,7 +255,7 @@ Therefore, solving the problem of imbalanced is equivalent to under- or over-sam
 In this section, several methods which will be used in the experiments are presented.
 
 \subsubsection{\Acl*{us1}}
-Techniques that reduce the number of samples of the majority class to be equal to the number of samples of minority class are referred as \ac{us1} techniques.
+Techniques that reduce the number of samples of the majority class to be equal to the number of samples of minority class are referred to as \ac{us1} techniques.
 %Considering the problem of imbalanced, \ac{us} is performed such that the number of samples of the majority class is reduced to be equal to the number of samples of the minority class.
 
 \begin{description}
@@ -278,10 +279,10 @@ Therefore, under-sampling is performed by keeping the most probable samples --- 
 \end{description}
 
 \subsubsection{\Acl*{os}}
-In the contrary to \ac{us1} techniques, data can be balanced by \ac{os} in which the new samples belonging to the minority class are generated, aiming at equalizing the number of samples in both classes.
+In contrast to \ac{us1} techniques, data can be balanced by \ac{os} in which the new samples belonging to the minority class are generated, aiming at equalizing the number of samples in both classes.
 
 \begin{description}
-\item[\Ac{smote}] is a method to generate synthetic samples in the feature space~\cite{chawla2002smote}.
+\item[\Ac{smote}] is a method to generate new synthetic samples~\cite{chawla2002smote}.
 Let define $x_i$ as a sample belonging to the minority class.
 Let define $x_{nn}$ as a randomly selected sample from the $k$-\ac{nn} of $x_i$, with $k$ set to 3.
 A new sample $x_j$ is generated such that $x_j = x_i + \sigma \left( x_{nn} - x_i \right)$, where $\sigma$ is a random number in the interval $\left[0,1\right]$.
@@ -294,7 +295,7 @@ Synthetic data is then created based on \ac{smote} method for borderline samples
 Then, $s$-\ac{nn} of the minority class are selected to generate synthetic sample similarly to \ac{smote}.
  
 \item[\Ac{smoteb2}] performs similarly to \ac{smoteb1}~\cite{han2005borderline}.
-However, the $s$-\ac{nn} are not computing by only considering the minority class but by considering both classes.
+However, the $s$-\ac{nn} are not computed by only considering the minority class but by considering both classes.
 The same generation rules as \ac{smote} is used.
 \end{description}
 
@@ -310,7 +311,7 @@ However, it does not require orthogonality of the space and does not assume Gaus
 Therefore, opposite to \ac{pca} it can recover uniquely the signals themselves rather than linear subspace in which the signals lie~\cite{murphy2012machine}.
 
 Sparse-\ac{pca} is another approach for feature extraction and dimension reduction~\cite{zou2006sparse}.
-Similarly to \ac{pca}, this approach project the data as a linear combination of input data.
+Similarly to \ac{pca}, this approach projects the data as a linear combination of input data.
 However, instead of using original data, it uses a sparse representation of the data, and therefore projects them as linear combination of few input components rather than all of them.
 Referring to \acs{eq}\,\eqref{eq:eigpca}, the cost function of sparse-\ac{pca} is formulated to maximize the variance while maintaining the sparsity constraint:
 
@@ -324,7 +325,7 @@ Referring to \acs{eq}\,\eqref{eq:eigpca}, the cost function of sparse-\ac{pca} i
 Additionally to feature extraction, we use two methods of feature selection during the experiments.
 The first feature selection is the one-way \ac{anova} test.
 This test is based on computing the F-test which is the ratio of the between-group variability over the with-in group variability.
-The F-value is computed for each pair of feature and the $K$ feature dimensions corresponding to the largest F-values are kept.
+The F-value is computed for each pair of features and the $K$ feature dimensions corresponding to the largest F-values are kept.
 
 Apart of using \ac{rf} as our main classifier, \ac{rf} provide information regarding the importance of each feature.
 The feature importance in \ac{rf} is linked with the Gini importance.
@@ -337,12 +338,12 @@ Subsequently, the $K$ most important features are selected to perform the featur
 Variety of classifiers have been explained in \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-clas}. 
 
 Among those, \ac{rf} showed its reliability to lead to high classification performance.
-That is why, \ac{rf} has been chosen to as our base classifier --- allowing for feature selection as well --- to perform classification of individual modality as well as the combination of modalities.
+That is why, \ac{rf} has been chosen as our base classifier --- allowing for feature selection as well --- to perform classification of individual modality as well as the combination of modalities.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.5\linewidth]{6_pipeline/figures/stacking_gb.png}
-  \caption[The principle of stacking.]{The principle of stacking. First, training samples (red) are used to train each individual \ac{rf}. Subsequently, a validation set (green) is provided to each \ac{rf} which output a set of probability used for the classification of the meta-classifier. Finally, a test set is used to asses the classification performance to whole stack.}
+  \caption[The principle of stacking.]{The principle of stacking. First, training samples (red) are used to train each individual \ac{rf}. Subsequently, a validation set (green) is provided to each \ac{rf} which outputs a set of probabilities used for the classification of the meta-classifier. Finally, a test set is used to asses the classification performance to whole stack.}
   \label{fig:stacking}
 \end{figure}
 
@@ -351,4 +352,4 @@ Additionally, we use stacking to create ensemble of base learners using a meta-c
 Stacking consists in a two-stage learning:
 (i) First, a set of training samples is used to train each individual base learner and
 (ii) subsequently, a set of validation samples is provided to each \ac{rf} which individually output a corresponding set of probability used to train a meta-classifier.
-Finally, the stack of classifier is assessed by providing a test set which is going through the base learners and the meta-classifier.
+Finally, the stack of classifiers is assessed by providing a test set which is going through the base learners and the meta-classifier.
