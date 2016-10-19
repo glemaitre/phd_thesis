@@ -286,7 +286,7 @@ In contrast to \ac{us1} techniques, data can be balanced by \ac{os} in which the
 Let define $x_i$ as a sample belonging to the minority class.
 Let define $x_{nn}$ as a randomly selected sample from the $k$-\ac{nn} of $x_i$, with $k$ set to 3.
 A new sample $x_j$ is generated such that $x_j = x_i + \sigma \left( x_{nn} - x_i \right)$, where $\sigma$ is a random number in the interval $\left[0,1\right]$.
-\item[\Ac{smoteb1}] over-samples the minority class similarly to \ac{smote}~\cite{han2005borderline}.
+\item[\Ac{smoteb1}] over-samples the minority class samples similarly to \ac{smote}~\cite{han2005borderline}.
 However, instead of using all the minority samples, it focuses on the borderline samples of minority class.
 Borderline samples simply indicate the samples that are closer to the other class.
 First, the borderline samples of minority class are detected.
