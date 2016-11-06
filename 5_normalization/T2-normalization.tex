@@ -14,7 +14,7 @@ This parametric method is based on computing the standard score --- also known a
   \label{eq:zscore}
 \end{equation}
 \noindent where, $I_{s}(x)$ and $I_{r}(x)$ are the standardized and the raw signal intensity, respectively, and $\mu_{PZ}$ and $\sigma_{PZ}$ are the mean and standard deviation of the \ac{pz} signal intensity, respectively. 
-This transformation enforces the image \ac{pdf} to have a null mean and a unit standard deviation.
+This transformation enforces the image \ac{pdf} to have a zero mean and a unit standard deviation.
 However, this normalization is not appropriate if the \ac{pdf} does not follow a Gaussian distribution as illustrated in Fig.\,\ref{fig:fitting}
 
 \citeauthor{Lv2009}~\cite{Lv2009} used the non-parametric method which is a piecewise-linear normalization, proposed by \citeauthor{Nyul2000} in~\cite{Nyul2000}.
@@ -41,9 +41,9 @@ It can be highlighted that the Rician model better fits the data than the Gaussi
 
 \begin{figure}
   \centering
-  \subfigure[]{
+  \subfigure[\acs*{rms}: Rice \num{4.13e-5} - Normal \num{2.59e-3}]{
     \label{fig:p1}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/03}}\hfill
-  \subfigure[]{
+  \subfigure[\acs*{rms}: Rice \num{2.25e-4} - Normal \num{9.57e-4}]{
     \label{fig:p2}\includegraphics[width=0.48\textwidth]{5_normalization/figures/T2-normalization/06}}\hfill
 %  \subfloat[][]{
 %    \label{fig:p3}\includegraphics[width=0.3\textwidth]{14}}
@@ -108,7 +108,7 @@ The major property of the \ac{srsf} representation used in the registration fram
 
 \noindent where $\dot{\gamma}$ is the derivative of $\gamma$.
 
-Using this property, a cost function --- so called amplitude or $y$-distance --- is defined to measure the similarity between the 2 functions $f_1$ and $f_2$, expressed as in \acs{eq}\,\eqref{eq:cf}
+Using this property, a cost function --- so called amplitude or $y$-distance --- is defined to measure the similarity between the 2 functions $f_1$ and $f_2$, expressed as in \acs{eq}\,\eqref{eq:cf}:
 
 \begin{equation}
   D_y(f_1, f_2) = \underset{\gamma \in \Gamma}{\infspie} \| q_1 - (q_2 \circ \gamma) \sqrt{\dot{\gamma}} \| \ .
@@ -156,7 +156,7 @@ Therefore, the cumulative sum of the normalized eigenvalues as well as the \ac{a
 \subsection{Materials}\label{subsec:chp5:T2-norm:Exp-res}
 
 The experiments are conducted on a subset of the public \ac{mpmri} prostate presented in \acs{sec}\,\ref{sec:data3t}.
-We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients of which 18 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
+We used the \SI{3}{\tesla} dataset which is composed of a total of 19 patients of which 17 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
 In this study, our subset consists of 17 patients with \ac{cap}.
 
 The different normalization methods are implemented in Python and are part of the \texttt{protoclass} toolbox presented in \acs{sec}\,\ref{chp4:sec:protoclass}.
@@ -191,42 +191,52 @@ All the methods seem to address the problem of the \ac{pdf} alignment of the ful
 However, the Rician normalization outperforms the other methods when focusing solely on the \ac{cap} data.
 The \ac{pdf} computed in this specific area is more skewed from its original shape in the case of the piecewise-linear normalization than with the 3 other normalization strategies.
 The \ac{srsf} normalization gets unstable due to the warping function $\gamma$ found which is in practise non-smooth as shown in \acs{fig}\,\ref{fig:mapsrsf}.
+Additionally, the warping function found with the piecewise-linear normalization suffer from abrupt transition around the landmarks as depicted in \acs{fig}\,\ref{fig:mapsrsf}.
+
+\paragraph{Quantitative results}
+
+In overall, all normalization methods improve the alignment of the \acp{pdf}.
+The parametric methods outperform the non-parametric while evaluating the \ac{pdf} alignment considering the full prostate organ.
+Furthermore, the Rician normalization is more appropriate than the Gaussian normalization.
+The \ac{srsf}-based normalization is shown to perform poorly which might be due to the instability of the mapping function inferred.
+However, by focusing on the solely on the \ac{cap} region, the \ac{srsf} outperforms the other methods followed by the Rician normalization.
+Therefore, the Rician normalization outperforms the other methods with an \ac{auc} of $99.74$ and $98.25$ considering the full prostate and \ac{cap}, respectively.
 
 \begin{landscape}
 
 \begin{figure}
   \hspace*{\fill}
-  \subfigure[Raw prostate.]{
+  \subfigure[Raw prostate - \acs*{auc}: 99.08.]{
     \label{subfig:raw}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/raw.pdf}}
   \hfill
-  \subfigure[Raw \acs*{cap}]{
+  \subfigure[Raw \acs*{cap} - \acs*{auc}: 98.19.]{
     \label{subfig:raw_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/raw_cap.pdf}}
   \hspace*{\fill}
   \\
   \hspace*{\fill}
-  \subfigure[Gaussian prostate.]{
+  \subfigure[Gaussian prostate - \acs*{auc}: 99.58.]{
     \label{subfig:gaussian}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/gaussian.pdf}}
   \hfill
-  \subfigure[Rician prostate.]{
+  \subfigure[Rician prostate - \acs*{auc}: 99.74.]{
     \label{subfig:rician}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/rician.pdf}}
   \hfill
-  \subfigure[Linear prostate.]{
+  \subfigure[Linear prostate - \acs*{auc}: 99.45.]{
     \label{subfig:piecewise}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/piecewise.pdf}}
   \hfill
-  \subfigure[\acs*{srsf} prostate.]{
+  \subfigure[\acs*{srsf} prostate - \acs*{auc}: 99.12.]{
     \label{subfig:srsf}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/srsf.pdf}}
   \hspace*{\fill}\\
   \hspace*{\fill}
-  \subfigure[Gaussian \acs*{cap}.]{
+  \subfigure[Gaussian \acs*{cap} - \acs*{auc}: 98.22.]{
     \label{subfig:gaussian_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/gaussian_cap.pdf}}
   \hfill
-  \subfigure[Rician \acs*{cap}.]{
+  \subfigure[Rician \acs*{cap} - \acs*{auc}: 98.25.]{
     \label{subfig:rician_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/rician_cap.pdf}}
   \hfill
-  \subfigure[Linear \acs*{cap}.]{
+  \subfigure[Linear \acs*{cap} - \acs*{auc}: 98.09.]{
     \label{subfig:piecewise_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/piecewise_cap.pdf}}
   \hfill
-  \subfigure[\acs*{srsf} \acs*{cap}.]{
+  \subfigure[\acs*{srsf} \acs*{cap} - \acs*{auc}: 98.30.]{
     \label{subfig:srsf_cap}\includegraphics[width=.23\linewidth]{5_normalization/figures/T2-normalization/srsf_cap.pdf}}
   \hspace*{\fill}
   \caption[Qualitative evaluation for \acs*{t2w}-\acs*{mri}]{Qualitative evaluation by visual inspection of the alignment of the \acs*{pdf}s for the full prostate and the \acs*{cap} in \acs*{t2w}-\acs*{mri}. The first row corresponds to the original \acs*{pdf}}
@@ -234,8 +244,6 @@ The \ac{srsf} normalization gets unstable due to the warping function $\gamma$ f
 \end{figure}
 
 \end{landscape}
-
-\paragraph{Quantitative results}
 
 \begin{figure}
   \centering
@@ -247,16 +255,10 @@ The \ac{srsf} normalization gets unstable due to the warping function $\gamma$ f
   \label{fig:qt}
 \end{figure}
 
-In overall, all normalization methods improve the alignment of the \acp{pdf}.
-The parametric methods outperform the non-parametric while evaluating the \ac{pdf} alignment considering the full prostate organ.
-Furthermore, the Rician normalization is more appropriate than the Gaussian normalization.
-The \ac{srsf}-based normalization is shown to perform poorly which might be due to the instability of the mapping function inferred.
-However, by focusing on the solely on the \ac{cap} region, the \ac{srsf} outperforms the other methods followed by the Rician normalization.
-Therefore, the Rician normalization outperforms the other methods with an \ac{auc} of $99.74$ and $98.25$ considering the full prostate and \ac{cap}, respectively.
-
 \subsection{Conclusion}\label{subsec:chp5:T2-norm:dis-con}
 In this section, we propose to normalize the \ac{t2w}-\ac{mri} prostate images using two new strategies: (i) based on a Rician \textit{a priori} and (ii) based on a \ac{srsf} representation.
 An extensive comparison has been conducted showing that the Rician normalization outperforms the Gaussian, \ac{srsf}-based, and piecewise-linear normalization for \ac{t2w}-\ac{mri} prostate images normalization.
 As avenues for future research, the contribution of the Rician normalization must be evaluated in a classification framework.
+Additionally, the \ac{srsf}-based normalization is unstable due to a non-smooth mapping function which might be solved by post-processing this function.
 Although our proposed evaluation metric seems more appropriate than the previous method, we think that complementary metric should be proposed.
 Furthermore, normalized \ac{t2w}-\ac{mri} can be included with other modalities in order to perform classification using \ac{mpmri} data.

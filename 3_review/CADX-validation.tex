@@ -18,15 +18,15 @@
 
 In pattern recognition, the use of model validation techniques to assess the performance of a classifier plays an important role for reporting results.
 Two techniques are broadly used in the development of \ac{cad} systems and are summarized in \acs{tab}~\ref{tab:valmod}.
-The most popular technique used in \ac{cad} systems is the \acf{loo} technique.
+The most popular technique used in \ac{cad} systems is the \ac{loo} technique.
 From the whole data, one patient is kept for validation and the other cases are used for training.
 This manipulation is repeated until each patient has been used for validation.
 This technique is popular when working with a limited number of patients, allowing to train on representative number of cases even with a small dataset.
 However, \ac{loo} cross-validation suffers from a large variance and is considered as an unreliable estimate~\cite{Efron1983}.
 
-The other technique is the \acf{kcv} technique which is based on splitting the dataset into $k$ subsets where the samples are randomly selected.
+The other technique is the \ac{kcv} technique which is based on splitting the dataset into $k$ subsets where the samples are randomly selected.
 Then, one fold is kept for testing and the remaining subsets are used for training.
 The classification is then repeated as in the \ac{loo} technique.
-In fact \acf{loo} is a particular case of \acf{kcv} when $k$ equals the number of patients.
+In fact \ac{loo} is a particular case of \ac{kcv} when $k$ equals the number of patients.
 In the reviewed papers, the typical values used for $k$ has been set to three and five.
-\acf{kcv} is regarded as more appropriate than \acf{loo}, but the number of patients in the dataset needs to be large enough for the results to be meaningful.
+\Ac{kcv} is regarded as more appropriate than \ac{loo}, but the number of patients in the dataset needs to be large enough for the results to be meaningful.

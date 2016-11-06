@@ -108,15 +108,16 @@
         {\color{blue}\cite{Viswanath2009}},
         {\color{blue}\cite{Viswanath2011}},
         {\color{blue}\cite{khalvati2015automated}},
+        {\color{blue}Our},
         {\color{blue}\cite{Viswanath2012}}
       }
 
-      \def\reward{81,83,95,82,77,90,80}
-      \def\dbSize{347,54,48,6,12,20,22}
-      \def\dbClass{3,3,2,1,1,1,1}
+      \def\reward{94,83,95,82,77,90,84,80}
+      \def\dbSize{347,54,48,6,12,20,19,22}
+      \def\dbClass{3,2,2,1,1,1,1,1}
       \def\cZoom{3} 
       \def\percentageLabelAngle{90}
-      \def\nbeams{7}
+      \def\nbeams{8}
       \pgfmathsetmacro\beamAngle{(360/\nbeams)}
       \pgfmathsetmacro\halfAngle{(180/\nbeams)}
       \pgfmathsetmacro\globalRotation{\halfAngle}
@@ -162,8 +163,8 @@
       \draw [thin,color=red!50!black,dashed] (0,0) circle [radius={\cZoom*\x/9}];
 
       %% draw the domain of each class 
-      \def\puta{6/0/{Multiparametric},
-        1/6/{Monoparametric}}
+      \def\puta{7/0/{Multiparametric},
+        1/7/{Monoparametric}}
 
       \foreach \numElm/\contadorQueNoSeCalcular/\name [count=\ni] in \puta
       {
@@ -180,7 +181,7 @@
     \end{tikzpicture}
  }
   %\hspace{\fill}
-  \caption[Results comparison from the state-of-the-art in terms of \acs*{auc}.]{Numerical and graphical comparison of the results in terms of \acs*{auc} for \SI{1.5}{\tesla} and \SI{3}{\tesla} \acs*{mri} scanners. The {\color{semiAuto}green} value represents the metric and are graphically reported in the {\color{semiAuto}green} curve in the center of the figure. The {\color{red}red} value and areas correspond to the number of patients in the dataset. The numbers between brackets in {blue\color{blue}} correspond to the reference as reported in \acs{tab}~\ref{tab:sumpap}.}
+  \caption[Results comparison from the state-of-the-art in terms of \acs*{auc}.]{Numerical and graphical comparison of the results in terms of \acs*{auc} for \SI{1.5}{\tesla}~\subref{fig:auc15} and \SI{3}{\tesla}~\subref{fig:auc30} \acs*{mri} scanners. The {\color{semiAuto}green} value represents the metric and are graphically reported in the {\color{semiAuto}green} curve in the center of the figure. The {\color{red}red} value and areas correspond to the number of patients in the dataset. The numbers between brackets in {blue\color{blue}} correspond to the reference as reported in \acs{tab}~\ref{tab:sumpap}.}
   \label{fig:auc}
 \end{figure}
 

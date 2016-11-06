@@ -121,6 +121,7 @@
 %:                  FRONT MATTER: dedications, abstract,..
 % --------------------------------------------------------------
 \onehalfspacing
+%\DeclareInstance{acro-title}{empty}{sectioning}{name-format =}
 \begin{document}
 
 %\language{english}
@@ -139,12 +140,13 @@
 % This cover back side is required by Dresden Med Fac; uncomment if needed.
 
 \newpage
+{\pagestyle{plain}
 \vspace{10mm}
 Reviewers:
 
 \begin{itemize}
 \item[] Su Ruan, Professor at Universit\'e de Rouen - LITIS
-\item[] Reyer Zwiggelaar Ir, Professor at Aberystwyth Universtiy - Vision, Graphics, and Visualisation Group
+\item[] Reyer Zwiggelaar, Professor at Aberystwyth Universtiy - Vision, Graphics, and Visualisation Group
 %\item[] Soumya Ghose, Research Associate at Case Western Reserve University
 \end{itemize}
 
@@ -170,7 +172,6 @@ Day of the defense: 28 November 2016
 
 %: ----------------------- tie in front matter ------------------------
 
-\frontmatter
 \include{0_frontmatter/dedication}
 \include{0_frontmatter/publication}
 
@@ -183,9 +184,10 @@ Day of the defense: 28 November 2016
 
 %: ----------------------- list of acronyms/figures/tables ------------------------
 
+%\begin{abbreviations}
 \addcontentsline{toc}{chapter}{List of Abbreviations}
-\printacronyms[exclude-classes= latex, name = List of Abbreviations]
-
+\printacronyms[exclude-classes=latex, name=List of Abbreviations, heading=chapter*]
+%\end{abbreviations}
 
 \listoffigures	% print list of figures
 
@@ -196,7 +198,7 @@ Day of the defense: 28 November 2016
 
 \tableofcontents            % print the table of contents
 \include{0_frontmatter/abstract}
-
+}
 
 %: --------------------------------------------------------------
 %:                  MAIN DOCUMENT SECTION

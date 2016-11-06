@@ -9,7 +9,7 @@ Consequently, different combination classifier rules are studied using the previ
 Finally, we conclude in \acs{sec}\,\ref{subsec:chp6:exp-res:Ex5} by investigating the benefit of fusing the \ac{mrsi} information with the other modality.
 
 All these experiments are conducted on a subset of the public \ac{mpmri} prostate presented in \acs{sec}\,\ref{sec:data3t}.
-We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients of which 18 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
+We used the \SI{3}{\tesla} dataset which is composed of a total of 19 patients of which 17 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
 In this study, our subset consists of 17 patients with \ac{cap}.
 
 \begin{landscape}
@@ -375,6 +375,9 @@ The comparative results are shown in \acs{fig}\,\ref{fig:res-Ex4}.
 In overall, classification using the fine-tuned features improve the classification performance.
 The third classification configuration is, however, the one which outperforms others with an \ac{auc} of $0.836 \pm 0.083$.
 The improvement in terms of \ac{auc} is of $0.028$ and $0.050$ compared with the 1\textsuperscript{st} and 2\textsuperscript{nd}, respectively.
+
+In clinical setting, the \ac{auc} score is categorized in 3 levels: (i) ``acceptable'' discrimination for an \ac{auc} ranging from $0.7$ to $0.8$, (ii) ``excellent'' discrimination for an \ac{auc} ranging from $0.8$ to $0.9$, and ``outstanding'' discrimination when the \ac{auc} is over $0.9$~\cite{hosmer2004applied}.
+Therefore, the combination of all \ac{mri} modalities in conjunction with fine-tuning allow to upgrade our \ac{cad} system from an ``acceptable'' to an ``excellent'' discrimination level.
 
 Additionally, the individual \ac{roc} analysis for each patient for the best configuration is shown in \acs{fig}\,\ref{fig:indauc}.
 It can be noted that 12 patients have an \ac{auc} superior to $0.800$ and 2 patients have a rather low \ac{auc} below $0.700$.

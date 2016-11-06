@@ -13,7 +13,7 @@
 In order to overcome such limitations, \citeauthor{peng2011reproducible}~\cite{peng2011reproducible} proposes reproducibility spectrum to be covered to move from non-reproducible publication to fully-reproducible research (see \acs{fig}\,\ref{fig:reproducibility_spectrum}).
 %% sik:
 %% Specifically, \citeauthor{peng2011reproducible} argues that the original data, the code of methods developed should both be made available along with the executable that lead to the published results so that the three are fully coupled\,\cite{peng2011reproducible}.
-Specifically, \citeauthor{peng2011reproducible}~cite{peng2011reproducible} argues that the original data and executable code which lead to the published results should be all coupled and available. 
+Specifically, \citeauthor{peng2011reproducible}~\cite{peng2011reproducible} argues that the original data and executable code which lead to the published results should be all coupled and available. 
 
 \begin{figure}
 \centering
@@ -42,19 +42,19 @@ We conclude by presenting the open source toolboxes developed during this thesis
 %% Underlying design choices are out of the scope of this chapter.
 %% Those regarding the methodologies developed for this thesis work can be found in other chapters.
 
-\section{Our efforts towards reproducible research.}
+\section{Our efforts towards reproducible research}
 To conduct our research we have developed working strategies based on existing and in-house platforms.
 This section describes the current and upcoming states of the framework, which has been refined through the thesis.
 %% sik:
 %% This section describes its current status with upcoming fixtures resulting from writing and reviewing this thesis, since these working strategies follow an iterative incremental procedure.
 
 \subsection{\acs{iccvb}}
-We have created the \acs{iccvb} website and its associated github community, which stands on the following core pillars stated on the website\footnote{\url{http://i2cvb.github.io/}}.
+We have created the \acs{iccvb} website and its associated GitHub community, which stands on the following core pillars stated on the website\footnote{\url{http://i2cvb.github.io/}}.
 
 \paragraph{Why? Vision: Ease the access to research}
 The first need in modern research, regardless its application domain, is related to the access to reliable data for its subsequent study.
 However, data gathering is an entrance barrier for most of the researchers mainly due to factors as diverse costs, infrastructure, availability, etc.
-Moreover, isolated endeavours to gather these data without granting public access lead to the creation of muda ("waste"): waste of resources and inability to compare results and validate conclusions.
+Moreover, isolated endeavours to gather these data without granting public access lead to the creation of muda (``waste''): waste of resources and inability to compare results and validate conclusions.
 
 Despite being highlighted by numerous research works, the lack of usable, public, reliable, and accessible data remains disregarded in many fields.
 The \ac{iccvb} is a wake-up call for addressing and breaking the entrance barriers in research due to data and/or isolation by applying collaborative strategies.
@@ -86,10 +86,10 @@ All available code is primarily developed in Python with a concern of:
 (iv) \emph{Documentation} through a description of the developed API.
 
 \subsection{Working strategy}
-As aforesaid, we developed a website and a github community.
+As aforesaid, we developed a website and a GitHub community.
 %% sik:
-%% The website is used mainly as facade to our project but its core is the \acs{iccvb} github community and this is how we strive for repeatable research.
-The website is used mainly as front-hand of our project while the \ac{iccvb} github community is the main core and this is how we strive for repeatable research.
+%% The website is used mainly as facade to our project but its core is the \acs{iccvb} GitHub community and this is how we strive for repeatable research.
+The website is used mainly as front-hand of our project while the \ac{iccvb} GitHub community is the main core and this is how we strive for repeatable research.
 Our research is based on collaborating with specialists to collect data, coding experiments, interpret, and communicate the observations.
 %% Back to the data, re-code the experiments, re-interpret the observations.
 %% In essence research is an iterative incremental process that require to ensure the quality at each step and its final deliver of each iteration is a manuscript that pin-point a position in the history of this research.
@@ -107,8 +107,8 @@ In essence, research is an iterative and incremental process that needs to ensur
 %% Publications, experiments, etc. become projects.
 
 The outcome of any research is highlighted through publications.
-In our work stratgey publications of each project are sub-projects of the main projects which are both hosted in github.
-%% These projects have their code and documentation hosted in github while its associated publications are subprojects with their source also hosted in github.
+In our work strategy publications of each project are sub-projects of the main projects which are both hosted in GitHub.
+%% These projects have their code and documentation hosted in GitHub while its associated publications are subprojects with their source also hosted in GitHub.
 This allows us to review projects and publications in the same manner taking advantage of issue tracking and \acs{ci}.
 The data of the project are hosted at \acs{cern}, provided with a \acs{doi} using \emph{Zenodo}, and disseminated through \acs{iccvb} website.
 At the time of publication, the code is released to freeze its state. 
@@ -152,8 +152,8 @@ Datasets have been acquired as $16 \times 8 \times 8$ phase-encoded spectral arr
 The \ac{mpmri} data are acquired from a cohort of patients with higher-than-normal level of \ac{psa}.
 The acquisition is performed using a \SI{3}{\tesla} whole body \ac{mri} scanner (Siemens Magnetom Trio TIM, Erlangen, Germany) using sequences to obtain \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, \ac{dw}-\ac{mri}, and \ac{mrsi}.
 Aside of the \ac{mri} examination, these patients also have undergone a guided-biopsy.
-The dataset is composed of a total of 20 patients of which 18 patients have biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies.
-From those 18, 13 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}.
+The dataset is composed of a total of 19 patients of which 17 patients have biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies.
+From those 17, 12 patients have a \ac{cap} in the \ac{pz}, 3 patients have \ac{cap} in the \ac{cg}, 2 patients have invasive \ac{cap} in both \ac{pz} and \ac{cg}.
 An experienced radiologist has segmented the prostate organ --- on \ac{t2w}-\ac{mri}, \ac{dce}-\ac{mri}, and \ac{adc}-\ac{mri} --- as well as the prostate zones --- i.e., \ac{pz} and \ac{cg} ---, and \ac{cap} on the \ac{t2w}-\ac{mri}.
 
 A \SI{3}{\mm} slice fat-suppressed \ac{t2w} fast spin-echo sequence (\ac{tr}: \SI{3400}{\ms}, \ac{te}: \SI{85}{\ms}, \ac{etl}:13) is used to acquire images in sagittal and oblique coronal planes, the latter planes being orientated perpendicular or parallel to the prostate \ac{pz} – rectal wall axis.
@@ -193,7 +193,7 @@ The toolbox is publicly available in GitHub\footnote{\url{https://github.com/sci
 
 To illustrate the developed API and the compatibility with \texttt{scikit-learn}, an example of a pipeline using a \ac{pca} decomposition, a \ac{smote} over-sampler, and a \ac{knn} classifier is presented below:
 
-\begin{lstlisting}[language=Python, caption=Code snippet to over-sample a dataset using \acs*{smote} in conjunction with \ac{pca} and a \ac{knn} classifer.]
+\begin{lstlisting}[language=Python, caption=Code snippet to over-sample a dataset using \acs*{smote} in conjunction with \ac{pca} and a \ac{knn} classifier.]
 from sklearn.datasets import make_classification
 from sklearn.cross_validation import train_test_split as tts
 from sklearn.decomposition import PCA

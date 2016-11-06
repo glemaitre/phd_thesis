@@ -346,6 +346,7 @@
         \vspace*{5mm}
     {\scriptsize Work submitted to the Universitat de Girona and Universit\'e de Bourgogne Franche-Comt\'e in partial fulfillment of the requirements for the degree of Doctor of Philosophy}
 \newpage
+\thispagestyle{empty}
 }%end large
   \end{center}
   \null\vfill
@@ -380,12 +381,30 @@
 % own page and is set out in verse format.
 
 \newenvironment{publication}
-{\pagestyle{empty}
+{\pagestyle{plain}
 \begin{alwayssingle}
-\begin{center}
-\vspace*{1.5cm}
-{\Large \bfseries Publications}
-\end{center}
+\chapter*{Publications}
+% \begin{center}
+% \vspace*{1.5cm}
+% {\Large \bfseries Publications}
+% \end{center}
+%\vspace{0.5cm}
+\begin{quote}}
+{\end{quote}\end{alwayssingle}}
+
+% Abbreviationa
+%
+% The dedication environment makes sure the dedication gets its
+% own page and is set out in verse format.
+
+\newenvironment{abbreviations}
+{%\pagestyle{plain}
+\begin{alwayssingle}
+\chapter*{List of Abbreviations}
+% \begin{center}
+% \vspace*{1.5cm}
+% {\Large \bfseries Publications}
+% \end{center}
 \vspace{0.5cm}
 \begin{quote}}
 {\end{quote}\end{alwayssingle}}
@@ -399,13 +418,14 @@
 % on its own page.
 
 \newenvironment{acknowledgements}
-{\pagestyle{empty}
+{%\pagestyle{empty}
 \begin{alwayssingle}
-\begin{center}
-\vspace*{1.5cm}
-{\Large \bfseries Acknowledgements}
-\end{center}
-\vspace{0.5cm}
+\chapter*{Acknowledgements}
+% \begin{center}
+% \vspace*{1.5cm}
+% {\Large \bfseries Acknowledgements}
+% \end{center}
+%\vspace{0.5cm}
 \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
@@ -414,13 +434,15 @@
 % does not appears in a quote environment so you can get more in.
 
 \newenvironment{acknowledgementslong}
-{\pagestyle{empty}
-\begin{alwayssingle}
-\begin{center}
-\vspace*{1.5cm}
-{\Large \bfseries Acknowledgements}
-\end{center}
-\vspace{0.5cm}\begin{quote}}
+{\pagestyle{plain}
+% \begin{alwayssingle}
+% \begin{center}
+% \vspace*{1.5cm}
+% {\Large \bfseries Acknowledgements}
+% \end{center}
+% \vspace{0.5cm}\begin{quote}
+\chapter*{Acknowledgements}
+}
 {\end{quote}\end{alwayssingle}}
 
 %ABSTRACT
@@ -429,7 +451,7 @@
 %the top of the page. The abstract itself appears in a quote environment,
 %i.e. tabbed in at both sides, and on its own page.
 
-\newenvironment{abstracts} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{abstracts} {\begin{alwayssingle}% \pagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  Abstract}
@@ -439,7 +461,7 @@
 {\end{quote}\end{alwayssingle}}
 
 
-\newenvironment{abstractCatalan} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{abstractCatalan} {\begin{alwayssingle}% \pagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  Resum}
@@ -448,7 +470,7 @@
    \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
-\newenvironment{abstractSpanish} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{abstractSpanish} {\begin{alwayssingle}% \pagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  Resumen}
@@ -457,7 +479,7 @@
    \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
-\newenvironment{abstractFrench} {\begin{alwayssingle} \pagestyle{empty}
+\newenvironment{abstractFrench} {\begin{alwayssingle}% \pagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  R\'esum\'e}

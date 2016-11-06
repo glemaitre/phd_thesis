@@ -154,7 +154,7 @@ Therefore the registration problem is equivalent to:
   \label{eq:cost}
 \end{equation}
 
-\noindent where $\mu(\cdot)$ is the mean model, $N$ is the number of \ac{dce}-\ac{mri} serie.
+\noindent where $\mu(\cdot)$ is the mean model, $N$ is the number of \ac{dce}-\ac{mri} series.
 
 Illustration of the correction applied to each \ac{rmse} patient is shown in \acs{fig}\,\ref{fig:rmseal}.
 Once all these parameters have been inferred, the data are shifted as well as scaled.
@@ -344,12 +344,12 @@ From \acs{eq}\,\eqref{eq:huisman}, the following features are extracted:
 (v) the relative enhancement $S_M - S_0$.
 
 
-\subsection{Experiment and results}\label{subsec:chp5:DCE-norm:exp-res}
+\subsection{Experiments and results}\label{subsec:chp5:DCE-norm:exp-res}
 
 %{\color{red} \textbf{Data, check with the material chapter}}
 
 The experiments are conducted on a subset of the public \ac{mpmri} prostate presented in \acs{sec}\,\ref{sec:data3t}.
-We used the \SI{3}{\tesla} dataset which is composed of a total of 20 patients of which 18 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
+We used the \SI{3}{\tesla} dataset which is composed of a total of 19 patients of which 17 patients had biopsy proven \ac{cap} and 2 patients are ``healthy'' with negative biopsies. 
 In this study, our subset consists of 17 patients with \ac{cap}.
 
 The \ac{dce}-\ac{mri} sequences are resampled using the spatial information of the \ac{t2w}-\ac{mri} and missing data are interpolated using a linear interpolation.
@@ -359,8 +359,6 @@ The resampling is implemented in C++ using the Insight Segmentation and Registra
 
 The implementation of the registration (C++), normalization (Python), and classification pipeline (Python) are publicly available on GitHub\footnote{\url{https://github.com/I2Cvb/lemaitre-2016-nov/tree/master}}~\cite{lemaitre2016github}.
 The data used for this work are also publicly available\footnote{\url{https://zenodo.org/record/61163}}~\cite{lemaitre2016dce}.
-
-
 
 \subsubsection{Goodness of model fitting}\label{subsubsec:chp5:DCE-norm:Good}
 
@@ -398,6 +396,7 @@ Brix, Hoffmann, and Tofts models are fitted with a coefficient $R^{2}$ superior 
 Additionally, the proposed \ac{pun} model does not seem to fit well the data.
 Data normalization improves the coefficient $R^2$ for all the methods apart of the Hoffmann model.
 The large standard deviation for this model might imply that there are some cases where the fitting fails.
+Furthermore, the use of a bi-exponential model --- i.e., Brix, Hoffman, and Tofts models --- instead of a mix of mono-exponential and linear functions --- i.e., semi-quantitative analysis --- allow a better fitting.
 
 \subsubsection{Detection of \acs*{cap} using pharmacokinetic parameters}\label{subsubsec:chp5:DCE-norm:phar}
 
@@ -454,8 +453,9 @@ To study the potential benefit of our normalization, \ac{cap} are detected at a 
 Each individual pharmacokinetic parameter is classified to evaluate their individual discriminative power to detect \ac{cap}.
 Therefore, a \ac{rf} classifier is used in conjunction with a \ac{lopo}.
 The use of \ac{rf} is motivated since that it leads to the best performance in the state-of-the-art methods~\cite{Litjens2014,Lemaitre2015}.
-Results are summarized in \acs{tab}~\ref{tab:resfeats} in terms of \ac{auc}.
-Normalization can improve the detection of \ac{cap}; however, the benefit of normalization is more obvious by combining together the pharmacokinetic features of a given model --- e.g., $A$, $k_ep$, and $k_el$ for Brix model ---, as previously done in traditional \ac{cad} system~\cite{Lemaitre2015}.
+Results are summarized in \acs{tab}~\ref{tab:resfeats} in terms of \ac{auc}: in general, the discriminative power of each individual parameter is rather low and $K_{trans}$, $k_{el}$, and wash-in parameters lead to the best classification performance.
+Furthermore, the obtained \ac{auc}s are in line with results reported in previous studies~\cite{giannini2015fully} since \ac{cap}s are occurring in both prostate zones --- i.e., \ac{pz} and \ac{cg} --- in our dataset.
+Additionally, normalization can improve the detection of \ac{cap}; however, the benefit of normalization is more obvious by combining together the pharmacokinetic features of a given model --- e.g., $A$, $k_ep$, and $k_el$ for Brix model ---, as previously done in traditional \ac{cad} system~\cite{Lemaitre2015}.
 For the latter configuration, results are summarized by performing a \ac{roc} analysis and computing the \ac{auc}, as reported in \acs{fig}\,\ref{fig:normpharmarf}.
 Quantification using normalized data outperforms quantification using un-normalized data in terms of classification performance apart of Hoffmann and Tofts population-based \ac{aif} models.
 The reasons behind the decrease of the \ac{auc} might be related to: (i) a poor fitting as discussed in \acs{sec}\,\ref{subsubsec:chp5:DCE-norm:Good} (cf., Hoffmann model) and (ii) a small number of patients while estimating some parameters (cf., Tofts model).
