@@ -7,11 +7,11 @@ Our \ac{mpmri} \ac{cad} system consists of seven different steps: pre-processing
 
 \begin{figure}
   \hspace*{\fill}
-  \subfigure[]{\label{fig:adcpdf1}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf.pdf}}
+  \subfigure[]{\label{fig:adcpdf1}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_416.pdf}}
   \hfill
-  \subfigure[]{\label{fig:adcpdf2}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_2.pdf}}
+  \subfigure[]{\label{fig:adcpdf2}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_430.pdf}}
   \hfill
-  \subfigure[]{\label{fig:adcpdf3}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_pdf_3.pdf}}
+  \subfigure[]{\label{fig:adcpdf3}\includegraphics[width=.3\textwidth]{6_pipeline/figures/adc_513.pdf}}
   \hspace*{\fill}
   \caption[Illustration of the \acs*{pdf} of the \acs*{adc} coefficients within the prostate.]{Illustration of the variability of the \acs*{pdf} of the \acs*{adc} coefficients within the prostate for 3 patients.}
   \label{fig:adcpdf}
@@ -353,3 +353,16 @@ Stacking consists in a two-stage learning:
 (i) First, a set of training samples is used to train each individual base learner and
 (ii) subsequently, a set of validation samples is provided to each \ac{rf} which individually output a corresponding set of probability used to train a meta-classifier.
 Finally, the stack of classifiers is assessed by providing a test set which is going through the base learners and the meta-classifier.
+
+In the later experiments, \ac{adb} and \ac{gb} are chosen as meta-classifiers to aggregate the base learners in the stacking strategies.
+\ac{adb} has been presented in \acs{sec}\,\ref{subsec:chp3:img-clas:CADX-clas} and thus only \ac{gb} will be succinctly in the remaining of this section.
+\ac{gb} is an ensemble classifier~\cite{friedman2001greedy} which similarly to \ac{adb} is formulated as in \acs{eq}\,\eqref{eq:gbadd}.
+
+\begin{equation}
+  F(x) = \sum_{m=1}^{M} \gamma_{m} h_m(x) \ ,
+  \label{eq:gbadd}
+\end{equation}
+
+\noindent where $h_m(x)$ is a weak learner with its associated weight $\gamma_m$.
+As with \ac{adb}, $h_m(x)$ is chosen to minimize a loss function using the additive model $F_{m-1}$.
+The difference between \ac{adb} and \ac{gb} lie in the fact the this minimization is tackle as a numerical optimization problem using the steepest descent.
